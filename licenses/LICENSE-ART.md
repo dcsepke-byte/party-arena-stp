@@ -130,7 +130,7 @@ Retrieved from [Open Game Art](https://opengameart.org/content/jack-o-lantern)
 
 License: [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/legalcode)
 
-## scenes/board_logic/controller/icons
+## common/scenes/board_logic/controller/icons
 ### cake.png
 
 Public Domain by maruki
@@ -181,21 +181,21 @@ Retrieved from [Open Game Art](https://opengameart.org/content/sara-sketch-portr
 
 License: [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/legalcode)
 
-## scenes/board_logic/node
+## common/scenes/board_logic/node
 ### node.blend | node.glb
 
 Copyright © 2020 Florian Kothmeier
 
 License: [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/legalcode)
 
-## scenes/board_logic/controller/rewardscreens
+## client/rewardscreens
 ### background.png | background.blend | seats.png
 
 Copyright © 2019 Florian Kothmeier
 
 License: [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/legalcode)
 
-## scenes/board_logic/node/arrow
+## common/scenes/board_logic/node/arrow
 ### arrow.png
 
 Copyright © 2018 Jakob Sinclair
@@ -208,7 +208,7 @@ Copyright © 2018 Florian Kothmeier
 
 License: [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/legalcode)
 
-## scenes/board_logic/node/material
+## common/scenes/board_logic/node/material
 ### tile_blue_col.png | tile_red_col.png | tile_yellow_col.png | tile_green_col.png
 
 Copyright © 2020 Florian Kothmeier
@@ -239,21 +239,21 @@ Based upon the nolok icon by Anthony Carré (yekcim)
 Retrieved from: [Super Tux Kart Sourceforge](https://sourceforge.net/p/supertuxkart/code/HEAD/tree/media/trunk/karts/nolok/nolokicon.png)
 License: [GPL 2.0](http://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
 
-## scenes/menus
+## client/menus
 ### stage.escn | stage.blend
 
 Copyright © 2020 Florian Kothmeier
 
 License: [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/legalcode)
 
-## scenes/speech_dialog
+## common/scenes/speech_dialog
 ### dialog_box.png | dialog_box_focus.png
 
 Copyright © 2019 Florian Kothmeier
 
 License: [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/legalcode)
 
-## scenes/team_indicator
+## client/team_indicator
 ### indicator.png
 
 Copyright © 2019 Florian Kothmeier

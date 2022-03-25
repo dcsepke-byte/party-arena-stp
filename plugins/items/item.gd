@@ -50,3 +50,18 @@ func activate_trap(_from_player, _trap_player, _controller):
 
 func recreate_state() -> void:
 	load_resources()
+
+func serialize() -> Dictionary:
+	return inst2dict(self)
+
+static func deserialize(i: Dictionary) -> Item:
+	# Check if this really is an item
+	# Prevent the loading of potentially malicious scripts
+	if not PluginSystem.item_loader.has_item(i["@path"]):
+		return null
+	if i["@subpath"] != "":
+		return null
+	# Now that we have checked that this is an item it is safe to load
+	var item: Item = dict2inst(i)
+	item.recreate_state()
+	return item

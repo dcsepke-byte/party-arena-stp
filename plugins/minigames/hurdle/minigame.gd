@@ -4,7 +4,7 @@ const MAX_CONSECUTIVE_HURDLES := 1
 
 var players_alive := 4
 var players_finished := 0
-var placement := []
+var placement := [ null, null, null, null ]
 
 var speedup_timeout := 10.0
 
@@ -13,12 +13,13 @@ var time_to_direction_change := 1.0
 
 var stop := false
 
-func _ready():
-	placement.resize(players_alive)
+var lobby: Lobby
+onready var players = Utility.get_nodes_in_group(self, "players")
 
-func _process(delta: float):
-	if stop:
-		return
+func _enter_tree() -> void:
+	lobby = Lobby.get_lobby(self)
+
+func update_speed(delta: float):
 	if abs(direction) < 1.0:
 		direction += sign(direction) * delta * 0.2
 		direction = clamp(direction, -1.0, 1.0)
@@ -28,27 +29,43 @@ func _process(delta: float):
 	else:
 		speedup_timeout -= delta
 		if speedup_timeout <= 0.0:
-			#$Environment/Screen/Message.text = "Overtime"
 			speedup_timeout = 0.0
+
+puppet func change_direction():
+	direction = -direction
+
+func _client_process(delta: float):
+	if stop:
+		return
+	update_speed(delta)
+	$conveyor_belt/AnimationPlayer.playback_speed = direction
+
+func _server_process(delta: float):
+	if stop:
+		return
+	update_speed(delta)
 	time_to_direction_change -= delta
 	if time_to_direction_change <= 0.0:
-		direction = - direction
+		direction = -direction
+		lobby.broadcast(self, "change_direction")
 		time_to_direction_change += randf() * 5.0 + 1.0
-	$conveyor_belt/AnimationPlayer.playback_speed = direction
-	var players = get_tree().get_nodes_in_group("players")
 	for player in players:
 		if not player.dead and player.translation.y < -10:
 			player.dead = true
 			player.hide()
-			placement[players_alive - 1] = player.player_id
+			placement[players_alive - 1] = player.info.player_id
 			players_alive -= 1
 			if players_alive <= 1:
 				stop = true
+				lobby.broadcast(self, "stop")
 				get_tree().create_timer(1).connect("timeout", self, "finished")
 
+puppet func stop():
+	stop = true
+
 func finished():
-	for player in get_tree().get_nodes_in_group("players"):
+	for player in Utility.get_nodes_in_group(self, "players"):
 		if not player.dead:
-			placement[players_alive - 1] = player.player_id
+			placement[players_alive - 1] = player.info.player_id
 			players_alive -= 1
-	Global.minigame_win_by_position(placement)
+	lobby.minigame_win_by_position(placement)

@@ -2,8 +2,7 @@ extends KinematicBody
 
 const MOVEMENT_SPEED = 2.5
 
-var is_ai
-var player_id
+var info: Lobby.PlayerInfo
 
 var plants = 0
 
@@ -18,7 +17,8 @@ var plant_spots
 var current_destination = null
 
 func _ready():
-	if Global.minigame_state.minigame_type == Global.MINIGAME_TYPES.DUEL:
+	set_network_master(info.addr.peer_id)
+	if get_parent().lobby.minigame_state.minigame_type == Lobby.MINIGAME_TYPES.DUEL:
 		plant_spots = [$"../Area2", $"../Area4"]
 	else:
 		plant_spots = [$"../Area1", $"../Area2", $"../Area3", $"../Area4"]
@@ -31,12 +31,14 @@ func has_player(colliders, blacklist):
 	return false
 
 func _physics_process(delta):
+	if not is_network_master():
+		return
 	var dir = Vector3()
 	
 	if not input_disabled:
-		if not is_ai:
-			dir.x = Input.get_action_strength("player%d_up" % player_id) - Input.get_action_strength("player%d_down" % player_id)
-			dir.z = Input.get_action_strength("player%d_right" % player_id) - Input.get_action_strength("player%d_left" % player_id)
+		if not info.is_ai():
+			dir.x = Input.get_action_strength("player%d_up" % info.player_id) - Input.get_action_strength("player%d_down" % info.player_id)
+			dir.z = Input.get_action_strength("player%d_right" % info.player_id) - Input.get_action_strength("player%d_left" % info.player_id)
 		else:
 			if current_destination == null or has_player(current_destination.get_overlapping_bodies(), [self]):
 				var spots = []
@@ -51,10 +53,11 @@ func _physics_process(delta):
 				if not spots.empty():
 					current_destination = spots[randi() % spots.size()]
 			
-			var destination_vec = current_destination.translation - self.translation
-			
-			if destination_vec.length_squared() > 0.01:
-				dir = destination_vec.normalized()
+			if current_destination:
+				var destination_vec = current_destination.translation - self.translation
+				
+				if destination_vec.length_squared() > 0.01:
+					dir = destination_vec.normalized()
 	else:
 		dir = current_destination - translation
 		if dir.length_squared() > pow(delta, 2) + 0.01:
@@ -70,14 +73,24 @@ func _physics_process(delta):
 		rotation.y = atan2(dir.x, dir.z)
 	
 	if dir.length_squared() > 0 and not is_walking:
-		$Model.play_animation("run")
+		play_animation("run")
 		is_walking = true
 	elif dir.length_squared() == 0 and is_walking:
-		$Model.play_animation("idle")
+		play_animation("idle")
 		is_walking = false
 	
+	get_parent().lobby.broadcast_unreliable(self, "position_updated", [translation, rotation, is_walking])
 	if is_on_floor():
 		movement = Vector3()
+
+puppet func position_updated(trans: Vector3, rot: Vector3, walking: bool):
+	if not is_walking and walking:
+		play_animation("run")
+	elif is_walking and not walking:
+		play_animation("idle")
+	translation = trans
+	rotation = rot
+	is_walking = walking
 
 func play_animation(name):
 	$Model.play_animation(name)

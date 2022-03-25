@@ -4,11 +4,13 @@ var max_speed = 2
 var accel = 10
 
 var team
-var player_id = 0
-var is_ai = false
+var info: Lobby.PlayerInfo
 var ai_difficulty: int
 
+var active := true
+
 var winner = false setget set_winner
+var minigame_mode: int
 
 var is_walking = false
 
@@ -20,17 +22,24 @@ func set_winner(win):
 
 func _ready():
 	$Model.set_as_toplevel(true)
+	set_network_master(info.addr.peer_id)
+	minigame_mode = info.lobby.minigame_state.minigame_type
 	
-	if is_ai:
+	if info.is_ai():
 		match ai_difficulty:
-			Global.Difficulty.EASY:
+			Lobby.Difficulty.EASY:
 				accel = 7
 				max_speed *= 0.8
-			Global.Difficulty.NORMAL:
+			Lobby.Difficulty.NORMAL:
 				accel = 10
 				max_speed *= 0.9
-			Global.Difficulty.HARD:
+			Lobby.Difficulty.HARD:
 				accel = 11
+
+puppet func position_update(x: Vector3, v: Vector3, rot: float):
+	self.translation = x
+	self.angular_velocity = v
+	$Model.rotation.y = rot
 
 func get_distance_to_shape(point):
 	var edges = get_parent().ground_edges
@@ -55,21 +64,20 @@ func is_on_floor():
 	return translation.y > 2.4
 
 func _process(delta):
+	$Model.translation = self.translation + Vector3(0, 0.5, 0)
+	if not is_network_master() or not active:
+		return
 	var dir = Vector3()
 	
-	$Model.translation = self.translation + Vector3(0, 0.5, 0)
-	
-	var players = get_tree().get_nodes_in_group("players")
-	
-	if not is_ai and is_on_floor():
-		dir.x = Input.get_action_strength("player%d_down" % player_id) - Input.get_action_strength("player%d_up" % player_id)
-		dir.z = Input.get_action_strength("player%d_left" % player_id) - Input.get_action_strength("player%d_right" % player_id)
+	if not info.is_ai() and is_on_floor():
+		dir.x = Input.get_action_strength("player%d_down" % info.player_id) - Input.get_action_strength("player%d_up" % info.player_id)
+		dir.z = Input.get_action_strength("player%d_left" % info.player_id) - Input.get_action_strength("player%d_right" % info.player_id)
 	elif is_on_floor():
 		# Try to knock off the player, that is the farthest away from the center, yet still on the ice
 		var farthest_player = null
 		var farthest_distance = INF
-		for p in players:
-			if p != self and (p.team != self.team or Global.minigame_state.minigame_type == Global.MINIGAME_TYPES.FREE_FOR_ALL):
+		for p in get_parent().players:
+			if p != self and (p.team != self.team or minigame_mode == Lobby.MINIGAME_TYPES.FREE_FOR_ALL):
 				var distance = get_distance_to_shape(p.translation)
 				if p.is_on_floor() and (farthest_player == null or farthest_distance > distance):
 					farthest_player = p
@@ -78,6 +86,7 @@ func _process(delta):
 		if farthest_player != null:
 			dir = (farthest_player.translation - translation).rotated(Vector3(0, 1, 0), PI/2)
 		else:
+			
 			# Everybody knocked off the board?
 			# Move towards the center
 			dir = self.translation.rotated(Vector3(0, 1, 0), -PI/2)
@@ -112,3 +121,5 @@ func _process(delta):
 	
 	if angular_velocity.length() > max_speed:
 		angular_velocity = max_speed * angular_velocity.normalized()
+	
+	info.lobby.broadcast_unreliable(self, "position_update", [self.translation, self.angular_velocity, $Model.rotation.y])

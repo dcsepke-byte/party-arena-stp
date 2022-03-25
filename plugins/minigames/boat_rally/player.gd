@@ -1,34 +1,41 @@
 extends Spatial
 
-var player_id: int
-var is_ai: bool
+var info: Lobby.PlayerInfo
 
-var paddle_cooldown := randf() if is_ai else 0.0
+var paddle_cooldown := 0.0
 
 export var force_dir: Vector3
 export var flip_paddle: bool
 
 func _ready():
+	if info.is_ai() and multiplayer.is_network_server():
+		paddle_cooldown = randf()
 	if flip_paddle:
 		$"Scene Root".rotation.y *= -1
 		$"Scene Root".scale.x *= -1
 		$"Scene Root".translation.x *= -1
 
-func fire():
-	if get_parent().fire(self.translation, force_dir):
-		$Model.play_animation("punch")
-		$Model.play_animation("idle")
-		$AnimationPlayer.play("paddle")
-		paddle_cooldown = 1 if not is_ai else 2
+puppet func fired():
+	$Model.play_animation("punch")
+	$Model.play_animation("idle")
+	$AnimationPlayer.play("paddle")
 
-func _process(delta):
-	paddle_cooldown = max(0, paddle_cooldown - delta)
-	if paddle_cooldown > 0:
+mastersync func fire():
+	if info.addr.peer_id != multiplayer.get_rpc_sender_id():
 		return
-	
-	if not is_ai:
-		if Input.is_action_just_pressed("player%d_action1" % player_id):
-			fire()
+	if get_parent().fire(self.translation, force_dir) and paddle_cooldown == 0:
+		get_parent().lobby.broadcast(self, "fired")
+		paddle_cooldown = 1 if not info.is_ai() else 2
+
+func _server_process(delta: float):
+	paddle_cooldown = max(0, paddle_cooldown - delta)
+
+func _process(delta: float):
+	if not info.is_local():
+		return
+	if not info.is_ai():
+		if Input.is_action_just_pressed("player%d_action1" % info.player_id):
+			rpc_id(1, "fire")
 	else:
 		var pos = get_parent().translation
 		var rot = get_parent().rotation_degrees
@@ -42,13 +49,13 @@ func _process(delta):
 				rocks.append(rock)
 		
 		if len(rocks) == 0:
-			fire()
+			rpc_id(1, "fire")
 			return
 		
 		for rock in rocks:
 			if rock.translation.x - pos.x >= -0.1 and force_dir.x < 0:
-				fire()
+				rpc_id(1, "fire")
 				return
 			elif rock.translation.x - pos.x < -0.1 and force_dir.x > 0:
-				fire()
+				rpc_id(1, "fire")
 				return

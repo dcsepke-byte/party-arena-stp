@@ -1,0 +1,165 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://common/scenes/overlays/score_overlay.gd" type="Script" id=1]
+[ext_resource path="res://assets/fonts/title_font.tres" type="DynamicFont" id=2]
+
+[node name="ScoreOverlay" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Player1" type="VBoxContainer" parent="."]
+margin_top = 20.0
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Icons" type="HBoxContainer" parent="Player1"]
+margin_right = 75.0
+
+[node name="Score" type="HBoxContainer" parent="Player1"]
+margin_top = 4.0
+margin_right = 75.0
+margin_bottom = 62.0
+
+[node name="Icon" type="TextureRect" parent="Player1/Score"]
+margin_right = 48.0
+margin_bottom = 58.0
+rect_min_size = Vector2( 48, 48 )
+expand = true
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Amount" type="Label" parent="Player1/Score"]
+margin_left = 52.0
+margin_right = 75.0
+margin_bottom = 58.0
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "0"
+
+[node name="Player2" type="VBoxContainer" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -40.0
+margin_top = 20.0
+margin_bottom = 62.0
+grow_horizontal = 0
+alignment = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Icons" type="HBoxContainer" parent="Player2"]
+margin_right = 75.0
+alignment = 2
+
+[node name="Score" type="HBoxContainer" parent="Player2"]
+margin_top = 4.0
+margin_right = 75.0
+margin_bottom = 62.0
+alignment = 2
+
+[node name="Amount" type="Label" parent="Player2/Score"]
+margin_right = 23.0
+margin_bottom = 58.0
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "0"
+
+[node name="Icon" type="TextureRect" parent="Player2/Score"]
+margin_left = 27.0
+margin_right = 75.0
+margin_bottom = 58.0
+rect_min_size = Vector2( 48, 48 )
+expand = true
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Player3" type="VBoxContainer" parent="."]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_top = -62.0
+margin_right = 40.0
+margin_bottom = -20.0
+grow_vertical = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Icons" type="HBoxContainer" parent="Player3"]
+margin_right = 75.0
+
+[node name="Score" type="HBoxContainer" parent="Player3"]
+margin_top = 4.0
+margin_right = 75.0
+margin_bottom = 62.0
+
+[node name="Icon" type="TextureRect" parent="Player3/Score"]
+margin_right = 48.0
+margin_bottom = 58.0
+rect_min_size = Vector2( 48, 48 )
+expand = true
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Amount" type="Label" parent="Player3/Score"]
+margin_left = 52.0
+margin_right = 75.0
+margin_bottom = 58.0
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "0"
+
+[node name="Player4" type="VBoxContainer" parent="."]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -40.0
+margin_top = -62.0
+margin_bottom = -20.0
+grow_horizontal = 0
+grow_vertical = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Icons" type="HBoxContainer" parent="Player4"]
+margin_right = 75.0
+alignment = 2
+
+[node name="Score" type="HBoxContainer" parent="Player4"]
+margin_top = 4.0
+margin_right = 75.0
+margin_bottom = 62.0
+alignment = 2
+
+[node name="Amount" type="Label" parent="Player4/Score"]
+margin_right = 23.0
+margin_bottom = 58.0
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "0"
+
+[node name="Icon" type="TextureRect" parent="Player4/Score"]
+margin_left = 27.0
+margin_right = 75.0
+margin_bottom = 58.0
+rect_min_size = Vector2( 48, 48 )
+expand = true
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}

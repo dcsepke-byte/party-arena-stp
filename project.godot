@@ -9,33 +9,76 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Reference",
+"class": "BoardLoader",
+"language": "GDScript",
+"path": "res://common/scripts/loader/board_loader.gd"
+}, {
+"base": "Reference",
+"class": "CharacterLoader",
+"language": "GDScript",
+"path": "res://common/scripts/loader/character_loader.gd"
+}, {
+"base": "Spatial",
+"class": "Controller",
+"language": "GDScript",
+"path": "res://common/scenes/board_logic/controller/controller.gd"
+}, {
 "base": "Resource",
 "class": "Item",
 "language": "GDScript",
 "path": "res://plugins/items/item.gd"
 }, {
+"base": "Reference",
+"class": "ItemLoader",
+"language": "GDScript",
+"path": "res://common/scripts/loader/item_loader.gd"
+}, {
+"base": "Node",
+"class": "Lobby",
+"language": "GDScript",
+"path": "res://common/lobby.gd"
+}, {
+"base": "Reference",
+"class": "MinigameLoader",
+"language": "GDScript",
+"path": "res://common/scripts/loader/minigame_loader.gd"
+}, {
 "base": "Spatial",
 "class": "NodeBoard",
 "language": "GDScript",
-"path": "res://scenes/board_logic/node/node.gd"
+"path": "res://common/scenes/board_logic/node/node.gd"
+}, {
+"base": "Spatial",
+"class": "PlayerBoard",
+"language": "GDScript",
+"path": "res://common/scenes/board_logic/player_board/player_board.gd"
 }, {
 "base": "Reference",
 "class": "SaveGameLoader",
 "language": "GDScript",
-"path": "res://savegames/savegames.gd"
+"path": "res://client/savegames/savegames.gd"
 } ]
 _global_script_class_icons={
+"BoardLoader": "",
+"CharacterLoader": "",
+"Controller": "",
 "Item": "",
+"ItemLoader": "",
+"Lobby": "",
+"MinigameLoader": "",
 "NodeBoard": "",
+"PlayerBoard": "",
 "SaveGameLoader": ""
 }
 
 [application]
 
 config/name="Super Tux Party"
-run/main_scene="res://scenes/menus/main_menu.tscn"
+run/main_scene="res://client/menus/main_menu.tscn"
 config/project_settings_override="user://render_settings.godot"
 config/icon="res://assets/icons/icon-smallest.png"
+run/main_scene.Server="res://server/server.tscn"
 
 [audio]
 
@@ -43,11 +86,11 @@ default_bus_layout="res://assets/defaults/default_bus_layout.tres"
 
 [autoload]
 
-Utility="*res://scripts/utility.gd"
-PluginSystem="*res://scripts/plugin_system.gd"
-Global="*res://scripts/global.gd"
-ControlHelper="*res://scripts/control_helper.gd"
-UISound="*res://scenes/sound_button/ui_sound.tscn"
+Utility="*res://common/scripts/utility.gd"
+PluginSystem="*res://common/scripts/loader/plugin_system.gd"
+Global="*res://common/scripts/global.gd"
+ControlHelper="*res://client/scripts/control_helper.gd"
+UISound="*res://common/scenes/sound_button/ui_sound.tscn"
 
 [debug]
 
@@ -67,7 +110,11 @@ window/vsync/use_vsync=false
 
 [editor_plugins]
 
-enabled=PoolStringArray( "minigame_config_dialog" )
+enabled=PoolStringArray( "res://addons/minigame_config_dialog/plugin.cfg" )
+
+[gui]
+
+theme/use_hidpi=true
 
 [input]
 
@@ -307,8 +354,17 @@ locale_filter=[ 0, [ "de", "en", "fr", "it", "nb", "pt_BR", "ru", "tr" ] ]
 [plugins]
 
 load_plugins=false
+load_plugins.Server=true
+load_plugins.Windows=true
+load_plugins.X11=true
+load_plugins.OSX=true
 
 [rendering]
 
 environment/default_clear_color=Color( 0.352941, 0.788235, 0.866667, 1 )
 environment/default_environment="res://assets/defaults/default_env.tres"
+
+[server]
+
+port=7634
+max_players=512

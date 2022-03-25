@@ -14,13 +14,21 @@ func _process(delta):
 	if self.translation.y < -5:
 		queue_free()
 
+puppet func explode():
+	$Mesh.hide()
+	$Sprite3D.hide()
+	$Particles.emitting = true
+	get_parent().set_process(false)
+	self.set_process(false)
+
 func _on_Bomb_body_entered(body):
+	if not multiplayer.is_network_server():
+		return
 	if body.is_in_group("player") and not body.is_hit:
 		body.is_hit = true
-		$Mesh.hide()
-		$Sprite3D.hide()
-		$Particles.emitting = true
+		var lobby: Lobby = get_parent().get_parent().lobby
+		lobby.broadcast(self, "explode")
 		get_parent().set_process(false)
 		self.set_process(false)
 		yield(get_tree().create_timer(2), "timeout")
-		Global.minigame_nolok_loose()
+		lobby.minigame_nolok_loose()

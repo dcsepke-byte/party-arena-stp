@@ -13,9 +13,7 @@ enum State {
 	STUNNED
 }
 
-var player_id
-var is_ai
-var ai_difficulty
+var info: Lobby.PlayerInfo
 
 # The current animation state
 var state: int = State.IDLE
@@ -27,6 +25,7 @@ var speed := BASE_SPEED
 # Is reset when the ground is touched
 var on_floor := true
 
+var dead := false
 
 var ai_direction := 0.0
 var ai_direction_change := 0.0
@@ -36,6 +35,8 @@ var perm_rotation := Vector3()
 func _ready():
 	$Model.play_animation("idle")
 	state = State.IDLE
+	
+	set_network_master(info.addr.peer_id)
 
 func face_direction(dir: Vector3, state: PhysicsDirectBodyState):
 	if dir.length_squared() > 0.01:
@@ -43,10 +44,11 @@ func face_direction(dir: Vector3, state: PhysicsDirectBodyState):
 
 func jump():
 	if on_floor:
-		$AudioStreamPlayer.play()
+		if not multiplayer.is_network_server():
+			$AudioStreamPlayer.play()
+			$Model.play_animation("jump")
 		linear_velocity.y = JUMP_VELOCITY
 		on_floor = false
-		$Model.play_animation("jump")
 		self.state = State.JUMP
 		return true
 	return false
@@ -72,8 +74,8 @@ func process_ai(state: PhysicsDirectBodyState):
 
 func process_player(state: PhysicsDirectBodyState):
 	var dir = Vector3(0, 0, 0)
-	dir.z += Input.get_action_strength("player{0}_up".format([player_id]))
-	dir.z -= Input.get_action_strength("player{0}_down".format([player_id]))
+	dir.z += Input.get_action_strength("player{0}_up".format([info.player_id]))
+	dir.z -= Input.get_action_strength("player{0}_down".format([info.player_id]))
 	
 	var v =  speed * dir.normalized()
 	if on_floor:
@@ -82,7 +84,7 @@ func process_player(state: PhysicsDirectBodyState):
 	state.linear_velocity.z = v.z
 	face_direction(dir, state)
 	
-	if Input.is_action_pressed("player{0}_action1".format([player_id])):
+	if Input.is_action_pressed("player{0}_action1".format([info.player_id])):
 		jump()
 
 	if self.state == State.IDLE and dir.length_squared() > 0.01:
@@ -92,8 +94,11 @@ func process_player(state: PhysicsDirectBodyState):
 		$Model.play_animation("idle")
 		self.state = State.IDLE
 
-func _integrate_forces(state: PhysicsDirectBodyState) -> void:#(delta: float):
-	if is_ai:
+func _integrate_forces(state: PhysicsDirectBodyState) -> void:
+	if not is_network_master() or dead:
+		return
+	
+	if info.is_ai():
 		process_ai(state)
 	else:
 		process_player(state)
@@ -102,6 +107,23 @@ func _integrate_forces(state: PhysicsDirectBodyState) -> void:#(delta: float):
 		$Model.play_animation("idle")
 		self.state = State.IDLE
 
+	info.lobby.broadcast_unreliable(self, "update_state",
+			[self.translation, self.rotation, self.state])
+
+puppet func update_state(trans: Vector3, rot: Vector3, state: int):
+	translation = trans
+	rotation = rot
+	if self.state != state:
+		match state:
+			State.IDLE:
+				$Model.play_animation("idle")
+			State.RUNNING:
+				$Model.play_animation("run")
+			State.JUMP:
+				$Model.play_animation("jump")
+				if not multiplayer.is_network_server():
+					$AudioStreamPlayer.play()
+	self.state = state
 
 func _on_Player_body_entered(body: Node) -> void:
 	if body.is_in_group("ground"):

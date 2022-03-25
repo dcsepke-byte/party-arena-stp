@@ -6,7 +6,7 @@
 [ext_resource path="res://plugins/minigames/dungeon_parkour/Dungeon Arena/Floor02.tscn" type="PackedScene" id=4]
 [ext_resource path="res://plugins/minigames/dungeon_parkour/Dungeon Arena/BlockS01.tscn" type="PackedScene" id=5]
 [ext_resource path="res://plugins/minigames/dungeon_parkour/Dungeon Arena/Skull01.tscn" type="PackedScene" id=6]
-[ext_resource path="res://scenes/waypoint/waypoint.tscn" type="PackedScene" id=7]
+[ext_resource path="res://common/scenes/waypoint/waypoint.tscn" type="PackedScene" id=7]
 [ext_resource path="res://plugins/minigames/dungeon_parkour/Dungeon Arena/platform.tscn" type="PackedScene" id=8]
 [ext_resource path="res://assets/textures/finish.png" type="Texture" id=9]
 [ext_resource path="res://plugins/minigames/dungeon_parkour/Dungeon Arena/Pole02.tscn" type="PackedScene" id=10]
@@ -526,7 +526,6 @@ nodes = [ NodePath("../Waypoint6") ]
 
 [node name="Waypoint6" parent="Ground" instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 112, 0, -20 )
-nodes = [  ]
 
 [node name="Floor02Triangle" parent="Ground" instance=ExtResource( 12 )]
 transform = Transform( -1, 0, 9.68575e-08, 0, 1, 0, -9.68575e-08, 0, -1, 20, -1, -2 )
@@ -624,6 +623,7 @@ custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
 [connection signal="timeout" from="Timer" to="." method="create_fireballs"]
 [connection signal="body_entered" from="Finish" to="." method="_on_Finish_body_entered"]
 [connection signal="timeout" from="Timer2" to="." method="_on_Timer2_timeout"]

@@ -1,5 +1,9 @@
 extends Spatial
 
+var lobby: Lobby
+
+onready var players = Utility.get_nodes_in_group(self, "players")
+
 var losses = 0 # Number of players that have been knocked-out
 var placement# Placements, is filled with player id in order. Index 0 is first place
 var timer_end = 4 # How long the winning message will be shown before exiting
@@ -11,20 +15,23 @@ var human_players := 0
 
 var ground_edges = {}
 
+func _enter_tree() -> void:
+	lobby = Lobby.get_lobby(self)
+
 func _ready():
 	$Environment/Screen/Message.hide()
 	
-	if Global.minigame_state.minigame_type == Global.MINIGAME_TYPES.DUEL:
+	if lobby.minigame_state.minigame_type == Lobby.MINIGAME_TYPES.DUEL:
 		placement = [0, 0]
 	else:
 		placement = [0, 0, 0, 0]
 	
 	var i = 1
-	for team_id in range(Global.minigame_state.minigame_teams.size()):
-		for player in Global.minigame_state.minigame_teams[team_id]:
+	for team_id in range(lobby.minigame_state.minigame_teams.size()):
+		for player in lobby.minigame_state.minigame_teams[team_id]:
 			var player_node = get_node("Player{0}".format([i]))
 			player_node.team = team_id
-			if not player_node.is_ai:
+			if not player_node.info.is_ai():
 				human_players += 1
 			i += 1
 	
@@ -84,56 +91,71 @@ func precompute_ground_edges():
 #	geometry.end()
 
 func win_condition(players):
-	if Global.minigame_state.minigame_type == Global.MINIGAME_TYPES.FREE_FOR_ALL:
+	if lobby.minigame_state.minigame_type == Lobby.MINIGAME_TYPES.FREE_FOR_ALL:
 		return players.size() <= 1
 	else:
 		var team
-		for p in get_tree().get_nodes_in_group("players"):
+		for p in players:
 			if team != null and p.team != team:
 				return false
 			team = p.team
 		
 		return true
 
-func _process(delta):
-	var players = get_tree().get_nodes_in_group("players")
+func _server_process(delta):
 	if human_players == 0 and len(players) > 0:
 		players[0].max_speed = 5.0
 	for p in players:
 		if p.translation.y < -10:
 			losses += 1
-			placement[placement.size() - losses] = p.player_id # Assign placement before deleting player
+			placement[placement.size() - losses] = p.info.player_id # Assign placement before deleting player
 			if losses == placement.size():
 				winner_team = p.team
-			if not p.is_ai:
+			if not p.info.is_ai():
 				human_players -= 1
+			players.erase(p)
+			lobby.broadcast(self, "player_out", [p.info.player_id])
 			p.queue_free()
 	
 	if win_condition(players) and not timer_end_start:
 		# If the last player has not died yet, put him as the winner
 		if players.size() == 1:
-			placement[0] = players[0].player_id
+			placement[0] = players[0].info.player_id
 			players[0].winner = true
 		
 		if not players.empty():
 			winner_team = players[0].team
 		timer_end_start = true
 		
-		match Global.minigame_state.minigame_type:
-			Global.MINIGAME_TYPES.FREE_FOR_ALL, Global.MINIGAME_TYPES.DUEL:
-				for p in Global.players:
-					if p.player_id == placement[0]:
-						$Environment/Screen/Message.text = tr("KNOCK_OFF_PLAYER_WINS_MSG").format({"player": p.player_name})
-			Global.MINIGAME_TYPES.TWO_VS_TWO:
-				$Environment/Screen/Message.text = tr("KNOCK_OFF_TEAM_WINS_MSG").format({"team": winner_team + 1})
-		
-		$Environment/Screen/Message.show()
+		match lobby.minigame_state.minigame_type:
+			Lobby.MINIGAME_TYPES.FREE_FOR_ALL, Lobby.MINIGAME_TYPES.DUEL:
+				lobby.broadcast(self, "win_player", [placement[0]])
+			Lobby.MINIGAME_TYPES.TWO_VS_TWO:
+				lobby.broadcast(self, "win_team", [winner_team + 1])
 	
 	if timer_end_start:
 		timer_end -= delta
 		if timer_end <= 0:
-			match Global.minigame_state.minigame_type:
-				Global.MINIGAME_TYPES.DUEL, Global.MINIGAME_TYPES.FREE_FOR_ALL:
-					Global.minigame_win_by_position(placement)
-				Global.MINIGAME_TYPES.TWO_VS_TWO:
-					Global.minigame_team_win(winner_team)
+			match lobby.minigame_state.minigame_type:
+				Lobby.MINIGAME_TYPES.DUEL, Lobby.MINIGAME_TYPES.FREE_FOR_ALL:
+					lobby.minigame_win_by_position(placement)
+				Lobby.MINIGAME_TYPES.TWO_VS_TWO:
+					lobby.minigame_team_win(winner_team)
+
+puppet func player_out(player_id: int):
+	for player in players:
+		if player.info.player_id == player_id:
+			players.erase(player)
+			player.hide()
+			player.active = false
+			break
+
+puppet func win_player(player_id: int):
+	var player = lobby.get_player_by_id(player_id)
+	$Environment/Screen/Message.text = tr("KNOCK_OFF_PLAYER_WINS_MSG").format({"player": player.name})
+	$Environment/Screen/Message.show()
+	players[0].winner = true
+
+puppet func win_team(team: int):
+	$Environment/Screen/Message.text = tr("KNOCK_OFF_TEAM_WINS_MSG").format({"team": team})
+	$Environment/Screen/Message.show()

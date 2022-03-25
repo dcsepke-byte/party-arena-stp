@@ -4,12 +4,12 @@
 [ext_resource path="res://plugins/minigames/escape_from_lava_1v3/player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/textures/lava.png" type="Texture" id=3]
 [ext_resource path="res://plugins/minigames/escape_from_lava_1v3/ground.dae" type="PackedScene" id=4]
-[ext_resource path="res://scenes/waypoint/waypoint.tscn" type="PackedScene" id=5]
+[ext_resource path="res://common/scenes/waypoint/waypoint.tscn" type="PackedScene" id=5]
 [ext_resource path="res://plugins/minigames/escape_from_lava_1v3/door.tscn" type="PackedScene" id=6]
 [ext_resource path="res://assets/fonts/title_font.tres" type="DynamicFont" id=7]
-[ext_resource path="res://scenes/control_view/control_view_2d.tscn" type="PackedScene" id=8]
+[ext_resource path="res://common/scenes/control_view/control_view_2d.tscn" type="PackedScene" id=8]
 [ext_resource path="res://assets/music/minigames/escape from lava.ogg" type="AudioStream" id=9]
-[ext_resource path="res://scenes/countdown/countdown.tscn" type="PackedScene" id=10]
+[ext_resource path="res://common/scenes/countdown/countdown.tscn" type="PackedScene" id=10]
 
 [sub_resource type="PlaneMesh" id=1]
 size = Vector2( 128, 128 )
@@ -75,7 +75,6 @@ shape = SubResource( 3 )
 transform = Transform( 4.88762e-07, 0, -1, 0, 1, 0, 1, 0, 4.88762e-07, 0, 0, -32 )
 
 [node name="Navigation" type="Spatial" parent="."]
-
 
 [node name="Waypoint" parent="Navigation" instance=ExtResource( 5 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 0.084275, -27 )
@@ -293,6 +292,7 @@ stream = ExtResource( 9 )
 autoplay = true
 
 [node name="Countdown" parent="." instance=ExtResource( 10 )]
+
 [connection signal="timeout" from="EndTimer" to="." method="_on_EndTimer_timeout"]
 [connection signal="body_entered" from="Lava" to="." method="_on_Lava_body_entered"]
 [connection signal="body_entered" from="Stage1/Area" to="." method="enter_stage" binds= [ 1 ]]
