@@ -1,88 +1,30 @@
 extends Control
 
-# Path to the board being used on game start.
-var current_player := 0
-
 var lobby: Node
-
-var human_players := 0
 
 func _ready() -> void:
 	# Wait with main menu music until audio options have been loaded
 	$AudioStreamPlayer.play()
-	#var award_type = $BoardSettings/Options/Award/AwardType
-	#award_type.add_item("MENU_LABEL_LINEAR", Global.AWARD_TYPE.LINEAR)
-	#award_type.add_item("MENU_LABEL_WINNER_TAKES_ALL", Global.AWARD_TYPE.WINNER_ONLY);
-
 	$MainMenu/Buttons/Play.grab_focus()
-	load_boards()
-	load_characters()
-
-	if false:
-		#Lobby.get_lobby().quit_to_menu = false
-
+	
+	var servers: Array = Global.storage.get_value("ServerList", "servers", [])
+	for server in servers:
+		var button := Button.new()
+		button.text = server
+		button.connect("pressed", self, "remote_server", [server])
+		$ServerList/VBoxContainer/ScrollContainer/List.add_child(button)
+	var add_button := Button.new()
+	add_button.text = "+"
+	add_button.connect("pressed", self, "_on_ServerList_server_add")
+	$ServerList/VBoxContainer/ScrollContainer/List.add_child(add_button)
+	
+	var current_server := Global.get_current_server()
+	if current_server and Global.is_local_multiplayer():
+		open_lobby(current_server.current_lobby)
+		current_server.current_lobby.refresh()
+	elif current_server:
+		_on_connection_succeeded(current_server)
 		$MainMenu.hide()
-		$SelectionBoard.show()
-		$Animation.play("SelectionBoard")
-		if $SelectionBoard/ScrollContainer/Buttons.get_child_count() > 0:
-			$SelectionBoard/ScrollContainer/Buttons.get_child(0).grab_focus()
-		else:
-			$SelectionBoard/Back.grab_focus()
-
-		var i := 1;
-
-		for p in Global.players:
-			if p.is_ai:
-				continue
-			else:
-				human_players += 1
-
-			get_node("PlayerInfo" + str(i) + "/Name").text = p.player_name;
-			get_node("PlayerInfo" + str(i) + "/Character").text =\
-					tr("MENU_LABEL_CHARACTER") + " " + p.character;
-			get_node("PlayerInfo" + str(i) + "/Ready").text =\
-					"MENU_LABEL_READY"
-			get_node("PlayerInfo" + str(i)).visible = true
-
-			i += 1
-
-		current_player = human_players
-
-		lobby.start()
-
-func load_boards() -> void:
-	var selection_board_list := $SelectionBoard/ScrollContainer/Buttons as\
-			VBoxContainer
-
-	var button_template: PackedScene =\
-			preload("res://common/scenes/sound_button/sound_button.tscn")
-	for board in PluginSystem.board_loader.get_loaded_boards():
-		var board_list_entry: Button = button_template.instance()
-		board_list_entry.size_flags_horizontal = SIZE_EXPAND_FILL
-
-		board_list_entry.text = board
-		board_list_entry.connect(
-				"pressed", self, "_on_board_select", [board_list_entry])
-
-		selection_board_list.add_child(board_list_entry)
-
-func load_characters() -> void:
-	var selection_char_list := $SelectionChar/Buttons/VScrollBar/Grid as\
-			GridContainer
-	var button_template: PackedScene =\
-			preload("res://common/scenes/sound_button/sound_button.tscn")
-	var character_loader = PluginSystem.character_loader
-	for character in character_loader.get_loaded_characters():
-		var character_list_entry: Button = button_template.instance()
-		character_list_entry.size_flags_horizontal = SIZE_EXPAND_FILL
-
-		character_list_entry.text = character
-		character_list_entry.icon = character_loader.load_character_icon(character)
-		character_list_entry.expand_icon = true
-		character_list_entry.connect("pressed", self, "_on_character_select",
-				[character_list_entry])
-
-		selection_char_list.add_child(character_list_entry)
 
 #*** Options menu ***#
 
@@ -108,181 +50,26 @@ func _on_OptionsMenu_quit() -> void:
 
 #*** Amount of players menu ***#
 
-func _on_PopupDialog_confirmed() -> void:
-	remote_server($PopupDialog/VBoxContainer/LineEdit.text)
-
-func remote_server(ip) -> void:
-	var players := 1
-	var game := Global.connect_remote_server(ip, 7634)
-	yield(get_tree().network_peer, "connection_succeeded")
-	lobby = yield(game.create_lobby(players), "completed")
-	if not lobby:
-		Global.destroy_local_server()
-		_on_Amount_Of_Players_Back_pressed()
-		return
-	lobby.connect("player_info_updated", self, "_on_player_info_updated")
-	lobby.set_current_scene(self)
-	human_players = players
-	for i in range(1, human_players + 1):
-		get_node("PlayerInfo{0}".format([i])).show()
-	$Animation.play_backwards("MainMenu")
-	yield($Animation, "animation_finished")
-	$MainMenu.hide()
-	$SelectionChar.show()
-	$Animation.play("SelectionChar")
-	if $SelectionChar/Buttons/VScrollBar/Grid.get_child_count() > 0:
-		$SelectionChar/Buttons/VScrollBar/Grid.get_child(0).grab_focus()
-	else:
-		$SelectionChar/Buttons/Back.grab_focus()
-
-func _select_player_amount(players) -> void:
+func _on_Play_pressed() -> void:
 	var game := Global.create_local_server()
 	yield(get_tree().network_peer, "connection_succeeded")
-	lobby = yield(game.create_lobby(players), "completed")
+	lobby = yield(game.create_lobby(), "completed")
 	if not lobby:
 		Global.destroy_local_server()
-		_on_Amount_Of_Players_Back_pressed()
 		return
-	lobby.connect("player_info_updated", self, "_on_player_info_updated")
-	lobby.set_current_scene(self)
-	human_players = players
-	for i in range(1, human_players + 1):
-		get_node("PlayerInfo{0}".format([i])).show()
+	open_lobby(lobby)
 
-	$Animation.play_backwards("SelectionPlayers")
-	yield($Animation, "animation_finished")
-	$SelectionPlayers.hide()
-	$SelectionChar.show()
-	$Animation.play("SelectionChar")
-	if $SelectionChar/Buttons/VScrollBar/Grid.get_child_count() > 0:
-		$SelectionChar/Buttons/VScrollBar/Grid.get_child(0).grab_focus()
-	else:
-		$SelectionChar/Buttons/Back.grab_focus()
-
-func _on_Play_pressed() -> void:
-	$Animation.play_backwards("MainMenu")
-	yield($Animation, "animation_finished")
-	$MainMenu/Buttons.hide()
-	$SelectionPlayers.show()
-	$Animation.play("SelectionPlayers")
-	$SelectionPlayers/Buttons/VScrollBar/Grid/One.grab_focus()
+func open_lobby(lobby: Lobby) -> void:
+	var lobby_menu = preload("res://client/menus/lobby/lobby_menu.tscn").instance()
+	lobby_menu.lobby = lobby
+	lobby_menu.mainmenu = self
+	add_child(lobby_menu)
+	$MainMenu.hide()
 
 func _on_Play2_pressed() -> void:
-	$PopupDialog.popup_centered()
-
-func _on_Amount_Of_Players_Back_pressed() -> void:
-	$SelectionPlayers/Buttons/Back.disabled = true
-	$Animation.play_backwards("SelectionPlayers")
-	yield($Animation, "animation_finished")
-	$SelectionPlayers.hide()
-	$MainMenu/Buttons.show()
-	$SelectionPlayers/Buttons/Back.disabled = false
-	$Animation.play("MainMenu")
-	$MainMenu/Buttons/Play.grab_focus()
-
-#*** Character selection menu ***#
-
-func _on_player_info_updated(playerinfo):
-	for player in playerinfo:
-		if player.addr.peer_id == multiplayer.get_network_unique_id() and player.character:
-			character_selected(player.addr.idx, player.character)
-
-func character_selected(idx: int, character: String):
-	get_node("PlayerInfo" + str(idx + 1) + "/Character").text =\
-			tr("MENU_LABEL_CHARACTER") + " " + character
-	get_node("PlayerInfo" + str(idx + 1) + "/Ready").text =\
-			"MENU_LABEL_READY"
-
-func _on_character_select(target: Button) -> void:
-	lobby.select_character(current_player, target.text)
-	current_player += 1
-
-# TODO: synchronize this with remote
-#	if PluginSystem.character_loader.get_loaded_characters().size() >=\
-#			Global.amount_of_players:
-#		target.disabled = true
-
-	if current_player == human_players:
-		$Animation.play_backwards("SelectionChar")
-		yield($Animation, "animation_finished")
-		$SelectionChar.hide()
-		$SelectionBoard.show()
-		$Animation.play("SelectionBoard")
-		if $SelectionBoard/ScrollContainer/Buttons.get_child_count() > 0:
-			$SelectionBoard/ScrollContainer/Buttons.get_child(0).grab_focus()
-		else:
-			$SelectionBoard/Back.grab_focus()
-
-	$SelectionChar/Title.text =\
-			"MENU_LABEL_SELECT_CHARACTER_PLAYER_" + str(current_player + 1)
-
-func _on_SelectionChar_Back_pressed() -> void:
-	Global.destroy_local_server()
-	$SelectionChar/Buttons/Back.disabled = true
-	$Animation.play_backwards("SelectionChar")
-	yield($Animation, "animation_finished")
-	$SelectionChar.hide()
-	$SelectionPlayers.show()
-	$SelectionChar/Buttons/Back.disabled = false
-	$Animation.play("SelectionPlayers")
-	$SelectionPlayers/Buttons/VScrollBar/Grid/One.grab_focus()
-
-	current_player = 0
-
-	$SelectionChar/Title.text = "MENU_LABEL_SELECT_CHARACTER_PLAYER_1"
-
-	for i in range(1, 5):
-		get_node("PlayerInfo" + str(i) + "/Character").text =\
-				"MENU_LABEL_CHARACTER"
-		get_node("PlayerInfo" + str(i) + "/Ready").text =\
-				"MENU_LABEL_NOT_READY_ELLIPSIS"
-		get_node("PlayerInfo" + str(i)).hide()
-
-	# Reenable all characters.
-	for child in $SelectionChar/Buttons/VScrollBar/Grid.get_children():
-		child.disabled = false
-
-#*** Board selection menu ***#
-
-func _on_board_select(target: Button) -> void:
-	lobby.select_board(target.get_text())
-	#board = board_loader.get_board_path(target.get_text())
-
-	$Animation.play_backwards("SelectionBoard")
-	yield($Animation, "animation_finished")
-	$SelectionBoard.hide()
-	$BoardSettings.show()
-	$Animation.play("BoardSettings")
-	$BoardSettings/Start.grab_focus()
-
-	var cake_cost: int = 30
-	var turns: int = 10
-
-	$BoardSettings/Options/CakeCost/SpinBox.value = cake_cost
-	$BoardSettings/Options/Turns/SpinBox.value = turns
-
-func _on_Selection_Back_pressed() -> void:
-	$SelectionBoard/Back.disabled = true
-	$Animation.play_backwards("SelectionBoard")
-	yield($Animation, "animation_finished")
-	$SelectionBoard.hide()
-	$SelectionBoard/Back.disabled = false
-	$Animation.play("SelectionChar")
-	current_player = 0
-	$SelectionChar/Title.text = "MENU_LABEL_SELECT_CHARACTER_PLAYER_1"
-
-	for i in range(1, 5):
-		get_node("PlayerInfo" + str(i) + "/Ready").text =\
-				"MENU_LABEL_NOT_READY_ELLIPSIS"
-
-	# Reenable all characters.
-	for child in $SelectionChar/Buttons/VScrollBar/Grid.get_children():
-		child.disabled = false
-
-	if $SelectionChar/Buttons/VScrollBar/Grid.get_child_count() > 0:
-		$SelectionChar/Buttons/VScrollBar/Grid.get_child(0).grab_focus()
-	else:
-		$SelectionChar/Buttons/Back.grab_focus()
+	$MainMenu.hide()
+	$ServerList.show()
+	$ServerList/VBoxContainer/Footer/Leave.grab_focus()
 
 #*** Load game menu ***#
 
@@ -363,14 +150,65 @@ func _on_BoardSettings_Back_pressed():
 	else:
 		$SelectionBoard/Back.grab_focus()
 
-func _on_BoardSettings_Start_pressed():
-	lobby.start()
-
 func _on_Screenshots_pressed():
 	OS.shell_open("file://{0}/screenshots".format([OS.get_user_data_dir()]))
-
 
 func _on_AnimationPlayer_animation_finished(_anim_name: String) -> void:
 	yield(get_tree().create_timer(5), "timeout")
 	$MainMenu/ViewportContainer/Viewport/tux/AnimationPlayer.play()
 	$MainMenu/ViewportContainer/Viewport/tux/AnimationPlayer2.play()
+
+#*** Server List Menu ***#
+
+func _on_ServerList_Leave_pressed() -> void:
+	$ServerList.hide()
+	$MainMenu.show()
+	$MainMenu/Buttons/Play2.grab_focus()
+
+func _on_ServerList_server_add():
+	var list := $ServerList/VBoxContainer/ScrollContainer/List
+	var entry := LineEdit.new()
+	entry.connect("text_entered", self, "_on_ServerList_server_added", [entry])
+	list.add_child(entry)
+	entry.grab_focus()
+	# Make the "+" button the last child again
+	list.get_child(list.get_child_count() - 2).raise()
+
+func _on_ServerList_server_added(text: String, entry: LineEdit):
+	# If there was no text entered, this is not a valid host to connect to
+	if not text:
+		entry.queue_free()
+		return
+	var button := Button.new()
+	button.text = text
+	entry.replace_by(button)
+	button.grab_focus()
+	# Save to disk
+	var servers: Array = Global.storage.get_value("ServerList", "servers", [])
+	servers.append(text)
+	Global.storage.set_value("ServerList", "servers", servers)
+	Global.save_storage()
+
+func remote_server(ip) -> void:
+	var server := Global.connect_remote_server(ip, 7634)
+	if server == null:
+		return
+	var conn := get_tree().network_peer
+	conn.connect("connection_failed", self, "_on_connection_failed")
+	conn.connect("connection_succeeded", self, "_on_connection_succeeded", [server])
+	$LoadAnimation.show()
+	$LoadAnimation/Cancel.grab_focus()
+
+func _on_connection_failed():
+	$LoadAnimation.hide()
+	get_tree().network_peer.disconnect("connection_failed", self, "_on_connection_failed")
+	get_tree().network_peer.disconnect("connection_succeeded", self, "_on_connection_suceeded")
+	get_tree().network_peer = null
+
+func _on_connection_succeeded(server):
+	$LoadAnimation.hide()
+	var servermenu = preload("res://client/menus/lobby/servermenu.tscn").instance()
+	servermenu.server = server
+	servermenu.mainmenu = self
+	add_child(servermenu)
+	$ServerList.hide()

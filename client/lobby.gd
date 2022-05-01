@@ -1,6 +1,8 @@
 extends Lobby
 
 signal player_info_updated(player_info)
+signal settings_changed(settings)
+signal board_selected(board)
 signal game_start
 
 const MINIGAME_TEAM_COLORS = [Color(1, 0, 0), Color(0, 0, 1)]
@@ -69,6 +71,17 @@ puppet func lobby_joined(playerlist: Array):
 	self.player_info = decoded
 	emit_signal("player_info_updated", self.player_info)
 
+puppet func update_settings(settings: Array):
+	var decoded := []
+	for entry in settings:
+		var obj := Lobby.Settings.decode(entry[1])
+		if not obj:
+			push_error("Invalid settings received: " + str(entry))
+			leave()
+			return
+		decoded.append([entry[0], obj])
+	emit_signal("settings_changed", decoded)
+
 puppet func playerstate_updated(playerstates: Array):
 	var decoded := []
 	for player in playerstates:
@@ -76,12 +89,30 @@ puppet func playerstate_updated(playerstates: Array):
 		decoded.append(obj)
 	self.playerstates = decoded
 
+puppet func add_player_failed():
+	# TODO: error reporting
+	pass
+
+func update_setting(id: String, value):
+	rpc_id(1, "update_setting", id, value)
+
+func add_player(idx: int):
+	rpc_id(1, "add_player", idx)
+
+func remove_player(idx: int):
+	rpc_id(1, "remove_player", idx)
+
 func start():
 	rpc_id(1, "start")
 
 func end():
 	playerstates = []
-	started = false
+	current_scene.queue_free()
+	current_scene = null
+	get_tree().change_scene_to(load("res://client/menus/main_menu.tscn"))
+
+func refresh():
+	rpc_id(1, "refresh")
 
 func select_board(board: String):
 	rpc_id(1, "select_board", board)
@@ -132,8 +163,8 @@ func _input(event: InputEvent) -> void:
 # ----- Scene changing code ----- #
 
 # Internal function for actually changing scene without saving any game state.
-func _goto_scene(path: String) -> void:
-	_interactive_load_scene(path, null, "", null)
+func _goto_scene(path: String, wait=true) -> void:
+	_interactive_load_scene(path, null, "", null, wait)
 
 func _goto_scene_board():
 	_interactive_load_scene(current_board, self, "_goto_scene_board_callback", null)
@@ -220,7 +251,8 @@ puppet func return_to_board():
 	_goto_scene_board()
 
 puppet func game_ended():
-	_goto_scene("res://client/menus/victory_screen.tscn")
+	_goto_scene("res://client/menus/victory_screen/victory_screen.tscn", false)
+	started = false
 
 puppet func load_minigame():
 	_goto_scene_minigame(self.minigame_state.minigame_config.scene_path, self.minigame_state)
@@ -285,12 +317,15 @@ func _install_translation_minigame(translation, file_name: String):
 	_minigame_loaded_translations.push_back(translation)
 
 const LOADING_SCREEN = preload("res://client/menus/loading_screen.tscn")
-func _interactive_load_scene(path: String, base: Object, method: String, arg):
+func _interactive_load_scene(path: String, base: Object, method: String, arg, wait := true):
 	if current_scene:
 		current_scene.queue_free()
 	current_scene = LOADING_SCREEN.instance()
 	add_child(current_scene)
-	connect("loading_finished", self, "rpc_id", [1, "client_ready"], CONNECT_ONESHOT)
+	if wait:
+		connect("loading_finished", self, "rpc_id", [1, "client_ready"], CONNECT_ONESHOT)
+	else:
+		connect("loading_finished", self, "loading_finished", [], CONNECT_ONESHOT)
 	_load_interactive(path, self, "_scene_loaded", [base, method, arg])
 
 puppet func loading_finished():

@@ -7,7 +7,8 @@ onready var controller: Controller = get_parent().get_parent()
 var current_player: int = -1
 
 func select(player_id: int):
-	# TODO: timeout?
+	controller.wait_for_duel_selection = true
+	controller.start_timer_for_player(controller.lobby.get_player_by_id(player_id).addr)
 	current_player = player_id
 	var info = controller.lobby.get_player_by_id(current_player)
 	rpc_id(info.addr.peer_id, "_client_select", current_player)
@@ -17,8 +18,10 @@ master func _client_selected(player_id: int):
 	if multiplayer.get_rpc_sender_id() != info.addr.peer_id:
 		return
 	if player_id == current_player:
-		# TODO: handle
+		controller.lobby.kick(info.addr.peer_id)
 		return
+	controller.wait_for_duel_selection = false
+	controller.cancel_timer()
 	emit_signal("selected", player_id)
 
 puppet func _client_select(player_id: int):

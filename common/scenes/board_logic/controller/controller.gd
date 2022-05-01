@@ -59,6 +59,7 @@ var has_rolled := true
 
 var wait_for_path_select := false
 var wait_for_select_item := false
+var wait_for_duel_selection := false
 
 var camera_focus: Spatial
 
@@ -201,12 +202,19 @@ func _on_player_disconnected(player_id: int):
 		$Screen/Shop.end_shopping()
 	# * Item Selection
 	elif wait_for_select_item:
+		wait_for_select_item = false
 		emit_signal("item_selected", randi() % len(player.items))
 	# * Path Selection
 	elif wait_for_path_select:
+		wait_for_path_select = false
 		var idx: int = randi() % player.space.next.size()
 		emit_signal("path_chosen", player.space.next[idx])
 	# * Space Selection (trap items)
+	elif wait_for_duel_selection:
+		var players: Array = self.players.duplicate()
+		players.erase(player)
+		var enemy_player = players[randi() % players.size()].info.player_id
+		$Screen/DuelSelection.emit_signal("selected", enemy_player)
 	elif $SelectSpaceHelper.current_player:
 		$SelectSpaceHelper.end_selection()
 
@@ -592,6 +600,7 @@ func _step(player: PlayerBoard, previous_space: NodeBoard, last: bool) -> void:
 			start_timer_for_player(player.info.addr)
 			player.space = yield(self, "path_chosen")
 			cancel_timer()
+			wait_for_path_select = false
 		else:
 			player.space = player.space.next[randi() % player.space.next.size()]
 			yield(get_tree().create_timer(1), "timeout")

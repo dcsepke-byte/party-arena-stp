@@ -107,6 +107,111 @@ class MinigameReward:
 	var duel_reward: int = -1
 	var gnu_solo_item_reward: Item = null
 
+class Settings:
+	const TYPE_INT := 0
+	const TYPE_BOOL := 1
+	const TYPE_OPTIONS := 2
+	var name := ""
+	var type := -1
+	var value = null
+
+	static func new_range(name: String, value: int, start: int, end: int) -> Settings:
+		assert (start <= value && value <= end, "Value not in range")
+		var obj := Settings.new()
+		obj.name = name
+		obj.type = Settings.TYPE_INT
+		obj.value = [value, start, end]
+		return obj
+
+	static func new_bool(name: String, value: bool) -> Settings:
+		var obj := Settings.new()
+		obj.name = name
+		obj.type = Settings.TYPE_BOOL
+		obj.value = value
+		return obj
+
+	static func new_options(name: String, value: String, options: Array) -> Settings:
+		for v in value:
+			assert(v is String, "Setting Options can only be String names")
+		assert(value in options, "The default value must be part of all possible values")
+		var obj := Settings.new()
+		obj.name = name
+		obj.type = Settings.TYPE_OPTIONS
+		obj.value = [value, options]
+		return obj
+
+	func encode() -> Array:
+		return [name, type, value]
+
+	func update_value(new_value) -> bool:
+		match type:
+			Settings.TYPE_INT:
+				if not new_value is int:
+					return false
+				if not (value[1] <= new_value and new_value <= value[2]):
+					return false
+				value[0] = new_value
+				return true
+			Settings.TYPE_BOOL:
+				if not new_value is bool:
+					return false
+				value = new_value
+				return true
+			Settings.TYPE_OPTIONS:
+				if not new_value is String:
+					return false
+				if not new_value in value[1]:
+					return false
+				value[0] = new_value
+				return true
+			_:
+				assert (false, "Invalid Settings type")
+				return false
+
+	static func check_type(type: int, value) -> bool:
+		match type:
+			Settings.TYPE_INT:
+				if not value is Array:
+					return false
+				if len(value) != 3:
+					return false
+				var v = value[0]
+				var start = value[1]
+				var end = value[2]
+				if not (v is int and start is int and end is int):
+					return false
+				return start <= v && v <= end
+			Settings.TYPE_BOOL:
+				return value is bool
+			Settings.TYPE_OPTIONS:
+				if not value is Array:
+					return false
+				if len(value) != 2:
+					return false
+				if not value[0] is String:
+					return false
+				if not value[1] is Array:
+					return false
+				for v in value[1]:
+					if not v is String:
+						return false
+				return true
+			_:
+				return false
+
+	static func decode(data: Array) -> Settings:
+		var obj := Settings.new()
+		obj.name = data[0]
+		obj.type = data[1]
+		obj.value = data[2]
+		if not obj.name is String:
+			return null
+		if not obj.type in [Settings.TYPE_INT, Settings.TYPE_BOOL, Settings.TYPE_OPTIONS]:
+			return null
+		if not check_type(obj.type, obj.value):
+			return null
+		return obj
+
 enum MINIGAME_TYPES {
 	DUEL,
 	ONE_VS_THREE,
@@ -128,6 +233,8 @@ enum Difficulty {
 	NORMAL,
 	HARD
 }
+
+const LOBBY_SIZE := 4
 
 # The players in the lobby described by a PlayerInfo (see above)
 var player_info := []
@@ -177,6 +284,12 @@ static func get_lobby(caller: Node) -> Lobby:
 
 func is_lobby_owner(id: int):
 	return player_info and id == player_info[0].addr.peer_id
+
+func has_peer(id: int):
+	for player in self.player_info:
+		if player.addr.peer_id == id:
+			return true
+	return false
 
 func assign_player_ids():
 	var player_id := 1

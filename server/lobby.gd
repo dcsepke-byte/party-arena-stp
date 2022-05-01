@@ -1,6 +1,7 @@
 extends Lobby
 
 signal player_left(player_id)
+signal setting_changed(setting)
 
 class BoardOverrides:
 	var cake_cost := 30
@@ -28,8 +29,6 @@ enum GNU_ACTION_TYPES {
 
 const MINIGAME_REWARD_SCREEN = preload("res://server//rewardscreens/rewardscreen.tscn")
 
-const LOBBY_SIZE := 4
-
 var overrides: BoardOverrides = BoardOverrides.new()
 
 var started := false
@@ -46,8 +45,43 @@ var trap_states := []
 # Time window for the action of a player
 # This ensures that a player cannot block the game by going AFK
 # If this time window is exhausted, the player will be kicked
-# TODO: Expose to game settings in lobby
 var timeout :=  -1 if Global.is_local_multiplayer() else 30
+
+var settings := {}
+
+func _init():
+	if not Global.is_local_multiplayer():
+		settings["main/public"] = Settings.new_bool("MENU_SETTINGS_PUBLIC", false)
+	settings["main/enable_timeout"] = Settings.new_bool("MENU_SETTINGS_ENABLE_TIMEOUT", not Global.is_local_multiplayer())
+	settings["main/timeout"] = Settings.new_range("MENU_SETTINGS_TIMEOUT", 30, 10, 65535)
+	settings["main/cake_cost"] = Settings.new_range("MENU_SETTINGS_CAKE_COST", 10, 1, 65535)
+	settings["main/turns"] = Settings.new_range("MENU_SETTINGS_TURNS", 30, 10, 65535)
+	settings["main/award_type"] = Settings.new_options("MENU_SETTINGS_AWARD_TYPE", "MENU_SETTINGS_AWARD_LINEAR", ["MENU_SETTINGS_AWARD_LINEAR", "MENU_SETTINGS_AWARD_WINNER_TAKES_ALL"])
+	connect("setting_changed", self, "_on_setting_changed")
+	current_board = PluginSystem.board_loader.get_loaded_boards()[0]
+
+func _on_setting_changed(setting: Settings):
+	match setting.name:
+		# Negative timeout values disable timeouts
+		# We use negative values to save timeout settings
+		"MENU_SETTINGS_ENABLE_TIMEOUT":
+			if setting.value:
+				timeout = settings["main/timeout"].value[0]
+			else:
+				timeout = -1
+		"MENU_SETTINGS_TIMEOUT":
+			if settings["main/enable_timeout"].value:
+				timeout = setting.value[0]
+		"MENU_SETTINGS_CAKE_COST":
+			overrides.cake_cost = setting.value[0]
+		"MENU_SETTINGS_TURNS":
+			overrides.max_turns = setting.value[0]
+		"MENU_SETTINGS_AWARD_TYPE":
+			match setting.value:
+				"MENU_SETTINGS_AWARD_LINEAR":
+					overrides.award = AWARD_TYPE.LINEAR
+				"MENU_SETTINGS_AWARD_WINNER_TAKES_ALL":
+					overrides.award = AWARD_TYPE.WINNER_ONLY
 
 func next_ai_addr():
 	var idx = num_ai
@@ -87,8 +121,10 @@ master func select_board(board: String):
 	if not board in PluginSystem.board_loader.get_loaded_boards():
 		return
 	if is_lobby_owner(multiplayer.get_rpc_sender_id()):
-		self.current_board = PluginSystem.board_loader.get_board_path(board)
-		var scene: SceneState = load(self.current_board).get_state()
+		self.current_board = board
+		var cake_cost := 30
+		var max_turns := 10
+		var scene: SceneState = load(PluginSystem.board_loader.get_board_path(self.current_board)).get_state()
 		for i in range(scene.get_node_count()):
 			var instance: PackedScene = scene.get_node_instance(i)
 			if instance:
@@ -97,10 +133,13 @@ master func select_board(board: String):
 					for prop in range(scene.get_node_property_count(i)):
 						match scene.get_node_property_name(i, prop):
 							"COOKIES_FOR_CAKE":
-								overrides.cake_cost = int(scene.get_node_property_value(i, prop))
+								cake_cost = int(scene.get_node_property_value(i, prop))
 							"MAX_TURNS":
-								overrides.max_turns = int(scene.get_node_property_value(i, prop))
-		broadcast(self, "board_selected", [board])
+								max_turns = int(scene.get_node_property_value(i, prop))
+		settings["main/cake_cost"].update_value(cake_cost)
+		settings["main/turns"].update_value(max_turns)
+		send_board()
+		send_settings()
 
 master func select_character(idx: int, character: String):
 	if not character in PluginSystem.character_loader.get_loaded_characters():
@@ -132,13 +171,50 @@ func end():
 	cake_space = NodePath()
 	current_scene.queue_free()
 	current_scene = null
+	broadcast(self, "game_ended")
+
+func is_public() -> bool:
+	if not "main/public" in settings:
+		return false
+	return settings["main/public"].value
+
+master func add_player(idx: int):
+	var peer := multiplayer.get_rpc_sender_id()
+	if not join(PlayerAddress.new(peer, idx)):
+		rpc_id(peer, "add_player_failed")
+		return
+	update_playerlist()
+
+master func remove_player(idx: int):
+	# Only available while in the lobby
+	if started:
+		return
+	# Is this the last player from that id?
+	var peer := multiplayer.get_rpc_sender_id()
+	var count := 0
+	for player in player_info:
+		if player.addr.peer_id == peer:
+			count += 1
+	# For a client to participate in a lobby, there must be at least one player registered
+	# If the last player from that client tries to leave, we don't let them
+	# They can only leave entirely by disconnecting from the lobby
+	if count == 1:
+		return
+	var i := 0
+	for player in player_info:
+		if player.addr.peer_id == peer and player.addr.idx == idx:
+			player_info.remove(i)
+			update_playerlist()
+			return
+		i += 1
 
 func join(addr: PlayerAddress) -> bool:
 	# Game has already started?
 	if started:
 		return false
 	# Lobby full?
-	if len(self.player_info) == LOBBY_SIZE:
+	var player_count := len(self.player_info)
+	if player_count == LOBBY_SIZE:
 		return false
 	# No duplicate players
 	for player in self.player_info:
@@ -147,15 +223,48 @@ func join(addr: PlayerAddress) -> bool:
 	# Prevent race condition with lobby deletion when last player leaves
 	if is_queued_for_deletion():
 		return false
-	self.player_info.append(PlayerInfo.new(self, addr, "", ""))
+	self.player_info.append(PlayerInfo.new(self, addr, "Player" + str(player_count + 1), ""))
 	return true
 
-func update_playerlist():
+master func update_setting(id: String, value):
+	if not is_lobby_owner(multiplayer.get_rpc_sender_id()):
+		return
+	if id in settings and settings[id].update_value(value):
+		emit_signal("setting_changed", settings[id])
+		send_settings()
+
+func send_settings(peer := -1):
+	# Send players the updated list
+	var encoded := []
+	for id in settings:
+		encoded.append([id, settings[id].encode()])
+	if peer == -1:
+		broadcast(self, "update_settings", [encoded])
+	else:
+		rpc_id(peer, "update_settings", encoded)
+
+func send_board(peer := -1):
+	if peer == -1:
+		broadcast(self, "board_selected", [current_board])
+	else:
+		rpc_id(peer, "board_selected", current_board)
+
+func update_playerlist(peer := -1):
 	# Send players the updated list
 	var encoded := []
 	for player in self.player_info:
 		encoded.append(player.encode())
-	broadcast(self, "lobby_joined", [encoded])
+	if peer == -1:
+		broadcast(self, "lobby_joined", [encoded])
+	else:
+		rpc_id(peer, "lobby_joined", encoded)
+
+master func refresh():
+	var peer := multiplayer.get_rpc_sender_id()
+	if has_peer(peer):
+		update_playerlist(peer)
+		send_settings(peer)
+		send_board(peer)
 
 func leave(id: int):
 	var keep := []
@@ -202,12 +311,11 @@ func _goto_scene_minigame(path: String) -> void:
 # Internal function for changing scene to a board while handling player objects.
 func _goto_scene_board() -> void:
 	if turn > overrides.max_turns:
-		broadcast(self, "game_ended")
 		# The game has ended, prepare the lobby for another round
 		end()
 		return
 	broadcast(self, "return_to_board")
-	_interactive_load_scene(current_board, self, "_goto_scene_board_callback", null)
+	_interactive_load_scene(PluginSystem.board_loader.get_board_path(current_board), self, "_goto_scene_board_callback", null)
 
 func _goto_scene_minigame_callback(scene: Node, _arg):
 	var i := 1
@@ -587,6 +695,8 @@ func _interactive_load_scene(path: String, base: Object, method: String, arg):
 		wait_before_scene_change[player.addr.peer_id] = true
 
 mastersync func client_ready():
+	if not wait_before_scene_change:
+		return
 	var id := multiplayer.get_rpc_sender_id()
 	wait_before_scene_change.erase(id)
 	

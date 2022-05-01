@@ -239,7 +239,7 @@ Based upon the nolok icon by Anthony Carré (yekcim)
 Retrieved from: [Super Tux Kart Sourceforge](https://sourceforge.net/p/supertuxkart/code/HEAD/tree/media/trunk/karts/nolok/nolokicon.png)
 License: [GPL 2.0](http://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
 
-## client/menus
+## client/menus/victory_screen
 ### stage.escn | stage.blend
 
 Copyright © 2020 Florian Kothmeier
@@ -448,6 +448,15 @@ Public Domain by Skitterphoto
 Retrieved from [pexels.com](https://www.pexels.com/photo/air-atmosphere-blue-blue-sky-675977)
 
 License: [CC0](https://creativecommons.org/publicdomain/zero/1.0/legalcode)
+
+## assets/icons/loading
+### load*.png
+
+Copyright © 2017 KopiteCowboy
+
+Retrieved from [wikipedia.org](https://cs.wikipedia.org/wiki/Soubor:Loading_2.gif)
+
+License: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/legalcode)
 
 ## assets/icons
 ### icon.\* | icon-\*

@@ -26,11 +26,15 @@ func destroy_local_server():
 
 func connect_remote_server(ip, port) -> Node:
 	var peer = NetworkedMultiplayerENet.new()
-	peer.create_client(ip, port)
+	if peer.create_client(ip, port) != OK:
+		return null
 	get_tree().network_peer = peer
 	var game_client := preload("res://client/game.tscn").instance()
 	get_tree().root.add_child(game_client)
 	return game_client.get_node("Game")
+
+func get_current_server() -> Node:
+	return get_node_or_null("/root/Client/Game")
 
 func destroy_remote_connection():
 	get_node("/root/Client").free()
@@ -42,7 +46,7 @@ func shutdown_connection():
 		destroy_remote_connection()
 
 func is_local_multiplayer() -> bool:
-	return has_node("/root/Client")
+	return has_node("/root/Client") and has_node("/root/Server")
 
 const USER_STORAGE_FILE = "user://data.cfg"
 #
@@ -180,6 +184,6 @@ func _load_interactive(path: String, base: Object, method: String, arg):
 #		current_savegame.trap_states.push_back(state)
 #
 #	savegame_loader.save(current_savegame)
-#
-#func save_storage():
-#	storage.save(USER_STORAGE_FILE)
+
+func save_storage():
+	storage.save(USER_STORAGE_FILE)

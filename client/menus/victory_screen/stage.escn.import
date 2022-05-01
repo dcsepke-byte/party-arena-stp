@@ -2,12 +2,12 @@
 
 importer="scene"
 type="PackedScene"
-path="res://.import/stage.escn-8bfc418d8aa0a72f882126c30cdac1f8.scn"
+path="res://.import/stage.escn-0dd42e763b03d648469f2f80e9c6d8a5.scn"
 
 [deps]
 
-source_file="res://client/menus/stage.escn"
-dest_files=[ "res://.import/stage.escn-8bfc418d8aa0a72f882126c30cdac1f8.scn" ]
+source_file="res://client/menus/victory_screen/stage.escn"
+dest_files=[ "res://.import/stage.escn-0dd42e763b03d648469f2f80e9c6d8a5.scn" ]
 
 [params]
 

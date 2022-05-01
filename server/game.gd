@@ -26,22 +26,37 @@ func _on_node_added(node: Node):
 			node.stream = null
 			node.queue_free()
 
-master func create_lobby(count: int):
-	var peer = multiplayer.get_rpc_sender_id()
-	var name := Marshalls.raw_to_base64(Crypto.new().generate_random_bytes(6))
-	var lobby: Node = preload("res://server/lobby.tscn").instance()
+master func get_public_lobbies():
+	var lobbies := []
+	for child in get_children():
+		if child.is_public():
+			lobbies.append([child.name, child.current_board])
+	rpc_id(multiplayer.get_rpc_sender_id(), "public_lobbies_callback", lobbies)
+
+master func create_lobby():
+	var peer := multiplayer.get_rpc_sender_id()
+	var name: String
+	for _i in range(5):
+		name = Marshalls.raw_to_base64(Crypto.new().generate_random_bytes(6))
+		if not has_node(name):
+			break
+	if not name:
+		rpc_id(peer, "lobby_creation_failed")
+		return
+	var lobby: Lobby = preload("res://server/lobby.tscn").instance()
 	lobby.name = name
 	add_child(lobby)
-	for i in range(count):
-		if not lobby.join(Lobby.PlayerAddress.new(peer, i)):
-			# It should not fail to join an empty lobby
-			lobby.delete()
-			rpc_id(peer, "lobby_creation_failed")
-			return
+	if not lobby.join(Lobby.PlayerAddress.new(peer, 0)):
+		# It should not fail to join an empty lobby
+		lobby.delete()
+		rpc_id(peer, "lobby_creation_failed")
+		return
 	rpc_id(peer, "lobby_created", name)
 	lobby.update_playerlist()
+	lobby.send_settings(peer)
+	lobby.send_board(peer)
 
-master func join_lobby(name: String, count: int):
+master func join_lobby(name: String):
 	var peer = multiplayer.get_rpc_sender_id()
 	# Prevent tree traversal
 	if "." in name or "/" in name:
@@ -50,12 +65,13 @@ master func join_lobby(name: String, count: int):
 	if not lobby:
 		rpc_id(peer, "lobby_join_failed")
 		return
-	for i in range(count):
-		if not lobby.join(Lobby.PlayerAddress.new(peer, i)):
-			rpc_id(peer, "lobby_join_failed")
-			return
-	lobby.update_playerlist()
+	if not lobby.join(Lobby.PlayerAddress.new(peer, 0)):
+		rpc_id(peer, "lobby_join_failed")
+		return
 	rpc_id(peer, "lobby_joined")
+	lobby.update_playerlist()
+	lobby.send_settings(peer)
+	lobby.send_board(peer)
 
 func _on_peer_disconnected(id: int):
 	for child in get_children():

@@ -102,7 +102,7 @@ func _input(event: InputEvent) -> void:
 			if not _local:
 				rpc_id(1, "query_value_changed", $HBoxContainer/NinePatchRect/Range.value)
 
-func _setup(speaker: String, texture: Texture, text: String, format_args: Dictionary, player_id: int):
+func _setup(speaker: String, texture: Texture, text: String, format_args, player_id: int):
 	_local = false
 	$HBoxContainer/TextureRect.texture = texture
 	self.player_id = player_id
@@ -131,7 +131,7 @@ func _internal_accept(arg):
 			return
 	type = -1
 
-func show_dialog(speaker: String, texture: String, text: String, player_id: int, format_args := {}) -> void:
+func show_dialog(speaker: String, texture: String, text: String, player_id: int, format_args = {}) -> void:
 	if multiplayer.is_network_server():
 		_local = false
 		self.player_id = player_id
@@ -144,7 +144,7 @@ func show_dialog(speaker: String, texture: String, text: String, player_id: int,
 		_client_show_dialog(speaker, texture, text, format_args, player_id)
 		_local = true
 
-puppet func _client_show_dialog(speaker: String, texture: String, text: String, format_args: Dictionary, player_id: int) -> void:
+puppet func _client_show_dialog(speaker: String, texture: String, text: String, format_args, player_id: int) -> void:
 	type = TYPES.DIALOG
 	_setup(speaker, load(texture), text, format_args, player_id)
 	grab_focus()
@@ -152,7 +152,7 @@ puppet func _client_show_dialog(speaker: String, texture: String, text: String, 
 	if lobby.get_player_by_id(player_id).is_ai():
 		get_tree().create_timer(2).connect("timeout", self, "_accept_dialog", ["dialog_finished", null])
 
-func show_accept_dialog(speaker: String, texture: String, text: String, player_id: int, format_args := {}) -> void:
+func show_accept_dialog(speaker: String, texture: String, text: String, player_id: int, format_args = {}) -> void:
 	if multiplayer.is_network_server():
 		_local = false
 		self.player_id = player_id
@@ -165,14 +165,14 @@ func show_accept_dialog(speaker: String, texture: String, text: String, player_i
 		_client_show_accept_dialog(speaker, texture, text, format_args, player_id)
 		_local = true
 
-puppet func _client_show_accept_dialog(speaker: String, texture: String, text: String, format_args: Dictionary, player_id: int):
+puppet func _client_show_accept_dialog(speaker: String, texture: String, text: String, format_args, player_id: int):
 	_setup(speaker, load(texture), text, format_args, player_id)
 	type = TYPES.YESNO
 	if lobby.get_player_by_id(player_id).is_local():
 		$HBoxContainer/NinePatchRect/Buttons.show()
 		$HBoxContainer/NinePatchRect/Buttons/Yes.grab_focus()
 
-func show_query_dialog(speaker: String, texture: String, text: String, player_id: int, minimum: int, maximum: int, start_value: int, format_args := {}) -> void:
+func show_query_dialog(speaker: String, texture: String, text: String, player_id: int, minimum: int, maximum: int, start_value: int, format_args = {}) -> void:
 	if multiplayer.is_network_server():
 		_local = true
 		self.player_id = player_id
@@ -188,7 +188,7 @@ func show_query_dialog(speaker: String, texture: String, text: String, player_id
 		_client_show_query_dialog(speaker, texture, text, format_args, player_id, minimum, maximum, start_value)
 		_local = false
 
-func _client_show_query_dialog(speaker: String, texture: String, text: String, format_args: Dictionary, player_id: int, minimum: int, maximum: int, start_value: int):
+func _client_show_query_dialog(speaker: String, texture: String, text: String, format_args, player_id: int, minimum: int, maximum: int, start_value: int):
 	type = TYPES.RANGE
 	_setup(speaker, load(texture), text, format_args, player_id)
 	$HBoxContainer/NinePatchRect/Range.min_value = minimum

@@ -41,8 +41,8 @@ func _ready():
 	
 	yield(get_tree().create_timer(2), "timeout")
 	
-	var sara_tex = preload("res://common/scenes/board_logic/controller/icons/sara.png")
-	$SpeechDialog.show_dialog("CONTEXT_SPEAKER_SARA", sara_tex, tr("CONTEXT_WINNER_ANNOUNCEMENT"), 1)
+	var sara_tex = "res://common/scenes/board_logic/controller/icons/sara.png"
+	$SpeechDialog.show_dialog("CONTEXT_SPEAKER_SARA", sara_tex, "CONTEXT_WINNER_ANNOUNCEMENT", 1)
 	yield($SpeechDialog, "dialog_finished")
 	
 	$AudioStreamPlayer2/AnimationPlayer.play("fade_out")
@@ -57,10 +57,10 @@ func _ready():
 		pos.x += 1.0
 	
 	match len(winner):
-		1: $SpeechDialog.show_dialog("CONTEXT_SPEAKER_SARA", sara_tex, tr("CONTEXT_WINNER_REVEAL_ONE_PLAYER").format(winner_names), 1)
-		2: $SpeechDialog.show_dialog("CONTEXT_SPEAKER_SARA", sara_tex, tr("CONTEXT_WINNER_REVEAL_TWO_PLAYER").format(winner_names), 1)
-		3: $SpeechDialog.show_dialog("CONTEXT_SPEAKER_SARA", sara_tex, tr("CONTEXT_WINNER_REVEAL_THREE_PLAYER").format(winner_names), 1)
-		4: $SpeechDialog.show_dialog("CONTEXT_SPEAKER_SARA", sara_tex, tr("CONTEXT_WINNER_REVEAL_FOUR_PLAYER").format(winner_names), 1)
+		1: $SpeechDialog.show_dialog("CONTEXT_SPEAKER_SARA", sara_tex, "CONTEXT_WINNER_REVEAL_ONE_PLAYER", 1, winner_names)
+		2: $SpeechDialog.show_dialog("CONTEXT_SPEAKER_SARA", sara_tex, "CONTEXT_WINNER_REVEAL_TWO_PLAYER", 1, winner_names)
+		3: $SpeechDialog.show_dialog("CONTEXT_SPEAKER_SARA", sara_tex, "CONTEXT_WINNER_REVEAL_THREE_PLAYER", 1, winner_names)
+		4: $SpeechDialog.show_dialog("CONTEXT_SPEAKER_SARA", sara_tex, "CONTEXT_WINNER_REVEAL_FOUR_PLAYER", 1, winner_names)
 	$CameraMovement.play("closeup")
 	
 	yield($SpeechDialog, "dialog_finished")

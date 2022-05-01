@@ -1,10 +1,10 @@
 [gd_scene load_steps=29 format=2]
 
-[ext_resource path="res://client/menus/victory_screen.gd" type="Script" id=1]
-[ext_resource path="res://client/menus/victory_screen_player.gd" type="Script" id=2]
+[ext_resource path="res://client/menus/victory_screen/victory_screen.gd" type="Script" id=1]
+[ext_resource path="res://client/menus/victory_screen/victory_screen_player.gd" type="Script" id=2]
 [ext_resource path="res://assets/music/menus/Steppin Up.ogg" type="AudioStream" id=3]
 [ext_resource path="res://assets/music/menus/Red Curtain.ogg" type="AudioStream" id=4]
-[ext_resource path="res://client/menus/stage.escn" type="PackedScene" id=5]
+[ext_resource path="res://client/menus/victory_screen/stage.escn" type="PackedScene" id=5]
 [ext_resource path="res://assets/textures/wood_planks/wood2_COLOR.jpg" type="Texture" id=6]
 [ext_resource path="res://assets/textures/wood_planks/wood2_OCC.jpg" type="Texture" id=7]
 [ext_resource path="res://assets/textures/wood_planks/wood2_SPEC.jpg" type="Texture" id=8]
