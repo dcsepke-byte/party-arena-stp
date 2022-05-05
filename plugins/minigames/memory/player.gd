@@ -2,10 +2,10 @@ extends Spatial
 
 const TEAM_COLORS = [Color.lightblue, Color.lightcoral]
 
-var player_id: int
-var is_ai: bool
+var info: Lobby.PlayerInfo
 var ai_difficulty: int
 
+export var idx := 0
 export var row := 1
 export var column := 1
 onready var right_side := column > 4
@@ -26,12 +26,12 @@ var ai_target_column := -1
 # Small penalty when flipping up nonmatching pairs
 # Includes the time for the flip down animation to complete
 var cooldown := 0.0
-onready var team := 0 if player_id in Global.minigame_state.minigame_teams[0] else 1
+onready var team := 0 if info.player_id in info.lobby.minigame_state.minigame_teams[0] else 1
 
 func set_points(num: int):
 	points = num
 
-	get_parent().get_node("ScoreOverlay").set_score(player_id, num)
+	get_parent().get_node("ScoreOverlay").set_score(info.player_id, num)
 
 func card_at(row: int, column: int) -> Node:
 	if row < 0 or column < 0:
@@ -45,11 +45,11 @@ func current_card():
 func random_card(variant: int) -> Array:
 	var rand_value
 	match ai_difficulty:
-		Global.Difficulty.EASY:
+		Lobby.Difficulty.EASY:
 			rand_value = 6
-		Global.Difficulty.NORMAL:
+		Lobby.Difficulty.NORMAL:
 			rand_value = 4
-		Global.Difficulty.HARD:
+		Lobby.Difficulty.HARD:
 			rand_value = 1
 	# Make the AI fail some times (probability depends on the difficulty)
 	if randi() % rand_value != 0:
@@ -71,13 +71,21 @@ func random_card(variant: int) -> Array:
 	return places[randi() % len(places)]
 
 func _ready():
-	current_card().show_player(self.name)
+	current_card().show_player(self.idx)
 
-func activate():
+puppet func card_flipped():
+	$Flip.play()
+
+puppet func point_scored():
+	$Point.play()
+
+master func activate():
+	if cooldown:
+		return
 	if current_card().faceup:
 		return
 
-	$Flip.play()
+	info.lobby.broadcast(self, "card_flipped")
 	blocked = true
 	holding_card = 0.0
 	var ally_node = get_node(ally)
@@ -92,7 +100,7 @@ func activate():
 		if ally_card.is_animation_running():
 			yield(ally_card.animation_player(), "animation_finished")
 		if ally_card.variant == current_card().variant:
-			$Point.play()
+			info.lobby.broadcast(self, "point_scored")
 			self.points += 1
 		else:
 			# wait for the animation to complete
@@ -102,8 +110,9 @@ func activate():
 			current_card().flip_down()
 		blocked = false
 		ally_node.blocked = false
+	cooldown = 0.25
 
-func _process(delta):
+func _server_process(delta):
 	cooldown = max(0, cooldown - delta)
 
 	# Flip the card facedown when holding for > 5 seconds
@@ -120,70 +129,86 @@ func _process(delta):
 		holding_card += delta
 		return
 
-	if is_ai and not cooldown:
-		current_card().hide_player(self.name)
-		var card = card_at(ai_target_row, ai_target_column)
-		var ally_node = get_node(ally)
-		var variant = -1
-		var ally_card = null
-		if ally_node.blocked:
-			ally_card = ally_node.current_card()
-			variant = ally_card.variant
-		if not card or card.faceup:
-			var random_pos = random_card(variant)
-			ai_target_row = random_pos[0]
-			ai_target_column = random_pos[1]
-		if ai_target_row >= 0 and ai_target_row < row:
-			row -= 1
-		elif ai_target_row >= 0 and ai_target_row > row:
-			row += 1
-		elif ai_target_column >= 0 and ai_target_column < column:
-			column -= 1
-		elif ai_target_column >= 0 and ai_target_column > column:
-			column += 1
-		else:
-			current_card().show_player(self.name)
-			# FIXME: GDScript has no await-keyword yet
-			# Will likely be added for 4.0, refactor this then
-			var result = activate()
-			while result is GDScriptFunctionState:
-				result = yield(result,"completed")
-		current_card().show_player(self.name)
-		cooldown = 0.25
+	if info.is_ai():
+		_process_ai()
 
-func _input(event: InputEvent):
-	if blocked or cooldown:
+func _process_ai():
+	if cooldown or blocked:
 		return
+	info.lobby.broadcast(current_card(), "hide_player", [self.idx])
+	var card = card_at(ai_target_row, ai_target_column)
+	var ally_node = get_node(ally)
+	var variant = -1
+	var ally_card = null
+	if ally_node.blocked:
+		ally_card = ally_node.current_card()
+		variant = ally_card.variant
+	if not card or card.faceup:
+		var random_pos = random_card(variant)
+		ai_target_row = random_pos[0]
+		ai_target_column = random_pos[1]
+	if ai_target_row >= 0 and ai_target_row < row:
+		row -= 1
+	elif ai_target_row >= 0 and ai_target_row > row:
+		row += 1
+	elif ai_target_column >= 0 and ai_target_column < column:
+		column -= 1
+	elif ai_target_column >= 0 and ai_target_column > column:
+		column += 1
+	else:
+		info.lobby.broadcast(current_card(), "show_player", [self.idx])
+		return activate()
+	info.lobby.broadcast(current_card(), "show_player", [self.idx])
+	cooldown = 0.25
 
-	current_card().hide_player(self.name)
-
+func move(dx: int, dy: int):
+	var player = info.lobby.get_player_by_id(info.player_id)
+	if multiplayer.get_rpc_sender_id() != player.addr.peer_id:
+		return
+	if cooldown or blocked:
+		return
 	var beginning := 1
 	var end := 7
 	if right_side:
 		beginning = 5
 	else:
 		end = 3
+	if dx < 0 and column == beginning:
+		return
+	if dx > 0 and column == end:
+		return
+	if dy < 0 and row == 1:
+		return
+	if dy > 0 and row == 4:
+		return
+	info.lobby.broadcast(current_card(), "hide_player", [self.idx])
+	column += dx
+	row += dy
+	cooldown = 0.1
+	info.lobby.broadcast(current_card(), "show_player", [self.idx])
 
-	if not is_ai:
-		if event.is_action_pressed("player{0}_left".format([player_id])) and column > beginning:
-			column -= 1
-			cooldown = 0.1
-		if event.is_action_pressed("player{0}_right".format([player_id])) and column < end:
-			column += 1
-			cooldown = 0.1
-		if event.is_action_pressed("player{0}_up".format([player_id])) and row > 1:
-			row -= 1
-			cooldown = 0.1
-		if event.is_action_pressed("player{0}_down".format([player_id])) and row < 4:
-			row += 1
-			cooldown = 0.1
-		if event.is_action_pressed("player{0}_action1".format([player_id])):
-			current_card().show_player(self.name)
-			# FIXME: GDScript has no await-keyword yet
-			# Will likely be added for 4.0, refactor this then
-			var result = activate()
-			while result is GDScriptFunctionState:
-				result = yield(result,"completed")
-			cooldown = 0.1
+master func move_left():
+	move(-1, 0)
 
-	current_card().show_player(self.name)
+master func move_right():
+	move(1, 0)
+
+master func move_up():
+	move(0, -1)
+
+master func move_down():
+	move(0, 1)
+
+func _input(event: InputEvent):
+	if not info.is_local():
+		return
+	if event.is_action_pressed("player{0}_left".format([info.player_id])):
+		rpc_id(1, "move_left")
+	if event.is_action_pressed("player{0}_right".format([info.player_id])):
+		rpc_id(1, "move_right")
+	if event.is_action_pressed("player{0}_up".format([info.player_id])):
+		rpc_id(1, "move_up")
+	if event.is_action_pressed("player{0}_down".format([info.player_id])):
+		rpc_id(1, "move_down")
+	if event.is_action_pressed("player{0}_action1".format([info.player_id])):
+		rpc_id(1, "activate")

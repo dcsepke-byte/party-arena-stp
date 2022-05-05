@@ -8,7 +8,7 @@
 [ext_resource path="res://assets/textures/rock/rock_05_col.png" type="Texture" id=6]
 [ext_resource path="res://assets/textures/lava.png" type="Texture" id=7]
 [ext_resource path="res://plugins/minigames/hurdle/ground/conveyor_belt.tscn" type="PackedScene" id=8]
-[ext_resource path="res://scenes/countdown/countdown.tscn" type="PackedScene" id=10]
+[ext_resource path="res://common/scenes/countdown/countdown.tscn" type="PackedScene" id=10]
 
 [sub_resource type="PanoramaSky" id=1]
 

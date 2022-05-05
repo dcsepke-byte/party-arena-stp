@@ -3,10 +3,17 @@ extends Spatial
 var started := false
 var finished := false
 
+var lobby: Lobby
+
+func _enter_tree() -> void:
+	lobby = Lobby.get_lobby(self)
+
 func card_at(row: int, column: int) -> Node:
 	return get_node("Row{0}/{1}".format([row, column]))
 
 func _ready():
+	if not is_network_master():
+		return
 	$Player1.blocked = true
 	$Player2.blocked = true
 	$Player3.blocked = true
@@ -49,6 +56,14 @@ func _ready():
 		var variant = variants[randi() % len(variants)]
 		places_left.pop_back().variant = variant
 		places_right.pop_back().variant = variant
+	
+	var data = [[], [], [], []]
+	for i in range(6):
+		data[0].append($Row1.get_child(i).variant)
+		data[1].append($Row2.get_child(i).variant)
+		data[2].append($Row3.get_child(i).variant)
+		data[3].append($Row4.get_child(i).variant)
+	lobby.broadcast(self, "load_cards", [data])
 
 	for i in range(6):
 		$Row1.get_child(i).flip_up()
@@ -66,11 +81,20 @@ func _ready():
 		yield(get_tree().create_timer(0.1), "timeout")
 
 	yield(get_tree().create_timer(0.5), "timeout")
+
 	$Player1.blocked = false
 	$Player2.blocked = false
 	$Player3.blocked = false
 	$Player4.blocked = false
 	started = true
+
+puppet func load_cards(data):
+	for i in range(6):
+		if not is_network_master():
+			$Row1.get_child(i).variant = data[0][i]
+			$Row2.get_child(i).variant = data[1][i]
+			$Row3.get_child(i).variant = data[2][i]
+			$Row4.get_child(i).variant = data[3][i]
 
 func _process(_delta):
 	if not started:
@@ -97,5 +121,4 @@ func _process(_delta):
 func _on_Timer_timeout():
 	var team1 = $Player1.points + $Player2.points
 	var team2 = $Player3.points + $Player4.points
-	Global.minigame_team_win_by_points([team1, team2])
-
+	lobby.minigame_team_win_by_points([team1, team2])

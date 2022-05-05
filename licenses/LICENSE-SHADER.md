@@ -6,7 +6,7 @@ Retrieved from [Github](https://github.com/GDquest/Godot-engine-tutorial-demos/b
 
 License: [MIT](https://github.com/GDQuest/godot-demos/blob/master/LICENSE)
 
-## scenes/menus
+## client/menus
 ### main_menu_bg.shader
 ## plugins/minigames/hurdle/ground
 ### ground.shader

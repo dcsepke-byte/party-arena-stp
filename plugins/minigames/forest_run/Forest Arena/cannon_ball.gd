@@ -22,8 +22,8 @@ func _process(delta):
 	velocity.y -= 9.81 * delta / 2
 	
 	if collision:
-		if collision.collider.is_in_group("player"):
-			Global.minigame_gnu_loose()
+		if collision.collider.is_in_group("player") and multiplayer.is_network_server():
+			get_parent().get_parent().lobby.minigame_gnu_loose()
 		
 		$Sprite3D.hide()
 		self.set_process(false)

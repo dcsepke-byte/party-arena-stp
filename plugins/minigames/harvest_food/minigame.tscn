@@ -2,9 +2,9 @@
 
 [ext_resource path="res://plugins/minigames/harvest_food/minigame.gd" type="Script" id=1]
 [ext_resource path="res://plugins/minigames/harvest_food/background/farm2_textured.escn" type="PackedScene" id=2]
-[ext_resource path="res://scenes/countdown/countdown.tscn" type="PackedScene" id=3]
+[ext_resource path="res://common/scenes/countdown/countdown.tscn" type="PackedScene" id=3]
 [ext_resource path="res://plugins/minigames/harvest_food/player.tscn" type="PackedScene" id=4]
-[ext_resource path="res://scenes/overlays/score_overlay.tscn" type="PackedScene" id=5]
+[ext_resource path="res://common/scenes/overlays/score_overlay.tscn" type="PackedScene" id=5]
 [ext_resource path="res://plugins/minigames/harvest_food/carrot.png" type="Texture" id=6]
 [ext_resource path="res://assets/fonts/title_font.tres" type="DynamicFont" id=7]
 [ext_resource path="res://assets/models/fence/fence.tscn" type="PackedScene" id=8]

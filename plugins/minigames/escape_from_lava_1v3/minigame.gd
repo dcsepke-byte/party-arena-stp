@@ -2,27 +2,32 @@ extends Spatial
 
 const LAVA_RISE_SPEED = 0.25
 
+var lobby: Lobby
+
 var num_players_alive = 4
 
 onready var stages = [$Stage1, $Stage2, $Stage3]
 var current_stage = -1
 var has_chosen = false
 
+func _enter_tree() -> void:
+	lobby = Lobby.get_lobby(self)
+
 func _ready():
 	enter_stage($Player1, 0)
 
-func process_stage(stage):
-	var index = (randi() % stage.get_child_count())
-	stage.get_child(index).can_be_opened = false
-
-func open_door(index):
-	if current_stage < stages.size() and not has_chosen:
+func close_door(index):
+	if current_stage < stages.size() and not has_chosen and index < stages[current_stage].get_child_count() and index >= 0:
 		stages[current_stage].get_child(index).can_be_opened = false
 		has_chosen = true
-		
-		$Screen/ControlView2D.clear_display();
-		$Screen/ControlView2D2.clear_display();
-		$Screen/ControlView2D3.clear_display();
+		lobby.broadcast(self, "door_closed", [index])
+
+puppet func door_closed(index):
+	if current_stage < stages.size() and not has_chosen and index < stages[current_stage].get_child_count() and index >= 0:
+		stages[current_stage].get_child(index).can_be_opened = false
+		$Screen/ControlView2D.clear_display()
+		$Screen/ControlView2D2.clear_display()
+		$Screen/ControlView2D3.clear_display()
 
 func enter_stage(body, new_stage):
 	if not body.is_in_group("players"):
@@ -32,17 +37,17 @@ func enter_stage(body, new_stage):
 		current_stage = new_stage
 		has_chosen = false
 		
-		if current_stage < stages.size():
+		if current_stage < stages.size() and $Player4.info.is_local():
 			$Player4.process_next_stage()
 			
-			$Screen/ControlView2D.display_action("player%d_action1" % $Player4.player_id)
-			$Screen/ControlView2D2.display_action("player%d_action2" % $Player4.player_id)
-			$Screen/ControlView2D3.display_action("player%d_action3" % $Player4.player_id)
+			$Screen/ControlView2D.display_action("player%d_action1" % $Player4.info.player_id)
+			$Screen/ControlView2D2.display_action("player%d_action2" % $Player4.info.player_id)
+			$Screen/ControlView2D3.display_action("player%d_action3" % $Player4.info.player_id)
 
 func _process(delta):
 	var min_progress = null
 	
-	for player in get_tree().get_nodes_in_group("players"):
+	for player in Utility.get_nodes_in_group(self, "players"):
 		if not player.is_dead() and (min_progress == null or player.translation.z < min_progress.z):
 			min_progress = player.translation
 	
@@ -51,36 +56,35 @@ func _process(delta):
 	
 	$Lava.translation += Vector3(0, 1, 0) * delta * LAVA_RISE_SPEED
 
-
 func _on_Lava_body_entered(body):
+	if not is_network_master():
+		return
 	if body.is_in_group("players"):
 		if not body.is_dead():
 			body.die()
 			num_players_alive -= 1
 			
 			if num_players_alive == 1:
-				end_game()
+				$EndTimer.start()
+				lobby.broadcast(self, "end_game")
 	elif body.is_in_group("door"):
 		body.destroy()
 
-
 func _on_Finish_body_entered(body):
+	if not is_network_master():
+		return
 	if body.is_in_group("players"):
 		body.has_finished = true
 		body.die()
 		
-		end_game()
+		$EndTimer.start()
+		lobby.broadcast(self, "end_game")
 
-func end_game():
+puppet func end_game():
 	$Screen/Label.show()
-	$EndTimer.start()
-	
-	for player in get_tree().get_nodes_in_group("players"):
-		if not player.is_dead():
-			player.die()
 
 func _on_EndTimer_timeout():
 	if num_players_alive > 1:
-		Global.minigame_1v3_win_team_players()
+		lobby.minigame_1v3_win_team_players()
 	else:
-		Global.minigame_1v3_win_solo_player()
+		lobby.minigame_1v3_win_solo_player()

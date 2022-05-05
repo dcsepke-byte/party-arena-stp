@@ -39,7 +39,7 @@ func _process(delta: float):
 				player_to_animate.translation.y += 10 * delta
 			else:
 				state = State.Fly_in
-				player_to_animate.teleport_to(next_space)
+				player_to_animate.translation = next_space.translation
 				destination = player_to_animate.translation
 				player_to_animate.translation += Vector3(0, 5, 0)
 				$Controller.camera_focus = next_space
@@ -55,16 +55,21 @@ func _process(delta: float):
 				emit_signal("animation_finished")
 
 func handle_event(player: Spatial, space: NodeBoard):
-	var name := tr("KDE_VALLEY_DRAGON_NAME")
-	var icon :=\
-		load("res://plugins/boards/KDEValley/dragons/%s_icon.png" % space.name)
-	var text := tr("KDE_VALLEY_TAKE_TO_CAKE")
+	var name := "KDE_VALLEY_DRAGON_NAME"
+	var icon := "res://plugins/boards/KDEValley/dragons/%s_icon.png" % space.name
+	var text := "KDE_VALLEY_TAKE_TO_CAKE"
 	
-	$SpeechDialog.show_accept_dialog(name, icon, text, player.player_id, player.cookies >= $Controller.COOKIES_FOR_CAKE)
+	$SpeechDialog.show_accept_dialog(name, icon, text, player.info.player_id)
 	if not yield($SpeechDialog, "dialog_option_taken"):
 		$Controller.continue()
 		return
 
+	$Controller.lobby.broadcast(self, "_dragon_animation", [player.info.player_id, get_path_to(space)])
+	return _dragon_animation(player.info.player_id, get_path_to(space))
+
+puppet func _dragon_animation(id: int, name: String):
+	var player = $Controller.get_player_by_player_id(id)
+	var space = get_node(name)
 	var dragon_anim: AnimationPlayer =\
 		space.get_node("Dragon/AnimationPlayer")
 	dragon_anim.play("walk")
@@ -84,7 +89,8 @@ func handle_event(player: Spatial, space: NodeBoard):
 	dragon_anim.play("fly_start")
 
 	yield(get_tree().create_timer(0.5), "timeout")
-	next_space = $Controller.get_cake_space()
+	var target_space = $Controller.get_cake_space()
+	next_space = target_space
 	player_to_animate = player
 	state = State.Fly_out
 
@@ -96,7 +102,8 @@ func handle_event(player: Spatial, space: NodeBoard):
 	dragon_anim.play("fly_end")
 	dragon = null
 
-	yield($Controller.buy_cake(player), "completed")
-	yield(get_tree().create_timer(0.5), "timeout")
-
-	$Controller.continue()
+	if multiplayer.is_network_server():
+		player.teleport_to(target_space)
+		yield($Controller.buy_cake(player), "completed")
+		yield(get_tree().create_timer(0.5), "timeout")
+		$Controller.continue()

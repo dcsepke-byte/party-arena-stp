@@ -172,7 +172,7 @@ msgstr "Continue"
 msgid "MENU_LABEL_DESKTOP"
 msgstr "Exit to Desktop"
 
-msgid "MENU_LABEL_LINEAR"
+msgid "MENU_SETTINGS_AWARD_LINEAR"
 msgstr "Linear"
 
 msgid "MENU_LABEL_NEW_GAME"
@@ -202,6 +202,9 @@ msgstr "4"
 msgid "MENU_LABEL_OK"
 msgstr "OK"
 
+msgid "MENU_LABEL_START"
+msgstr "Start"
+
 msgid "MENU_LABEL_PAUSE"
 msgstr "Pause"
 
@@ -213,6 +216,9 @@ msgstr "Pause when window focus is lost"
 
 msgid "MENU_LABEL_PLAY"
 msgstr "Play"
+
+msgid "MENU_LABEL_ONLINE"
+msgstr "Play online"
 
 msgid "MENU_LABEL_PLAYER1"
 msgstr "Player1"
@@ -248,7 +254,10 @@ msgid "MENU_LABEL_REWARD_SYSTEM"
 msgstr "Reward System:"
 
 msgid "MENU_LABEL_SELECT_BOARD"
-msgstr "Select board:"
+msgstr "Board:"
+
+msgid "MENU_LABEL_SELECT_CHARACTER"
+msgstr "Select your Character"
 
 msgid "MENU_LABEL_SELECT_CHARACTER_PLAYER_1"
 msgstr "Select a character for player 1"
@@ -274,8 +283,11 @@ msgstr "Super Tux Party"
 msgid "MENU_LABEL_TRY"
 msgstr "Try"
 
-msgid "MENU_LABEL_WINNER_TAKES_ALL"
+msgid "MENU_SETTINGS_AWARD_WINNER_TAKES_ALL"
 msgstr "Winner takes all"
+
+msgid "MENU_SETTINGS_AWARD_TYPE"
+msgstr "Award Type"
 
 msgid "MENU_LABEL_XBOX"
 msgstr "XBOX"
@@ -340,11 +352,35 @@ msgstr "Yes"
 msgid "DIALOG_NO"
 msgstr "No"
 
-msgid "MENU_LABEL_CAKE_COST"
-msgstr "Cake cost:"
+msgid "MENU_LABEL_CHOOSE_SERVER"
+msgstr "Choose Server:"
 
-msgid "MENU_LABEL_TURNS"
-msgstr "Turns:"
+msgid "MENU_LABEL_COPY"
+msgstr "Copy to Clipboard"
+
+msgid "MENU_LABEL_LOBBY_CREATE"
+msgstr "Create Lobby"
+
+msgid "MENU_LABEL_LOBBY_JOIN"
+msgstr "Join Lobby"
+
+msgid "MENU_LOBBY_SETTINGS"
+msgstr "Game Options"
+
+msgid "MENU_SETTINGS_PUBLIC"
+msgstr "Public Lobby"
+
+msgid "MENU_SETTINGS_CAKE_COST"
+msgstr "Cake cost"
+
+msgid "MENU_SETTINGS_TURNS"
+msgstr "Turns"
+
+msgid "MENU_SETTINGS_ENABLE_TIMEOUT"
+msgstr "Kick players for Inactivity"
+
+msgid "MENU_SETTINGS_TIMEOUT"
+msgstr "Time Limit"
 
 msgid "AI_DIFFICULTY"
 msgstr "AI difficulty:"
@@ -375,6 +411,9 @@ msgstr "Low"
 
 msgid "MENU_GRAPHIC_QUALITY_REBOOT_NOTICE"
 msgstr "Changing the graphic quality only takes effect after a restart"
+
+msgid "MENU_LOBBY_ADD_PLAYER"
+msgstr "Press to join"
 
 msgid "CONTEXT_SPEAKER_SARA"
 msgstr "Sara"
