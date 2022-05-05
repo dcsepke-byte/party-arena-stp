@@ -20,7 +20,17 @@ build:linux:
   <<: *build_base
   script:
     - mkdir build
-    - godot --export "Linux/X11" "build/supertuxparty"
+    - godot --export "Linux Client" "build/supertuxparty"
+
+build:server:
+  stage: build_and_test
+  <<: *build_base
+  script:
+    - mkdir build
+    - godot --export "Linux Server" "build/supertuxparty_server.pck"
+    - curl 'https://downloads.tuxfamily.org/godotengine/3.3.2/Godot_v3.3.2-stable_linux_server.64.zip' -o godot_linux_server.zip
+    - unzip godot_linux_server.zip
+    - mv Godot_v3.3.2-stable_linux_server.64 build/supertuxparty_server
 
 build:windows:
   stage: build_and_test
@@ -34,7 +44,7 @@ build:osx:
   <<: *build_base
   script:
     - mkdir build
-    - godot --export "Mac OSX" "build/supertuxparty.app"
+    - godot --export "Mac OSX Client" "build/supertuxparty.app"
 
 build:plugins:
   stage: build_and_test
@@ -91,6 +101,14 @@ deploy_release:
     - build:osx
     - build:plugins
     - build:sources
+  before_script:
+    - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
+    - eval $(ssh-agent -s)
+    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    - echo "$SSH_KNOWN_HOSTS" >> ~/.ssh/known_hosts
+    - chmod 644 ~/.ssh/known_hosts
   script:
     - mkdir .ci-bin && cd .ci-bin
     - apt -qq update && apt -qq install -y curl
