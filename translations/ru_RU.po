@@ -684,6 +684,3 @@ msgstr "Одиночная Nolok мини-игра"
 
 #~ msgid "MENU_CONTROLS_GAMEPAD_START"
 #~ msgstr "Кнопка гейпада Start"
-
-msgid "MENU_LABEL_TITLE"
-msgstr "Super Tux Party"

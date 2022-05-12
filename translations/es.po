@@ -677,6 +677,3 @@ msgstr "Minijuego en solitario de Nolok"
 
 #~ msgid "MENU_CONTROLS_GAMEPAD_BUTTON_Y"
 #~ msgstr "Mando botón Y"
-
-msgid "MENU_LABEL_TITLE"
-msgstr "Super Tux Party"
