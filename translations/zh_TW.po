@@ -163,44 +163,20 @@ msgstr "返回"
 msgid "MENU_LABEL_CANCEL"
 msgstr "取消"
 
-msgid "MENU_LABEL_CHARACTER"
-msgstr ""
-
 msgid "MENU_LABEL_CONTINUE"
 msgstr "繼續"
 
 msgid "MENU_LABEL_DESKTOP"
 msgstr "退出至桌面"
 
-msgid "MENU_LABEL_LINEAR"
+msgid "MENU_SETTINGS_AWARD_LINEAR"
 msgstr ""
 
 msgid "MENU_LABEL_NEW_GAME"
 msgstr "新游戲"
 
-msgid "MENU_LABEL_NINTENDO_DS"
+msgid "MENU_LABEL_START"
 msgstr ""
-
-msgid "MENU_LABEL_NOT_READY_ELLIPSIS"
-msgstr ""
-
-msgid "MENU_LABEL_NUMBERS"
-msgstr ""
-
-msgid "MENU_LABEL_NUM_1"
-msgstr "1"
-
-msgid "MENU_LABEL_NUM_2"
-msgstr "2"
-
-msgid "MENU_LABEL_NUM_3"
-msgstr "3"
-
-msgid "MENU_LABEL_NUM_4"
-msgstr "4"
-
-msgid "MENU_LABEL_OK"
-msgstr "OK"
 
 msgid "MENU_LABEL_PAUSE"
 msgstr "暫停"
@@ -214,6 +190,9 @@ msgstr ""
 msgid "MENU_LABEL_PLAY"
 msgstr "開始"
 
+msgid "MENU_LABEL_ONLINE"
+msgstr ""
+
 msgid "MENU_LABEL_PLAYER1"
 msgstr "玩家1"
 
@@ -225,9 +204,6 @@ msgstr "玩家3"
 
 msgid "MENU_LABEL_PLAYER4"
 msgstr "玩家4"
-
-msgid "MENU_LABEL_PLAYSTATION"
-msgstr "PlayStation"
 
 msgid "MENU_LABEL_PRESS_ANY_KEY"
 msgstr "按下任意鍵"
@@ -244,38 +220,20 @@ msgstr "繼續"
 msgid "MENU_LABEL_RETURN_MENU"
 msgstr "返回至主界面"
 
-msgid "MENU_LABEL_REWARD_SYSTEM"
-msgstr ""
-
 msgid "MENU_LABEL_SELECT_BOARD"
 msgstr ""
 
-msgid "MENU_LABEL_SELECT_CHARACTER_PLAYER_1"
-msgstr ""
-
-msgid "MENU_LABEL_SELECT_CHARACTER_PLAYER_2"
-msgstr ""
-
-msgid "MENU_LABEL_SELECT_CHARACTER_PLAYER_3"
-msgstr ""
-
-msgid "MENU_LABEL_SELECT_CHARACTER_PLAYER_4"
-msgstr ""
-
-msgid "MENU_LABEL_SELECT_NUM_PLAYERS"
-msgstr "選擇玩家數量"
-
-msgid "MENU_LABEL_BOARD_SETTINGS"
+msgid "MENU_LABEL_SELECT_CHARACTER"
 msgstr ""
 
 msgid "MENU_LABEL_TRY"
 msgstr ""
 
-msgid "MENU_LABEL_WINNER_TAKES_ALL"
-msgstr "贏者全拿"
+msgid "MENU_SETTINGS_AWARD_WINNER_TAKES_ALL"
+msgstr ""
 
-msgid "MENU_LABEL_XBOX"
-msgstr "XBOX"
+msgid "MENU_SETTINGS_AWARD_TYPE"
+msgstr ""
 
 msgid "MENU_LABEL_CREDITS"
 msgstr ""
@@ -334,10 +292,34 @@ msgstr ""
 msgid "DIALOG_NO"
 msgstr ""
 
-msgid "MENU_LABEL_CAKE_COST"
+msgid "MENU_LABEL_CHOOSE_SERVER"
 msgstr ""
 
-msgid "MENU_LABEL_TURNS"
+msgid "MENU_LABEL_COPY"
+msgstr ""
+
+msgid "MENU_LABEL_LOBBY_CREATE"
+msgstr ""
+
+msgid "MENU_LABEL_LOBBY_JOIN"
+msgstr ""
+
+msgid "MENU_LOBBY_SETTINGS"
+msgstr ""
+
+msgid "MENU_SETTINGS_PUBLIC"
+msgstr ""
+
+msgid "MENU_SETTINGS_CAKE_COST"
+msgstr ""
+
+msgid "MENU_SETTINGS_TURNS"
+msgstr ""
+
+msgid "MENU_SETTINGS_ENABLE_TIMEOUT"
+msgstr ""
+
+msgid "MENU_SETTINGS_TIMEOUT"
 msgstr ""
 
 msgid "AI_DIFFICULTY"
@@ -368,6 +350,9 @@ msgid "MENU_OPTIONS_GRAPHIC_QUALITY_LOW"
 msgstr "低"
 
 msgid "MENU_GRAPHIC_QUALITY_REBOOT_NOTICE"
+msgstr ""
+
+msgid "MENU_LOBBY_ADD_PLAYER"
 msgstr ""
 
 msgid "CONTEXT_SPEAKER_SARA"
@@ -571,6 +556,33 @@ msgstr ""
 
 msgid "MINIGAME_TYPE_NOLOK_SOLO"
 msgstr ""
+
+#~ msgid "MENU_LABEL_NUM_1"
+#~ msgstr "1"
+
+#~ msgid "MENU_LABEL_NUM_2"
+#~ msgstr "2"
+
+#~ msgid "MENU_LABEL_NUM_3"
+#~ msgstr "3"
+
+#~ msgid "MENU_LABEL_NUM_4"
+#~ msgstr "4"
+
+#~ msgid "MENU_LABEL_OK"
+#~ msgstr "OK"
+
+#~ msgid "MENU_LABEL_PLAYSTATION"
+#~ msgstr "PlayStation"
+
+#~ msgid "MENU_LABEL_SELECT_NUM_PLAYERS"
+#~ msgstr "選擇玩家數量"
+
+#~ msgid "MENU_LABEL_WINNER_TAKES_ALL"
+#~ msgstr "贏者全拿"
+
+#~ msgid "MENU_LABEL_XBOX"
+#~ msgstr "XBOX"
 
 #~ msgid "MENU_LABEL_TITLE"
 #~ msgstr "Super Tux Party"

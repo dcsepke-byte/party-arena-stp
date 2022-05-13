@@ -163,41 +163,23 @@ msgstr "חזרה"
 msgid "MENU_LABEL_CANCEL"
 msgstr "ביטול"
 
-msgid "MENU_LABEL_CHARACTER"
-msgstr "דמות:"
-
 msgid "MENU_LABEL_CONTINUE"
 msgstr "להמשך"
 
 msgid "MENU_LABEL_DESKTOP"
 msgstr "יציאה לשולחן העבודה"
 
-msgid "MENU_LABEL_LINEAR"
-msgstr "לינארי"
-
 msgid "MENU_LABEL_NEW_GAME"
 msgstr "משחק חדש"
-
-msgid "MENU_LABEL_NINTENDO_DS"
-msgstr "‏Nintendo DS"
 
 msgid "MENU_LABEL_NOT_READY_ELLIPSIS"
 msgstr "לא מוכנים…"
 
-msgid "MENU_LABEL_NUMBERS"
-msgstr "מספרים"
-
 msgid "MENU_LABEL_NUM_1"
 msgstr "1"
 
-msgid "MENU_LABEL_NUM_2"
-msgstr "2"
-
 msgid "MENU_LABEL_NUM_3"
 msgstr "3"
-
-msgid "MENU_LABEL_NUM_4"
-msgstr "4"
 
 msgid "MENU_LABEL_OK"
 msgstr "אישור"
@@ -226,9 +208,6 @@ msgstr "שחקן/ית3"
 msgid "MENU_LABEL_PLAYER4"
 msgstr "שחקן/ית4"
 
-msgid "MENU_LABEL_PLAYSTATION"
-msgstr "‏PlayStation"
-
 msgid "MENU_LABEL_PRESS_ANY_KEY"
 msgstr "נא ללחוץ על מקש מסוים"
 
@@ -244,35 +223,20 @@ msgstr "המשך"
 msgid "MENU_LABEL_RETURN_MENU"
 msgstr "חזרה לתפריט הראשי"
 
-msgid "MENU_LABEL_REWARD_SYSTEM"
-msgstr "מערכת מתן פרסים:"
-
 msgid "MENU_LABEL_SELECT_BOARD"
 msgstr "נא לבחור לוח:"
-
-msgid "MENU_LABEL_SELECT_CHARACTER_PLAYER_1"
-msgstr "נא לבחור דמות עבור שחקן/ית 1"
 
 msgid "MENU_LABEL_SELECT_CHARACTER_PLAYER_2"
 msgstr "נא לבחור דמות עבור שחקן/ית 2"
 
-msgid "MENU_LABEL_SELECT_CHARACTER_PLAYER_3"
-msgstr "נא לבחור דמות עבור שחקן/ית 3"
-
 msgid "MENU_LABEL_SELECT_CHARACTER_PLAYER_4"
 msgstr "נא לבחור דמות עבור שחקן/ית 4"
-
-msgid "MENU_LABEL_SELECT_NUM_PLAYERS"
-msgstr "נא לבחור את כמות השחקנים"
 
 msgid "MENU_LABEL_BOARD_SETTINGS"
 msgstr "הגדרות הלוח"
 
 msgid "MENU_LABEL_TRY"
 msgstr "התנסות"
-
-msgid "MENU_LABEL_WINNER_TAKES_ALL"
-msgstr "מי שינצח ייקח הכול"
 
 msgid "MENU_LABEL_XBOX"
 msgstr "XBOX"
@@ -333,9 +297,6 @@ msgstr "כן"
 
 msgid "DIALOG_NO"
 msgstr "לא"
-
-msgid "MENU_LABEL_CAKE_COST"
-msgstr "עלות העוגה:"
 
 msgid "MENU_LABEL_TURNS"
 msgstr "סיבובים:"
@@ -408,8 +369,8 @@ msgstr "שלום לך, רוצה קצת עזרה? רק רגע, אראה מה או
 
 msgid "CONTEXT_GNU_MINIGAME_SOLO_MODERATION"
 msgstr ""
-"זה משחקון ליחיד! תרא/י לי את הכישורים שלך ואתן לך "
-"[color=#dd44ff]{reward}[/color]"
+"זה משחקון ליחיד! תרא/י לי את הכישורים שלך ואתן לך [color=#dd44ff]{reward}[/"
+"color]"
 
 msgid "CONTEXT_GNU_MINIGAME_SOLO"
 msgstr "משחקון ליחיד"
@@ -547,8 +508,8 @@ msgstr "כמה עוגות ברצונך לקנות?"
 
 msgid "CONTEXT_CAKE_COLLECTED"
 msgstr ""
-"כל הכבוד, [color=#00aaff]{player}[/color]. הינה "
-"[color=#dd44ff]{amount}[/color] עוגה/ות בשבילך."
+"כל הכבוד, [color=#00aaff]{player}[/color]. הינה [color=#dd44ff]{amount}[/"
+"color] עוגה/ות בשבילך."
 
 msgid "CONTEXT_CAKE_CANT_AFFORD"
 msgstr "אני מצטערת אבל אין לך מספיק עוגיות לקניית עוגה."
@@ -601,6 +562,57 @@ msgstr "המשחק הקבוצתי של נולוק"
 msgid "MINIGAME_TYPE_NOLOK_SOLO"
 msgstr "המשחקון ליחיד של נולוק"
 
+msgid "MENU_SETTINGS_AWARD_LINEAR"
+msgstr "קווי"
+
+msgid "MENU_LABEL_START"
+msgstr "התחלה"
+
+msgid "MENU_LABEL_ONLINE"
+msgstr "לשחק ברשת"
+
+msgid "MENU_LABEL_SELECT_CHARACTER"
+msgstr "בחירת הדמות שלך"
+
+msgid "MENU_SETTINGS_AWARD_WINNER_TAKES_ALL"
+msgstr "המנצח זוכה בהכול"
+
+msgid "MENU_SETTINGS_AWARD_TYPE"
+msgstr "סוג הפרס"
+
+msgid "MENU_LABEL_CHOOSE_SERVER"
+msgstr "בחירת שרת:"
+
+msgid "MENU_LABEL_COPY"
+msgstr "העתקה ללוח הגזירים"
+
+msgid "MENU_LABEL_LOBBY_CREATE"
+msgstr "יצירת לובי"
+
+msgid "MENU_LABEL_LOBBY_JOIN"
+msgstr "הצטרפות ללובי"
+
+msgid "MENU_LOBBY_SETTINGS"
+msgstr "אפשרויות משחק"
+
+msgid "MENU_SETTINGS_PUBLIC"
+msgstr "לובי ציבורי"
+
+msgid "MENU_SETTINGS_CAKE_COST"
+msgstr "עלות העוגה"
+
+msgid "MENU_SETTINGS_TURNS"
+msgstr "תורות"
+
+msgid "MENU_SETTINGS_ENABLE_TIMEOUT"
+msgstr "הרחקת משתמשים בלתי פעילים"
+
+msgid "MENU_SETTINGS_TIMEOUT"
+msgstr "מגבלת זמן"
+
+msgid "MENU_LOBBY_ADD_PLAYER"
+msgstr "לחיצה להצטרפות"
+
 #~ msgid "MENU_LABEL_TITLE"
 #~ msgstr "Super Tux Party"
 
@@ -609,6 +621,3 @@ msgstr "המשחקון ליחיד של נולוק"
 
 #~ msgid "MENU_CONTROLS_GAMEPAD"
 #~ msgstr "ג'ויסטיק"
-
-msgid "MENU_OPTIONS_FXAA"
-msgstr "FXAA"

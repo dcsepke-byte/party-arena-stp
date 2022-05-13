@@ -5,16 +5,16 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 0.7\n"
-"PO-Revision-Date: 2021-02-28 04:50+0000\n"
+"PO-Revision-Date: 2021-12-26 21:52+0000\n"
 "Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
-"Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/"
-"super-tux-party/super-tux-party/nb_NO/>\n"
+"Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/super-"
+"tux-party/super-tux-party/nb_NO/>\n"
 "Language: nb_NO\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.5\n"
+"X-Generator: Weblate 4.10.1\n"
 
 msgid "CONTEXT_LABEL_BUY_CAKE"
 msgstr "Kjøp en kake for {amount} kjeks"
@@ -50,7 +50,7 @@ msgid "CONTEXT_LABEL_STEAL_TEN_COOKIES"
 msgstr "Vinneren stjeler 10 kjeks"
 
 msgid "CONTEXT_LABEL_TURN_NUM"
-msgstr "Tur {turn}"
+msgstr "Tur {turn}/{total}"
 
 msgid "CONTEXT_LABEL_VS"
 msgstr "mot"
@@ -166,44 +166,20 @@ msgstr "Tilbake"
 msgid "MENU_LABEL_CANCEL"
 msgstr "Avbryt"
 
-msgid "MENU_LABEL_CHARACTER"
-msgstr "Karakter:"
-
 msgid "MENU_LABEL_CONTINUE"
 msgstr "Fortsett"
 
 msgid "MENU_LABEL_DESKTOP"
 msgstr "Avslutt til skrivebord"
 
-msgid "MENU_LABEL_LINEAR"
-msgstr "Lineær"
+msgid "MENU_SETTINGS_AWARD_LINEAR"
+msgstr ""
 
 msgid "MENU_LABEL_NEW_GAME"
 msgstr "Nytt spill"
 
-msgid "MENU_LABEL_NINTENDO_DS"
-msgstr "Nintendo DS"
-
-msgid "MENU_LABEL_NOT_READY_ELLIPSIS"
-msgstr "Ikke klar enda…"
-
-msgid "MENU_LABEL_NUMBERS"
-msgstr "Tall"
-
-msgid "MENU_LABEL_NUM_1"
-msgstr "1"
-
-msgid "MENU_LABEL_NUM_2"
-msgstr "2"
-
-msgid "MENU_LABEL_NUM_3"
-msgstr "3"
-
-msgid "MENU_LABEL_NUM_4"
-msgstr "4"
-
-msgid "MENU_LABEL_OK"
-msgstr "OK"
+msgid "MENU_LABEL_START"
+msgstr ""
 
 msgid "MENU_LABEL_PAUSE"
 msgstr "Pause"
@@ -217,6 +193,9 @@ msgstr "Pause ved tap av vindusfokus"
 msgid "MENU_LABEL_PLAY"
 msgstr "Spill"
 
+msgid "MENU_LABEL_ONLINE"
+msgstr ""
+
 msgid "MENU_LABEL_PLAYER1"
 msgstr "Spiller1"
 
@@ -228,9 +207,6 @@ msgstr "Spiller3"
 
 msgid "MENU_LABEL_PLAYER4"
 msgstr "Spiller4"
-
-msgid "MENU_LABEL_PLAYSTATION"
-msgstr "PlayStation"
 
 msgid "MENU_LABEL_PRESS_ANY_KEY"
 msgstr "Trykk vilkårlig tast"
@@ -247,38 +223,20 @@ msgstr "Fortsett"
 msgid "MENU_LABEL_RETURN_MENU"
 msgstr "Tilbake til hovedmeny"
 
-msgid "MENU_LABEL_REWARD_SYSTEM"
-msgstr "Belønningssystem:"
-
 msgid "MENU_LABEL_SELECT_BOARD"
 msgstr "Velg kart:"
 
-msgid "MENU_LABEL_SELECT_CHARACTER_PLAYER_1"
-msgstr "Velg en karakter for spiller 1"
-
-msgid "MENU_LABEL_SELECT_CHARACTER_PLAYER_2"
-msgstr "Velg en karakter for spiller 2"
-
-msgid "MENU_LABEL_SELECT_CHARACTER_PLAYER_3"
-msgstr "Velg en karakter for spiller 3"
-
-msgid "MENU_LABEL_SELECT_CHARACTER_PLAYER_4"
-msgstr "Velg en karakter for spiller 4"
-
-msgid "MENU_LABEL_SELECT_NUM_PLAYERS"
-msgstr "Velg antall spillere"
-
-msgid "MENU_LABEL_BOARD_SETTINGS"
+msgid "MENU_LABEL_SELECT_CHARACTER"
 msgstr ""
 
 msgid "MENU_LABEL_TRY"
 msgstr "Prøv"
 
-msgid "MENU_LABEL_WINNER_TAKES_ALL"
-msgstr "Vinneren står igjen med alt"
+msgid "MENU_SETTINGS_AWARD_WINNER_TAKES_ALL"
+msgstr ""
 
-msgid "MENU_LABEL_XBOX"
-msgstr "XBOX"
+msgid "MENU_SETTINGS_AWARD_TYPE"
+msgstr ""
 
 msgid "MENU_LABEL_CREDITS"
 msgstr "Æreshenvisninger"
@@ -304,8 +262,9 @@ msgstr "Rammetaktsbegrensning"
 msgid "MENU_OPTIONS_FULLSCREEN"
 msgstr "Fullskjermsvisning"
 
+#, fuzzy
 msgid "MENU_OPTIONS_MSAA"
-msgstr ""
+msgstr "Multisample-anti-bildestøy (MSAA)"
 
 msgid "MENU_OPTIONS_LANGUAGE"
 msgstr "Språk"
@@ -337,11 +296,35 @@ msgstr "Ja"
 msgid "DIALOG_NO"
 msgstr "Nei"
 
-msgid "MENU_LABEL_CAKE_COST"
-msgstr "Kakekostnad:"
+msgid "MENU_LABEL_CHOOSE_SERVER"
+msgstr ""
 
-msgid "MENU_LABEL_TURNS"
-msgstr "Turer:"
+msgid "MENU_LABEL_COPY"
+msgstr ""
+
+msgid "MENU_LABEL_LOBBY_CREATE"
+msgstr ""
+
+msgid "MENU_LABEL_LOBBY_JOIN"
+msgstr ""
+
+msgid "MENU_LOBBY_SETTINGS"
+msgstr ""
+
+msgid "MENU_SETTINGS_PUBLIC"
+msgstr ""
+
+msgid "MENU_SETTINGS_CAKE_COST"
+msgstr ""
+
+msgid "MENU_SETTINGS_TURNS"
+msgstr ""
+
+msgid "MENU_SETTINGS_ENABLE_TIMEOUT"
+msgstr ""
+
+msgid "MENU_SETTINGS_TIMEOUT"
+msgstr ""
 
 msgid "AI_DIFFICULTY"
 msgstr "Maskinvanskelighetsgrad:"
@@ -372,6 +355,9 @@ msgstr "Lav"
 
 msgid "MENU_GRAPHIC_QUALITY_REBOOT_NOTICE"
 msgstr "Endring av grafikkvalitet inntreffer ved neste omstart av spillet"
+
+msgid "MENU_LOBBY_ADD_PLAYER"
+msgstr ""
 
 msgid "CONTEXT_SPEAKER_SARA"
 msgstr "Sara"
@@ -574,46 +560,72 @@ msgid "SHOP_ITEM_NO_DESCRIPTION"
 msgstr "Ingen beskrivelse"
 
 msgid "REWARDSCREEN_MINIGAME_RESULTS"
-msgstr ""
+msgstr "Minispill-resultat"
 
 msgid "REWARDSCREEN_MINIGAME_WINNER"
-msgstr ""
+msgstr "Seier!"
 
 msgid "REWARDSCREEN_MINIGAME_REWARD"
-msgstr ""
+msgstr "Belønning:"
 
+#, fuzzy
 msgid "REWARDSCREEN_PRESS_BUTTON"
-msgstr ""
+msgstr "Trykk"
 
+#, fuzzy
 msgid "MINIGAME_ACTION_MOVEMENT"
-msgstr ""
+msgstr "Beveg"
 
 msgid "MINIGAME_TYPE_FFA"
-msgstr ""
+msgstr "Alle-mot-alle -minispill"
 
 msgid "MINIGAME_TYPE_2v2"
-msgstr ""
+msgstr "To-mot-to -minispill"
 
 msgid "MINIGAME_TYPE_1v3"
-msgstr ""
+msgstr "Én-mot-tre -minispill"
 
 msgid "MINIGAME_TYPE_DUEL"
-msgstr ""
+msgstr "Duell-minispill"
 
 msgid "MINIGAME_TYPE_GNU_COOP"
-msgstr ""
+msgstr "GNU-samarbeidsminispill"
 
 msgid "MINIGAME_TYPE_GNU_SOLO"
-msgstr ""
+msgstr "GNU-enkeltspiller-minispill"
 
 msgid "MINIGAME_TYPE_NOLOK_COOP"
-msgstr ""
+msgstr "Nolok-samarbeidsminispill"
 
 msgid "MINIGAME_TYPE_NOLOK_SOLO"
-msgstr ""
+msgstr "Nolok-enkeltspiller-minispill"
 
-#~ msgid "MENU_LABEL_TITLE"
-#~ msgstr "Super Tux Party"
+#~ msgid "MENU_LABEL_NOT_READY_ELLIPSIS"
+#~ msgstr "Ikke klar enda…"
+
+#~ msgid "MENU_LABEL_NUM_1"
+#~ msgstr "1"
+
+#~ msgid "MENU_LABEL_NUM_3"
+#~ msgstr "3"
+
+#~ msgid "MENU_LABEL_OK"
+#~ msgstr "OK"
+
+#~ msgid "MENU_LABEL_SELECT_CHARACTER_PLAYER_2"
+#~ msgstr "Velg en karakter for spiller 2"
+
+#~ msgid "MENU_LABEL_SELECT_CHARACTER_PLAYER_4"
+#~ msgstr "Velg en karakter for spiller 4"
+
+#~ msgid "MENU_LABEL_BOARD_SETTINGS"
+#~ msgstr "Brettinnstillinger"
+
+#~ msgid "MENU_LABEL_XBOX"
+#~ msgstr "XBOX"
+
+#~ msgid "MENU_LABEL_TURNS"
+#~ msgstr "Turer:"
 
 #~ msgid "MENU_LABEL_DESCRIPTION"
 #~ msgstr "Beskrivelse"
@@ -686,3 +698,9 @@ msgstr ""
 
 #~ msgid "MENU_CONTROLS_GAMEPAD_START"
 #~ msgstr "Spillkontrollerknapp start"
+
+#~ msgid "MENU_LABEL_TITLE"
+#~ msgstr "Super Tux Party"
+
+#~ msgid "MENU_OPTIONS_FXAA"
+#~ msgstr "FXAA"

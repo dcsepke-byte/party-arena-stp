@@ -7,11 +7,11 @@ msgstr ""
 "Project-Id-Version: 0.7\n"
 "PO-Revision-Date: 2021-06-11 01:32+0000\n"
 "Last-Translator: Reza Almanda <rezaalmanda27@gmail.com>\n"
-"Language-Team: Indonesian <https://hosted.weblate.org/projects/"
-"super-tux-party/super-tux-party/id/>\n"
+"Language-Team: Indonesian <https://hosted.weblate.org/projects/super-tux-"
+"party/super-tux-party/id/>\n"
 "Language: id\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Weblate 4.7-dev\n"
@@ -163,44 +163,20 @@ msgstr "Kembali"
 msgid "MENU_LABEL_CANCEL"
 msgstr "Batal"
 
-msgid "MENU_LABEL_CHARACTER"
-msgstr "Karakter:"
-
 msgid "MENU_LABEL_CONTINUE"
 msgstr "Lanjut"
 
 msgid "MENU_LABEL_DESKTOP"
 msgstr "Keluar ke Destop"
 
-msgid "MENU_LABEL_LINEAR"
-msgstr "Linier"
+msgid "MENU_SETTINGS_AWARD_LINEAR"
+msgstr ""
 
 msgid "MENU_LABEL_NEW_GAME"
 msgstr "Permainan Baru"
 
-msgid "MENU_LABEL_NINTENDO_DS"
-msgstr "Nintendo DS"
-
-msgid "MENU_LABEL_NOT_READY_ELLIPSIS"
-msgstr "Belum siap…"
-
-msgid "MENU_LABEL_NUMBERS"
-msgstr "Nomor"
-
-msgid "MENU_LABEL_NUM_1"
-msgstr "1"
-
-msgid "MENU_LABEL_NUM_2"
-msgstr "2"
-
-msgid "MENU_LABEL_NUM_3"
-msgstr "3"
-
-msgid "MENU_LABEL_NUM_4"
-msgstr "4"
-
-msgid "MENU_LABEL_OK"
-msgstr "Oke"
+msgid "MENU_LABEL_START"
+msgstr ""
 
 msgid "MENU_LABEL_PAUSE"
 msgstr "Jeda"
@@ -214,6 +190,9 @@ msgstr "Jeda ketika fokus jendela hilang"
 msgid "MENU_LABEL_PLAY"
 msgstr "Main"
 
+msgid "MENU_LABEL_ONLINE"
+msgstr ""
+
 msgid "MENU_LABEL_PLAYER1"
 msgstr "Pemain1"
 
@@ -225,9 +204,6 @@ msgstr "Pemain3"
 
 msgid "MENU_LABEL_PLAYER4"
 msgstr "Pemain4"
-
-msgid "MENU_LABEL_PLAYSTATION"
-msgstr "PlayStation"
 
 msgid "MENU_LABEL_PRESS_ANY_KEY"
 msgstr "Tekan tombol apapun"
@@ -244,38 +220,20 @@ msgstr "Lanjut"
 msgid "MENU_LABEL_RETURN_MENU"
 msgstr "Kembali ke Menu Utama"
 
-msgid "MENU_LABEL_REWARD_SYSTEM"
-msgstr "Sistem Hadiah:"
-
 msgid "MENU_LABEL_SELECT_BOARD"
 msgstr "Pilih papan:"
 
-msgid "MENU_LABEL_SELECT_CHARACTER_PLAYER_1"
-msgstr "Pilih karakter untuk pemain 1"
-
-msgid "MENU_LABEL_SELECT_CHARACTER_PLAYER_2"
-msgstr "Pilih karakter untuk pemain 2"
-
-msgid "MENU_LABEL_SELECT_CHARACTER_PLAYER_3"
-msgstr "Pilih karakter untuk pemain 3"
-
-msgid "MENU_LABEL_SELECT_CHARACTER_PLAYER_4"
-msgstr "Pilih karakter untuk pemain 4"
-
-msgid "MENU_LABEL_SELECT_NUM_PLAYERS"
-msgstr "Pilih jumlah pemain"
-
-msgid "MENU_LABEL_BOARD_SETTINGS"
-msgstr "Pengaturan Papan"
+msgid "MENU_LABEL_SELECT_CHARACTER"
+msgstr ""
 
 msgid "MENU_LABEL_TRY"
 msgstr "Coba"
 
-msgid "MENU_LABEL_WINNER_TAKES_ALL"
-msgstr "Pemenang mendapat semuanya"
+msgid "MENU_SETTINGS_AWARD_WINNER_TAKES_ALL"
+msgstr ""
 
-msgid "MENU_LABEL_XBOX"
-msgstr "XBOX"
+msgid "MENU_SETTINGS_AWARD_TYPE"
+msgstr ""
 
 msgid "MENU_LABEL_CREDITS"
 msgstr "Kredit"
@@ -334,11 +292,35 @@ msgstr "Ya"
 msgid "DIALOG_NO"
 msgstr "Tidak"
 
-msgid "MENU_LABEL_CAKE_COST"
-msgstr "Harga kue:"
+msgid "MENU_LABEL_CHOOSE_SERVER"
+msgstr ""
 
-msgid "MENU_LABEL_TURNS"
-msgstr "Giliran:"
+msgid "MENU_LABEL_COPY"
+msgstr ""
+
+msgid "MENU_LABEL_LOBBY_CREATE"
+msgstr ""
+
+msgid "MENU_LABEL_LOBBY_JOIN"
+msgstr ""
+
+msgid "MENU_LOBBY_SETTINGS"
+msgstr ""
+
+msgid "MENU_SETTINGS_PUBLIC"
+msgstr ""
+
+msgid "MENU_SETTINGS_CAKE_COST"
+msgstr ""
+
+msgid "MENU_SETTINGS_TURNS"
+msgstr ""
+
+msgid "MENU_SETTINGS_ENABLE_TIMEOUT"
+msgstr ""
+
+msgid "MENU_SETTINGS_TIMEOUT"
+msgstr ""
 
 msgid "AI_DIFFICULTY"
 msgstr "Kesulitan AI:"
@@ -370,6 +352,9 @@ msgstr "Rendah"
 msgid "MENU_GRAPHIC_QUALITY_REBOOT_NOTICE"
 msgstr "Mengubah kualitas grafik diterapkan setelah restart"
 
+msgid "MENU_LOBBY_ADD_PLAYER"
+msgstr ""
+
 msgid "CONTEXT_SPEAKER_SARA"
 msgstr "Sara"
 
@@ -386,13 +371,13 @@ msgstr "[color=#ff3300]{0}[/color] dan [color=#33ff00]{1}[/color]!"
 
 msgid "CONTEXT_WINNER_REVEAL_THREE_PLAYER"
 msgstr ""
-"[color=#ff3300]{0}[/color], [color=#33ff00]{1}[/color] dan "
-"[color=#00ff88]{2}[/color]!"
+"[color=#ff3300]{0}[/color], [color=#33ff00]{1}[/color] dan [color=#00ff88]{2}"
+"[/color]!"
 
 msgid "CONTEXT_WINNER_REVEAL_FOUR_PLAYER"
 msgstr ""
-"[color=#ff3300]{0}[/color], [color=#33ff00]{1}[/color], "
-"[color=#00ff88]{2}[/color] dan [color=#ffff33]{3}[/color]!"
+"[color=#ff3300]{0}[/color], [color=#33ff00]{1}[/color], [color=#00ff88]{2}[/"
+"color] dan [color=#ffff33]{3}[/color]!"
 
 msgid "CONTEXT_LABEL_CAKES"
 msgstr "Kue-kue"
@@ -506,7 +491,8 @@ msgid "CONTEXT_TUTORIAL_MINIGAMES_FFA"
 msgstr ""
 
 msgid "CONTEXT_TUTORIAL_MINIGAMES_2V2"
-msgstr "Dua vs dua, di mana kamu bermain dalam tim yang terdiri dari dua orang."
+msgstr ""
+"Dua vs dua, di mana kamu bermain dalam tim yang terdiri dari dua orang."
 
 msgid "CONTEXT_TUTORIAL_MINIGAMES_1V3"
 msgstr ""
@@ -581,5 +567,71 @@ msgstr "Minigame Nolok Coop"
 msgid "MINIGAME_TYPE_NOLOK_SOLO"
 msgstr "Minigame Nolok Solo"
 
-msgid "MENU_LABEL_TITLE"
-msgstr "Super Tux Party"
+#~ msgid "MENU_LABEL_CHARACTER"
+#~ msgstr "Karakter:"
+
+#~ msgid "MENU_LABEL_LINEAR"
+#~ msgstr "Linier"
+
+#~ msgid "MENU_LABEL_NINTENDO_DS"
+#~ msgstr "Nintendo DS"
+
+#~ msgid "MENU_LABEL_NOT_READY_ELLIPSIS"
+#~ msgstr "Belum siap…"
+
+#~ msgid "MENU_LABEL_NUMBERS"
+#~ msgstr "Nomor"
+
+#~ msgid "MENU_LABEL_NUM_1"
+#~ msgstr "1"
+
+#~ msgid "MENU_LABEL_NUM_2"
+#~ msgstr "2"
+
+#~ msgid "MENU_LABEL_NUM_3"
+#~ msgstr "3"
+
+#~ msgid "MENU_LABEL_NUM_4"
+#~ msgstr "4"
+
+#~ msgid "MENU_LABEL_OK"
+#~ msgstr "Oke"
+
+#~ msgid "MENU_LABEL_PLAYSTATION"
+#~ msgstr "PlayStation"
+
+#~ msgid "MENU_LABEL_REWARD_SYSTEM"
+#~ msgstr "Sistem Hadiah:"
+
+#~ msgid "MENU_LABEL_SELECT_CHARACTER_PLAYER_1"
+#~ msgstr "Pilih karakter untuk pemain 1"
+
+#~ msgid "MENU_LABEL_SELECT_CHARACTER_PLAYER_2"
+#~ msgstr "Pilih karakter untuk pemain 2"
+
+#~ msgid "MENU_LABEL_SELECT_CHARACTER_PLAYER_3"
+#~ msgstr "Pilih karakter untuk pemain 3"
+
+#~ msgid "MENU_LABEL_SELECT_CHARACTER_PLAYER_4"
+#~ msgstr "Pilih karakter untuk pemain 4"
+
+#~ msgid "MENU_LABEL_SELECT_NUM_PLAYERS"
+#~ msgstr "Pilih jumlah pemain"
+
+#~ msgid "MENU_LABEL_BOARD_SETTINGS"
+#~ msgstr "Pengaturan Papan"
+
+#~ msgid "MENU_LABEL_WINNER_TAKES_ALL"
+#~ msgstr "Pemenang mendapat semuanya"
+
+#~ msgid "MENU_LABEL_XBOX"
+#~ msgstr "XBOX"
+
+#~ msgid "MENU_LABEL_CAKE_COST"
+#~ msgstr "Harga kue:"
+
+#~ msgid "MENU_LABEL_TURNS"
+#~ msgstr "Giliran:"
+
+#~ msgid "MENU_LABEL_TITLE"
+#~ msgstr "Super Tux Party"

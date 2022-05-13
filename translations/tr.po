@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 0.7\n"
-"PO-Revision-Date: 2021-09-23 16:36+0000\n"
-"Last-Translator: Oğuz Ersen <oguzersen@protonmail.com>\n"
+"PO-Revision-Date: 2022-05-13 19:14+0000\n"
+"Last-Translator: Oğuz Ersen <oguz@ersen.moe>\n"
 "Language-Team: Turkish <https://hosted.weblate.org/projects/super-tux-party/"
 "super-tux-party/tr/>\n"
 "Language: tr\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.9-dev\n"
+"X-Generator: Weblate 4.13-dev\n"
 
 msgid "CONTEXT_LABEL_BUY_CAKE"
 msgstr "{amount} kurabiye karşılığında bir pasta satın al"
@@ -163,41 +163,17 @@ msgstr "Geri"
 msgid "MENU_LABEL_CANCEL"
 msgstr "İptal"
 
-msgid "MENU_LABEL_CHARACTER"
-msgstr "Karakter:"
-
 msgid "MENU_LABEL_CONTINUE"
 msgstr "Devam Et"
 
 msgid "MENU_LABEL_DESKTOP"
 msgstr "Oyunu Kapat"
 
-msgid "MENU_LABEL_LINEAR"
-msgstr "Doğrusal"
-
 msgid "MENU_LABEL_NEW_GAME"
 msgstr "Yeni Oyun"
 
-msgid "MENU_LABEL_NINTENDO_DS"
-msgstr "Nintendo DS"
-
-msgid "MENU_LABEL_NOT_READY_ELLIPSIS"
-msgstr "Hazır değil…"
-
-msgid "MENU_LABEL_NUMBERS"
-msgstr "Numaralar"
-
 msgid "MENU_LABEL_NUM_1"
 msgstr "1"
-
-msgid "MENU_LABEL_NUM_2"
-msgstr "2"
-
-msgid "MENU_LABEL_NUM_3"
-msgstr "3"
-
-msgid "MENU_LABEL_NUM_4"
-msgstr "4"
 
 msgid "MENU_LABEL_OK"
 msgstr "Tamam"
@@ -226,9 +202,6 @@ msgstr "Oyuncu3"
 msgid "MENU_LABEL_PLAYER4"
 msgstr "Oyuncu4"
 
-msgid "MENU_LABEL_PLAYSTATION"
-msgstr "PlayStation"
-
 msgid "MENU_LABEL_PRESS_ANY_KEY"
 msgstr "Herhangi bir tuşa bas"
 
@@ -244,38 +217,14 @@ msgstr "Devam Et"
 msgid "MENU_LABEL_RETURN_MENU"
 msgstr "Ana Menüye Geri Dön"
 
-msgid "MENU_LABEL_REWARD_SYSTEM"
-msgstr "Ödül Sistemi:"
-
 msgid "MENU_LABEL_SELECT_BOARD"
-msgstr "Tahta seç:"
-
-msgid "MENU_LABEL_SELECT_CHARACTER_PLAYER_1"
-msgstr "Oyuncu 1 için bir karakter seç"
-
-msgid "MENU_LABEL_SELECT_CHARACTER_PLAYER_2"
-msgstr "Oyuncu 2 için bir karakter seç"
-
-msgid "MENU_LABEL_SELECT_CHARACTER_PLAYER_3"
-msgstr "Oyuncu 3 için bir karakter seç"
+msgstr "Tahta Seç:"
 
 msgid "MENU_LABEL_SELECT_CHARACTER_PLAYER_4"
 msgstr "Oyuncu 4 için bir karakter seç"
 
-msgid "MENU_LABEL_SELECT_NUM_PLAYERS"
-msgstr "Oyuncu sayısını seç"
-
-msgid "MENU_LABEL_BOARD_SETTINGS"
-msgstr "Tahta Ayarları"
-
 msgid "MENU_LABEL_TRY"
 msgstr "Dene"
-
-msgid "MENU_LABEL_WINNER_TAKES_ALL"
-msgstr "Kazanan hepsini alır"
-
-msgid "MENU_LABEL_XBOX"
-msgstr "XBOX"
 
 msgid "MENU_LABEL_CREDITS"
 msgstr "Emeği geçenler"
@@ -333,12 +282,6 @@ msgstr "Evet"
 
 msgid "DIALOG_NO"
 msgstr "Hayır"
-
-msgid "MENU_LABEL_CAKE_COST"
-msgstr "Pasta maliyeti:"
-
-msgid "MENU_LABEL_TURNS"
-msgstr "Sıra:"
 
 msgid "AI_DIFFICULTY"
 msgstr "Yapay zeka zorluk düzeyi:"
@@ -612,6 +555,57 @@ msgstr "Nolok ortaklaşa küçük oyun"
 msgid "MINIGAME_TYPE_NOLOK_SOLO"
 msgstr "Nolok tek kişilik küçük oyun"
 
+msgid "MENU_SETTINGS_AWARD_LINEAR"
+msgstr "Doğrusal"
+
+msgid "MENU_LABEL_START"
+msgstr "Başlat"
+
+msgid "MENU_LABEL_ONLINE"
+msgstr "Çevrim içi oyna"
+
+msgid "MENU_LABEL_SELECT_CHARACTER"
+msgstr "Karakterinizi seçin"
+
+msgid "MENU_SETTINGS_AWARD_WINNER_TAKES_ALL"
+msgstr "Kazanan hepsini alır"
+
+msgid "MENU_SETTINGS_AWARD_TYPE"
+msgstr "Ödül Türü"
+
+msgid "MENU_LABEL_CHOOSE_SERVER"
+msgstr "Sunucu Seç:"
+
+msgid "MENU_LABEL_COPY"
+msgstr "Panoya Kopyala"
+
+msgid "MENU_LABEL_LOBBY_CREATE"
+msgstr "Lobi Oluştur"
+
+msgid "MENU_LABEL_LOBBY_JOIN"
+msgstr "Lobiye Katıl"
+
+msgid "MENU_LOBBY_SETTINGS"
+msgstr "Oyun Seçenekleri"
+
+msgid "MENU_SETTINGS_PUBLIC"
+msgstr "Ortak Lobi"
+
+msgid "MENU_SETTINGS_CAKE_COST"
+msgstr "Pasta maliyeti"
+
+msgid "MENU_SETTINGS_TURNS"
+msgstr "Sıra"
+
+msgid "MENU_SETTINGS_ENABLE_TIMEOUT"
+msgstr "Etkin olmayan oyuncuları at"
+
+msgid "MENU_SETTINGS_TIMEOUT"
+msgstr "Zaman Sınırı"
+
+msgid "MENU_LOBBY_ADD_PLAYER"
+msgstr "Katılmak için basın"
+
 #~ msgid "MENU_LABEL_TITLE"
 #~ msgstr "Super Tux Party"
 
@@ -620,6 +614,3 @@ msgstr "Nolok tek kişilik küçük oyun"
 
 #~ msgid "MENU_CONTROLS_GAMEPAD"
 #~ msgstr "Oyun Kumandası"
-
-msgid "MENU_OPTIONS_FXAA"
-msgstr "FXAA"

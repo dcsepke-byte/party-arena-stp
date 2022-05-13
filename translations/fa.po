@@ -5,16 +5,12 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 0.7\n"
-"PO-Revision-Date: 2021-02-09 16:50+0000\n"
-"Last-Translator: Michalis <michalisntovas@yahoo.gr>\n"
-"Language-Team: Greek <https://hosted.weblate.org/projects/super-tux-party/"
-"super-tux-party/el/>\n"
-"Language: el\n"
+"PO-Revision-Date: 2019-10-29 23:16:12.181795\n"
+"Last-Translator: Automatically generated\n"
+"Language: fa\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.5-dev\n"
 
 msgid "CONTEXT_LABEL_BUY_CAKE"
 msgstr ""
@@ -83,7 +79,7 @@ msgid "MENU_CONTROLS_GENERIC_GAMEPAD_BUTTON"
 msgstr ""
 
 msgid "MENU_CONTROLS_MOUSE"
-msgstr "Ποντίκι"
+msgstr ""
 
 msgid "MENU_CONTROLS_MOUSE_BUTTON"
 msgstr ""
@@ -128,16 +124,16 @@ msgid "MENU_CONTROLS_TRIGGER_RIGHT_3"
 msgstr ""
 
 msgid "MENU_CONTROLS_DIR_DOWN"
-msgstr "Κάτω"
+msgstr ""
 
 msgid "MENU_CONTROLS_DIR_LEFT"
-msgstr "Αριστερά"
+msgstr ""
 
 msgid "MENU_CONTROLS_DIR_RIGHT"
-msgstr "Δεξί"
+msgstr ""
 
 msgid "MENU_CONTROLS_DIR_UP"
-msgstr "Πάνω"
+msgstr ""
 
 msgid "MENU_CONTROLS_SCREENSHOT"
 msgstr ""
@@ -149,46 +145,46 @@ msgid "MENU_IO_ENTER_SAVEGAME_NAME"
 msgstr ""
 
 msgid "MENU_IO_LOAD_GAME"
-msgstr "Άνοιγμα παιχνιδιού"
+msgstr ""
 
 msgid "MENU_IO_SAVE"
-msgstr "Αποθήκευση"
+msgstr ""
 
 msgid "MENU_IO_SAVE_GAME"
-msgstr "Αποθήκευση παιχνιδιού"
+msgstr ""
 
 msgid "MENU_LABEL_BACK"
-msgstr "Επιστροφή"
+msgstr ""
 
 msgid "MENU_LABEL_CANCEL"
-msgstr "Άκυρο"
+msgstr ""
 
 msgid "MENU_LABEL_CONTINUE"
-msgstr "Συνέχεια"
+msgstr ""
 
 msgid "MENU_LABEL_DESKTOP"
-msgstr "Επιστροφή στο περιβάλλον εργασίας"
+msgstr ""
 
 msgid "MENU_SETTINGS_AWARD_LINEAR"
 msgstr ""
 
 msgid "MENU_LABEL_NEW_GAME"
-msgstr "Νέο παιχνίδι"
+msgstr ""
 
 msgid "MENU_LABEL_START"
 msgstr ""
 
 msgid "MENU_LABEL_PAUSE"
-msgstr "Παύση"
+msgstr ""
 
 msgid "MENU_LABEL_PAUSED"
-msgstr "Σε παύση"
+msgstr ""
 
 msgid "MENU_LABEL_PAUSE_ON_WINDOW_UNFOCUS"
 msgstr ""
 
 msgid "MENU_LABEL_PLAY"
-msgstr "Παίξε"
+msgstr ""
 
 msgid "MENU_LABEL_ONLINE"
 msgstr ""
@@ -206,10 +202,10 @@ msgid "MENU_LABEL_PLAYER4"
 msgstr ""
 
 msgid "MENU_LABEL_PRESS_ANY_KEY"
-msgstr "Πάτα ένα πλήκτρο"
+msgstr ""
 
 msgid "MENU_LABEL_QUIT"
-msgstr "Έξοδος"
+msgstr ""
 
 msgid "MENU_LABEL_READY"
 msgstr ""
@@ -218,7 +214,7 @@ msgid "MENU_LABEL_RESUME"
 msgstr ""
 
 msgid "MENU_LABEL_RETURN_MENU"
-msgstr "Επιστροφή στο Κεντρικό Μενού"
+msgstr ""
 
 msgid "MENU_LABEL_SELECT_BOARD"
 msgstr ""
@@ -242,13 +238,13 @@ msgid "MENU_LABEL_SCREENSHOTS"
 msgstr ""
 
 msgid "MENU_OPTIONS"
-msgstr "Επιλογές"
+msgstr ""
 
 msgid "MENU_OPTIONS_AUDIO"
 msgstr ""
 
 msgid "MENU_OPTIONS_CONTROLS"
-msgstr "Χειρισμός"
+msgstr ""
 
 msgid "MENU_OPTIONS_EFFECTS"
 msgstr ""
@@ -257,7 +253,7 @@ msgid "MENU_OPTIONS_FRAME_CAP"
 msgstr ""
 
 msgid "MENU_OPTIONS_FULLSCREEN"
-msgstr "Πλήρης οθόνη"
+msgstr ""
 
 msgid "MENU_OPTIONS_MSAA"
 msgstr ""
@@ -269,10 +265,10 @@ msgid "MENU_OPTIONS_MASTER"
 msgstr ""
 
 msgid "MENU_OPTIONS_MISC"
-msgstr "Αλλα"
+msgstr ""
 
 msgid "MENU_OPTIONS_MUSIC"
-msgstr "Μουσική"
+msgstr ""
 
 msgid "MENU_OPTIONS_MUTE_ON_WINDOW_UNFOCUS"
 msgstr ""
@@ -284,7 +280,7 @@ msgid "MENU_OPTIONS_VISUAL"
 msgstr ""
 
 msgid "MENU_OPTIONS_VSYNC"
-msgstr "Vsync"
+msgstr ""
 
 msgid "DIALOG_YES"
 msgstr ""
@@ -337,20 +333,17 @@ msgstr ""
 msgid "CONTEXT_GNU_ACTION_TYPE"
 msgstr ""
 
-#, fuzzy
 msgid "MENU_OPTIONS_GRAPHIC_QUALITY"
-msgstr "Αλλα"
+msgstr ""
 
-#, fuzzy
 msgid "MENU_OPTIONS_GRAPHIC_QUALITY_HIGH"
-msgstr "Αλλα"
+msgstr ""
 
 msgid "MENU_OPTIONS_GRAPHIC_QUALITY_MEDIUM"
 msgstr ""
 
-#, fuzzy
 msgid "MENU_OPTIONS_GRAPHIC_QUALITY_LOW"
-msgstr "Αλλα"
+msgstr ""
 
 msgid "MENU_GRAPHIC_QUALITY_REBOOT_NOTICE"
 msgstr ""
@@ -555,16 +548,3 @@ msgstr ""
 
 msgid "MINIGAME_TYPE_NOLOK_SOLO"
 msgstr ""
-
-#~ msgid "MENU_LABEL_CHARACTER"
-#~ msgstr "Χαρακτήρας:"
-
-#~ msgid "MENU_LABEL_OK"
-#~ msgstr "ΟΚ"
-
-#, fuzzy
-#~ msgid "MENU_LABEL_PLAYSTATION"
-#~ msgstr "PlayStation"
-
-#~ msgid "MENU_CONTROLS_GAMEPAD"
-#~ msgstr "Gamepad"

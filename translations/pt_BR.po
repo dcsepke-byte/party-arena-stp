@@ -163,41 +163,23 @@ msgstr "Voltar"
 msgid "MENU_LABEL_CANCEL"
 msgstr "Cancelar"
 
-msgid "MENU_LABEL_CHARACTER"
-msgstr "Personagem:"
-
 msgid "MENU_LABEL_CONTINUE"
 msgstr "Continuar"
 
 msgid "MENU_LABEL_DESKTOP"
 msgstr "Sair para a Área de Trab"
 
-msgid "MENU_LABEL_LINEAR"
-msgstr "Linear"
-
 msgid "MENU_LABEL_NEW_GAME"
 msgstr "Novo Jogo"
-
-msgid "MENU_LABEL_NINTENDO_DS"
-msgstr "Nintendo DS"
 
 msgid "MENU_LABEL_NOT_READY_ELLIPSIS"
 msgstr "Não preparado…"
 
-msgid "MENU_LABEL_NUMBERS"
-msgstr "Números"
-
 msgid "MENU_LABEL_NUM_1"
 msgstr "1"
 
-msgid "MENU_LABEL_NUM_2"
-msgstr "2"
-
 msgid "MENU_LABEL_NUM_3"
 msgstr "3"
-
-msgid "MENU_LABEL_NUM_4"
-msgstr "4"
 
 msgid "MENU_LABEL_OK"
 msgstr "OK"
@@ -226,9 +208,6 @@ msgstr "Jogador3"
 msgid "MENU_LABEL_PLAYER4"
 msgstr "Jogador4"
 
-msgid "MENU_LABEL_PLAYSTATION"
-msgstr "PlayStation"
-
 msgid "MENU_LABEL_PRESS_ANY_KEY"
 msgstr "Pressione qualquer botão"
 
@@ -244,35 +223,20 @@ msgstr "Resumir"
 msgid "MENU_LABEL_RETURN_MENU"
 msgstr "Retornar ao Menu Inicial"
 
-msgid "MENU_LABEL_REWARD_SYSTEM"
-msgstr "Sistema de Recompensa:"
-
 msgid "MENU_LABEL_SELECT_BOARD"
 msgstr "Selecione o tabuleiro:"
-
-msgid "MENU_LABEL_SELECT_CHARACTER_PLAYER_1"
-msgstr "Selecione um personagem para o jogador 1"
 
 msgid "MENU_LABEL_SELECT_CHARACTER_PLAYER_2"
 msgstr "Selecione um personagem para o jogador 2"
 
-msgid "MENU_LABEL_SELECT_CHARACTER_PLAYER_3"
-msgstr "Selecione um personagem para o jogador 3"
-
 msgid "MENU_LABEL_SELECT_CHARACTER_PLAYER_4"
 msgstr "Selecione um personagem para o jogador 4"
-
-msgid "MENU_LABEL_SELECT_NUM_PLAYERS"
-msgstr "Selecione o número de jogadores"
 
 msgid "MENU_LABEL_BOARD_SETTINGS"
 msgstr "Configurações do Tabuleiro"
 
 msgid "MENU_LABEL_TRY"
 msgstr "Tentar"
-
-msgid "MENU_LABEL_WINNER_TAKES_ALL"
-msgstr "Vencedor leva tudo"
 
 msgid "MENU_LABEL_XBOX"
 msgstr "XBOX"
@@ -334,9 +298,6 @@ msgstr "Sim"
 msgid "DIALOG_NO"
 msgstr "Não"
 
-msgid "MENU_LABEL_CAKE_COST"
-msgstr "Custo de bolo:"
-
 msgid "MENU_LABEL_TURNS"
 msgstr "Turnos:"
 
@@ -387,13 +348,13 @@ msgstr "[color=#ff3300]{0}[/color] e [color=#33ff00]{1}[/color]!"
 
 msgid "CONTEXT_WINNER_REVEAL_THREE_PLAYER"
 msgstr ""
-"[color=#ff3300]{0}[/color], [color=#33ff00]{1}[/color] e "
-"[color=#00ff88]{2}[/color]!"
+"[color=#ff3300]{0}[/color], [color=#33ff00]{1}[/color] e [color=#00ff88]{2}[/"
+"color]!"
 
 msgid "CONTEXT_WINNER_REVEAL_FOUR_PLAYER"
 msgstr ""
-"[color=#ff3300]{0}[/color], [color=#33ff00]{1}[/color], "
-"[color=#00ff88]{2}[/color] e [color=#ffff33]{3}[/color]!"
+"[color=#ff3300]{0}[/color], [color=#33ff00]{1}[/color], [color=#00ff88]{2}[/"
+"color] e [color=#ffff33]{3}[/color]!"
 
 msgid "CONTEXT_LABEL_CAKES"
 msgstr "Bolos"
@@ -405,7 +366,8 @@ msgid "CONTEXT_GNU_NAME"
 msgstr "GNU"
 
 msgid "CONTEXT_GNU_EVENT_START"
-msgstr "Ei, precisa de ajuda? Deixa eu ver, o que eu posso fazer por você hoje…"
+msgstr ""
+"Ei, precisa de ajuda? Deixa eu ver, o que eu posso fazer por você hoje…"
 
 msgid "CONTEXT_GNU_MINIGAME_SOLO_MODERATION"
 msgstr ""
@@ -575,6 +537,57 @@ msgid "MINIGAME_TYPE_NOLOK_COOP"
 msgstr ""
 
 msgid "MINIGAME_TYPE_NOLOK_SOLO"
+msgstr ""
+
+msgid "MENU_SETTINGS_AWARD_LINEAR"
+msgstr ""
+
+msgid "MENU_LABEL_START"
+msgstr ""
+
+msgid "MENU_LABEL_ONLINE"
+msgstr ""
+
+msgid "MENU_LABEL_SELECT_CHARACTER"
+msgstr ""
+
+msgid "MENU_SETTINGS_AWARD_WINNER_TAKES_ALL"
+msgstr ""
+
+msgid "MENU_SETTINGS_AWARD_TYPE"
+msgstr ""
+
+msgid "MENU_LABEL_CHOOSE_SERVER"
+msgstr ""
+
+msgid "MENU_LABEL_COPY"
+msgstr ""
+
+msgid "MENU_LABEL_LOBBY_CREATE"
+msgstr ""
+
+msgid "MENU_LABEL_LOBBY_JOIN"
+msgstr ""
+
+msgid "MENU_LOBBY_SETTINGS"
+msgstr ""
+
+msgid "MENU_SETTINGS_PUBLIC"
+msgstr ""
+
+msgid "MENU_SETTINGS_CAKE_COST"
+msgstr ""
+
+msgid "MENU_SETTINGS_TURNS"
+msgstr ""
+
+msgid "MENU_SETTINGS_ENABLE_TIMEOUT"
+msgstr ""
+
+msgid "MENU_SETTINGS_TIMEOUT"
+msgstr ""
+
+msgid "MENU_LOBBY_ADD_PLAYER"
 msgstr ""
 
 #~ msgid "MENU_LABEL_TITLE"

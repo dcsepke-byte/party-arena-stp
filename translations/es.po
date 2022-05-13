@@ -163,41 +163,23 @@ msgstr "Volver"
 msgid "MENU_LABEL_CANCEL"
 msgstr "Cancelar"
 
-msgid "MENU_LABEL_CHARACTER"
-msgstr "Personaje:"
-
 msgid "MENU_LABEL_CONTINUE"
 msgstr "Continuar"
 
 msgid "MENU_LABEL_DESKTOP"
 msgstr "Salir al escritorio"
 
-msgid "MENU_LABEL_LINEAR"
-msgstr "Lineal"
-
 msgid "MENU_LABEL_NEW_GAME"
 msgstr "Juego nuevo"
-
-msgid "MENU_LABEL_NINTENDO_DS"
-msgstr "Nintendo DS"
 
 msgid "MENU_LABEL_NOT_READY_ELLIPSIS"
 msgstr "No está listo…"
 
-msgid "MENU_LABEL_NUMBERS"
-msgstr "Números"
-
 msgid "MENU_LABEL_NUM_1"
 msgstr "1"
 
-msgid "MENU_LABEL_NUM_2"
-msgstr "2"
-
 msgid "MENU_LABEL_NUM_3"
 msgstr "3"
-
-msgid "MENU_LABEL_NUM_4"
-msgstr "4"
 
 msgid "MENU_LABEL_OK"
 msgstr "OK"
@@ -226,9 +208,6 @@ msgstr "Jugador3"
 msgid "MENU_LABEL_PLAYER4"
 msgstr "Jugador4"
 
-msgid "MENU_LABEL_PLAYSTATION"
-msgstr "PlayStation"
-
 msgid "MENU_LABEL_PRESS_ANY_KEY"
 msgstr "Pulsa cualquier tecla"
 
@@ -244,35 +223,20 @@ msgstr "Reanudar"
 msgid "MENU_LABEL_RETURN_MENU"
 msgstr "Volver al menú principal"
 
-msgid "MENU_LABEL_REWARD_SYSTEM"
-msgstr "Sistema de recompensas:"
-
 msgid "MENU_LABEL_SELECT_BOARD"
 msgstr "Selecciona el tablero:"
-
-msgid "MENU_LABEL_SELECT_CHARACTER_PLAYER_1"
-msgstr "Selecciona un personaje para el jugador 1"
 
 msgid "MENU_LABEL_SELECT_CHARACTER_PLAYER_2"
 msgstr "Selecciona un personaje para el jugador 2"
 
-msgid "MENU_LABEL_SELECT_CHARACTER_PLAYER_3"
-msgstr "Selecciona un personaje para el jugador 3"
-
 msgid "MENU_LABEL_SELECT_CHARACTER_PLAYER_4"
 msgstr "Selecciona un personaje para el jugador 4"
-
-msgid "MENU_LABEL_SELECT_NUM_PLAYERS"
-msgstr "Selecciona la cantidad de jugadores"
 
 msgid "MENU_LABEL_BOARD_SETTINGS"
 msgstr "Configuración del tablero"
 
 msgid "MENU_LABEL_TRY"
 msgstr "Tratar"
-
-msgid "MENU_LABEL_WINNER_TAKES_ALL"
-msgstr "El ganador se lo lleva todo"
 
 msgid "MENU_LABEL_XBOX"
 msgstr "Xbox"
@@ -334,9 +298,6 @@ msgstr "Si"
 msgid "DIALOG_NO"
 msgstr "No"
 
-msgid "MENU_LABEL_CAKE_COST"
-msgstr "Coste del pastel:"
-
 msgid "MENU_LABEL_TURNS"
 msgstr "Turnos:"
 
@@ -368,7 +329,8 @@ msgid "MENU_OPTIONS_GRAPHIC_QUALITY_LOW"
 msgstr "Baja"
 
 msgid "MENU_GRAPHIC_QUALITY_REBOOT_NOTICE"
-msgstr "El cambio de la calidad gráfica sólo tendrá efecto después de reiniciar"
+msgstr ""
+"El cambio de la calidad gráfica sólo tendrá efecto después de reiniciar"
 
 msgid "CONTEXT_SPEAKER_SARA"
 msgstr "Sara"
@@ -386,13 +348,13 @@ msgstr "[color=#ff3300]{0}[/color] y [color=#33ff00]{1}[/color]!"
 
 msgid "CONTEXT_WINNER_REVEAL_THREE_PLAYER"
 msgstr ""
-"[color=#ff3300]{0}[/color], [color=#33ff00]{1}[/color] y "
-"[color=#00ff88]{2}[/color]!"
+"[color=#ff3300]{0}[/color], [color=#33ff00]{1}[/color] y [color=#00ff88]{2}[/"
+"color]!"
 
 msgid "CONTEXT_WINNER_REVEAL_FOUR_PLAYER"
 msgstr ""
-"[color=#ff3300]{0}[/color], [color=#33ff00]{1}[/color], "
-"[color=#00ff88]{2}[/color] y [color=#ffff33]{3}[/color]!"
+"[color=#ff3300]{0}[/color], [color=#33ff00]{1}[/color], [color=#00ff88]{2}[/"
+"color] y [color=#ffff33]{3}[/color]!"
 
 msgid "CONTEXT_LABEL_CAKES"
 msgstr "Pasteles"
@@ -480,9 +442,9 @@ msgstr "Pierde tus galletas"
 
 msgid "CONTEXT_NOLOK_ROLL_MODIFIER_MODERATION"
 msgstr ""
-"Tal vez deberías ir más despacio. A ver cómo te va con "
-"[color=#00aaff]{cantidad}[/color] menos movimiento para los próximos "
-"[color=#dd44ff]{duración}[/color] lanzamientos"
+"Tal vez deberías ir más despacio. A ver cómo te va con [color=#00aaff]"
+"{cantidad}[/color] menos movimiento para los próximos [color=#dd44ff]"
+"{duración}[/color] lanzamientos"
 
 msgid "CONTEXT_NOLOK_ROLL_MODIFIER"
 msgstr "Dado maldito"
@@ -553,8 +515,8 @@ msgstr "¿Cuántos pasteles quieres comprar?"
 
 msgid "CONTEXT_CAKE_COLLECTED"
 msgstr ""
-"Bien hecho, [color=#00aaff]{jugador}[/color]. Eso es "
-"[color=#dd44ff]{cantidad}[/color] de pastel(es) para ti."
+"Bien hecho, [color=#00aaff]{jugador}[/color]. Eso es [color=#dd44ff]"
+"{cantidad}[/color] de pastel(es) para ti."
 
 msgid "CONTEXT_CAKE_CANT_AFFORD"
 msgstr "Lo siento, pero no tienes suficientes galletas para comprar un pastel."
@@ -606,6 +568,57 @@ msgstr "Minijuego cooperativo de Nolok"
 
 msgid "MINIGAME_TYPE_NOLOK_SOLO"
 msgstr "Minijuego en solitario de Nolok"
+
+msgid "MENU_SETTINGS_AWARD_LINEAR"
+msgstr ""
+
+msgid "MENU_LABEL_START"
+msgstr ""
+
+msgid "MENU_LABEL_ONLINE"
+msgstr ""
+
+msgid "MENU_LABEL_SELECT_CHARACTER"
+msgstr ""
+
+msgid "MENU_SETTINGS_AWARD_WINNER_TAKES_ALL"
+msgstr ""
+
+msgid "MENU_SETTINGS_AWARD_TYPE"
+msgstr ""
+
+msgid "MENU_LABEL_CHOOSE_SERVER"
+msgstr ""
+
+msgid "MENU_LABEL_COPY"
+msgstr ""
+
+msgid "MENU_LABEL_LOBBY_CREATE"
+msgstr ""
+
+msgid "MENU_LABEL_LOBBY_JOIN"
+msgstr ""
+
+msgid "MENU_LOBBY_SETTINGS"
+msgstr ""
+
+msgid "MENU_SETTINGS_PUBLIC"
+msgstr ""
+
+msgid "MENU_SETTINGS_CAKE_COST"
+msgstr ""
+
+msgid "MENU_SETTINGS_TURNS"
+msgstr ""
+
+msgid "MENU_SETTINGS_ENABLE_TIMEOUT"
+msgstr ""
+
+msgid "MENU_SETTINGS_TIMEOUT"
+msgstr ""
+
+msgid "MENU_LOBBY_ADD_PLAYER"
+msgstr ""
 
 #~ msgid "MENU_LABEL_TITLE"
 #~ msgstr "Super Tux Party"
@@ -677,3 +690,6 @@ msgstr "Minijuego en solitario de Nolok"
 
 #~ msgid "MENU_CONTROLS_GAMEPAD_BUTTON_Y"
 #~ msgstr "Mando botón Y"
+
+#~ msgid "MENU_OPTIONS_FXAA"
+#~ msgstr "FXAA"

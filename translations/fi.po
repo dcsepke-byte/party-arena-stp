@@ -163,44 +163,20 @@ msgstr "Takaisin"
 msgid "MENU_LABEL_CANCEL"
 msgstr "Peruuta"
 
-msgid "MENU_LABEL_CHARACTER"
-msgstr "Hahmo:"
-
 msgid "MENU_LABEL_CONTINUE"
 msgstr "Jatka"
 
 msgid "MENU_LABEL_DESKTOP"
 msgstr "Poistu työpöydälle"
 
-msgid "MENU_LABEL_LINEAR"
-msgstr "Lineaarinen"
+msgid "MENU_SETTINGS_AWARD_LINEAR"
+msgstr ""
 
 msgid "MENU_LABEL_NEW_GAME"
 msgstr "Uusi peli"
 
-msgid "MENU_LABEL_NINTENDO_DS"
-msgstr "Nintendo DS"
-
-msgid "MENU_LABEL_NOT_READY_ELLIPSIS"
-msgstr "Ei valmis…"
-
-msgid "MENU_LABEL_NUMBERS"
-msgstr "Numerot"
-
-msgid "MENU_LABEL_NUM_1"
-msgstr "1"
-
-msgid "MENU_LABEL_NUM_2"
-msgstr "2"
-
-msgid "MENU_LABEL_NUM_3"
-msgstr "3"
-
-msgid "MENU_LABEL_NUM_4"
-msgstr "4"
-
-msgid "MENU_LABEL_OK"
-msgstr "OK"
+msgid "MENU_LABEL_START"
+msgstr ""
 
 msgid "MENU_LABEL_PAUSE"
 msgstr "Pysäytä"
@@ -214,6 +190,9 @@ msgstr "Keskeytä, kun ikkunan kohdistus menetetään"
 msgid "MENU_LABEL_PLAY"
 msgstr "Pelaa"
 
+msgid "MENU_LABEL_ONLINE"
+msgstr ""
+
 msgid "MENU_LABEL_PLAYER1"
 msgstr ""
 
@@ -225,9 +204,6 @@ msgstr ""
 
 msgid "MENU_LABEL_PLAYER4"
 msgstr ""
-
-msgid "MENU_LABEL_PLAYSTATION"
-msgstr "PlayStation"
 
 msgid "MENU_LABEL_PRESS_ANY_KEY"
 msgstr "Paina mitä tahansa näppäintä"
@@ -244,38 +220,20 @@ msgstr "Jatka"
 msgid "MENU_LABEL_RETURN_MENU"
 msgstr "Palaa päävalikkoon"
 
-msgid "MENU_LABEL_REWARD_SYSTEM"
-msgstr "Palkitsemisjärjestelmä:"
-
 msgid "MENU_LABEL_SELECT_BOARD"
 msgstr "Valitse taulu:"
 
-msgid "MENU_LABEL_SELECT_CHARACTER_PLAYER_1"
-msgstr "Valitse hahmo pelaajalle 1"
-
-msgid "MENU_LABEL_SELECT_CHARACTER_PLAYER_2"
-msgstr "Valitse hahmo pelaajalle 2"
-
-msgid "MENU_LABEL_SELECT_CHARACTER_PLAYER_3"
-msgstr "Valitse hahmo pelaajalle 3"
-
-msgid "MENU_LABEL_SELECT_CHARACTER_PLAYER_4"
-msgstr "Valitse hahmo pelaajalle 4"
-
-msgid "MENU_LABEL_SELECT_NUM_PLAYERS"
-msgstr "Valitse pelaajien määrä"
-
-msgid "MENU_LABEL_BOARD_SETTINGS"
+msgid "MENU_LABEL_SELECT_CHARACTER"
 msgstr ""
 
 msgid "MENU_LABEL_TRY"
 msgstr "Kokeile"
 
-msgid "MENU_LABEL_WINNER_TAKES_ALL"
-msgstr "Voittaja vie kaiken"
+msgid "MENU_SETTINGS_AWARD_WINNER_TAKES_ALL"
+msgstr ""
 
-msgid "MENU_LABEL_XBOX"
-msgstr "Xbox"
+msgid "MENU_SETTINGS_AWARD_TYPE"
+msgstr ""
 
 msgid "MENU_LABEL_CREDITS"
 msgstr "Tekijät"
@@ -334,11 +292,35 @@ msgstr "Kyllä"
 msgid "DIALOG_NO"
 msgstr "Ei"
 
-msgid "MENU_LABEL_CAKE_COST"
-msgstr "Kakun hinta:"
+msgid "MENU_LABEL_CHOOSE_SERVER"
+msgstr ""
 
-msgid "MENU_LABEL_TURNS"
-msgstr "Vuoroja:"
+msgid "MENU_LABEL_COPY"
+msgstr ""
+
+msgid "MENU_LABEL_LOBBY_CREATE"
+msgstr ""
+
+msgid "MENU_LABEL_LOBBY_JOIN"
+msgstr ""
+
+msgid "MENU_LOBBY_SETTINGS"
+msgstr ""
+
+msgid "MENU_SETTINGS_PUBLIC"
+msgstr ""
+
+msgid "MENU_SETTINGS_CAKE_COST"
+msgstr ""
+
+msgid "MENU_SETTINGS_TURNS"
+msgstr ""
+
+msgid "MENU_SETTINGS_ENABLE_TIMEOUT"
+msgstr ""
+
+msgid "MENU_SETTINGS_TIMEOUT"
+msgstr ""
 
 msgid "AI_DIFFICULTY"
 msgstr "Tekoälyn vaikeustaso:"
@@ -371,6 +353,9 @@ msgid "MENU_GRAPHIC_QUALITY_REBOOT_NOTICE"
 msgstr ""
 "Grafiikan laadun muuttaminen tulee voimaan vasta uudelleenkäynnistyksen "
 "jälkeen"
+
+msgid "MENU_LOBBY_ADD_PLAYER"
+msgstr ""
 
 msgid "CONTEXT_SPEAKER_SARA"
 msgstr "Sara"
@@ -587,6 +572,69 @@ msgstr ""
 
 msgid "MINIGAME_TYPE_NOLOK_SOLO"
 msgstr ""
+
+#~ msgid "MENU_LABEL_CHARACTER"
+#~ msgstr "Hahmo:"
+
+#~ msgid "MENU_LABEL_LINEAR"
+#~ msgstr "Lineaarinen"
+
+#~ msgid "MENU_LABEL_NINTENDO_DS"
+#~ msgstr "Nintendo DS"
+
+#~ msgid "MENU_LABEL_NOT_READY_ELLIPSIS"
+#~ msgstr "Ei valmis…"
+
+#~ msgid "MENU_LABEL_NUMBERS"
+#~ msgstr "Numerot"
+
+#~ msgid "MENU_LABEL_NUM_1"
+#~ msgstr "1"
+
+#~ msgid "MENU_LABEL_NUM_2"
+#~ msgstr "2"
+
+#~ msgid "MENU_LABEL_NUM_3"
+#~ msgstr "3"
+
+#~ msgid "MENU_LABEL_NUM_4"
+#~ msgstr "4"
+
+#~ msgid "MENU_LABEL_OK"
+#~ msgstr "OK"
+
+#~ msgid "MENU_LABEL_PLAYSTATION"
+#~ msgstr "PlayStation"
+
+#~ msgid "MENU_LABEL_REWARD_SYSTEM"
+#~ msgstr "Palkitsemisjärjestelmä:"
+
+#~ msgid "MENU_LABEL_SELECT_CHARACTER_PLAYER_1"
+#~ msgstr "Valitse hahmo pelaajalle 1"
+
+#~ msgid "MENU_LABEL_SELECT_CHARACTER_PLAYER_2"
+#~ msgstr "Valitse hahmo pelaajalle 2"
+
+#~ msgid "MENU_LABEL_SELECT_CHARACTER_PLAYER_3"
+#~ msgstr "Valitse hahmo pelaajalle 3"
+
+#~ msgid "MENU_LABEL_SELECT_CHARACTER_PLAYER_4"
+#~ msgstr "Valitse hahmo pelaajalle 4"
+
+#~ msgid "MENU_LABEL_SELECT_NUM_PLAYERS"
+#~ msgstr "Valitse pelaajien määrä"
+
+#~ msgid "MENU_LABEL_WINNER_TAKES_ALL"
+#~ msgstr "Voittaja vie kaiken"
+
+#~ msgid "MENU_LABEL_XBOX"
+#~ msgstr "Xbox"
+
+#~ msgid "MENU_LABEL_CAKE_COST"
+#~ msgstr "Kakun hinta:"
+
+#~ msgid "MENU_LABEL_TURNS"
+#~ msgstr "Vuoroja:"
 
 #~ msgid "MENU_LABEL_TITLE"
 #~ msgstr "Super Tux Party"

@@ -163,44 +163,20 @@ msgstr "الرجوع"
 msgid "MENU_LABEL_CANCEL"
 msgstr "إلغاء"
 
-msgid "MENU_LABEL_CHARACTER"
-msgstr ""
-
 msgid "MENU_LABEL_CONTINUE"
 msgstr "متابعة"
 
 msgid "MENU_LABEL_DESKTOP"
 msgstr "الخروج لسطح المكتب"
 
-msgid "MENU_LABEL_LINEAR"
+msgid "MENU_SETTINGS_AWARD_LINEAR"
 msgstr ""
 
 msgid "MENU_LABEL_NEW_GAME"
 msgstr "لعبة جديدة"
 
-msgid "MENU_LABEL_NINTENDO_DS"
+msgid "MENU_LABEL_START"
 msgstr ""
-
-msgid "MENU_LABEL_NOT_READY_ELLIPSIS"
-msgstr ""
-
-msgid "MENU_LABEL_NUMBERS"
-msgstr ""
-
-msgid "MENU_LABEL_NUM_1"
-msgstr "١"
-
-msgid "MENU_LABEL_NUM_2"
-msgstr "٢"
-
-msgid "MENU_LABEL_NUM_3"
-msgstr "٣"
-
-msgid "MENU_LABEL_NUM_4"
-msgstr "٤"
-
-msgid "MENU_LABEL_OK"
-msgstr "موافق"
 
 msgid "MENU_LABEL_PAUSE"
 msgstr "إيقاف"
@@ -214,6 +190,9 @@ msgstr ""
 msgid "MENU_LABEL_PLAY"
 msgstr "لعب"
 
+msgid "MENU_LABEL_ONLINE"
+msgstr ""
+
 msgid "MENU_LABEL_PLAYER1"
 msgstr ""
 
@@ -225,10 +204,6 @@ msgstr ""
 
 msgid "MENU_LABEL_PLAYER4"
 msgstr ""
-
-#, fuzzy
-msgid "MENU_LABEL_PLAYSTATION"
-msgstr "PlayStation"
 
 msgid "MENU_LABEL_PRESS_ANY_KEY"
 msgstr "اضغط على أي مفتاح"
@@ -245,37 +220,19 @@ msgstr ""
 msgid "MENU_LABEL_RETURN_MENU"
 msgstr "عودة إلى القائمة الرئيسية"
 
-msgid "MENU_LABEL_REWARD_SYSTEM"
-msgstr ""
-
 msgid "MENU_LABEL_SELECT_BOARD"
 msgstr ""
 
-msgid "MENU_LABEL_SELECT_CHARACTER_PLAYER_1"
-msgstr ""
-
-msgid "MENU_LABEL_SELECT_CHARACTER_PLAYER_2"
-msgstr ""
-
-msgid "MENU_LABEL_SELECT_CHARACTER_PLAYER_3"
-msgstr ""
-
-msgid "MENU_LABEL_SELECT_CHARACTER_PLAYER_4"
-msgstr ""
-
-msgid "MENU_LABEL_SELECT_NUM_PLAYERS"
-msgstr ""
-
-msgid "MENU_LABEL_BOARD_SETTINGS"
+msgid "MENU_LABEL_SELECT_CHARACTER"
 msgstr ""
 
 msgid "MENU_LABEL_TRY"
 msgstr ""
 
-msgid "MENU_LABEL_WINNER_TAKES_ALL"
+msgid "MENU_SETTINGS_AWARD_WINNER_TAKES_ALL"
 msgstr ""
 
-msgid "MENU_LABEL_XBOX"
+msgid "MENU_SETTINGS_AWARD_TYPE"
 msgstr ""
 
 msgid "MENU_LABEL_CREDITS"
@@ -335,10 +292,34 @@ msgstr "نعم"
 msgid "DIALOG_NO"
 msgstr "لا"
 
-msgid "MENU_LABEL_CAKE_COST"
+msgid "MENU_LABEL_CHOOSE_SERVER"
 msgstr ""
 
-msgid "MENU_LABEL_TURNS"
+msgid "MENU_LABEL_COPY"
+msgstr ""
+
+msgid "MENU_LABEL_LOBBY_CREATE"
+msgstr ""
+
+msgid "MENU_LABEL_LOBBY_JOIN"
+msgstr ""
+
+msgid "MENU_LOBBY_SETTINGS"
+msgstr ""
+
+msgid "MENU_SETTINGS_PUBLIC"
+msgstr ""
+
+msgid "MENU_SETTINGS_CAKE_COST"
+msgstr ""
+
+msgid "MENU_SETTINGS_TURNS"
+msgstr ""
+
+msgid "MENU_SETTINGS_ENABLE_TIMEOUT"
+msgstr ""
+
+msgid "MENU_SETTINGS_TIMEOUT"
 msgstr ""
 
 msgid "AI_DIFFICULTY"
@@ -372,6 +353,9 @@ msgid "MENU_OPTIONS_GRAPHIC_QUALITY_LOW"
 msgstr "منوّع"
 
 msgid "MENU_GRAPHIC_QUALITY_REBOOT_NOTICE"
+msgstr ""
+
+msgid "MENU_LOBBY_ADD_PLAYER"
 msgstr ""
 
 msgid "CONTEXT_SPEAKER_SARA"
@@ -571,6 +555,25 @@ msgstr ""
 
 msgid "MINIGAME_TYPE_NOLOK_SOLO"
 msgstr ""
+
+#~ msgid "MENU_LABEL_NUM_1"
+#~ msgstr "١"
+
+#~ msgid "MENU_LABEL_NUM_2"
+#~ msgstr "٢"
+
+#~ msgid "MENU_LABEL_NUM_3"
+#~ msgstr "٣"
+
+#~ msgid "MENU_LABEL_NUM_4"
+#~ msgstr "٤"
+
+#~ msgid "MENU_LABEL_OK"
+#~ msgstr "موافق"
+
+#, fuzzy
+#~ msgid "MENU_LABEL_PLAYSTATION"
+#~ msgstr "PlayStation"
 
 #~ msgid "MENU_CONTROLS_GAMEPAD"
 #~ msgstr "مقبض التحكم"

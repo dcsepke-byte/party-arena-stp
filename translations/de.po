@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 0.7\n"
-"PO-Revision-Date: 2021-05-22 11:32+0000\n"
-"Last-Translator: Benjamin Weis <benjamin.weis@gmx.com>\n"
+"PO-Revision-Date: 2022-05-12 08:20+0000\n"
+"Last-Translator: SZanko <szanko@protonmail.com>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/super-tux-party/"
 "super-tux-party/de/>\n"
 "Language: de\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.7-dev\n"
+"X-Generator: Weblate 4.13-dev\n"
 
 msgid "CONTEXT_LABEL_BUY_CAKE"
 msgstr "Kaufe einen Kuchen für {amount} Kekse"
@@ -163,41 +163,14 @@ msgstr "Zurück"
 msgid "MENU_LABEL_CANCEL"
 msgstr "Abbrechen"
 
-msgid "MENU_LABEL_CHARACTER"
-msgstr "Charakter:"
-
 msgid "MENU_LABEL_CONTINUE"
 msgstr "Fortsetzen"
 
 msgid "MENU_LABEL_DESKTOP"
 msgstr "Zurück zum Desktop"
 
-msgid "MENU_LABEL_LINEAR"
-msgstr "Linear"
-
 msgid "MENU_LABEL_NEW_GAME"
 msgstr "Neues Spiel"
-
-msgid "MENU_LABEL_NINTENDO_DS"
-msgstr "Nintendo DS"
-
-msgid "MENU_LABEL_NOT_READY_ELLIPSIS"
-msgstr "Nicht bereit…"
-
-msgid "MENU_LABEL_NUMBERS"
-msgstr "Zahlen"
-
-msgid "MENU_LABEL_NUM_1"
-msgstr "1"
-
-msgid "MENU_LABEL_NUM_2"
-msgstr "2"
-
-msgid "MENU_LABEL_NUM_3"
-msgstr "3"
-
-msgid "MENU_LABEL_NUM_4"
-msgstr "4"
 
 msgid "MENU_LABEL_OK"
 msgstr "OK"
@@ -226,9 +199,6 @@ msgstr "Spieler 3"
 msgid "MENU_LABEL_PLAYER4"
 msgstr "Spieler 4"
 
-msgid "MENU_LABEL_PLAYSTATION"
-msgstr "PlayStation"
-
 msgid "MENU_LABEL_PRESS_ANY_KEY"
 msgstr "Drücke eine beliebige Taste"
 
@@ -244,38 +214,11 @@ msgstr "Fortfahren"
 msgid "MENU_LABEL_RETURN_MENU"
 msgstr "Zurück zum Hauptmenü"
 
-msgid "MENU_LABEL_REWARD_SYSTEM"
-msgstr "Belohnungs System:"
-
 msgid "MENU_LABEL_SELECT_BOARD"
 msgstr "Spielbrett auswählen:"
 
-msgid "MENU_LABEL_SELECT_CHARACTER_PLAYER_1"
-msgstr "Wähle einen Charakter für Spieler 1"
-
-msgid "MENU_LABEL_SELECT_CHARACTER_PLAYER_2"
-msgstr "Wähle einen Charakter für Spieler 2"
-
-msgid "MENU_LABEL_SELECT_CHARACTER_PLAYER_3"
-msgstr "Wähle einen Charakter für Spieler 3"
-
-msgid "MENU_LABEL_SELECT_CHARACTER_PLAYER_4"
-msgstr "Wähle einen Charakter für Spieler 4"
-
-msgid "MENU_LABEL_SELECT_NUM_PLAYERS"
-msgstr "Spieleranzahl auswählen"
-
-msgid "MENU_LABEL_BOARD_SETTINGS"
-msgstr "Spielbrett Optionen"
-
 msgid "MENU_LABEL_TRY"
 msgstr "Versuchen"
-
-msgid "MENU_LABEL_WINNER_TAKES_ALL"
-msgstr "Der Sieger nimmt alles"
-
-msgid "MENU_LABEL_XBOX"
-msgstr "XBox"
 
 msgid "MENU_LABEL_CREDITS"
 msgstr "Danksagungen"
@@ -302,7 +245,7 @@ msgid "MENU_OPTIONS_FULLSCREEN"
 msgstr "Vollbild"
 
 msgid "MENU_OPTIONS_MSAA"
-msgstr ""
+msgstr "MSAA (Multisample Anti-Aliasing)"
 
 msgid "MENU_OPTIONS_LANGUAGE"
 msgstr "Sprache"
@@ -333,12 +276,6 @@ msgstr "Ja"
 
 msgid "DIALOG_NO"
 msgstr "Nein"
-
-msgid "MENU_LABEL_CAKE_COST"
-msgstr "Kosten eines Kuchen:"
-
-msgid "MENU_LABEL_TURNS"
-msgstr "Anzahl Züge:"
 
 msgid "AI_DIFFICULTY"
 msgstr "KI Stärke:"
@@ -456,7 +393,7 @@ msgid "CONTEXT_NOLOK_MINIGAME_SOLO"
 msgstr "Solo Minispiel"
 
 msgid "CONTEXT_NOLOK_MINIGAME_COOP_MODERATION"
-msgstr "Ich gegen alle von euch? Denkt ihr, ihr habt überhaupt eine Chance?"
+msgstr "Ich gegen euch? Meint ihr, überhaupt eine Chance gegen mich zu haben?"
 
 msgid "CONTEXT_NOLOK_MINIGAME_COOP"
 msgstr "Kooperatives Minispiel"
@@ -566,7 +503,7 @@ msgstr ""
 "Es tut mir Leid, aber du hast nicht genug Kekse um einen Kuchen zu kaufen."
 
 msgid "SHOP_LABEL_TITLE"
-msgstr "Item Shop"
+msgstr "ItemShop"
 
 msgid "SHOP_LABEL_DESCRIPTION"
 msgstr "Item Beschreibung"
@@ -590,28 +527,79 @@ msgid "MINIGAME_ACTION_MOVEMENT"
 msgstr "Bewegen"
 
 msgid "MINIGAME_TYPE_FFA"
-msgstr ""
+msgstr "Jeder gegen Jeden Minispiel"
 
 msgid "MINIGAME_TYPE_2v2"
-msgstr ""
+msgstr "Zwei gegen Zwei Minispiel"
 
 msgid "MINIGAME_TYPE_1v3"
-msgstr ""
+msgstr "Eins gegen Drei Minigame"
 
 msgid "MINIGAME_TYPE_DUEL"
-msgstr ""
+msgstr "Duell Minispiel"
 
 msgid "MINIGAME_TYPE_GNU_COOP"
-msgstr ""
+msgstr "GNU Coop Minispiel"
 
 msgid "MINIGAME_TYPE_GNU_SOLO"
-msgstr ""
+msgstr "GNU Solo Minispiel"
 
 msgid "MINIGAME_TYPE_NOLOK_COOP"
-msgstr ""
+msgstr "Nolok Coop Minispiel"
 
 msgid "MINIGAME_TYPE_NOLOK_SOLO"
-msgstr ""
+msgstr "Nolok Solo Minispiel"
+
+msgid "MENU_SETTINGS_AWARD_LINEAR"
+msgstr "Linear"
+
+msgid "MENU_LABEL_START"
+msgstr "Start"
+
+msgid "MENU_LABEL_ONLINE"
+msgstr "Online Spielen"
+
+msgid "MENU_LABEL_SELECT_CHARACTER"
+msgstr "Wähle deinen Character"
+
+msgid "MENU_SETTINGS_AWARD_WINNER_TAKES_ALL"
+msgstr "Nur Gewinner"
+
+msgid "MENU_SETTINGS_AWARD_TYPE"
+msgstr "Minispiel Belohnungen"
+
+msgid "MENU_LABEL_CHOOSE_SERVER"
+msgstr "Wähle einen Server:"
+
+msgid "MENU_LABEL_COPY"
+msgstr "Kopieren"
+
+msgid "MENU_LABEL_LOBBY_CREATE"
+msgstr "Lobby erstellen"
+
+msgid "MENU_LABEL_LOBBY_JOIN"
+msgstr "Lobby beitreten"
+
+msgid "MENU_LOBBY_SETTINGS"
+msgstr "Spieleinstellungen"
+
+msgid "MENU_SETTINGS_PUBLIC"
+msgstr "Öffentliche Lobby"
+
+msgid "MENU_SETTINGS_CAKE_COST"
+msgstr "Kosten eines Kuchens"
+
+msgid "MENU_SETTINGS_TURNS"
+msgstr "Anzahl Züge"
+
+msgid "MENU_SETTINGS_ENABLE_TIMEOUT"
+msgstr "Entferne inaktive Spieler"
+
+msgid "MENU_SETTINGS_TIMEOUT"
+msgstr "Zeitlimit"
+
+msgid "MENU_LOBBY_ADD_PLAYER"
+msgstr "Drücken um Beizutreten"
 
 #~ msgid "MENU_LABEL_TITLE"
 #~ msgstr "Super Tux Party"
@@ -684,3 +672,6 @@ msgstr ""
 
 #~ msgid "MENU_CONTROLS_GAMEPAD_START"
 #~ msgstr "Gamepad Start"
+
+#~ msgid "MENU_OPTIONS_FXAA"
+#~ msgstr "FXAA (Fast Approximate Anti-Aliasing)"

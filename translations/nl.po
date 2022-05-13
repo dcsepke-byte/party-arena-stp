@@ -146,7 +146,7 @@ msgid "MENU_CONTROLS_DEV_MENU"
 msgstr "Open het ontwikkelaarsmenu"
 
 msgid "MENU_IO_ENTER_SAVEGAME_NAME"
-msgstr "Voer spelnaam in voor opslaan:"
+msgstr "Geef het spel een naam:"
 
 msgid "MENU_IO_LOAD_GAME"
 msgstr "Spel laden"
@@ -163,41 +163,23 @@ msgstr "Terug"
 msgid "MENU_LABEL_CANCEL"
 msgstr "Annuleren"
 
-msgid "MENU_LABEL_CHARACTER"
-msgstr "Personage:"
-
 msgid "MENU_LABEL_CONTINUE"
 msgstr "Doorgaan"
 
 msgid "MENU_LABEL_DESKTOP"
 msgstr "Volledig afsluiten"
 
-msgid "MENU_LABEL_LINEAR"
-msgstr "Lineair"
-
 msgid "MENU_LABEL_NEW_GAME"
 msgstr "Nieuw spel"
-
-msgid "MENU_LABEL_NINTENDO_DS"
-msgstr "Nintendo DS"
 
 msgid "MENU_LABEL_NOT_READY_ELLIPSIS"
 msgstr "Nog niet klaar…"
 
-msgid "MENU_LABEL_NUMBERS"
-msgstr "Nummers"
-
 msgid "MENU_LABEL_NUM_1"
 msgstr "1"
 
-msgid "MENU_LABEL_NUM_2"
-msgstr "2"
-
 msgid "MENU_LABEL_NUM_3"
 msgstr "3"
-
-msgid "MENU_LABEL_NUM_4"
-msgstr "4"
 
 msgid "MENU_LABEL_OK"
 msgstr "Oké"
@@ -226,9 +208,6 @@ msgstr "Speler 3"
 msgid "MENU_LABEL_PLAYER4"
 msgstr "Speler 4"
 
-msgid "MENU_LABEL_PLAYSTATION"
-msgstr "PlayStation"
-
 msgid "MENU_LABEL_PRESS_ANY_KEY"
 msgstr "Druk op een knop"
 
@@ -244,35 +223,20 @@ msgstr "Hervatten"
 msgid "MENU_LABEL_RETURN_MENU"
 msgstr "Terug naar hoofdmenu"
 
-msgid "MENU_LABEL_REWARD_SYSTEM"
-msgstr "Beloningssysteem:"
-
 msgid "MENU_LABEL_SELECT_BOARD"
 msgstr "Kies een bord:"
-
-msgid "MENU_LABEL_SELECT_CHARACTER_PLAYER_1"
-msgstr "Kies een personage voor speler 1"
 
 msgid "MENU_LABEL_SELECT_CHARACTER_PLAYER_2"
 msgstr "Kies een personage voor speler 2"
 
-msgid "MENU_LABEL_SELECT_CHARACTER_PLAYER_3"
-msgstr "Kies een personage voor speler 3"
-
 msgid "MENU_LABEL_SELECT_CHARACTER_PLAYER_4"
 msgstr "Kies een personage voor speler 4"
-
-msgid "MENU_LABEL_SELECT_NUM_PLAYERS"
-msgstr "Selecteer het aantal spelers"
 
 msgid "MENU_LABEL_BOARD_SETTINGS"
 msgstr "Bordinstellingen"
 
 msgid "MENU_LABEL_TRY"
 msgstr "Proberen"
-
-msgid "MENU_LABEL_WINNER_TAKES_ALL"
-msgstr "Alles is voor de winnaar"
 
 msgid "MENU_LABEL_XBOX"
 msgstr "XBOX"
@@ -299,7 +263,7 @@ msgid "MENU_OPTIONS_FRAME_CAP"
 msgstr "Framelimiet"
 
 msgid "MENU_OPTIONS_FULLSCREEN"
-msgstr "Beeldvullend"
+msgstr "Schermvullend"
 
 msgid "MENU_OPTIONS_MSAA"
 msgstr "Multisample-anti-kartelvorming (MSAA)"
@@ -333,9 +297,6 @@ msgstr "Ja"
 
 msgid "DIALOG_NO"
 msgstr "Nee"
-
-msgid "MENU_LABEL_CAKE_COST"
-msgstr "Prijs van taarten:"
 
 msgid "MENU_LABEL_TURNS"
 msgstr "Aantal beurten:"
@@ -408,7 +369,7 @@ msgstr "Hé, heb je hulp nodig? Ik kan je helpen…"
 
 msgid "CONTEXT_GNU_MINIGAME_SOLO_MODERATION"
 msgstr ""
-"Een minispel voor één speler! Laat zien wat je kunt en dan krijg je van mij "
+"Een minispel voor één speler! Laat zien wat je kunt, dan krijg je van mij "
 "een [color=#dd44ff]{reward}[/color]"
 
 msgid "CONTEXT_GNU_MINIGAME_SOLO"
@@ -446,29 +407,28 @@ msgstr "Mijn beurt! Ik weet al wat ik ga doen…"
 msgid "CONTEXT_NOLOK_MINIGAME_SOLO_MODERATION"
 msgstr ""
 "Ik daag je uit voor een minispel! Als je me kunt verslaan, houd je je "
-"spullen - als je verliest, krijg ik één van je taarten…"
+"spullen - als je verliest, krijg ik een van je taarten…"
 
 msgid "CONTEXT_NOLOK_MINIGAME_SOLO"
 msgstr "Minispel voor één speler"
 
 msgid "CONTEXT_NOLOK_MINIGAME_COOP_MODERATION"
-msgstr ""
-"Ík tegen jullie allen? Jullie denken toch niet dat jullie een kans maken?"
+msgstr "Ík tegen jullie allen? Jullie denken toch niet dat jullie kans maken?"
 
 msgid "CONTEXT_NOLOK_MINIGAME_COOP"
 msgstr "Minispel voor meerdere spelers"
 
 msgid "CONTEXT_NOLOK_SOLO_VICTORY"
-msgstr "Wees dankbaar dat ik je gespaard heb!"
+msgstr "Wees blij dat ik je gespaard heb!"
 
 msgid "CONTEXT_NOLOK_SOLO_LOSS"
-msgstr "Ik kijk er al naar uit je weer in te maken!"
+msgstr "Ik kijk er naar uit je wéér in te maken!"
 
 msgid "CONTEXT_NOLOK_COOP_VICTORY"
-msgstr "Volgende keer verlies je."
+msgstr "Volgende keer ga je eraan."
 
 msgid "CONTEXT_NOLOK_COOP_LOSS"
-msgstr "Haha, dat was doodeenvoudig."
+msgstr "Haha, wat een makkie was dat, zeg."
 
 msgid "CONTEXT_NOLOK_LOSE_COOKIES_MODERATION"
 msgstr ""
@@ -480,7 +440,7 @@ msgstr "Daar gaan je koekjes"
 
 msgid "CONTEXT_NOLOK_ROLL_MODIFIER_MODERATION"
 msgstr ""
-"1Rustig aan, makker. De komende [color=#dd44ff]{duration}[/color] beurten "
+"Rustig aan, makker. De komende [color=#dd44ff]{duration}[/color] beurten "
 "beweeg je [color=#00aaff]{amount}[/color] langzamer."
 
 msgid "CONTEXT_NOLOK_ROLL_MODIFIER"
@@ -492,18 +452,18 @@ msgstr "Het lijkt er op dat dit je eerste keer is. Zal ik de regels uitleggen?"
 msgid "CONTEXT_TUTORIAL_DICE"
 msgstr ""
 "Het spel wordt gespeeld in beurten. Tijdens je beurt rol je een dobbelsteen "
-"en ga je net zo veel stappen vooruit als de dobbelsteen aangeeft."
+"en ga je net zoveel stappen vooruit als de dobbelsteen aangeeft."
 
 msgid "CONTEXT_TUTORIAL_COOKIES"
 msgstr ""
-"De valuta is koekjes. Je verdient koekjes door minispellen te winnen. Met "
-"die koekjes kun je onderweg, op de winkelvakjes, items kopen."
+"Je verdient koekjes door minispellen te winnen. Met die koekjes kun je "
+"onderweg, op de winkelvakjes, items kopen."
 
 msgid "CONTEXT_TUTORIAL_CAKES"
 msgstr ""
 "Winnen doe je door de meeste taarten te verzamelen. Koekjes worden gebruikt "
 "als tiebreaker. Je kunt taarten kopen op speciale plekken op het bord. Als "
-"je er één koopt, gaat de taart naar een andere plek."
+"je er een koopt, gaat de taart naar een andere plek."
 
 msgid "CONTEXT_TUTORIAL_SPACES_NORMAL"
 msgstr ""
@@ -512,8 +472,8 @@ msgstr ""
 
 msgid "CONTEXT_TUTORIAL_SPACES_SPECIAL"
 msgstr ""
-"Groene vakjes leiden tot speciale gebeurtenissen. Op gevechtsvakjes kun je "
-"een andere speler uitdagen voor een minispel."
+"Op groene vakjes gebeurt er iets speciaals. Op gevechtsvakjes kun je een "
+"andere speler uitdagen voor een minispel."
 
 msgid "CONTEXT_TUTORIAL_MINIGAMES"
 msgstr ""
@@ -534,8 +494,8 @@ msgstr ""
 msgid "CONTEXT_TUTORIAL_MINIGAMES_SPECIAL"
 msgstr ""
 "Als een speler op een GNU- of Nolok-vakje landt, wordt er een speciaal soort "
-"minispel gespeeld. GNU-minispellen zijn in je voordeel en Nolok-minispelles "
-"in je nadeel, dus blijf daar van weg!"
+"minispel gespeeld. GNU-minispellen zijn in je voordeel; Nolok-minispellen in "
+"je nadeel. Blijf daar dus van weg!"
 
 msgid "CONTEXT_TUTORIAL_END"
 msgstr "Nu kun je gaan spelen. Veel plezier!"
@@ -547,7 +507,7 @@ msgid "CONTEXT_CAKE_WANT_BUY"
 msgstr "Wil je een taart kopen?"
 
 msgid "CONTEXT_CAKE_BUY_AMOUNT"
-msgstr "Hoe veel taarten wil je kopen?"
+msgstr "Hoeveel taarten wil je kopen?"
 
 msgid "CONTEXT_CAKE_COLLECTED"
 msgstr ""
@@ -576,7 +536,7 @@ msgid "REWARDSCREEN_MINIGAME_REWARD"
 msgstr "Beloning:"
 
 msgid "REWARDSCREEN_PRESS_BUTTON"
-msgstr "Druk"
+msgstr "Druk op"
 
 msgid "MINIGAME_ACTION_MOVEMENT"
 msgstr "Verplaatsen"
@@ -594,16 +554,67 @@ msgid "MINIGAME_TYPE_DUEL"
 msgstr "Duel-minispel"
 
 msgid "MINIGAME_TYPE_GNU_COOP"
-msgstr "GNU samenwerkingsminispel"
+msgstr "GNU-samenwerkingsminispel"
 
 msgid "MINIGAME_TYPE_GNU_SOLO"
-msgstr "GNU solo-minispel"
+msgstr "GNU-solominispel"
 
 msgid "MINIGAME_TYPE_NOLOK_COOP"
-msgstr "Nolok samenwerkingsminispel"
+msgstr "Nolok-samenwerkingsminispel"
 
 msgid "MINIGAME_TYPE_NOLOK_SOLO"
-msgstr "Nolok solo-minispel"
+msgstr "Nolok-solominispel"
+
+msgid "MENU_SETTINGS_AWARD_LINEAR"
+msgstr "Lineair"
+
+msgid "MENU_LABEL_START"
+msgstr "Starten"
+
+msgid "MENU_LABEL_ONLINE"
+msgstr "Online spelen"
+
+msgid "MENU_LABEL_SELECT_CHARACTER"
+msgstr "Kies een personage"
+
+msgid "MENU_SETTINGS_AWARD_WINNER_TAKES_ALL"
+msgstr "Alles is voor de winnaar"
+
+msgid "MENU_SETTINGS_AWARD_TYPE"
+msgstr "Soort prijs"
+
+msgid "MENU_LABEL_CHOOSE_SERVER"
+msgstr "Kies een server:"
+
+msgid "MENU_LABEL_COPY"
+msgstr "Kopiëren naar klembord"
+
+msgid "MENU_LABEL_LOBBY_CREATE"
+msgstr "Kamer samenstellen"
+
+msgid "MENU_LABEL_LOBBY_JOIN"
+msgstr "Kamer binnengaan"
+
+msgid "MENU_LOBBY_SETTINGS"
+msgstr "Spelinstellingen"
+
+msgid "MENU_SETTINGS_PUBLIC"
+msgstr "Openbare kamer"
+
+msgid "MENU_SETTINGS_CAKE_COST"
+msgstr "Aantal koekjes"
+
+msgid "MENU_SETTINGS_TURNS"
+msgstr "Aantal beurten"
+
+msgid "MENU_SETTINGS_ENABLE_TIMEOUT"
+msgstr "Spelers buitenzetten als ze inactief zijn"
+
+msgid "MENU_SETTINGS_TIMEOUT"
+msgstr "Tijdslimiet"
+
+msgid "MENU_LOBBY_ADD_PLAYER"
+msgstr "Klik om naar binnen te gaan"
 
 #~ msgid "MENU_LABEL_TITLE"
 #~ msgstr "Super Tux Party"
@@ -679,6 +690,3 @@ msgstr "Nolok solo-minispel"
 
 #~ msgid "MENU_CONTROLS_GAMEPAD_START"
 #~ msgstr "Controller Start"
-
-msgid "MENU_OPTIONS_FXAA"
-msgstr "FXAA"

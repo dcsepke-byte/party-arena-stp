@@ -163,41 +163,23 @@ msgstr "Назад"
 msgid "MENU_LABEL_CANCEL"
 msgstr "Отмена"
 
-msgid "MENU_LABEL_CHARACTER"
-msgstr "Персонаж:"
-
 msgid "MENU_LABEL_CONTINUE"
 msgstr "Продолжить игру"
 
 msgid "MENU_LABEL_DESKTOP"
 msgstr "Выйти на рабочий стол"
 
-msgid "MENU_LABEL_LINEAR"
-msgstr "Линейная"
-
 msgid "MENU_LABEL_NEW_GAME"
 msgstr "Новая игра"
-
-msgid "MENU_LABEL_NINTENDO_DS"
-msgstr "Nintendo DS"
 
 msgid "MENU_LABEL_NOT_READY_ELLIPSIS"
 msgstr "Не готов…"
 
-msgid "MENU_LABEL_NUMBERS"
-msgstr "Числа"
-
 msgid "MENU_LABEL_NUM_1"
 msgstr "1"
 
-msgid "MENU_LABEL_NUM_2"
-msgstr "2"
-
 msgid "MENU_LABEL_NUM_3"
 msgstr "3"
-
-msgid "MENU_LABEL_NUM_4"
-msgstr "4"
 
 msgid "MENU_LABEL_OK"
 msgstr "OK"
@@ -226,9 +208,6 @@ msgstr "Игрок3"
 msgid "MENU_LABEL_PLAYER4"
 msgstr "Игрок4"
 
-msgid "MENU_LABEL_PLAYSTATION"
-msgstr "PlayStation"
-
 msgid "MENU_LABEL_PRESS_ANY_KEY"
 msgstr "Нажмите любую клавишу"
 
@@ -244,35 +223,20 @@ msgstr "Продолжить"
 msgid "MENU_LABEL_RETURN_MENU"
 msgstr "Вернуться в главное меню"
 
-msgid "MENU_LABEL_REWARD_SYSTEM"
-msgstr "Система наград:"
-
 msgid "MENU_LABEL_SELECT_BOARD"
 msgstr "Выберите доску:"
-
-msgid "MENU_LABEL_SELECT_CHARACTER_PLAYER_1"
-msgstr "Выберите персонажа для игрока 1"
 
 msgid "MENU_LABEL_SELECT_CHARACTER_PLAYER_2"
 msgstr "Выберите персонажа для игрока 2"
 
-msgid "MENU_LABEL_SELECT_CHARACTER_PLAYER_3"
-msgstr "Выберите персонажа для игрока 3"
-
 msgid "MENU_LABEL_SELECT_CHARACTER_PLAYER_4"
 msgstr "Выберите персонажа для игрока 4"
-
-msgid "MENU_LABEL_SELECT_NUM_PLAYERS"
-msgstr "Выбрать количество игроков"
 
 msgid "MENU_LABEL_BOARD_SETTINGS"
 msgstr "Настройки доски"
 
 msgid "MENU_LABEL_TRY"
 msgstr "Попробовать"
-
-msgid "MENU_LABEL_WINNER_TAKES_ALL"
-msgstr "Победитель получает всё"
 
 msgid "MENU_LABEL_XBOX"
 msgstr "XBOX"
@@ -333,9 +297,6 @@ msgstr "Да"
 
 msgid "DIALOG_NO"
 msgstr "Нет"
-
-msgid "MENU_LABEL_CAKE_COST"
-msgstr "Стоимость торта:"
 
 msgid "MENU_LABEL_TURNS"
 msgstr "Ходов:"
@@ -585,9 +546,8 @@ msgstr "Нажмите"
 msgid "MINIGAME_ACTION_MOVEMENT"
 msgstr "Двигаться"
 
-#, fuzzy
 msgid "MINIGAME_TYPE_FFA"
-msgstr "Бесплатно для всех мини-игр"
+msgstr "Каждый сам за себя во всех мини-играх"
 
 msgid "MINIGAME_TYPE_2v2"
 msgstr "Мини-игра «Два на два»"
@@ -609,6 +569,57 @@ msgstr "Мини-игра \"Nolok кооператив\""
 
 msgid "MINIGAME_TYPE_NOLOK_SOLO"
 msgstr "Одиночная Nolok мини-игра"
+
+msgid "MENU_SETTINGS_AWARD_LINEAR"
+msgstr ""
+
+msgid "MENU_LABEL_START"
+msgstr ""
+
+msgid "MENU_LABEL_ONLINE"
+msgstr ""
+
+msgid "MENU_LABEL_SELECT_CHARACTER"
+msgstr ""
+
+msgid "MENU_SETTINGS_AWARD_WINNER_TAKES_ALL"
+msgstr ""
+
+msgid "MENU_SETTINGS_AWARD_TYPE"
+msgstr ""
+
+msgid "MENU_LABEL_CHOOSE_SERVER"
+msgstr ""
+
+msgid "MENU_LABEL_COPY"
+msgstr ""
+
+msgid "MENU_LABEL_LOBBY_CREATE"
+msgstr ""
+
+msgid "MENU_LABEL_LOBBY_JOIN"
+msgstr ""
+
+msgid "MENU_LOBBY_SETTINGS"
+msgstr ""
+
+msgid "MENU_SETTINGS_PUBLIC"
+msgstr ""
+
+msgid "MENU_SETTINGS_CAKE_COST"
+msgstr ""
+
+msgid "MENU_SETTINGS_TURNS"
+msgstr ""
+
+msgid "MENU_SETTINGS_ENABLE_TIMEOUT"
+msgstr ""
+
+msgid "MENU_SETTINGS_TIMEOUT"
+msgstr ""
+
+msgid "MENU_LOBBY_ADD_PLAYER"
+msgstr ""
 
 #~ msgid "MENU_LABEL_TITLE"
 #~ msgstr "Super Tux Party"
@@ -684,3 +695,6 @@ msgstr "Одиночная Nolok мини-игра"
 
 #~ msgid "MENU_CONTROLS_GAMEPAD_START"
 #~ msgstr "Кнопка гейпада Start"
+
+#~ msgid "MENU_OPTIONS_FXAA"
+#~ msgstr "FXAA"

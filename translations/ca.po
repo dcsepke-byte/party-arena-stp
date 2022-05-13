@@ -11,7 +11,7 @@ msgstr ""
 "super-tux-party/ca/>\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Weblate 4.5.2-dev\n"
@@ -163,44 +163,20 @@ msgstr "Enrere"
 msgid "MENU_LABEL_CANCEL"
 msgstr "Canel·la"
 
-msgid "MENU_LABEL_CHARACTER"
-msgstr "Personatge:"
-
 msgid "MENU_LABEL_CONTINUE"
 msgstr "Continua"
 
 msgid "MENU_LABEL_DESKTOP"
 msgstr "Ix a l'escriptori"
 
-msgid "MENU_LABEL_LINEAR"
-msgstr "Lineal"
+msgid "MENU_SETTINGS_AWARD_LINEAR"
+msgstr ""
 
 msgid "MENU_LABEL_NEW_GAME"
 msgstr "Nova partida"
 
-msgid "MENU_LABEL_NINTENDO_DS"
-msgstr "Nintendo DS"
-
-msgid "MENU_LABEL_NOT_READY_ELLIPSIS"
-msgstr "No està llest…"
-
-msgid "MENU_LABEL_NUMBERS"
-msgstr "Nombres"
-
-msgid "MENU_LABEL_NUM_1"
-msgstr "1"
-
-msgid "MENU_LABEL_NUM_2"
+msgid "MENU_LABEL_START"
 msgstr ""
-
-msgid "MENU_LABEL_NUM_3"
-msgstr ""
-
-msgid "MENU_LABEL_NUM_4"
-msgstr ""
-
-msgid "MENU_LABEL_OK"
-msgstr "D'acord"
 
 msgid "MENU_LABEL_PAUSE"
 msgstr "Pausa"
@@ -214,6 +190,9 @@ msgstr "Pausa quan la finestra perdi el focus"
 msgid "MENU_LABEL_PLAY"
 msgstr "Juga"
 
+msgid "MENU_LABEL_ONLINE"
+msgstr ""
+
 msgid "MENU_LABEL_PLAYER1"
 msgstr "Jugador1"
 
@@ -225,9 +204,6 @@ msgstr "Jugador3"
 
 msgid "MENU_LABEL_PLAYER4"
 msgstr "Jugador4"
-
-msgid "MENU_LABEL_PLAYSTATION"
-msgstr "PlayStation"
 
 msgid "MENU_LABEL_PRESS_ANY_KEY"
 msgstr "Prem qualsevol tecla"
@@ -244,37 +220,19 @@ msgstr "Reprén"
 msgid "MENU_LABEL_RETURN_MENU"
 msgstr "Torna al menú principal"
 
-msgid "MENU_LABEL_REWARD_SYSTEM"
-msgstr "Sistema de recompensa:"
-
 msgid "MENU_LABEL_SELECT_BOARD"
 msgstr "Tria el tauler:"
 
-msgid "MENU_LABEL_SELECT_CHARACTER_PLAYER_1"
-msgstr "Tria un personatge per al jugador 1"
-
-msgid "MENU_LABEL_SELECT_CHARACTER_PLAYER_2"
-msgstr "Tria un personatge per al jugador 2"
-
-msgid "MENU_LABEL_SELECT_CHARACTER_PLAYER_3"
-msgstr "Tria un personatge per al jugador 3"
-
-msgid "MENU_LABEL_SELECT_CHARACTER_PLAYER_4"
-msgstr "Tria un personatge per al jugador 4"
-
-msgid "MENU_LABEL_SELECT_NUM_PLAYERS"
-msgstr "Tria el nombre de jugadors"
-
-msgid "MENU_LABEL_BOARD_SETTINGS"
-msgstr "Arranjament del tauler"
+msgid "MENU_LABEL_SELECT_CHARACTER"
+msgstr ""
 
 msgid "MENU_LABEL_TRY"
 msgstr "Prova"
 
-msgid "MENU_LABEL_WINNER_TAKES_ALL"
-msgstr "EL guanyador s'ho enduu tot"
+msgid "MENU_SETTINGS_AWARD_WINNER_TAKES_ALL"
+msgstr ""
 
-msgid "MENU_LABEL_XBOX"
+msgid "MENU_SETTINGS_AWARD_TYPE"
 msgstr ""
 
 msgid "MENU_LABEL_CREDITS"
@@ -334,11 +292,35 @@ msgstr "Sí"
 msgid "DIALOG_NO"
 msgstr ""
 
-msgid "MENU_LABEL_CAKE_COST"
-msgstr "Cost de pastissos:"
+msgid "MENU_LABEL_CHOOSE_SERVER"
+msgstr ""
 
-msgid "MENU_LABEL_TURNS"
-msgstr "Torns:"
+msgid "MENU_LABEL_COPY"
+msgstr ""
+
+msgid "MENU_LABEL_LOBBY_CREATE"
+msgstr ""
+
+msgid "MENU_LABEL_LOBBY_JOIN"
+msgstr ""
+
+msgid "MENU_LOBBY_SETTINGS"
+msgstr ""
+
+msgid "MENU_SETTINGS_PUBLIC"
+msgstr ""
+
+msgid "MENU_SETTINGS_CAKE_COST"
+msgstr ""
+
+msgid "MENU_SETTINGS_TURNS"
+msgstr ""
+
+msgid "MENU_SETTINGS_ENABLE_TIMEOUT"
+msgstr ""
+
+msgid "MENU_SETTINGS_TIMEOUT"
+msgstr ""
 
 msgid "AI_DIFFICULTY"
 msgstr "Dificultat de l'IA"
@@ -369,6 +351,9 @@ msgstr "Baixa"
 
 msgid "MENU_GRAPHIC_QUALITY_REBOOT_NOTICE"
 msgstr "Canviar la qualitat gràfica només pren efecte després de reiniciar"
+
+msgid "MENU_LOBBY_ADD_PLAYER"
+msgstr ""
 
 msgid "CONTEXT_SPEAKER_SARA"
 msgstr ""
@@ -476,9 +461,9 @@ msgstr "Perds les teves galetes"
 
 msgid "CONTEXT_NOLOK_ROLL_MODIFIER_MODERATION"
 msgstr ""
-"Potser t'hauries d'alentir una miqueta. Vegem què faràs amb "
-"[color=#00aaff]{amount}[/color] moviments menys durant les següents "
-"[color=#dd44ff]{duration}[/color] tirades"
+"Potser t'hauries d'alentir una miqueta. Vegem què faràs amb [color=#00aaff]"
+"{amount}[/color] moviments menys durant les següents [color=#dd44ff]"
+"{duration}[/color] tirades"
 
 msgid "CONTEXT_NOLOK_ROLL_MODIFIER"
 msgstr "Dau maleït"
@@ -552,8 +537,8 @@ msgstr "Quants en vols comprar, de pastissos?"
 #, fuzzy
 msgid "CONTEXT_CAKE_COLLECTED"
 msgstr ""
-"Ben fet, [color=#00aaff]{player}[/color]. Això seran "
-"[color=#dd44ff]{amount}[/color] pastissos per a tu."
+"Ben fet, [color=#00aaff]{player}[/color]. Això seran [color=#dd44ff]{amount}"
+"[/color] pastissos per a tu."
 
 msgid "CONTEXT_CAKE_CANT_AFFORD"
 msgstr "Ho sent, però no tens prou galetes per a comprar un pastís."
@@ -605,3 +590,57 @@ msgstr "Minijoc Nolok cooperatiu"
 
 msgid "MINIGAME_TYPE_NOLOK_SOLO"
 msgstr "Minijoc Nolok d'un jugador"
+
+#~ msgid "MENU_LABEL_CHARACTER"
+#~ msgstr "Personatge:"
+
+#~ msgid "MENU_LABEL_LINEAR"
+#~ msgstr "Lineal"
+
+#~ msgid "MENU_LABEL_NINTENDO_DS"
+#~ msgstr "Nintendo DS"
+
+#~ msgid "MENU_LABEL_NOT_READY_ELLIPSIS"
+#~ msgstr "No està llest…"
+
+#~ msgid "MENU_LABEL_NUMBERS"
+#~ msgstr "Nombres"
+
+#~ msgid "MENU_LABEL_NUM_1"
+#~ msgstr "1"
+
+#~ msgid "MENU_LABEL_OK"
+#~ msgstr "D'acord"
+
+#~ msgid "MENU_LABEL_PLAYSTATION"
+#~ msgstr "PlayStation"
+
+#~ msgid "MENU_LABEL_REWARD_SYSTEM"
+#~ msgstr "Sistema de recompensa:"
+
+#~ msgid "MENU_LABEL_SELECT_CHARACTER_PLAYER_1"
+#~ msgstr "Tria un personatge per al jugador 1"
+
+#~ msgid "MENU_LABEL_SELECT_CHARACTER_PLAYER_2"
+#~ msgstr "Tria un personatge per al jugador 2"
+
+#~ msgid "MENU_LABEL_SELECT_CHARACTER_PLAYER_3"
+#~ msgstr "Tria un personatge per al jugador 3"
+
+#~ msgid "MENU_LABEL_SELECT_CHARACTER_PLAYER_4"
+#~ msgstr "Tria un personatge per al jugador 4"
+
+#~ msgid "MENU_LABEL_SELECT_NUM_PLAYERS"
+#~ msgstr "Tria el nombre de jugadors"
+
+#~ msgid "MENU_LABEL_BOARD_SETTINGS"
+#~ msgstr "Arranjament del tauler"
+
+#~ msgid "MENU_LABEL_WINNER_TAKES_ALL"
+#~ msgstr "EL guanyador s'ho enduu tot"
+
+#~ msgid "MENU_LABEL_CAKE_COST"
+#~ msgstr "Cost de pastissos:"
+
+#~ msgid "MENU_LABEL_TURNS"
+#~ msgstr "Torns:"

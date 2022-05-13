@@ -163,41 +163,23 @@ msgstr "Retour"
 msgid "MENU_LABEL_CANCEL"
 msgstr "Annuler"
 
-msgid "MENU_LABEL_CHARACTER"
-msgstr "Caractère :"
-
 msgid "MENU_LABEL_CONTINUE"
 msgstr "Continuer"
 
 msgid "MENU_LABEL_DESKTOP"
 msgstr "Retourner sur le bureau"
 
-msgid "MENU_LABEL_LINEAR"
-msgstr "Linéaire"
-
 msgid "MENU_LABEL_NEW_GAME"
 msgstr "Nouvelle partie"
-
-msgid "MENU_LABEL_NINTENDO_DS"
-msgstr "Nintendo DS"
 
 msgid "MENU_LABEL_NOT_READY_ELLIPSIS"
 msgstr "N'est pas prêt…"
 
-msgid "MENU_LABEL_NUMBERS"
-msgstr "Nombres"
-
 msgid "MENU_LABEL_NUM_1"
 msgstr "1"
 
-msgid "MENU_LABEL_NUM_2"
-msgstr "2"
-
 msgid "MENU_LABEL_NUM_3"
 msgstr "3"
-
-msgid "MENU_LABEL_NUM_4"
-msgstr "4"
 
 msgid "MENU_LABEL_OK"
 msgstr "OK"
@@ -226,9 +208,6 @@ msgstr "Joueur 3"
 msgid "MENU_LABEL_PLAYER4"
 msgstr "Joueur 4"
 
-msgid "MENU_LABEL_PLAYSTATION"
-msgstr "PlayStation"
-
 msgid "MENU_LABEL_PRESS_ANY_KEY"
 msgstr "Appuyez sur une touche"
 
@@ -244,35 +223,20 @@ msgstr "Reprendre"
 msgid "MENU_LABEL_RETURN_MENU"
 msgstr "Retourner au menu principal"
 
-msgid "MENU_LABEL_REWARD_SYSTEM"
-msgstr "Système de récompense :"
-
 msgid "MENU_LABEL_SELECT_BOARD"
 msgstr "Choisi un damier :"
-
-msgid "MENU_LABEL_SELECT_CHARACTER_PLAYER_1"
-msgstr "Sélectionne un personnage pour le joueur 1"
 
 msgid "MENU_LABEL_SELECT_CHARACTER_PLAYER_2"
 msgstr "Sélectionne un personnage pour le joueur 2"
 
-msgid "MENU_LABEL_SELECT_CHARACTER_PLAYER_3"
-msgstr "Sélectionne un personnage pour le joueur 3"
-
 msgid "MENU_LABEL_SELECT_CHARACTER_PLAYER_4"
 msgstr "Sélectionne un personnage pour le joueur 4"
-
-msgid "MENU_LABEL_SELECT_NUM_PLAYERS"
-msgstr "Sélectionner le nombre de joueurs"
 
 msgid "MENU_LABEL_BOARD_SETTINGS"
 msgstr "Paramètres de la carte"
 
 msgid "MENU_LABEL_TRY"
 msgstr "Essayer"
-
-msgid "MENU_LABEL_WINNER_TAKES_ALL"
-msgstr "Le vainqueur gagne tout"
 
 msgid "MENU_LABEL_XBOX"
 msgstr "Xbox"
@@ -333,9 +297,6 @@ msgstr "Oui"
 
 msgid "DIALOG_NO"
 msgstr "Non"
-
-msgid "MENU_LABEL_CAKE_COST"
-msgstr "Coût du gâteau :"
 
 msgid "MENU_LABEL_TURNS"
 msgstr "Nombre de tours :"
@@ -616,6 +577,57 @@ msgstr "Mini-jeu Nolok Coop"
 
 msgid "MINIGAME_TYPE_NOLOK_SOLO"
 msgstr "Mini-jeu Nolok Solo"
+
+msgid "MENU_SETTINGS_AWARD_LINEAR"
+msgstr ""
+
+msgid "MENU_LABEL_START"
+msgstr ""
+
+msgid "MENU_LABEL_ONLINE"
+msgstr ""
+
+msgid "MENU_LABEL_SELECT_CHARACTER"
+msgstr ""
+
+msgid "MENU_SETTINGS_AWARD_WINNER_TAKES_ALL"
+msgstr ""
+
+msgid "MENU_SETTINGS_AWARD_TYPE"
+msgstr ""
+
+msgid "MENU_LABEL_CHOOSE_SERVER"
+msgstr ""
+
+msgid "MENU_LABEL_COPY"
+msgstr ""
+
+msgid "MENU_LABEL_LOBBY_CREATE"
+msgstr ""
+
+msgid "MENU_LABEL_LOBBY_JOIN"
+msgstr ""
+
+msgid "MENU_LOBBY_SETTINGS"
+msgstr ""
+
+msgid "MENU_SETTINGS_PUBLIC"
+msgstr ""
+
+msgid "MENU_SETTINGS_CAKE_COST"
+msgstr ""
+
+msgid "MENU_SETTINGS_TURNS"
+msgstr ""
+
+msgid "MENU_SETTINGS_ENABLE_TIMEOUT"
+msgstr ""
+
+msgid "MENU_SETTINGS_TIMEOUT"
+msgstr ""
+
+msgid "MENU_LOBBY_ADD_PLAYER"
+msgstr ""
 
 #~ msgid "MENU_LABEL_TITLE"
 #~ msgstr "Super Tux Party"

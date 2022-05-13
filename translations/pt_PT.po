@@ -163,44 +163,20 @@ msgstr "Atrás"
 msgid "MENU_LABEL_CANCEL"
 msgstr "Cancelar"
 
-msgid "MENU_LABEL_CHARACTER"
-msgstr "Personagem:"
-
 msgid "MENU_LABEL_CONTINUE"
 msgstr "Continuar"
 
 msgid "MENU_LABEL_DESKTOP"
 msgstr "Sair para o ambiente de trabalho"
 
-msgid "MENU_LABEL_LINEAR"
-msgstr "Linear"
+msgid "MENU_SETTINGS_AWARD_LINEAR"
+msgstr ""
 
 msgid "MENU_LABEL_NEW_GAME"
 msgstr "Novo Jogo"
 
-msgid "MENU_LABEL_NINTENDO_DS"
-msgstr "Nintendo DS"
-
-msgid "MENU_LABEL_NOT_READY_ELLIPSIS"
-msgstr "Não preparado…"
-
-msgid "MENU_LABEL_NUMBERS"
-msgstr "Números"
-
-msgid "MENU_LABEL_NUM_1"
-msgstr "1"
-
-msgid "MENU_LABEL_NUM_2"
-msgstr "2"
-
-msgid "MENU_LABEL_NUM_3"
-msgstr "3"
-
-msgid "MENU_LABEL_NUM_4"
-msgstr "4"
-
-msgid "MENU_LABEL_OK"
-msgstr "OK"
+msgid "MENU_LABEL_START"
+msgstr ""
 
 msgid "MENU_LABEL_PAUSE"
 msgstr "Pausa"
@@ -214,6 +190,9 @@ msgstr "Pausa quando o foco da janela for perdido"
 msgid "MENU_LABEL_PLAY"
 msgstr "Jogar"
 
+msgid "MENU_LABEL_ONLINE"
+msgstr ""
+
 msgid "MENU_LABEL_PLAYER1"
 msgstr "Jogador1"
 
@@ -225,9 +204,6 @@ msgstr "Jogador3"
 
 msgid "MENU_LABEL_PLAYER4"
 msgstr "Jogador4"
-
-msgid "MENU_LABEL_PLAYSTATION"
-msgstr "PlayStation"
 
 msgid "MENU_LABEL_PRESS_ANY_KEY"
 msgstr "Carregue em qualquer tecla"
@@ -244,38 +220,20 @@ msgstr "Resumir"
 msgid "MENU_LABEL_RETURN_MENU"
 msgstr "Regressar ao Menu Principal"
 
-msgid "MENU_LABEL_REWARD_SYSTEM"
-msgstr "Sistema de Recompensa:"
-
 msgid "MENU_LABEL_SELECT_BOARD"
 msgstr "Selecione o tabuleiro:"
 
-msgid "MENU_LABEL_SELECT_CHARACTER_PLAYER_1"
-msgstr "Selecione a personagem para o jogador 1"
-
-msgid "MENU_LABEL_SELECT_CHARACTER_PLAYER_2"
-msgstr "Selecione a personagem para o jogador 2"
-
-msgid "MENU_LABEL_SELECT_CHARACTER_PLAYER_3"
-msgstr "Selecione a personagem para o jogador 3"
-
-msgid "MENU_LABEL_SELECT_CHARACTER_PLAYER_4"
-msgstr "Selecione a personagem para o jogador 4"
-
-msgid "MENU_LABEL_SELECT_NUM_PLAYERS"
-msgstr "Selecione a quantidade de jogadores"
-
-msgid "MENU_LABEL_BOARD_SETTINGS"
+msgid "MENU_LABEL_SELECT_CHARACTER"
 msgstr ""
 
 msgid "MENU_LABEL_TRY"
 msgstr "Tentar"
 
-msgid "MENU_LABEL_WINNER_TAKES_ALL"
-msgstr "Vencedor leva tudo"
+msgid "MENU_SETTINGS_AWARD_WINNER_TAKES_ALL"
+msgstr ""
 
-msgid "MENU_LABEL_XBOX"
-msgstr "XBOX"
+msgid "MENU_SETTINGS_AWARD_TYPE"
+msgstr ""
 
 msgid "MENU_LABEL_CREDITS"
 msgstr "Créditos"
@@ -334,11 +292,35 @@ msgstr "Sim"
 msgid "DIALOG_NO"
 msgstr "Não"
 
-msgid "MENU_LABEL_CAKE_COST"
-msgstr "Custo do bolo:"
+msgid "MENU_LABEL_CHOOSE_SERVER"
+msgstr ""
 
-msgid "MENU_LABEL_TURNS"
-msgstr "Voltas:"
+msgid "MENU_LABEL_COPY"
+msgstr ""
+
+msgid "MENU_LABEL_LOBBY_CREATE"
+msgstr ""
+
+msgid "MENU_LABEL_LOBBY_JOIN"
+msgstr ""
+
+msgid "MENU_LOBBY_SETTINGS"
+msgstr ""
+
+msgid "MENU_SETTINGS_PUBLIC"
+msgstr ""
+
+msgid "MENU_SETTINGS_CAKE_COST"
+msgstr ""
+
+msgid "MENU_SETTINGS_TURNS"
+msgstr ""
+
+msgid "MENU_SETTINGS_ENABLE_TIMEOUT"
+msgstr ""
+
+msgid "MENU_SETTINGS_TIMEOUT"
+msgstr ""
 
 msgid "AI_DIFFICULTY"
 msgstr "Dificuldade das IA:"
@@ -369,6 +351,9 @@ msgstr "baixo"
 
 msgid "MENU_GRAPHIC_QUALITY_REBOOT_NOTICE"
 msgstr "A alteração da qualidade gráfica só tem efeito após reiniciar"
+
+msgid "MENU_LOBBY_ADD_PLAYER"
+msgstr ""
 
 msgid "CONTEXT_SPEAKER_SARA"
 msgstr "Sara"
@@ -601,6 +586,69 @@ msgstr ""
 
 msgid "MINIGAME_TYPE_NOLOK_SOLO"
 msgstr ""
+
+#~ msgid "MENU_LABEL_CHARACTER"
+#~ msgstr "Personagem:"
+
+#~ msgid "MENU_LABEL_LINEAR"
+#~ msgstr "Linear"
+
+#~ msgid "MENU_LABEL_NINTENDO_DS"
+#~ msgstr "Nintendo DS"
+
+#~ msgid "MENU_LABEL_NOT_READY_ELLIPSIS"
+#~ msgstr "Não preparado…"
+
+#~ msgid "MENU_LABEL_NUMBERS"
+#~ msgstr "Números"
+
+#~ msgid "MENU_LABEL_NUM_1"
+#~ msgstr "1"
+
+#~ msgid "MENU_LABEL_NUM_2"
+#~ msgstr "2"
+
+#~ msgid "MENU_LABEL_NUM_3"
+#~ msgstr "3"
+
+#~ msgid "MENU_LABEL_NUM_4"
+#~ msgstr "4"
+
+#~ msgid "MENU_LABEL_OK"
+#~ msgstr "OK"
+
+#~ msgid "MENU_LABEL_PLAYSTATION"
+#~ msgstr "PlayStation"
+
+#~ msgid "MENU_LABEL_REWARD_SYSTEM"
+#~ msgstr "Sistema de Recompensa:"
+
+#~ msgid "MENU_LABEL_SELECT_CHARACTER_PLAYER_1"
+#~ msgstr "Selecione a personagem para o jogador 1"
+
+#~ msgid "MENU_LABEL_SELECT_CHARACTER_PLAYER_2"
+#~ msgstr "Selecione a personagem para o jogador 2"
+
+#~ msgid "MENU_LABEL_SELECT_CHARACTER_PLAYER_3"
+#~ msgstr "Selecione a personagem para o jogador 3"
+
+#~ msgid "MENU_LABEL_SELECT_CHARACTER_PLAYER_4"
+#~ msgstr "Selecione a personagem para o jogador 4"
+
+#~ msgid "MENU_LABEL_SELECT_NUM_PLAYERS"
+#~ msgstr "Selecione a quantidade de jogadores"
+
+#~ msgid "MENU_LABEL_WINNER_TAKES_ALL"
+#~ msgstr "Vencedor leva tudo"
+
+#~ msgid "MENU_LABEL_XBOX"
+#~ msgstr "XBOX"
+
+#~ msgid "MENU_LABEL_CAKE_COST"
+#~ msgstr "Custo do bolo:"
+
+#~ msgid "MENU_LABEL_TURNS"
+#~ msgstr "Voltas:"
 
 #~ msgid "MENU_LABEL_TITLE"
 #~ msgstr "Super Tux Party"

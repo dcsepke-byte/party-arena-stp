@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 0.7\n"
-"PO-Revision-Date: 2020-12-28 19:29+0000\n"
-"Last-Translator: Vytautas Butėnas <doggoofspeed@gmail.com>\n"
+"PO-Revision-Date: 2022-05-13 19:14+0000\n"
+"Last-Translator: Florian Kothmeier <floriankothmeier@web.de>\n"
 "Language-Team: English <https://hosted.weblate.org/projects/super-tux-party/"
 "super-tux-party/en/>\n"
 "Language: en\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.4.1-dev\n"
+"X-Generator: Weblate 4.13-dev\n"
 
 msgid "CONTEXT_LABEL_BUY_CAKE"
 msgstr "Buy a cake for {amount} cookies"
@@ -163,9 +163,6 @@ msgstr "Back"
 msgid "MENU_LABEL_CANCEL"
 msgstr "Cancel"
 
-msgid "MENU_LABEL_CHARACTER"
-msgstr "Character:"
-
 msgid "MENU_LABEL_CONTINUE"
 msgstr "Continue"
 
@@ -177,30 +174,6 @@ msgstr "Linear"
 
 msgid "MENU_LABEL_NEW_GAME"
 msgstr "New Game"
-
-msgid "MENU_LABEL_NINTENDO_DS"
-msgstr "Nintendo DS"
-
-msgid "MENU_LABEL_NOT_READY_ELLIPSIS"
-msgstr "Not ready…"
-
-msgid "MENU_LABEL_NUMBERS"
-msgstr "Numbers"
-
-msgid "MENU_LABEL_NUM_1"
-msgstr "1"
-
-msgid "MENU_LABEL_NUM_2"
-msgstr "2"
-
-msgid "MENU_LABEL_NUM_3"
-msgstr "3"
-
-msgid "MENU_LABEL_NUM_4"
-msgstr "4"
-
-msgid "MENU_LABEL_OK"
-msgstr "OK"
 
 msgid "MENU_LABEL_START"
 msgstr "Start"
@@ -232,9 +205,6 @@ msgstr "Player3"
 msgid "MENU_LABEL_PLAYER4"
 msgstr "Player4"
 
-msgid "MENU_LABEL_PLAYSTATION"
-msgstr "PlayStation"
-
 msgid "MENU_LABEL_PRESS_ANY_KEY"
 msgstr "Press any key"
 
@@ -250,35 +220,11 @@ msgstr "Resume"
 msgid "MENU_LABEL_RETURN_MENU"
 msgstr "Return to Main Menu"
 
-msgid "MENU_LABEL_REWARD_SYSTEM"
-msgstr "Reward System:"
-
 msgid "MENU_LABEL_SELECT_BOARD"
-msgstr "Board:"
+msgstr "Select Board:"
 
 msgid "MENU_LABEL_SELECT_CHARACTER"
 msgstr "Select your Character"
-
-msgid "MENU_LABEL_SELECT_CHARACTER_PLAYER_1"
-msgstr "Select a character for player 1"
-
-msgid "MENU_LABEL_SELECT_CHARACTER_PLAYER_2"
-msgstr "Select a character for player 2"
-
-msgid "MENU_LABEL_SELECT_CHARACTER_PLAYER_3"
-msgstr "Select a character for player 3"
-
-msgid "MENU_LABEL_SELECT_CHARACTER_PLAYER_4"
-msgstr "Select a character for player 4"
-
-msgid "MENU_LABEL_SELECT_NUM_PLAYERS"
-msgstr "Select amount of players"
-
-msgid "MENU_LABEL_BOARD_SETTINGS"
-msgstr "Board Settings"
-
-msgid "MENU_LABEL_TITLE"
-msgstr "Super Tux Party"
 
 msgid "MENU_LABEL_TRY"
 msgstr "Try"
@@ -288,9 +234,6 @@ msgstr "Winner takes all"
 
 msgid "MENU_SETTINGS_AWARD_TYPE"
 msgstr "Award Type"
-
-msgid "MENU_LABEL_XBOX"
-msgstr "XBOX"
 
 msgid "MENU_LABEL_CREDITS"
 msgstr "Credits"
@@ -342,9 +285,6 @@ msgstr "Visual"
 
 msgid "MENU_OPTIONS_VSYNC"
 msgstr "VSync"
-
-msgid "MENU_OPTIONS_FXAA"
-msgstr "FXAA"
 
 msgid "DIALOG_YES"
 msgstr "Yes"
@@ -575,8 +515,8 @@ msgstr "Two vs two, where you play in teams of two."
 
 msgid "CONTEXT_TUTORIAL_MINIGAMES_1V3"
 msgstr ""
-"And one vs three, where one competes with the rest. The solo player gets "
-"a bonus to even things up."
+"And one vs three, where one competes with the rest. The solo player gets a "
+"bonus to even things up."
 
 msgid "CONTEXT_TUTORIAL_MINIGAMES_SPECIAL"
 msgstr ""
@@ -629,13 +569,13 @@ msgid "MINIGAME_ACTION_MOVEMENT"
 msgstr "Move"
 
 msgid "MINIGAME_TYPE_FFA"
-msgstr "Free for all minigame"
+msgstr "Free-for-all minigame"
 
 msgid "MINIGAME_TYPE_2v2"
-msgstr "Two vs two minigame"
+msgstr "Two-on-two minigame"
 
 msgid "MINIGAME_TYPE_1v3"
-msgstr "One vs three minigame"
+msgstr "One-on-three minigame"
 
 msgid "MINIGAME_TYPE_DUEL"
 msgstr "Duel minigame"
@@ -651,6 +591,78 @@ msgstr "Nolok Coop minigame"
 
 msgid "MINIGAME_TYPE_NOLOK_SOLO"
 msgstr "Nolok Solo minigame"
+
+#~ msgid "MENU_LABEL_CHARACTER"
+#~ msgstr "Character:"
+
+#~ msgid "MENU_LABEL_NINTENDO_DS"
+#~ msgstr "Nintendo DS"
+
+#~ msgid "MENU_LABEL_NOT_READY_ELLIPSIS"
+#~ msgstr "Not ready…"
+
+#~ msgid "MENU_LABEL_NUMBERS"
+#~ msgstr "Numbers"
+
+#~ msgid "MENU_LABEL_NUM_1"
+#~ msgstr "1"
+
+#~ msgid "MENU_LABEL_NUM_2"
+#~ msgstr "2"
+
+#~ msgid "MENU_LABEL_NUM_3"
+#~ msgstr "3"
+
+#~ msgid "MENU_LABEL_NUM_4"
+#~ msgstr "4"
+
+#~ msgid "MENU_LABEL_OK"
+#~ msgstr "OK"
+
+#~ msgid "MENU_LABEL_PLAYSTATION"
+#~ msgstr "PlayStation"
+
+#~ msgid "MENU_LABEL_REWARD_SYSTEM"
+#~ msgstr "Reward System:"
+
+#~ msgid "MENU_LABEL_SELECT_CHARACTER_PLAYER_1"
+#~ msgstr "Select a character for player 1"
+
+#~ msgid "MENU_LABEL_SELECT_CHARACTER_PLAYER_2"
+#~ msgstr "Select a character for player 2"
+
+#~ msgid "MENU_LABEL_SELECT_CHARACTER_PLAYER_3"
+#~ msgstr "Select a character for player 3"
+
+#~ msgid "MENU_LABEL_SELECT_CHARACTER_PLAYER_4"
+#~ msgstr "Select a character for player 4"
+
+#~ msgid "MENU_LABEL_SELECT_NUM_PLAYERS"
+#~ msgstr "Select amount of players"
+
+#~ msgid "MENU_LABEL_BOARD_SETTINGS"
+#~ msgstr "Board Settings"
+
+#~ msgid "MENU_LABEL_TITLE"
+#~ msgstr "Super Tux Party"
+
+#~ msgid "MENU_LABEL_XBOX"
+#~ msgstr "XBOX"
+
+#~ msgid "MENU_OPTIONS_FXAA"
+#~ msgstr "FXAA"
+
+#~ msgid "MENU_LABEL_LINEAR"
+#~ msgstr "Linear"
+
+#~ msgid "MENU_LABEL_WINNER_TAKES_ALL"
+#~ msgstr "Winner takes all"
+
+#~ msgid "MENU_LABEL_CAKE_COST"
+#~ msgstr "Cake cost:"
+
+#~ msgid "MENU_LABEL_TURNS"
+#~ msgstr "Turns:"
 
 #~ msgid "MENU_CONTROLS_AXIS_MINUS"
 #~ msgstr "Axis -"

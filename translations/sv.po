@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 0.7\n"
-"PO-Revision-Date: 2021-04-26 00:43+0000\n"
+"PO-Revision-Date: 2022-05-07 15:11+0000\n"
 "Last-Translator: Anders Jonsson <anders.jonsson@norsjovallen.se>\n"
 "Language-Team: Swedish <https://hosted.weblate.org/projects/super-tux-party/"
 "super-tux-party/sv/>\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.7-dev\n"
+"X-Generator: Weblate 4.12.1\n"
 
 msgid "CONTEXT_LABEL_BUY_CAKE"
 msgstr "Köp en tårta för {amount} kakor"
@@ -146,7 +146,7 @@ msgid "MENU_CONTROLS_DEV_MENU"
 msgstr "Öppna utvecklarmeny"
 
 msgid "MENU_IO_ENTER_SAVEGAME_NAME"
-msgstr ""
+msgstr "Ange namn på sparat spel:"
 
 msgid "MENU_IO_LOAD_GAME"
 msgstr "Ladda spel"
@@ -163,44 +163,20 @@ msgstr "Tillbaka"
 msgid "MENU_LABEL_CANCEL"
 msgstr "Avbryt"
 
-msgid "MENU_LABEL_CHARACTER"
-msgstr ""
-
 msgid "MENU_LABEL_CONTINUE"
 msgstr "Fortsätt"
 
 msgid "MENU_LABEL_DESKTOP"
 msgstr "Avsluta till skrivbordet"
 
-msgid "MENU_LABEL_LINEAR"
-msgstr "Linjärt"
+msgid "MENU_SETTINGS_AWARD_LINEAR"
+msgstr ""
 
 msgid "MENU_LABEL_NEW_GAME"
 msgstr "Nytt spel"
 
-msgid "MENU_LABEL_NINTENDO_DS"
-msgstr "Nintendo DS"
-
-msgid "MENU_LABEL_NOT_READY_ELLIPSIS"
-msgstr ""
-
-msgid "MENU_LABEL_NUMBERS"
-msgstr ""
-
-msgid "MENU_LABEL_NUM_1"
-msgstr "1"
-
-msgid "MENU_LABEL_NUM_2"
-msgstr "2"
-
-msgid "MENU_LABEL_NUM_3"
-msgstr "3"
-
-msgid "MENU_LABEL_NUM_4"
-msgstr "4"
-
-msgid "MENU_LABEL_OK"
-msgstr "OK"
+msgid "MENU_LABEL_START"
+msgstr "Starta"
 
 msgid "MENU_LABEL_PAUSE"
 msgstr "Pausa"
@@ -214,6 +190,9 @@ msgstr "Pausa då fönster förlorar fokus"
 msgid "MENU_LABEL_PLAY"
 msgstr "Spela"
 
+msgid "MENU_LABEL_ONLINE"
+msgstr "Spela på nätet"
+
 msgid "MENU_LABEL_PLAYER1"
 msgstr "Spelare1"
 
@@ -226,9 +205,6 @@ msgstr "Spelare3"
 msgid "MENU_LABEL_PLAYER4"
 msgstr "Spelare4"
 
-msgid "MENU_LABEL_PLAYSTATION"
-msgstr "PlayStation"
-
 msgid "MENU_LABEL_PRESS_ANY_KEY"
 msgstr "Tryck på valfri knapp"
 
@@ -236,46 +212,28 @@ msgid "MENU_LABEL_QUIT"
 msgstr "Avsluta"
 
 msgid "MENU_LABEL_READY"
-msgstr ""
+msgstr "Klar!"
 
 msgid "MENU_LABEL_RESUME"
-msgstr ""
+msgstr "Fortsätt"
 
 msgid "MENU_LABEL_RETURN_MENU"
 msgstr "Återgå till huvudmeny"
 
-msgid "MENU_LABEL_REWARD_SYSTEM"
-msgstr "Belöningssystem:"
-
 msgid "MENU_LABEL_SELECT_BOARD"
-msgstr "Välj bräde:"
+msgstr "Bräde:"
 
-msgid "MENU_LABEL_SELECT_CHARACTER_PLAYER_1"
-msgstr ""
-
-msgid "MENU_LABEL_SELECT_CHARACTER_PLAYER_2"
-msgstr ""
-
-msgid "MENU_LABEL_SELECT_CHARACTER_PLAYER_3"
-msgstr ""
-
-msgid "MENU_LABEL_SELECT_CHARACTER_PLAYER_4"
-msgstr ""
-
-msgid "MENU_LABEL_SELECT_NUM_PLAYERS"
-msgstr "Välj antal spelare"
-
-msgid "MENU_LABEL_BOARD_SETTINGS"
+msgid "MENU_LABEL_SELECT_CHARACTER"
 msgstr ""
 
 msgid "MENU_LABEL_TRY"
 msgstr "Försök"
 
-msgid "MENU_LABEL_WINNER_TAKES_ALL"
-msgstr "Vinnaren får allt"
+msgid "MENU_SETTINGS_AWARD_WINNER_TAKES_ALL"
+msgstr ""
 
-msgid "MENU_LABEL_XBOX"
-msgstr "XBOX"
+msgid "MENU_SETTINGS_AWARD_TYPE"
+msgstr ""
 
 msgid "MENU_LABEL_CREDITS"
 msgstr ""
@@ -334,11 +292,35 @@ msgstr "Ja"
 msgid "DIALOG_NO"
 msgstr "Nej"
 
-msgid "MENU_LABEL_CAKE_COST"
-msgstr "Tårtkostnad:"
+msgid "MENU_LABEL_CHOOSE_SERVER"
+msgstr "Välj server:"
 
-msgid "MENU_LABEL_TURNS"
+msgid "MENU_LABEL_COPY"
+msgstr "Kopiera till urklipp"
+
+msgid "MENU_LABEL_LOBBY_CREATE"
+msgstr "Skapa lobby"
+
+msgid "MENU_LABEL_LOBBY_JOIN"
+msgstr "Gå in i lobby"
+
+msgid "MENU_LOBBY_SETTINGS"
+msgstr "Spelalternativ"
+
+msgid "MENU_SETTINGS_PUBLIC"
+msgstr "Öppen lobby"
+
+msgid "MENU_SETTINGS_CAKE_COST"
 msgstr ""
+
+msgid "MENU_SETTINGS_TURNS"
+msgstr ""
+
+msgid "MENU_SETTINGS_ENABLE_TIMEOUT"
+msgstr ""
+
+msgid "MENU_SETTINGS_TIMEOUT"
+msgstr "Tidsgräns"
 
 msgid "AI_DIFFICULTY"
 msgstr "AI-svårighetsgrad:"
@@ -355,27 +337,26 @@ msgstr "Svår"
 msgid "CONTEXT_GNU_ACTION_TYPE"
 msgstr ""
 
-#, fuzzy
 msgid "MENU_OPTIONS_GRAPHIC_QUALITY"
-msgstr "Ljud"
+msgstr "Grafikkvalitet"
 
-#, fuzzy
 msgid "MENU_OPTIONS_GRAPHIC_QUALITY_HIGH"
-msgstr "Språk"
+msgstr "Hög"
 
-#, fuzzy
 msgid "MENU_OPTIONS_GRAPHIC_QUALITY_MEDIUM"
-msgstr "Ljud"
+msgstr "Medel"
 
-#, fuzzy
 msgid "MENU_OPTIONS_GRAPHIC_QUALITY_LOW"
-msgstr "Ljud"
+msgstr "Låg"
 
 msgid "MENU_GRAPHIC_QUALITY_REBOOT_NOTICE"
 msgstr ""
 
-msgid "CONTEXT_SPEAKER_SARA"
+msgid "MENU_LOBBY_ADD_PLAYER"
 msgstr ""
+
+msgid "CONTEXT_SPEAKER_SARA"
+msgstr "Sara"
 
 msgid "CONTEXT_WINNER_ANNOUNCEMENT"
 msgstr ""
@@ -388,22 +369,22 @@ msgstr "[color=#ff3300]{0}[/color] och [color=#33ff00]{1}[/color]!"
 
 msgid "CONTEXT_WINNER_REVEAL_THREE_PLAYER"
 msgstr ""
-"[color=#ff3300]{0}[/color], [color=#33ff00]{1}[/color] och "
-"[color=#00ff88]{2}[/color]!"
+"[color=#ff3300]{0}[/color], [color=#33ff00]{1}[/color] och [color=#00ff88]{2}"
+"[/color]!"
 
 msgid "CONTEXT_WINNER_REVEAL_FOUR_PLAYER"
 msgstr ""
-"[color=#ff3300]{0}[/color], [color=#33ff00]{1}[/color], "
-"[color=#00ff88]{2}[/color] och [color=#ffff33]{3}[/color]!"
+"[color=#ff3300]{0}[/color], [color=#33ff00]{1}[/color], [color=#00ff88]{2}[/"
+"color] och [color=#ffff33]{3}[/color]!"
 
 msgid "CONTEXT_LABEL_CAKES"
 msgstr ""
 
 msgid "CONTEXT_LABEL_COOKIES"
-msgstr ""
+msgstr "Kakor"
 
 msgid "CONTEXT_GNU_NAME"
-msgstr ""
+msgstr "GNU"
 
 msgid "CONTEXT_GNU_EVENT_START"
 msgstr ""
@@ -433,7 +414,7 @@ msgid "CONTEXT_GNU_COOP_LOSS"
 msgstr ""
 
 msgid "CONTEXT_NOLOK_NAME"
-msgstr ""
+msgstr "Nolok"
 
 msgid "CONTEXT_NOLOK_ACTION_TYPE"
 msgstr ""
@@ -575,6 +556,45 @@ msgstr ""
 
 msgid "MINIGAME_TYPE_NOLOK_SOLO"
 msgstr ""
+
+#~ msgid "MENU_LABEL_LINEAR"
+#~ msgstr "Linjärt"
+
+#~ msgid "MENU_LABEL_NINTENDO_DS"
+#~ msgstr "Nintendo DS"
+
+#~ msgid "MENU_LABEL_NUM_1"
+#~ msgstr "1"
+
+#~ msgid "MENU_LABEL_NUM_2"
+#~ msgstr "2"
+
+#~ msgid "MENU_LABEL_NUM_3"
+#~ msgstr "3"
+
+#~ msgid "MENU_LABEL_NUM_4"
+#~ msgstr "4"
+
+#~ msgid "MENU_LABEL_OK"
+#~ msgstr "OK"
+
+#~ msgid "MENU_LABEL_PLAYSTATION"
+#~ msgstr "PlayStation"
+
+#~ msgid "MENU_LABEL_REWARD_SYSTEM"
+#~ msgstr "Belöningssystem:"
+
+#~ msgid "MENU_LABEL_SELECT_NUM_PLAYERS"
+#~ msgstr "Välj antal spelare"
+
+#~ msgid "MENU_LABEL_WINNER_TAKES_ALL"
+#~ msgstr "Vinnaren får allt"
+
+#~ msgid "MENU_LABEL_XBOX"
+#~ msgstr "XBOX"
+
+#~ msgid "MENU_LABEL_CAKE_COST"
+#~ msgstr "Tårtkostnad:"
 
 #~ msgid "MENU_LABEL_TITLE"
 #~ msgstr "Super Tux Party"
