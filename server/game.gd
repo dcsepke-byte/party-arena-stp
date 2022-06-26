@@ -26,6 +26,10 @@ func _on_node_added(node: Node):
 			node.stream = null
 			node.queue_free()
 
+master func get_version():
+	rpc_id(multiplayer.get_rpc_sender_id(), "version_callback",
+			Global.PROTOCOL_VERSION, Global.VERSION_STRING)
+
 master func get_public_lobbies():
 	var lobbies := []
 	for child in get_children():
