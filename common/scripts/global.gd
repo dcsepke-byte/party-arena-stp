@@ -1,5 +1,8 @@
 extends Node
 
+const PROTOCOL_VERSION := 2
+const VERSION_STRING := "v1.0-rc1"
+
 func create_local_server(public: bool = false) -> Node:
 	var game_server := preload("res://server/game.tscn").instance()
 	var server := NetworkedMultiplayerENet.new()

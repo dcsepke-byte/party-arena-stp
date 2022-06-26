@@ -585,6 +585,10 @@ __meta__ = {
 stream = ExtResource( 10 )
 bus = "Music"
 
+[node name="AcceptDialog" type="AcceptDialog" parent="."]
+margin_right = 144.0
+margin_bottom = 84.0
+
 [connection signal="pressed" from="MainMenu/Quit" to="." method="_on_Quit_pressed"]
 [connection signal="pressed" from="MainMenu/Buttons/Play" to="." method="_on_Play_pressed"]
 [connection signal="pressed" from="MainMenu/Buttons/Play2" to="." method="_on_Play2_pressed"]

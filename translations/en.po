@@ -292,6 +292,24 @@ msgstr "Yes"
 msgid "DIALOG_NO"
 msgstr "No"
 
+msgid "MENU_LABEL_CONNECTION_ERROR_TITLE"
+msgstr "Connection Error"
+
+msgid "MENU_LABEL_CONNECTION_TIMEOUT"
+msgstr "Cannot reach server.\n\nPlease contact your server administrator."
+
+msgid "MENU_LABEL_NO_SERVER_VERSION"
+msgstr "Could not determine server version.\n\nPlease contact your server administrator."
+
+msgid "MENU_LABEL_VERSION_MISMATCH_TITLE"
+msgstr "Version mismatch"
+
+msgid "MENU_LABEL_VERSION_MISMATCH"
+msgstr "You are running an incompatible version of SuperTuxParty for this server.\nYour version: {local}\nServer version: {remote}\n\nPlease download a compatible version to play on this server."
+
+msgid "MENU_LABEL_CONNECTION_ERROR"
+msgstr "Connection Error"
+
 msgid "MENU_LABEL_CHOOSE_SERVER"
 msgstr "Choose Server:"
 

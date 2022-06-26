@@ -101,6 +101,13 @@ func _on_Load_pressed() -> void:
 		$LoadGameMenu/Back.grab_focus()
 
 func _on_SaveGame_Load_pressed(savegame: SaveGameLoader.SaveGame) -> void:
+	var game := Global.create_local_server()
+	yield(get_tree().network_peer, "connection_succeeded")
+	lobby = yield(game.create_lobby(), "completed")
+	if not lobby:
+		Global.destroy_local_server()
+		return
+	open_lobby(lobby)
 	Global.load_board_from_savegame(savegame)
 
 func _on_SaveGame_Delete_pressed(savegame: SaveGameLoader.SaveGame,
@@ -192,6 +199,9 @@ func _on_ServerList_server_added(text: String, entry: LineEdit):
 func remote_server(ip) -> void:
 	var server := Global.connect_remote_server(ip, 7634)
 	if server == null:
+		$AcceptDialog.window_title = "MENU_LABEL_CONNECTION_ERROR"
+		$AcceptDialog.dialog_text = "MENU_LABEL_CONNECTION_TIMEOUT"
+		$AcceptDialog.popup_centered()
 		return
 	var conn := get_tree().network_peer
 	conn.connect("connection_failed", self, "_on_connection_failed")
@@ -201,12 +211,35 @@ func remote_server(ip) -> void:
 
 func _on_connection_failed():
 	$LoadAnimation.hide()
+	$AcceptDialog.window_title = "MENU_LABEL_CONNECTION_ERROR"
+	$AcceptDialog.dialog_text = "MENU_LABEL_CONNECTION_TIMEOUT"
+	$AcceptDialog.popup_centered()
 	get_tree().network_peer.disconnect("connection_failed", self, "_on_connection_failed")
 	get_tree().network_peer.disconnect("connection_succeeded", self, "_on_connection_suceeded")
 	get_tree().network_peer = null
+	Global.shutdown_connection()
 
 func _on_connection_succeeded(server):
+	var version = yield(server.get_version(), "completed")
 	$LoadAnimation.hide()
+	if version == null:
+		$AcceptDialog.window_title = "MENU_LABEL_CONNECTION_ERROR_TITLE"
+		$AcceptDialog.dialog_text = "MENU_LABEL_NO_SERVER_VERSION"
+		$AcceptDialog.popup_centered()
+		get_tree().network_peer = null
+		Global.shutdown_connection()
+		return
+	elif version[0] != Global.PROTOCOL_VERSION:
+		$AcceptDialog.window_title = "MENU_LABEL_VERSION_MISMATCH_TITLE"
+		$AcceptDialog.dialog_text = tr("MENU_LABEL_VERSION_MISMATCH").format(
+			{
+				'local': Global.VERSION_STRING,
+				'remote': version[1]
+			})
+		$AcceptDialog.popup_centered()
+		get_tree().network_peer = null
+		Global.shutdown_connection()
+		return
 	var servermenu = preload("res://client/menus/lobby/servermenu.tscn").instance()
 	servermenu.server = server
 	servermenu.mainmenu = self

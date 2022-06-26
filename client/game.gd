@@ -3,6 +3,7 @@ extends Node
 signal create_lobby_callback(name)
 signal join_lobby_callback(success)
 signal public_lobbies(list)
+signal version(prot, name)
 
 var current_lobby
 
@@ -46,6 +47,17 @@ func join_lobby(name: String) -> Node:
 func update_lobbies():
 	rpc_id(1, "get_public_lobbies")
 
+func get_version():
+	rpc_id(1, "get_version")
+	var timer = get_tree().create_timer(3)
+	timer.connect("timeout", self, "_on_version_timeout")
+	var res = yield(self, "version")
+	timer.disconnect("timeout", self, "_on_version_timeout")
+	return res
+
+func _on_version_timeout():
+	emit_signal("version", null)
+
 puppet func public_lobbies_callback(list: Array):
 	emit_signal("public_lobbies", list)
 
@@ -60,3 +72,6 @@ puppet func lobby_join_failed():
 
 puppet func lobby_joined():
 	emit_signal("join_lobby_callback", true)
+
+puppet func version_callback(id: int, name: String):
+	emit_signal("version", id, name)
