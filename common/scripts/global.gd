@@ -4,7 +4,7 @@ const PROTOCOL_VERSION := 2
 const VERSION_STRING := "v1.0-rc1"
 
 func create_local_server(public: bool = false) -> Node:
-	var game_server := preload("res://server/game.tscn").instance()
+	var game_server = load("res://server/game.tscn").instance()
 	var server := NetworkedMultiplayerENet.new()
 	if not public:
 		server.set_bind_ip("127.0.0.1")
@@ -19,7 +19,7 @@ func create_local_server(public: bool = false) -> Node:
 	get_tree().network_peer = client
 	get_tree().root.add_child(game_server)
 	
-	var game_client := preload("res://client/game.tscn").instance()
+	var game_client = load("res://client/game.tscn").instance()
 	get_tree().root.add_child(game_client)
 	return game_client.get_node("Game")
 
@@ -32,7 +32,7 @@ func connect_remote_server(ip, port) -> Node:
 	if peer.create_client(ip, port) != OK:
 		return null
 	get_tree().network_peer = peer
-	var game_client := preload("res://client/game.tscn").instance()
+	var game_client = load("res://client/game.tscn").instance()
 	get_tree().root.add_child(game_client)
 	return game_client.get_node("Game")
 
