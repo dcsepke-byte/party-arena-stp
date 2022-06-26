@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 0.7\n"
-"PO-Revision-Date: 2022-04-23 01:14+0000\n"
+"PO-Revision-Date: 2022-06-25 09:14+0000\n"
 "Last-Translator: phlostically <phlostically@mailinator.com>\n"
 "Language-Team: Esperanto <https://hosted.weblate.org/projects/super-tux-"
 "party/super-tux-party/eo/>\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.12.1-dev\n"
+"X-Generator: Weblate 4.13.1-dev\n"
 
 msgid "CONTEXT_LABEL_BUY_CAKE"
 msgstr "Aĉeti kukon kontraŭ {amount} biskvitoj"
@@ -170,13 +170,13 @@ msgid "MENU_LABEL_DESKTOP"
 msgstr "Eliri al la Labortablo"
 
 msgid "MENU_SETTINGS_AWARD_LINEAR"
-msgstr ""
+msgstr "Linia"
 
 msgid "MENU_LABEL_NEW_GAME"
 msgstr "Nova Ludo"
 
 msgid "MENU_LABEL_START"
-msgstr ""
+msgstr "Ek"
 
 msgid "MENU_LABEL_PAUSE"
 msgstr "Paŭzigi"
@@ -191,7 +191,7 @@ msgid "MENU_LABEL_PLAY"
 msgstr "Ludi"
 
 msgid "MENU_LABEL_ONLINE"
-msgstr ""
+msgstr "Ludi Interrete"
 
 msgid "MENU_LABEL_PLAYER1"
 msgstr "Ludanto1"
@@ -224,16 +224,16 @@ msgid "MENU_LABEL_SELECT_BOARD"
 msgstr "Elektu tabulon:"
 
 msgid "MENU_LABEL_SELECT_CHARACTER"
-msgstr ""
+msgstr "Elektu vian avataron"
 
 msgid "MENU_LABEL_TRY"
 msgstr "Provi"
 
 msgid "MENU_SETTINGS_AWARD_WINNER_TAKES_ALL"
-msgstr ""
+msgstr "Gajninto prenas ĉiom"
 
 msgid "MENU_SETTINGS_AWARD_TYPE"
-msgstr ""
+msgstr "Speco de gajnado"
 
 msgid "MENU_LABEL_CREDITS"
 msgstr "Dankoj"
@@ -292,35 +292,50 @@ msgstr "Jes"
 msgid "DIALOG_NO"
 msgstr "Ne"
 
-msgid "MENU_LABEL_CHOOSE_SERVER"
+msgid "MENU_LABEL_CONNECTION_ERROR_TITLE"
 msgstr ""
+
+msgid "MENU_LABEL_CONNECTION_TIMEOUT"
+msgstr ""
+
+msgid "MENU_LABEL_NO_SERVER_VERSION"
+msgstr ""
+
+msgid "MENU_LABEL_VERSION_MISMATCH_TITLE"
+msgstr ""
+
+msgid "MENU_LABEL_VERSION_MISMATCH"
+msgstr ""
+
+msgid "MENU_LABEL_CHOOSE_SERVER"
+msgstr "Elektu servilon:"
 
 msgid "MENU_LABEL_COPY"
-msgstr ""
+msgstr "Kopii en tondujon"
 
 msgid "MENU_LABEL_LOBBY_CREATE"
-msgstr ""
+msgstr "Krei ĉambron"
 
 msgid "MENU_LABEL_LOBBY_JOIN"
-msgstr ""
+msgstr "Aliĝi al ĉambro"
 
 msgid "MENU_LOBBY_SETTINGS"
-msgstr ""
+msgstr "Opcioj pri ludo"
 
 msgid "MENU_SETTINGS_PUBLIC"
-msgstr ""
+msgstr "Publika ĉambro"
 
 msgid "MENU_SETTINGS_CAKE_COST"
-msgstr ""
+msgstr "Kosto de kuko"
 
 msgid "MENU_SETTINGS_TURNS"
-msgstr ""
+msgstr "Movoj"
 
 msgid "MENU_SETTINGS_ENABLE_TIMEOUT"
-msgstr ""
+msgstr "Forpeli ludantojn pro neaktiveco"
 
 msgid "MENU_SETTINGS_TIMEOUT"
-msgstr ""
+msgstr "Tempolimo"
 
 msgid "AI_DIFFICULTY"
 msgstr "Facilo de artefarita intelekto:"
@@ -353,7 +368,7 @@ msgid "MENU_GRAPHIC_QUALITY_REBOOT_NOTICE"
 msgstr "Ŝanĝo de la grafika kvalito efektivos nur post relanĉo"
 
 msgid "MENU_LOBBY_ADD_PLAYER"
-msgstr ""
+msgstr "Premu por aliĝi"
 
 msgid "CONTEXT_SPEAKER_SARA"
 msgstr "Sara"

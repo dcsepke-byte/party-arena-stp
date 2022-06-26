@@ -169,20 +169,14 @@ msgstr "להמשך"
 msgid "MENU_LABEL_DESKTOP"
 msgstr "יציאה לשולחן העבודה"
 
+msgid "MENU_SETTINGS_AWARD_LINEAR"
+msgstr "קווי"
+
 msgid "MENU_LABEL_NEW_GAME"
 msgstr "משחק חדש"
 
-msgid "MENU_LABEL_NOT_READY_ELLIPSIS"
-msgstr "לא מוכנים…"
-
-msgid "MENU_LABEL_NUM_1"
-msgstr "1"
-
-msgid "MENU_LABEL_NUM_3"
-msgstr "3"
-
-msgid "MENU_LABEL_OK"
-msgstr "אישור"
+msgid "MENU_LABEL_START"
+msgstr "התחלה"
 
 msgid "MENU_LABEL_PAUSE"
 msgstr "השהיה"
@@ -195,6 +189,9 @@ msgstr "השהיה כאשר אין התמקדות בחלון"
 
 msgid "MENU_LABEL_PLAY"
 msgstr "למשחק"
+
+msgid "MENU_LABEL_ONLINE"
+msgstr "לשחק ברשת"
 
 msgid "MENU_LABEL_PLAYER1"
 msgstr "שחקן/ית1"
@@ -226,20 +223,17 @@ msgstr "חזרה לתפריט הראשי"
 msgid "MENU_LABEL_SELECT_BOARD"
 msgstr "נא לבחור לוח:"
 
-msgid "MENU_LABEL_SELECT_CHARACTER_PLAYER_2"
-msgstr "נא לבחור דמות עבור שחקן/ית 2"
-
-msgid "MENU_LABEL_SELECT_CHARACTER_PLAYER_4"
-msgstr "נא לבחור דמות עבור שחקן/ית 4"
-
-msgid "MENU_LABEL_BOARD_SETTINGS"
-msgstr "הגדרות הלוח"
+msgid "MENU_LABEL_SELECT_CHARACTER"
+msgstr "בחירת הדמות שלך"
 
 msgid "MENU_LABEL_TRY"
 msgstr "התנסות"
 
-msgid "MENU_LABEL_XBOX"
-msgstr "XBOX"
+msgid "MENU_SETTINGS_AWARD_WINNER_TAKES_ALL"
+msgstr "המנצח זוכה בהכול"
+
+msgid "MENU_SETTINGS_AWARD_TYPE"
+msgstr "סוג הפרס"
 
 msgid "MENU_LABEL_CREDITS"
 msgstr "תודות"
@@ -298,8 +292,50 @@ msgstr "כן"
 msgid "DIALOG_NO"
 msgstr "לא"
 
-msgid "MENU_LABEL_TURNS"
-msgstr "סיבובים:"
+msgid "MENU_LABEL_CONNECTION_ERROR_TITLE"
+msgstr ""
+
+msgid "MENU_LABEL_CONNECTION_TIMEOUT"
+msgstr ""
+
+msgid "MENU_LABEL_NO_SERVER_VERSION"
+msgstr ""
+
+msgid "MENU_LABEL_VERSION_MISMATCH_TITLE"
+msgstr ""
+
+msgid "MENU_LABEL_VERSION_MISMATCH"
+msgstr ""
+
+msgid "MENU_LABEL_CHOOSE_SERVER"
+msgstr "בחירת שרת:"
+
+msgid "MENU_LABEL_COPY"
+msgstr "העתקה ללוח הגזירים"
+
+msgid "MENU_LABEL_LOBBY_CREATE"
+msgstr "יצירת לובי"
+
+msgid "MENU_LABEL_LOBBY_JOIN"
+msgstr "הצטרפות ללובי"
+
+msgid "MENU_LOBBY_SETTINGS"
+msgstr "אפשרויות משחק"
+
+msgid "MENU_SETTINGS_PUBLIC"
+msgstr "לובי ציבורי"
+
+msgid "MENU_SETTINGS_CAKE_COST"
+msgstr "עלות העוגה"
+
+msgid "MENU_SETTINGS_TURNS"
+msgstr "תורות"
+
+msgid "MENU_SETTINGS_ENABLE_TIMEOUT"
+msgstr "הרחקת משתמשים בלתי פעילים"
+
+msgid "MENU_SETTINGS_TIMEOUT"
+msgstr "מגבלת זמן"
 
 msgid "AI_DIFFICULTY"
 msgstr "רמת הבינה המלאכותית:"
@@ -330,6 +366,9 @@ msgstr "נמוכה"
 
 msgid "MENU_GRAPHIC_QUALITY_REBOOT_NOTICE"
 msgstr "שינוי איכות הגרפיקה נכנס לתוקף רק לאחר הפעלה מחדש"
+
+msgid "MENU_LOBBY_ADD_PLAYER"
+msgstr "לחיצה להצטרפות"
 
 msgid "CONTEXT_SPEAKER_SARA"
 msgstr "שרה"
@@ -562,56 +601,32 @@ msgstr "המשחק הקבוצתי של נולוק"
 msgid "MINIGAME_TYPE_NOLOK_SOLO"
 msgstr "המשחקון ליחיד של נולוק"
 
-msgid "MENU_SETTINGS_AWARD_LINEAR"
-msgstr "קווי"
+#~ msgid "MENU_LABEL_NOT_READY_ELLIPSIS"
+#~ msgstr "לא מוכנים…"
 
-msgid "MENU_LABEL_START"
-msgstr "התחלה"
+#~ msgid "MENU_LABEL_NUM_1"
+#~ msgstr "1"
 
-msgid "MENU_LABEL_ONLINE"
-msgstr "לשחק ברשת"
+#~ msgid "MENU_LABEL_NUM_3"
+#~ msgstr "3"
 
-msgid "MENU_LABEL_SELECT_CHARACTER"
-msgstr "בחירת הדמות שלך"
+#~ msgid "MENU_LABEL_OK"
+#~ msgstr "אישור"
 
-msgid "MENU_SETTINGS_AWARD_WINNER_TAKES_ALL"
-msgstr "המנצח זוכה בהכול"
+#~ msgid "MENU_LABEL_SELECT_CHARACTER_PLAYER_2"
+#~ msgstr "נא לבחור דמות עבור שחקן/ית 2"
 
-msgid "MENU_SETTINGS_AWARD_TYPE"
-msgstr "סוג הפרס"
+#~ msgid "MENU_LABEL_SELECT_CHARACTER_PLAYER_4"
+#~ msgstr "נא לבחור דמות עבור שחקן/ית 4"
 
-msgid "MENU_LABEL_CHOOSE_SERVER"
-msgstr "בחירת שרת:"
+#~ msgid "MENU_LABEL_BOARD_SETTINGS"
+#~ msgstr "הגדרות הלוח"
 
-msgid "MENU_LABEL_COPY"
-msgstr "העתקה ללוח הגזירים"
+#~ msgid "MENU_LABEL_XBOX"
+#~ msgstr "XBOX"
 
-msgid "MENU_LABEL_LOBBY_CREATE"
-msgstr "יצירת לובי"
-
-msgid "MENU_LABEL_LOBBY_JOIN"
-msgstr "הצטרפות ללובי"
-
-msgid "MENU_LOBBY_SETTINGS"
-msgstr "אפשרויות משחק"
-
-msgid "MENU_SETTINGS_PUBLIC"
-msgstr "לובי ציבורי"
-
-msgid "MENU_SETTINGS_CAKE_COST"
-msgstr "עלות העוגה"
-
-msgid "MENU_SETTINGS_TURNS"
-msgstr "תורות"
-
-msgid "MENU_SETTINGS_ENABLE_TIMEOUT"
-msgstr "הרחקת משתמשים בלתי פעילים"
-
-msgid "MENU_SETTINGS_TIMEOUT"
-msgstr "מגבלת זמן"
-
-msgid "MENU_LOBBY_ADD_PLAYER"
-msgstr "לחיצה להצטרפות"
+#~ msgid "MENU_LABEL_TURNS"
+#~ msgstr "סיבובים:"
 
 #~ msgid "MENU_LABEL_TITLE"
 #~ msgstr "Super Tux Party"

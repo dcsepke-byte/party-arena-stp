@@ -169,14 +169,14 @@ msgstr "Devam Et"
 msgid "MENU_LABEL_DESKTOP"
 msgstr "Oyunu Kapat"
 
+msgid "MENU_SETTINGS_AWARD_LINEAR"
+msgstr "Doğrusal"
+
 msgid "MENU_LABEL_NEW_GAME"
 msgstr "Yeni Oyun"
 
-msgid "MENU_LABEL_NUM_1"
-msgstr "1"
-
-msgid "MENU_LABEL_OK"
-msgstr "Tamam"
+msgid "MENU_LABEL_START"
+msgstr "Başlat"
 
 msgid "MENU_LABEL_PAUSE"
 msgstr "Duraklat"
@@ -189,6 +189,9 @@ msgstr "Pencere odağı kaybolduğunda duraklat"
 
 msgid "MENU_LABEL_PLAY"
 msgstr "Oyna"
+
+msgid "MENU_LABEL_ONLINE"
+msgstr "Çevrim içi oyna"
 
 msgid "MENU_LABEL_PLAYER1"
 msgstr "Oyuncu1"
@@ -220,11 +223,17 @@ msgstr "Ana Menüye Geri Dön"
 msgid "MENU_LABEL_SELECT_BOARD"
 msgstr "Tahta Seç:"
 
-msgid "MENU_LABEL_SELECT_CHARACTER_PLAYER_4"
-msgstr "Oyuncu 4 için bir karakter seç"
+msgid "MENU_LABEL_SELECT_CHARACTER"
+msgstr "Karakterinizi seçin"
 
 msgid "MENU_LABEL_TRY"
 msgstr "Dene"
+
+msgid "MENU_SETTINGS_AWARD_WINNER_TAKES_ALL"
+msgstr "Kazanan hepsini alır"
+
+msgid "MENU_SETTINGS_AWARD_TYPE"
+msgstr "Ödül Türü"
 
 msgid "MENU_LABEL_CREDITS"
 msgstr "Emeği geçenler"
@@ -283,6 +292,51 @@ msgstr "Evet"
 msgid "DIALOG_NO"
 msgstr "Hayır"
 
+msgid "MENU_LABEL_CONNECTION_ERROR_TITLE"
+msgstr ""
+
+msgid "MENU_LABEL_CONNECTION_TIMEOUT"
+msgstr ""
+
+msgid "MENU_LABEL_NO_SERVER_VERSION"
+msgstr ""
+
+msgid "MENU_LABEL_VERSION_MISMATCH_TITLE"
+msgstr ""
+
+msgid "MENU_LABEL_VERSION_MISMATCH"
+msgstr ""
+
+msgid "MENU_LABEL_CHOOSE_SERVER"
+msgstr "Sunucu Seç:"
+
+msgid "MENU_LABEL_COPY"
+msgstr "Panoya Kopyala"
+
+msgid "MENU_LABEL_LOBBY_CREATE"
+msgstr "Lobi Oluştur"
+
+msgid "MENU_LABEL_LOBBY_JOIN"
+msgstr "Lobiye Katıl"
+
+msgid "MENU_LOBBY_SETTINGS"
+msgstr "Oyun Seçenekleri"
+
+msgid "MENU_SETTINGS_PUBLIC"
+msgstr "Ortak Lobi"
+
+msgid "MENU_SETTINGS_CAKE_COST"
+msgstr "Pasta maliyeti"
+
+msgid "MENU_SETTINGS_TURNS"
+msgstr "Sıra"
+
+msgid "MENU_SETTINGS_ENABLE_TIMEOUT"
+msgstr "Etkin olmayan oyuncuları at"
+
+msgid "MENU_SETTINGS_TIMEOUT"
+msgstr "Zaman Sınırı"
+
 msgid "AI_DIFFICULTY"
 msgstr "Yapay zeka zorluk düzeyi:"
 
@@ -314,6 +368,9 @@ msgid "MENU_GRAPHIC_QUALITY_REBOOT_NOTICE"
 msgstr ""
 "Grafik kalitesinin değiştirilmesi yalnızca yeniden başlattıktan sonra etkili "
 "olur"
+
+msgid "MENU_LOBBY_ADD_PLAYER"
+msgstr "Katılmak için basın"
 
 msgid "CONTEXT_SPEAKER_SARA"
 msgstr "Sara"
@@ -555,56 +612,14 @@ msgstr "Nolok ortaklaşa küçük oyun"
 msgid "MINIGAME_TYPE_NOLOK_SOLO"
 msgstr "Nolok tek kişilik küçük oyun"
 
-msgid "MENU_SETTINGS_AWARD_LINEAR"
-msgstr "Doğrusal"
+#~ msgid "MENU_LABEL_NUM_1"
+#~ msgstr "1"
 
-msgid "MENU_LABEL_START"
-msgstr "Başlat"
+#~ msgid "MENU_LABEL_OK"
+#~ msgstr "Tamam"
 
-msgid "MENU_LABEL_ONLINE"
-msgstr "Çevrim içi oyna"
-
-msgid "MENU_LABEL_SELECT_CHARACTER"
-msgstr "Karakterinizi seçin"
-
-msgid "MENU_SETTINGS_AWARD_WINNER_TAKES_ALL"
-msgstr "Kazanan hepsini alır"
-
-msgid "MENU_SETTINGS_AWARD_TYPE"
-msgstr "Ödül Türü"
-
-msgid "MENU_LABEL_CHOOSE_SERVER"
-msgstr "Sunucu Seç:"
-
-msgid "MENU_LABEL_COPY"
-msgstr "Panoya Kopyala"
-
-msgid "MENU_LABEL_LOBBY_CREATE"
-msgstr "Lobi Oluştur"
-
-msgid "MENU_LABEL_LOBBY_JOIN"
-msgstr "Lobiye Katıl"
-
-msgid "MENU_LOBBY_SETTINGS"
-msgstr "Oyun Seçenekleri"
-
-msgid "MENU_SETTINGS_PUBLIC"
-msgstr "Ortak Lobi"
-
-msgid "MENU_SETTINGS_CAKE_COST"
-msgstr "Pasta maliyeti"
-
-msgid "MENU_SETTINGS_TURNS"
-msgstr "Sıra"
-
-msgid "MENU_SETTINGS_ENABLE_TIMEOUT"
-msgstr "Etkin olmayan oyuncuları at"
-
-msgid "MENU_SETTINGS_TIMEOUT"
-msgstr "Zaman Sınırı"
-
-msgid "MENU_LOBBY_ADD_PLAYER"
-msgstr "Katılmak için basın"
+#~ msgid "MENU_LABEL_SELECT_CHARACTER_PLAYER_4"
+#~ msgstr "Oyuncu 4 için bir karakter seç"
 
 #~ msgid "MENU_LABEL_TITLE"
 #~ msgstr "Super Tux Party"

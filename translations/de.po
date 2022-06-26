@@ -169,11 +169,14 @@ msgstr "Fortsetzen"
 msgid "MENU_LABEL_DESKTOP"
 msgstr "Zurück zum Desktop"
 
+msgid "MENU_SETTINGS_AWARD_LINEAR"
+msgstr "Linear"
+
 msgid "MENU_LABEL_NEW_GAME"
 msgstr "Neues Spiel"
 
-msgid "MENU_LABEL_OK"
-msgstr "OK"
+msgid "MENU_LABEL_START"
+msgstr "Start"
 
 msgid "MENU_LABEL_PAUSE"
 msgstr "Pause"
@@ -186,6 +189,9 @@ msgstr "Spiel bei Fensterwechsel pausieren"
 
 msgid "MENU_LABEL_PLAY"
 msgstr "Spielen"
+
+msgid "MENU_LABEL_ONLINE"
+msgstr "Online Spielen"
 
 msgid "MENU_LABEL_PLAYER1"
 msgstr "Spieler 1"
@@ -217,8 +223,17 @@ msgstr "Zurück zum Hauptmenü"
 msgid "MENU_LABEL_SELECT_BOARD"
 msgstr "Spielbrett auswählen:"
 
+msgid "MENU_LABEL_SELECT_CHARACTER"
+msgstr "Wähle deinen Character"
+
 msgid "MENU_LABEL_TRY"
 msgstr "Versuchen"
+
+msgid "MENU_SETTINGS_AWARD_WINNER_TAKES_ALL"
+msgstr "Nur Gewinner"
+
+msgid "MENU_SETTINGS_AWARD_TYPE"
+msgstr "Minispiel Belohnungen"
 
 msgid "MENU_LABEL_CREDITS"
 msgstr "Danksagungen"
@@ -277,6 +292,51 @@ msgstr "Ja"
 msgid "DIALOG_NO"
 msgstr "Nein"
 
+msgid "MENU_LABEL_CONNECTION_ERROR_TITLE"
+msgstr ""
+
+msgid "MENU_LABEL_CONNECTION_TIMEOUT"
+msgstr ""
+
+msgid "MENU_LABEL_NO_SERVER_VERSION"
+msgstr ""
+
+msgid "MENU_LABEL_VERSION_MISMATCH_TITLE"
+msgstr ""
+
+msgid "MENU_LABEL_VERSION_MISMATCH"
+msgstr ""
+
+msgid "MENU_LABEL_CHOOSE_SERVER"
+msgstr "Wähle einen Server:"
+
+msgid "MENU_LABEL_COPY"
+msgstr "Kopieren"
+
+msgid "MENU_LABEL_LOBBY_CREATE"
+msgstr "Lobby erstellen"
+
+msgid "MENU_LABEL_LOBBY_JOIN"
+msgstr "Lobby beitreten"
+
+msgid "MENU_LOBBY_SETTINGS"
+msgstr "Spieleinstellungen"
+
+msgid "MENU_SETTINGS_PUBLIC"
+msgstr "Öffentliche Lobby"
+
+msgid "MENU_SETTINGS_CAKE_COST"
+msgstr "Kosten eines Kuchens"
+
+msgid "MENU_SETTINGS_TURNS"
+msgstr "Anzahl Züge"
+
+msgid "MENU_SETTINGS_ENABLE_TIMEOUT"
+msgstr "Entferne inaktive Spieler"
+
+msgid "MENU_SETTINGS_TIMEOUT"
+msgstr "Zeitlimit"
+
 msgid "AI_DIFFICULTY"
 msgstr "KI Stärke:"
 
@@ -307,6 +367,9 @@ msgstr "Niedrig"
 msgid "MENU_GRAPHIC_QUALITY_REBOOT_NOTICE"
 msgstr ""
 "Änderungen an der Graphik-Qualität werden erst nach Neustart angewendet"
+
+msgid "MENU_LOBBY_ADD_PLAYER"
+msgstr "Drücken um Beizutreten"
 
 msgid "CONTEXT_SPEAKER_SARA"
 msgstr "Sara"
@@ -550,56 +613,8 @@ msgstr "Nolok Coop Minispiel"
 msgid "MINIGAME_TYPE_NOLOK_SOLO"
 msgstr "Nolok Solo Minispiel"
 
-msgid "MENU_SETTINGS_AWARD_LINEAR"
-msgstr "Linear"
-
-msgid "MENU_LABEL_START"
-msgstr "Start"
-
-msgid "MENU_LABEL_ONLINE"
-msgstr "Online Spielen"
-
-msgid "MENU_LABEL_SELECT_CHARACTER"
-msgstr "Wähle deinen Character"
-
-msgid "MENU_SETTINGS_AWARD_WINNER_TAKES_ALL"
-msgstr "Nur Gewinner"
-
-msgid "MENU_SETTINGS_AWARD_TYPE"
-msgstr "Minispiel Belohnungen"
-
-msgid "MENU_LABEL_CHOOSE_SERVER"
-msgstr "Wähle einen Server:"
-
-msgid "MENU_LABEL_COPY"
-msgstr "Kopieren"
-
-msgid "MENU_LABEL_LOBBY_CREATE"
-msgstr "Lobby erstellen"
-
-msgid "MENU_LABEL_LOBBY_JOIN"
-msgstr "Lobby beitreten"
-
-msgid "MENU_LOBBY_SETTINGS"
-msgstr "Spieleinstellungen"
-
-msgid "MENU_SETTINGS_PUBLIC"
-msgstr "Öffentliche Lobby"
-
-msgid "MENU_SETTINGS_CAKE_COST"
-msgstr "Kosten eines Kuchens"
-
-msgid "MENU_SETTINGS_TURNS"
-msgstr "Anzahl Züge"
-
-msgid "MENU_SETTINGS_ENABLE_TIMEOUT"
-msgstr "Entferne inaktive Spieler"
-
-msgid "MENU_SETTINGS_TIMEOUT"
-msgstr "Zeitlimit"
-
-msgid "MENU_LOBBY_ADD_PLAYER"
-msgstr "Drücken um Beizutreten"
+#~ msgid "MENU_LABEL_OK"
+#~ msgstr "OK"
 
 #~ msgid "MENU_LABEL_TITLE"
 #~ msgstr "Super Tux Party"

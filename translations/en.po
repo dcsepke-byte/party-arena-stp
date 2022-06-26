@@ -296,19 +296,27 @@ msgid "MENU_LABEL_CONNECTION_ERROR_TITLE"
 msgstr "Connection Error"
 
 msgid "MENU_LABEL_CONNECTION_TIMEOUT"
-msgstr "Cannot reach server.\n\nPlease contact your server administrator."
+msgstr ""
+"Cannot reach server.\n"
+"\n"
+"Please contact your server administrator."
 
 msgid "MENU_LABEL_NO_SERVER_VERSION"
-msgstr "Could not determine server version.\n\nPlease contact your server administrator."
+msgstr ""
+"Could not determine server version.\n"
+"\n"
+"Please contact your server administrator."
 
 msgid "MENU_LABEL_VERSION_MISMATCH_TITLE"
 msgstr "Version mismatch"
 
 msgid "MENU_LABEL_VERSION_MISMATCH"
-msgstr "You are running an incompatible version of SuperTuxParty for this server.\nYour version: {local}\nServer version: {remote}\n\nPlease download a compatible version to play on this server."
-
-msgid "MENU_LABEL_CONNECTION_ERROR"
-msgstr "Connection Error"
+msgstr ""
+"You are running an incompatible version of SuperTuxParty for this server.\n"
+"Your version: {local}\n"
+"Server version: {remote}\n"
+"\n"
+"Please download a compatible version to play on this server."
 
 msgid "MENU_LABEL_CHOOSE_SERVER"
 msgstr "Choose Server:"
@@ -609,6 +617,9 @@ msgstr "Nolok Coop minigame"
 
 msgid "MINIGAME_TYPE_NOLOK_SOLO"
 msgstr "Nolok Solo minigame"
+
+#~ msgid "MENU_LABEL_CONNECTION_ERROR"
+#~ msgstr "Connection Error"
 
 #~ msgid "MENU_LABEL_CHARACTER"
 #~ msgstr "Character:"

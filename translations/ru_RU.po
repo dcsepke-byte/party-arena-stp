@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 0.7\n"
-"PO-Revision-Date: 2021-08-06 09:34+0000\n"
-"Last-Translator: Nikita Epifanov <nikgreens@protonmail.com>\n"
+"PO-Revision-Date: 2022-05-23 05:18+0000\n"
+"Last-Translator: AHOHNMYC <lqwh2h2cwa@protonmail.com>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/super-tux-party/"
 "super-tux-party/ru/>\n"
 "Language: ru_RU\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Weblate 4.8-dev\n"
+"X-Generator: Weblate 4.13-dev\n"
 
 msgid "CONTEXT_LABEL_BUY_CAKE"
 msgstr "Купить торт на {amount} печенек"
@@ -169,20 +169,14 @@ msgstr "Продолжить игру"
 msgid "MENU_LABEL_DESKTOP"
 msgstr "Выйти на рабочий стол"
 
+msgid "MENU_SETTINGS_AWARD_LINEAR"
+msgstr ""
+
 msgid "MENU_LABEL_NEW_GAME"
 msgstr "Новая игра"
 
-msgid "MENU_LABEL_NOT_READY_ELLIPSIS"
-msgstr "Не готов…"
-
-msgid "MENU_LABEL_NUM_1"
-msgstr "1"
-
-msgid "MENU_LABEL_NUM_3"
-msgstr "3"
-
-msgid "MENU_LABEL_OK"
-msgstr "OK"
+msgid "MENU_LABEL_START"
+msgstr "Запустить"
 
 msgid "MENU_LABEL_PAUSE"
 msgstr "Пауза"
@@ -195,6 +189,9 @@ msgstr "Пауза при потере фокуса окна"
 
 msgid "MENU_LABEL_PLAY"
 msgstr "Играть"
+
+msgid "MENU_LABEL_ONLINE"
+msgstr "Играть по сети"
 
 msgid "MENU_LABEL_PLAYER1"
 msgstr "Игрок1"
@@ -226,20 +223,17 @@ msgstr "Вернуться в главное меню"
 msgid "MENU_LABEL_SELECT_BOARD"
 msgstr "Выберите доску:"
 
-msgid "MENU_LABEL_SELECT_CHARACTER_PLAYER_2"
-msgstr "Выберите персонажа для игрока 2"
-
-msgid "MENU_LABEL_SELECT_CHARACTER_PLAYER_4"
-msgstr "Выберите персонажа для игрока 4"
-
-msgid "MENU_LABEL_BOARD_SETTINGS"
-msgstr "Настройки доски"
+msgid "MENU_LABEL_SELECT_CHARACTER"
+msgstr "Выберите персонажа"
 
 msgid "MENU_LABEL_TRY"
 msgstr "Попробовать"
 
-msgid "MENU_LABEL_XBOX"
-msgstr "XBOX"
+msgid "MENU_SETTINGS_AWARD_WINNER_TAKES_ALL"
+msgstr "Победитель получает всё"
+
+msgid "MENU_SETTINGS_AWARD_TYPE"
+msgstr ""
 
 msgid "MENU_LABEL_CREDITS"
 msgstr "Титры"
@@ -298,8 +292,50 @@ msgstr "Да"
 msgid "DIALOG_NO"
 msgstr "Нет"
 
-msgid "MENU_LABEL_TURNS"
-msgstr "Ходов:"
+msgid "MENU_LABEL_CONNECTION_ERROR_TITLE"
+msgstr ""
+
+msgid "MENU_LABEL_CONNECTION_TIMEOUT"
+msgstr ""
+
+msgid "MENU_LABEL_NO_SERVER_VERSION"
+msgstr ""
+
+msgid "MENU_LABEL_VERSION_MISMATCH_TITLE"
+msgstr ""
+
+msgid "MENU_LABEL_VERSION_MISMATCH"
+msgstr ""
+
+msgid "MENU_LABEL_CHOOSE_SERVER"
+msgstr "Выберите сервер:"
+
+msgid "MENU_LABEL_COPY"
+msgstr "Копировать в буфер обмена"
+
+msgid "MENU_LABEL_LOBBY_CREATE"
+msgstr ""
+
+msgid "MENU_LABEL_LOBBY_JOIN"
+msgstr ""
+
+msgid "MENU_LOBBY_SETTINGS"
+msgstr "Настройки игры"
+
+msgid "MENU_SETTINGS_PUBLIC"
+msgstr ""
+
+msgid "MENU_SETTINGS_CAKE_COST"
+msgstr ""
+
+msgid "MENU_SETTINGS_TURNS"
+msgstr ""
+
+msgid "MENU_SETTINGS_ENABLE_TIMEOUT"
+msgstr "Выкидывать неактивных игроков"
+
+msgid "MENU_SETTINGS_TIMEOUT"
+msgstr "Ограничение по времени"
 
 msgid "AI_DIFFICULTY"
 msgstr "Сложность AI:"
@@ -330,6 +366,9 @@ msgstr "Низкое"
 
 msgid "MENU_GRAPHIC_QUALITY_REBOOT_NOTICE"
 msgstr "Изменение качества графики вступает в силу только после перезагрузки"
+
+msgid "MENU_LOBBY_ADD_PLAYER"
+msgstr "Присоединиться"
 
 msgid "CONTEXT_SPEAKER_SARA"
 msgstr "Сара"
@@ -570,56 +609,14 @@ msgstr "Мини-игра \"Nolok кооператив\""
 msgid "MINIGAME_TYPE_NOLOK_SOLO"
 msgstr "Одиночная Nolok мини-игра"
 
-msgid "MENU_SETTINGS_AWARD_LINEAR"
-msgstr ""
+#~ msgid "MENU_LABEL_NUM_1"
+#~ msgstr "1"
 
-msgid "MENU_LABEL_START"
-msgstr ""
+#~ msgid "MENU_LABEL_OK"
+#~ msgstr "OK"
 
-msgid "MENU_LABEL_ONLINE"
-msgstr ""
-
-msgid "MENU_LABEL_SELECT_CHARACTER"
-msgstr ""
-
-msgid "MENU_SETTINGS_AWARD_WINNER_TAKES_ALL"
-msgstr ""
-
-msgid "MENU_SETTINGS_AWARD_TYPE"
-msgstr ""
-
-msgid "MENU_LABEL_CHOOSE_SERVER"
-msgstr ""
-
-msgid "MENU_LABEL_COPY"
-msgstr ""
-
-msgid "MENU_LABEL_LOBBY_CREATE"
-msgstr ""
-
-msgid "MENU_LABEL_LOBBY_JOIN"
-msgstr ""
-
-msgid "MENU_LOBBY_SETTINGS"
-msgstr ""
-
-msgid "MENU_SETTINGS_PUBLIC"
-msgstr ""
-
-msgid "MENU_SETTINGS_CAKE_COST"
-msgstr ""
-
-msgid "MENU_SETTINGS_TURNS"
-msgstr ""
-
-msgid "MENU_SETTINGS_ENABLE_TIMEOUT"
-msgstr ""
-
-msgid "MENU_SETTINGS_TIMEOUT"
-msgstr ""
-
-msgid "MENU_LOBBY_ADD_PLAYER"
-msgstr ""
+#~ msgid "MENU_LABEL_SELECT_CHARACTER_PLAYER_4"
+#~ msgstr "Выберите персонажа для игрока 4"
 
 #~ msgid "MENU_LABEL_TITLE"
 #~ msgstr "Super Tux Party"

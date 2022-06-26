@@ -169,20 +169,14 @@ msgstr "Doorgaan"
 msgid "MENU_LABEL_DESKTOP"
 msgstr "Volledig afsluiten"
 
+msgid "MENU_SETTINGS_AWARD_LINEAR"
+msgstr "Lineair"
+
 msgid "MENU_LABEL_NEW_GAME"
 msgstr "Nieuw spel"
 
-msgid "MENU_LABEL_NOT_READY_ELLIPSIS"
-msgstr "Nog niet klaar…"
-
-msgid "MENU_LABEL_NUM_1"
-msgstr "1"
-
-msgid "MENU_LABEL_NUM_3"
-msgstr "3"
-
-msgid "MENU_LABEL_OK"
-msgstr "Oké"
+msgid "MENU_LABEL_START"
+msgstr "Starten"
 
 msgid "MENU_LABEL_PAUSE"
 msgstr "Pauzeren"
@@ -195,6 +189,9 @@ msgstr "Pauzeren als venster niet meer gefocust is"
 
 msgid "MENU_LABEL_PLAY"
 msgstr "Spelen"
+
+msgid "MENU_LABEL_ONLINE"
+msgstr "Online spelen"
 
 msgid "MENU_LABEL_PLAYER1"
 msgstr "Speler 1"
@@ -226,20 +223,17 @@ msgstr "Terug naar hoofdmenu"
 msgid "MENU_LABEL_SELECT_BOARD"
 msgstr "Kies een bord:"
 
-msgid "MENU_LABEL_SELECT_CHARACTER_PLAYER_2"
-msgstr "Kies een personage voor speler 2"
-
-msgid "MENU_LABEL_SELECT_CHARACTER_PLAYER_4"
-msgstr "Kies een personage voor speler 4"
-
-msgid "MENU_LABEL_BOARD_SETTINGS"
-msgstr "Bordinstellingen"
+msgid "MENU_LABEL_SELECT_CHARACTER"
+msgstr "Kies een personage"
 
 msgid "MENU_LABEL_TRY"
 msgstr "Proberen"
 
-msgid "MENU_LABEL_XBOX"
-msgstr "XBOX"
+msgid "MENU_SETTINGS_AWARD_WINNER_TAKES_ALL"
+msgstr "Alles is voor de winnaar"
+
+msgid "MENU_SETTINGS_AWARD_TYPE"
+msgstr "Soort prijs"
 
 msgid "MENU_LABEL_CREDITS"
 msgstr "Met dank aan"
@@ -298,8 +292,50 @@ msgstr "Ja"
 msgid "DIALOG_NO"
 msgstr "Nee"
 
-msgid "MENU_LABEL_TURNS"
-msgstr "Aantal beurten:"
+msgid "MENU_LABEL_CONNECTION_ERROR_TITLE"
+msgstr ""
+
+msgid "MENU_LABEL_CONNECTION_TIMEOUT"
+msgstr ""
+
+msgid "MENU_LABEL_NO_SERVER_VERSION"
+msgstr ""
+
+msgid "MENU_LABEL_VERSION_MISMATCH_TITLE"
+msgstr ""
+
+msgid "MENU_LABEL_VERSION_MISMATCH"
+msgstr ""
+
+msgid "MENU_LABEL_CHOOSE_SERVER"
+msgstr "Kies een server:"
+
+msgid "MENU_LABEL_COPY"
+msgstr "Kopiëren naar klembord"
+
+msgid "MENU_LABEL_LOBBY_CREATE"
+msgstr "Kamer samenstellen"
+
+msgid "MENU_LABEL_LOBBY_JOIN"
+msgstr "Kamer binnengaan"
+
+msgid "MENU_LOBBY_SETTINGS"
+msgstr "Spelinstellingen"
+
+msgid "MENU_SETTINGS_PUBLIC"
+msgstr "Openbare kamer"
+
+msgid "MENU_SETTINGS_CAKE_COST"
+msgstr "Aantal koekjes"
+
+msgid "MENU_SETTINGS_TURNS"
+msgstr "Aantal beurten"
+
+msgid "MENU_SETTINGS_ENABLE_TIMEOUT"
+msgstr "Spelers buitenzetten als ze inactief zijn"
+
+msgid "MENU_SETTINGS_TIMEOUT"
+msgstr "Tijdslimiet"
 
 msgid "AI_DIFFICULTY"
 msgstr "Moeilijkheidsgraad van computer:"
@@ -330,6 +366,9 @@ msgstr "Laag"
 
 msgid "MENU_GRAPHIC_QUALITY_REBOOT_NOTICE"
 msgstr "Herstart om de wijziging toe te passen"
+
+msgid "MENU_LOBBY_ADD_PLAYER"
+msgstr "Klik om naar binnen te gaan"
 
 msgid "CONTEXT_SPEAKER_SARA"
 msgstr "Sara"
@@ -565,56 +604,32 @@ msgstr "Nolok-samenwerkingsminispel"
 msgid "MINIGAME_TYPE_NOLOK_SOLO"
 msgstr "Nolok-solominispel"
 
-msgid "MENU_SETTINGS_AWARD_LINEAR"
-msgstr "Lineair"
+#~ msgid "MENU_LABEL_NOT_READY_ELLIPSIS"
+#~ msgstr "Nog niet klaar…"
 
-msgid "MENU_LABEL_START"
-msgstr "Starten"
+#~ msgid "MENU_LABEL_NUM_1"
+#~ msgstr "1"
 
-msgid "MENU_LABEL_ONLINE"
-msgstr "Online spelen"
+#~ msgid "MENU_LABEL_NUM_3"
+#~ msgstr "3"
 
-msgid "MENU_LABEL_SELECT_CHARACTER"
-msgstr "Kies een personage"
+#~ msgid "MENU_LABEL_OK"
+#~ msgstr "Oké"
 
-msgid "MENU_SETTINGS_AWARD_WINNER_TAKES_ALL"
-msgstr "Alles is voor de winnaar"
+#~ msgid "MENU_LABEL_SELECT_CHARACTER_PLAYER_2"
+#~ msgstr "Kies een personage voor speler 2"
 
-msgid "MENU_SETTINGS_AWARD_TYPE"
-msgstr "Soort prijs"
+#~ msgid "MENU_LABEL_SELECT_CHARACTER_PLAYER_4"
+#~ msgstr "Kies een personage voor speler 4"
 
-msgid "MENU_LABEL_CHOOSE_SERVER"
-msgstr "Kies een server:"
+#~ msgid "MENU_LABEL_BOARD_SETTINGS"
+#~ msgstr "Bordinstellingen"
 
-msgid "MENU_LABEL_COPY"
-msgstr "Kopiëren naar klembord"
+#~ msgid "MENU_LABEL_XBOX"
+#~ msgstr "XBOX"
 
-msgid "MENU_LABEL_LOBBY_CREATE"
-msgstr "Kamer samenstellen"
-
-msgid "MENU_LABEL_LOBBY_JOIN"
-msgstr "Kamer binnengaan"
-
-msgid "MENU_LOBBY_SETTINGS"
-msgstr "Spelinstellingen"
-
-msgid "MENU_SETTINGS_PUBLIC"
-msgstr "Openbare kamer"
-
-msgid "MENU_SETTINGS_CAKE_COST"
-msgstr "Aantal koekjes"
-
-msgid "MENU_SETTINGS_TURNS"
-msgstr "Aantal beurten"
-
-msgid "MENU_SETTINGS_ENABLE_TIMEOUT"
-msgstr "Spelers buitenzetten als ze inactief zijn"
-
-msgid "MENU_SETTINGS_TIMEOUT"
-msgstr "Tijdslimiet"
-
-msgid "MENU_LOBBY_ADD_PLAYER"
-msgstr "Klik om naar binnen te gaan"
+#~ msgid "MENU_LABEL_TURNS"
+#~ msgstr "Aantal beurten:"
 
 #~ msgid "MENU_LABEL_TITLE"
 #~ msgstr "Super Tux Party"

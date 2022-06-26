@@ -169,20 +169,14 @@ msgstr "Continuar"
 msgid "MENU_LABEL_DESKTOP"
 msgstr "Sair para a Área de Trab"
 
+msgid "MENU_SETTINGS_AWARD_LINEAR"
+msgstr ""
+
 msgid "MENU_LABEL_NEW_GAME"
 msgstr "Novo Jogo"
 
-msgid "MENU_LABEL_NOT_READY_ELLIPSIS"
-msgstr "Não preparado…"
-
-msgid "MENU_LABEL_NUM_1"
-msgstr "1"
-
-msgid "MENU_LABEL_NUM_3"
-msgstr "3"
-
-msgid "MENU_LABEL_OK"
-msgstr "OK"
+msgid "MENU_LABEL_START"
+msgstr ""
 
 msgid "MENU_LABEL_PAUSE"
 msgstr "Pausar"
@@ -195,6 +189,9 @@ msgstr "Pausar quando o foco da janela for perdido"
 
 msgid "MENU_LABEL_PLAY"
 msgstr "Jogar"
+
+msgid "MENU_LABEL_ONLINE"
+msgstr ""
 
 msgid "MENU_LABEL_PLAYER1"
 msgstr "Jogador1"
@@ -226,20 +223,17 @@ msgstr "Retornar ao Menu Inicial"
 msgid "MENU_LABEL_SELECT_BOARD"
 msgstr "Selecione o tabuleiro:"
 
-msgid "MENU_LABEL_SELECT_CHARACTER_PLAYER_2"
-msgstr "Selecione um personagem para o jogador 2"
-
-msgid "MENU_LABEL_SELECT_CHARACTER_PLAYER_4"
-msgstr "Selecione um personagem para o jogador 4"
-
-msgid "MENU_LABEL_BOARD_SETTINGS"
-msgstr "Configurações do Tabuleiro"
+msgid "MENU_LABEL_SELECT_CHARACTER"
+msgstr ""
 
 msgid "MENU_LABEL_TRY"
 msgstr "Tentar"
 
-msgid "MENU_LABEL_XBOX"
-msgstr "XBOX"
+msgid "MENU_SETTINGS_AWARD_WINNER_TAKES_ALL"
+msgstr ""
+
+msgid "MENU_SETTINGS_AWARD_TYPE"
+msgstr ""
 
 msgid "MENU_LABEL_CREDITS"
 msgstr "Créditos"
@@ -298,8 +292,50 @@ msgstr "Sim"
 msgid "DIALOG_NO"
 msgstr "Não"
 
-msgid "MENU_LABEL_TURNS"
-msgstr "Turnos:"
+msgid "MENU_LABEL_CONNECTION_ERROR_TITLE"
+msgstr ""
+
+msgid "MENU_LABEL_CONNECTION_TIMEOUT"
+msgstr ""
+
+msgid "MENU_LABEL_NO_SERVER_VERSION"
+msgstr ""
+
+msgid "MENU_LABEL_VERSION_MISMATCH_TITLE"
+msgstr ""
+
+msgid "MENU_LABEL_VERSION_MISMATCH"
+msgstr ""
+
+msgid "MENU_LABEL_CHOOSE_SERVER"
+msgstr ""
+
+msgid "MENU_LABEL_COPY"
+msgstr ""
+
+msgid "MENU_LABEL_LOBBY_CREATE"
+msgstr ""
+
+msgid "MENU_LABEL_LOBBY_JOIN"
+msgstr ""
+
+msgid "MENU_LOBBY_SETTINGS"
+msgstr ""
+
+msgid "MENU_SETTINGS_PUBLIC"
+msgstr ""
+
+msgid "MENU_SETTINGS_CAKE_COST"
+msgstr ""
+
+msgid "MENU_SETTINGS_TURNS"
+msgstr ""
+
+msgid "MENU_SETTINGS_ENABLE_TIMEOUT"
+msgstr ""
+
+msgid "MENU_SETTINGS_TIMEOUT"
+msgstr ""
 
 msgid "AI_DIFFICULTY"
 msgstr "Difficuldade da IA:"
@@ -331,6 +367,9 @@ msgstr "Baixa"
 msgid "MENU_GRAPHIC_QUALITY_REBOOT_NOTICE"
 msgstr ""
 "Alterações na qualidade do gráfico só entrará em vigor após a reinicialização"
+
+msgid "MENU_LOBBY_ADD_PLAYER"
+msgstr ""
 
 msgid "CONTEXT_SPEAKER_SARA"
 msgstr "Sara"
@@ -539,56 +578,32 @@ msgstr ""
 msgid "MINIGAME_TYPE_NOLOK_SOLO"
 msgstr ""
 
-msgid "MENU_SETTINGS_AWARD_LINEAR"
-msgstr ""
+#~ msgid "MENU_LABEL_NOT_READY_ELLIPSIS"
+#~ msgstr "Não preparado…"
 
-msgid "MENU_LABEL_START"
-msgstr ""
+#~ msgid "MENU_LABEL_NUM_1"
+#~ msgstr "1"
 
-msgid "MENU_LABEL_ONLINE"
-msgstr ""
+#~ msgid "MENU_LABEL_NUM_3"
+#~ msgstr "3"
 
-msgid "MENU_LABEL_SELECT_CHARACTER"
-msgstr ""
+#~ msgid "MENU_LABEL_OK"
+#~ msgstr "OK"
 
-msgid "MENU_SETTINGS_AWARD_WINNER_TAKES_ALL"
-msgstr ""
+#~ msgid "MENU_LABEL_SELECT_CHARACTER_PLAYER_2"
+#~ msgstr "Selecione um personagem para o jogador 2"
 
-msgid "MENU_SETTINGS_AWARD_TYPE"
-msgstr ""
+#~ msgid "MENU_LABEL_SELECT_CHARACTER_PLAYER_4"
+#~ msgstr "Selecione um personagem para o jogador 4"
 
-msgid "MENU_LABEL_CHOOSE_SERVER"
-msgstr ""
+#~ msgid "MENU_LABEL_BOARD_SETTINGS"
+#~ msgstr "Configurações do Tabuleiro"
 
-msgid "MENU_LABEL_COPY"
-msgstr ""
+#~ msgid "MENU_LABEL_XBOX"
+#~ msgstr "XBOX"
 
-msgid "MENU_LABEL_LOBBY_CREATE"
-msgstr ""
-
-msgid "MENU_LABEL_LOBBY_JOIN"
-msgstr ""
-
-msgid "MENU_LOBBY_SETTINGS"
-msgstr ""
-
-msgid "MENU_SETTINGS_PUBLIC"
-msgstr ""
-
-msgid "MENU_SETTINGS_CAKE_COST"
-msgstr ""
-
-msgid "MENU_SETTINGS_TURNS"
-msgstr ""
-
-msgid "MENU_SETTINGS_ENABLE_TIMEOUT"
-msgstr ""
-
-msgid "MENU_SETTINGS_TIMEOUT"
-msgstr ""
-
-msgid "MENU_LOBBY_ADD_PLAYER"
-msgstr ""
+#~ msgid "MENU_LABEL_TURNS"
+#~ msgstr "Turnos:"
 
 #~ msgid "MENU_LABEL_TITLE"
 #~ msgstr "Super Tux Party"
