@@ -80,6 +80,7 @@ deploy_nightly:
     - build:windows
     - build:osx
     - build:plugins
+    - build:server
     - build:sources
   before_script:
     - apt-get update && apt-get install openssh-client -y
