@@ -53,13 +53,13 @@ func _save_game(save_name: String) -> void:
 	if save_name == "":
 		return
 
-	Global.current_savegame.name = save_name
-	for savegame in Global.savegame_loader.savegames:
-		if savegame.name == save_name:
-			$OverrideSave.popup_centered()
-			return
+	if Global.savegame_loader.savegames.has(save_name):
+		$OverrideSave.popup_centered()
+		return
+	var lobby := Lobby.get_lobby(self)
+	lobby.savegame_name = save_name
+	lobby.save_game()
 
-	Global.save_game()
 	$SavegameNameInput.hide()
 	_on_Resume_pressed()
 
@@ -78,11 +78,13 @@ func _on_ExitDesktop_pressed() -> void:
 	get_tree().quit()
 
 func _on_SaveGame_pressed() -> void:
-	if Global.is_new_savegame:
+	var lobby := Lobby.get_lobby(self)
+	if lobby.is_new_savegame:
 		$SavegameNameInput.popup_centered()
 		$SavegameNameInput/VBoxContainer/LineEdit.grab_focus()
 	else:
-		Global.save_game()
+		lobby.save_game()
+		yield(lobby, "savegame_saved")
 		_on_Resume_pressed()
 
 func _on_Savegame_LineEdit_text_changed(new_text) -> void:
@@ -92,8 +94,10 @@ func _on_Savegame_Button_pressed() -> void:
 	_save_game($SavegameNameInput/VBoxContainer/LineEdit.text)
 
 func _on_OverrideSave_confirmed() -> void:
-	Global.save_game()
+	var lobby := Lobby.get_lobby(self)
+	lobby.save_game()
 	$SavegameNameInput.hide()
+	yield(Lobby.get_lobby(self), "savegame_saved")
 	_on_Resume_pressed()
 
 func _on_Options_pressed() -> void:

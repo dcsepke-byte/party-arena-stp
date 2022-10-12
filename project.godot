@@ -57,7 +57,7 @@ _global_script_classes=[ {
 "base": "Reference",
 "class": "SaveGameLoader",
 "language": "GDScript",
-"path": "res://client/savegames/savegames.gd"
+"path": "res://common/savegames/savegames.gd"
 } ]
 _global_script_class_icons={
 "BoardLoader": "",

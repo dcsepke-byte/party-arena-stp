@@ -488,6 +488,8 @@ mastersync func roll() -> void:
 
 			emit_signal("rolled", player, dice)
 			lobby.broadcast(self, "rolled", [dice])
+		_:
+			push_error("Invalid type: %d (%s != %d)" % [item.type, typeof(item.type), TYPE_INT])
 
 puppet func rolled(dice: int):
 	step_count = dice
