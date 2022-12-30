@@ -68,11 +68,8 @@ func _on_Resume_pressed() -> void:
 
 func _on_ExitMenu_pressed() -> void:
 	unpause()
-	# TODO: Fix
-	Global.quit_to_menu = true
-
-	Global.reset_state()
-	Global.goto_scene("res://scenes/menus/main_menu.tscn")
+	Global.call_deferred("shutdown_connection")
+	get_tree().change_scene("res://client/menus/main_menu.tscn")
 
 func _on_ExitDesktop_pressed() -> void:
 	get_tree().quit()
