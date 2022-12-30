@@ -170,6 +170,9 @@ func _on_minigame_pressed(minigame, type):
 			# to the board
 			lobby.minigame_reward = Lobby.MinigameReward.new()
 			lobby.minigame_reward.duel_reward = Lobby.MINIGAME_DUEL_REWARDS.TEN_COOKIES
+			# Send the minigame reward to the client
+			lobby.broadcast(controller, "minigame_duel_reward_animation", [lobby.minigame_reward.duel_reward])
+			yield(controller.minigame_duel_reward_animation(lobby.minigame_reward.duel_reward), "completed")
 		Lobby.MINIGAME_TYPES.NOLOK_SOLO, Lobby.MINIGAME_TYPES.GNU_SOLO:
 			state.minigame_teams = [[1], []]
 	

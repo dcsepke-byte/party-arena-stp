@@ -478,6 +478,9 @@ func _goto_board(placement) -> void:
 						winning_player.cakes += cakes
 						losing_player.cakes -= cakes
 						minigame_summary.reward = cakes
+			else:
+				# No cookies were transferred between players
+				minigame_summary.reward = 0
 
 			call_deferred("_goto_scene_instant", MINIGAME_REWARD_SCREEN)
 		MINIGAME_TYPES.NOLOK_SOLO:
