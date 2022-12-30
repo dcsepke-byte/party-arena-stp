@@ -87,8 +87,8 @@ default_bus_layout="res://assets/defaults/default_bus_layout.tres"
 [autoload]
 
 Utility="*res://common/scripts/utility.gd"
-PluginSystem="*res://common/scripts/loader/plugin_system.gd"
 Global="*res://common/scripts/global.gd"
+PluginSystem="*res://common/scripts/loader/plugin_system.gd"
 ControlHelper="*res://client/scripts/control_helper.gd"
 UISound="*res://common/scenes/sound_button/ui_sound.tscn"
 
