@@ -143,6 +143,15 @@ class Settings:
 	func encode() -> Array:
 		return [name, type, value]
 
+	func get_value():
+		match type:
+			Settings.TYPE_INT:
+				return value[0]
+			Settings.TYPE_BOOL:
+				return value
+			Settings.TYPE_OPTIONS:
+				return value[0]
+
 	func update_value(new_value) -> bool:
 		match type:
 			Settings.TYPE_INT:
@@ -232,6 +241,13 @@ enum Difficulty {
 	EASY,
 	NORMAL,
 	HARD
+}
+
+# linear, 1st: 15, 2nd: 10, 3rd: 5, 4th: 0
+# winner_only, 1st: 10, 2nd-4th: 0
+enum AWARD_TYPE {
+	LINEAR,
+	WINNER_ONLY
 }
 
 const LOBBY_SIZE := 4

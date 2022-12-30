@@ -7,14 +7,7 @@ class BoardOverrides:
 	var cake_cost := 30
 	var max_turns := 10
 	# Option to choose how players are awarded after completing a mini-game.
-	var award: int = AWARD_TYPE.LINEAR
-
-# linear, 1st: 15, 2nd: 10, 3rd: 5, 4th: 0
-# winner_only, 1st: 10, 2nd-4th: 0
-enum AWARD_TYPE {
-	LINEAR,
-	WINNER_ONLY
-}
+	var award: int = Lobby.AWARD_TYPE.LINEAR
 
 enum NOLOK_ACTION_TYPES {
 	SOLO_MINIGAME,
@@ -32,6 +25,7 @@ const MINIGAME_REWARD_SCREEN = preload("res://server//rewardscreens/rewardscreen
 var overrides: BoardOverrides = BoardOverrides.new()
 
 var started := false
+var loaded_from_savegame := false
 var num_ai := 0
 
 var wait_before_scene_change := {}
@@ -49,6 +43,9 @@ var timeout :=  -1 if Global.is_local_multiplayer() else 30
 
 var settings := {}
 
+# TODO: support savegame loading in online multiplayer
+var enable_savegames := Global.is_local_multiplayer()
+
 func _init():
 	if not Global.is_local_multiplayer():
 		settings["main/public"] = Settings.new_bool("MENU_SETTINGS_PUBLIC", false)
@@ -65,19 +62,19 @@ func _on_setting_changed(setting: Settings):
 		# Negative timeout values disable timeouts
 		# We use negative values to save timeout settings
 		"MENU_SETTINGS_ENABLE_TIMEOUT":
-			if setting.value:
-				timeout = settings["main/timeout"].value[0]
+			if setting.get_value():
+				timeout = settings["main/timeout"].get_value()
 			else:
 				timeout = -1
 		"MENU_SETTINGS_TIMEOUT":
-			if settings["main/enable_timeout"].value:
-				timeout = setting.value[0]
+			if settings["main/enable_timeout"].get_value():
+				timeout = setting.get_value()
 		"MENU_SETTINGS_CAKE_COST":
-			overrides.cake_cost = setting.value[0]
+			overrides.cake_cost = setting.get_value()
 		"MENU_SETTINGS_TURNS":
-			overrides.max_turns = setting.value[0]
+			overrides.max_turns = setting.get_value()
 		"MENU_SETTINGS_AWARD_TYPE":
-			match setting.value:
+			match setting.get_value():
 				"MENU_SETTINGS_AWARD_LINEAR":
 					overrides.award = AWARD_TYPE.LINEAR
 				"MENU_SETTINGS_AWARD_WINNER_TAKES_ALL":
@@ -120,6 +117,8 @@ master func start():
 master func select_board(board: String):
 	if not board in PluginSystem.board_loader.get_loaded_boards():
 		return
+	if loaded_from_savegame:
+		return
 	if is_lobby_owner(multiplayer.get_rpc_sender_id()):
 		self.current_board = board
 		var cake_cost := 30
@@ -143,6 +142,8 @@ master func select_board(board: String):
 
 master func select_character(idx: int, character: String):
 	if not character in PluginSystem.character_loader.get_loaded_characters():
+		return
+	if loaded_from_savegame:
 		return
 	var target = PlayerAddress.new(multiplayer.get_rpc_sender_id(), idx)
 	var player = get_player_by_addr(target)
@@ -176,7 +177,7 @@ func end():
 func is_public() -> bool:
 	if not "main/public" in settings:
 		return false
-	return settings["main/public"].value
+	return settings["main/public"].get_value()
 
 master func add_player(idx: int):
 	var peer := multiplayer.get_rpc_sender_id()
@@ -229,9 +230,14 @@ func join(addr: PlayerAddress) -> bool:
 master func update_setting(id: String, value):
 	if not is_lobby_owner(multiplayer.get_rpc_sender_id()):
 		return
+	if change_setting(id, value):
+		send_settings()
+
+func change_setting(id: String, value) -> bool:
 	if id in settings and settings[id].update_value(value):
 		emit_signal("setting_changed", settings[id])
-		send_settings()
+		return true
+	return false
 
 func send_settings(peer := -1):
 	# Send players the updated list
@@ -340,58 +346,6 @@ func _goto_scene_board_callback(scene: Node, _arg):
 		var player = scene.get_node("Player" + str(i + 1))
 		_load_player(player, player_info[i])
 
-#func load_board_from_savegame(savegame) -> void:
-#	current_savegame = savegame
-#	is_new_savegame = false
-#	new_game = false
-#
-#	var dir := Directory.new()
-#	dir.open(savegame.board_path.get_base_dir() + "/translations")
-#	dir.list_dir_begin(true)
-#	while true:
-#		var file_name: String = dir.get_next()
-#		if file_name == "":
-#			break
-#
-#		if file_name.ends_with(".translation") or file_name.ends_with(".po"):
-#			_load_interactive(dir.get_current_dir() + "/" + file_name, self, "_install_translation_board", file_name)
-#
-#	dir.list_dir_end()
-#
-#	current_board = savegame.board_path
-#	for i in amount_of_players:
-#		players[i].player_id = i + 1
-#		players[i].player_name = savegame.players[i].player_name
-#		players[i].is_ai = savegame.players[i].is_ai
-#		players[i].ai_difficulty = int(savegame.players[i].ai_difficulty)
-#		players[i].space = savegame.players[i].space
-#		players[i].character = savegame.players[i].character
-#		players[i].cookies = int(savegame.players[i].cookies)
-#		players[i].cakes = int(savegame.players[i].cakes)
-#		players[i].items = savegame.players[i].items
-#		players[i].roll_modifiers = savegame.players[i].roll_modifiers
-#
-#	cake_space = savegame.cake_space
-#	if savegame.current_minigame:
-#		minigame_state = MinigameState.new()
-#		minigame_state.current_minigame = PluginSystem.minigame_loader.parse_file(savegame.current_minigame)
-#		minigame_state.minigame_type = int(savegame.minigame_type)
-#		minigame_state.minigame_teams = savegame.minigame_teams
-#		for team in minigame_state.minigame_teams:
-#			for i in range(len(team)):
-#				team[i] = int(team[i])
-#	else:
-#		minigame_state = null
-#	player_turn = int(current_savegame.player_turn)
-#	turn = int(current_savegame.turn)
-#	overrides.cake_cost = int(savegame.cake_cost)
-#	overrides.max_turns = int(savegame.max_turns)
-#	overrides.award = int(savegame.award_type)
-#
-#	trap_states = savegame.trap_states.duplicate()
-#
-#	_goto_scene_board()
-
 master func _goto_minigame(is_try: bool):
 	if not minigame_state:
 		return
@@ -412,9 +366,9 @@ func goto_minigame() -> void:
 	trap_states.clear()
 	for trap in Utility.get_nodes_in_group(self, "trap"):
 		var state := {
-			node = trap.get_path(),
+			node = get_path_to(trap),
 			item = trap.trap,
-			player = trap.trap_player.get_path()
+			player = get_path_to(trap.trap_player)
 		}
 
 		trap_states.push_back(state)
@@ -423,7 +377,7 @@ func goto_minigame() -> void:
 	for i in r_players.size():
 		playerstates[i].cookies = r_players[i].cookies
 		playerstates[i].cakes = r_players[i].cakes
-		playerstates[i].space = r_players[i].space.get_path()
+		playerstates[i].space = get_path_to(r_players[i].space)
 
 		playerstates[i].roll_modifiers = r_players[i].roll_modifiers
 
@@ -667,17 +621,18 @@ func load_board_state(controller: Spatial) -> void:
 		r_players[i].cookies = playerstates[i].cookies
 		r_players[i].cakes = playerstates[i].cakes
 		if playerstates[i].space:
-			r_players[i].space = current_scene.get_node(playerstates[i].space)
+			r_players[i].space = get_node(playerstates[i].space)
 		r_players[i].roll_modifiers = playerstates[i].roll_modifiers
 
 		r_players[i].items = deduplicate_items(playerstates[i].items)
 
 func load_board() -> void:
-	for i in range(LOBBY_SIZE):
-		playerstates.append(PlayerState.new(self.player_info[i]))
-		if player_info[i].is_ai():
-			# TODO: adjust difficulty per AI?
-			player_info[i].ai_difficulty = Difficulty.NORMAL
+	if not loaded_from_savegame:
+		for i in range(LOBBY_SIZE):
+			playerstates.append(PlayerState.new(self.player_info[i]))
+			if player_info[i].is_ai():
+				# TODO: adjust difficulty per AI?
+				player_info[i].ai_difficulty = Difficulty.NORMAL
 	var encoded := []
 	for state in playerstates:
 		encoded.append(state.encode())
@@ -709,3 +664,115 @@ func _scene_loaded(s: PackedScene, arg: Array):
 
 	if arg[0]:
 		arg[0].call(arg[1], loaded_scene, arg[2])
+
+# ----- Savegame code ----- #
+
+master func load_savegame(data: Dictionary) -> void:
+	if not enable_savegames or not is_lobby_owner(multiplayer.get_rpc_sender_id()):
+		return
+
+	var savegame := SaveGameLoader.SaveGame.from_data(data)
+	current_board = savegame.board_state.board_path
+	player_info = []
+	playerstates = []
+	for i in len(savegame.players):
+		# TODO: what should we do here to add support for multiplayer savegames?
+		var addr := PlayerAddress.new(multiplayer.get_network_connected_peers()[0], i)
+		if savegame.players[i].is_ai:
+			addr = next_ai_addr()
+		var name: String = savegame.players[i].player_name
+		var character: String = savegame.players[i].character
+		var info := PlayerInfo.new(self, addr, name, character)
+		info.player_id = i + 1
+		info.ai_difficulty = savegame.players[i].ai_difficulty
+		
+		var playerstate := PlayerState.new(info)
+		playerstate.space = savegame.players[i].space
+		playerstate.cookies = savegame.players[i].cookies
+		playerstate.cakes = savegame.players[i].cakes
+		playerstate.items = savegame.players[i].items
+		playerstate.roll_modifiers = savegame.players[i].roll_modifiers
+		player_info.append(info)
+		playerstates.append(playerstate)
+
+	cake_space = savegame.board_state.cake_space
+	if savegame.minigame_state.minigame_config:
+		minigame_state = MinigameState.new()
+		minigame_state.minigame_config = PluginSystem.minigame_loader \
+			.parse_file(savegame.minigame_state.minigame_config)
+		minigame_state.minigame_type = savegame.minigame_state.minigame_type
+		minigame_state.minigame_teams = savegame.minigame_state.minigame_teams
+		minigame_reward = MinigameReward.new()
+		if savegame.minigame_state.has_reward:
+			minigame_reward.duel_reward = savegame.minigame_state.duel_reward
+			if savegame.minigame_state.item_reward:
+				minigame_reward.gnu_solo_item_reward = dict2inst(savegame.minigame_state.item_reward)
+	else:
+		minigame_state = null
+	player_turn = savegame.board_state.player_turn
+	turn = savegame.board_state.turn
+	for id in settings:
+		change_setting(id, savegame.settings.get(id))
+
+	trap_states = savegame.board_state.trap_states.duplicate()
+	loaded_from_savegame = true
+	update_playerlist()
+	send_settings()
+	send_board()
+
+master func save_game() -> void:
+	if not enable_savegames:
+		rpc_id(multiplayer.get_rpc_sender_id(), "save_game_callback", {}, "SAVE_GAME_DISABLED")
+		return
+	
+	var controller_nodes: Array = Utility.get_nodes_in_group(self, "Controller")
+	# Check whether the board is currently loaded
+	# We cannot save the game during a minigame
+	if not controller_nodes:
+		rpc_id(multiplayer.get_rpc_sender_id(), "save_game_callback", {}, "SAVE_GAME_CANNOT_SAVE")
+		return
+	
+	var controller: Controller = controller_nodes[0]
+	var r_players: Array = Utility.get_nodes_in_group(self, "players")
+
+	var savegame := SaveGameLoader.SaveGame.new()
+	savegame.board_state.board_path = current_board;
+	for i in len(self.player_info):
+			var player := savegame.add_player()
+			player.player_name = player_info[i].name
+			player.is_ai = player_info[i].is_ai()
+			player.ai_difficulty = player_info[i].ai_difficulty
+			player.space = get_path_to(r_players[i].space)
+			player.character = player_info[i].character
+			player.cookies = r_players[i].cookies
+			player.cakes = r_players[i].cakes
+			player.items = duplicate_items(r_players[i].items)
+			player.roll_modifiers = r_players[i].roll_modifiers
+
+	savegame.board_state.cake_space = cake_space
+	if minigame_state:
+			savegame.minigame_state.minigame_config = minigame_state.minigame_config.filename
+			savegame.minigame_state.minigame_type = minigame_state.minigame_type
+			savegame.minigame_state.minigame_teams = minigame_state.minigame_teams.duplicate()
+			if minigame_reward:
+				savegame.minigame_state.has_reward = true
+				savegame.minigame_state.duel_reward = minigame_reward.duel_reward
+				if minigame_reward.gnu_solo_item_reward:
+					savegame.minigame_state.item_reward = inst2dict(minigame_reward.gnu_solo_item_reward)
+	savegame.board_state.player_turn = controller.player_turn
+	savegame.board_state.turn = turn
+
+	savegame.board_state.trap_states = []
+
+	for trap in Utility.get_nodes_in_group(self, "trap"):
+			var state := {
+					node = get_path_to(trap),
+					item = inst2dict(trap.trap),
+					player = get_path_to(trap.trap_player)
+			}
+
+			savegame.board_state.trap_states.push_back(state)
+	
+	for id in settings:
+		savegame.settings[id] = settings[id].get_value();
+	rpc_id(multiplayer.get_rpc_sender_id(), "save_game_callback", savegame.serialize(), "")

@@ -74,18 +74,19 @@ func _on_Play2_pressed() -> void:
 #*** Load game menu ***#
 
 func _on_Load_pressed() -> void:
+	Global.savegame_loader.read_savegames()
 	var savegame_template: PackedScene =\
 			preload("res://client/savegames/savegame_entry.tscn")
 	for i in Global.savegame_loader.get_num_savegames():
 		var savegame_entry := savegame_template.instance() as Control
-		var savegame: SaveGameLoader.SaveGame =\
-				Global.savegame_loader.get_savegame(i)
-		savegame_entry.get_node("Load").text = savegame.name
+		var savegame := Global.savegame_loader.get_savegame(i)
+		var filename := Global.savegame_loader.get_filename(i)
+		savegame_entry.get_node("Load").text = filename
 
 		savegame_entry.get_node("Load").connect("pressed", self,
-				"_on_SaveGame_Load_pressed", [savegame])
+				"_on_SaveGame_Load_pressed", [filename, savegame])
 		savegame_entry.get_node("Delete").connect("pressed", self,
-				"_on_SaveGame_Delete_pressed", [savegame, savegame_entry])
+				"_on_SaveGame_Delete_pressed", [filename, savegame_entry])
 
 		$LoadGameMenu/ScrollContainer/Saves.add_child(savegame_entry)
 
@@ -100,7 +101,7 @@ func _on_Load_pressed() -> void:
 	else:
 		$LoadGameMenu/Back.grab_focus()
 
-func _on_SaveGame_Load_pressed(savegame: SaveGameLoader.SaveGame) -> void:
+func _on_SaveGame_Load_pressed(name: String, savegame: SaveGameLoader.SaveGame) -> void:
 	var game := Global.create_local_server()
 	yield(get_tree().network_peer, "connection_succeeded")
 	lobby = yield(game.create_lobby(), "completed")
@@ -108,10 +109,10 @@ func _on_SaveGame_Load_pressed(savegame: SaveGameLoader.SaveGame) -> void:
 		Global.destroy_local_server()
 		return
 	open_lobby(lobby)
-	Global.load_board_from_savegame(savegame)
+	lobby.load_savegame(name, savegame)
+	$LoadGameMenu.hide()
 
-func _on_SaveGame_Delete_pressed(savegame: SaveGameLoader.SaveGame,
-		node: Control) -> void:
+func _on_SaveGame_Delete_pressed(filename: String, node: Control) -> void:
 	var index: int = node.get_index()
 	node.queue_free()
 	$LoadGameMenu/ScrollContainer/Saves.remove_child(node)
@@ -125,7 +126,7 @@ func _on_SaveGame_Delete_pressed(savegame: SaveGameLoader.SaveGame,
 	else:
 		$LoadGameMenu/Back.grab_focus()
 
-	Global.savegame_loader.delete_savegame(savegame)
+	Global.savegame_loader.delete_savegame(filename)
 
 func _on_LoadGame_Back_pressed() -> void:
 	for i in $LoadGameMenu/ScrollContainer/Saves.get_children():

@@ -51,10 +51,20 @@ func shutdown_connection():
 func is_local_multiplayer() -> bool:
 	return has_node("/root/Client") and has_node("/root/Server")
 
+func show_error(error: String):
+	var dialog := AcceptDialog.new()
+	dialog.theme = preload("res://assets/defaults/default_theme.tres")
+	dialog.window_title = "ERROR"
+	dialog.dialog_text = error
+	add_child(dialog)
+	dialog.connect("confirmed", dialog, "queue_free")
+	raise()
+	dialog.popup_centered()
+
 const USER_STORAGE_FILE = "user://data.cfg"
-#
-#var savegame_loader := SaveGameLoader.new()
-#
+
+var savegame_loader := SaveGameLoader.new()
+
 # warning-ignore:unused_signal
 signal language_changed
 
@@ -70,18 +80,11 @@ var _was_muted := false
 # ConfigFile to store custom data between sessions
 var storage: ConfigFile = ConfigFile.new()
 
-# Stops the controller from loading information when starting a new game.
-#
-#var current_savegame: Object
-#var is_new_savegame := false
-
 func _ready() -> void:
 	randomize()
 	var err = storage.load(USER_STORAGE_FILE)
 	if err != OK:
 		print("Error while loading saved data: " + Utility.error_code_to_string(err))
-
-#	savegame_loader.read_savegames()
 
 func _notification(what: int) -> void:
 	match what:
@@ -141,52 +144,6 @@ func _load_interactive(path: String, base: Object, method: String, arg):
 		interactive_loaders[path] = [loader, [[base, method, arg]]]
 	else:
 		push_error("Failed to obtain loader for `{0}`".format([path]))
-
-#func new_savegame() -> void:
-#	current_savegame = SaveGameLoader.SaveGame.new()
-#	is_new_savegame = true
-#
-#func save_game() -> void:
-#	var r_players: Array = get_tree().get_nodes_in_group("players")
-#	var controller: Spatial = get_tree().get_nodes_in_group("Controller")[0]
-#
-#	current_savegame.board_path = current_board;
-#	for i in amount_of_players:
-#		current_savegame.players[i].player_name = r_players[i].player_name
-#		current_savegame.players[i].is_ai = r_players[i].is_ai
-#		current_savegame.players[i].ai_difficulty = r_players[i].ai_difficulty
-#		current_savegame.players[i].space = r_players[i].space.get_path()
-#		current_savegame.players[i].character = players[i].character
-#		current_savegame.players[i].cookies = r_players[i].cookies
-#		current_savegame.players[i].cakes = r_players[i].cakes
-#		current_savegame.players[i].items = duplicate_items(r_players[i].items)
-#		current_savegame.players[i].roll_modifiers = r_players[i].roll_modifiers
-#
-#	current_savegame.cake_space = cake_space
-#	if minigame_state:
-#		current_savegame.current_minigame = minigame_state.minigame_config
-#		current_savegame.minigame_type = minigame_state.minigame_type
-#		current_savegame.minigame_teams = minigame_state.minigame_teams.duplicate()
-#	else:
-#		current_savegame.current_minigame = null
-#	current_savegame.player_turn = controller.player_turn
-#	current_savegame.turn = turn
-#	current_savegame.cake_cost = overrides.cake_cost
-#	current_savegame.max_turns = overrides.max_turns
-#	current_savegame.award_type = overrides.award
-#
-#	current_savegame.trap_states = []
-#
-#	for trap in get_tree().get_nodes_in_group("trap"):
-#		var state := {
-#			node = trap.get_path(),
-#			item = inst2dict(trap.trap),
-#			player = trap.trap_player.get_path()
-#		}
-#
-#		current_savegame.trap_states.push_back(state)
-#
-#	savegame_loader.save(current_savegame)
 
 func save_storage():
 	storage.save(USER_STORAGE_FILE)

@@ -4,6 +4,7 @@ signal player_info_updated(player_info)
 signal settings_changed(settings)
 signal board_selected(board)
 signal game_start
+signal savegame_saved
 
 const MINIGAME_TEAM_COLORS = [Color(1, 0, 0), Color(0, 0, 1)]
 
@@ -29,6 +30,10 @@ var _minigame_loaded_translations := []
 
 var started := false
 
+var current_savegame := SaveGameLoader.SaveGame.new()
+var savegame_name := ""
+var is_new_savegame := true
+
 func leave():
 	get_tree().change_scene("res://client/menus/main_menu.tscn")
 	Global.shutdown_connection()
@@ -43,6 +48,7 @@ puppet func board_selected(board: String):
 	if not board in PluginSystem.board_loader.get_loaded_boards():
 		push_error("Unknown board: " + board)
 		leave()
+		return
 	self.current_board = PluginSystem.board_loader.get_board_path(board)
 	
 	emit_signal("board_selected", board)
@@ -340,3 +346,28 @@ func _scene_loaded(s: PackedScene, arg: Array):
 
 	if arg[0]:
 		arg[0].call(arg[1], loaded_scene, arg[2])
+
+# ----- Save game code ----- #
+
+func load_savegame(name: String, savegame: SaveGameLoader.SaveGame):
+	is_new_savegame = false
+	current_savegame = savegame
+	savegame_name = name
+	rpc_id(1, "load_savegame", savegame.serialize())
+
+var sent_savegame_request := false
+
+puppet func save_game_callback(data: Dictionary, error: String):
+	if error:
+		push_warning(error)
+		Global.show_error(error)
+	elif sent_savegame_request:
+		current_savegame = SaveGameLoader.SaveGame.from_data(data)
+		
+		Global.savegame_loader.save(savegame_name, current_savegame)
+		emit_signal("savegame_saved")
+		sent_savegame_request = false
+
+func save_game() -> void:
+	sent_savegame_request = true
+	rpc_id(1, "save_game")
