@@ -205,8 +205,8 @@ func remote_server(ip) -> void:
 		$AcceptDialog.popup_centered()
 		return
 	var conn := get_tree().network_peer
-	conn.connect("connection_failed", self, "_on_connection_failed")
-	conn.connect("connection_succeeded", self, "_on_connection_succeeded", [server])
+	conn.connect("connection_failed", self, "_on_connection_failed", [], CONNECT_DEFERRED)
+	conn.connect("connection_succeeded", self, "_on_connection_succeeded", [server], CONNECT_DEFERRED)
 	$LoadAnimation.show()
 	$LoadAnimation/Cancel.grab_focus()
 
