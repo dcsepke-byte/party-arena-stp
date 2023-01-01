@@ -3,9 +3,9 @@
 [ext_resource path="res://plugins/minigames/escape_from_lava_1v3/minigame.gd" type="Script" id=1]
 [ext_resource path="res://plugins/minigames/escape_from_lava_1v3/player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/textures/lava.png" type="Texture" id=3]
-[ext_resource path="res://plugins/minigames/escape_from_lava_1v3/ground.dae" type="PackedScene" id=4]
+[ext_resource path="res://plugins/minigames/escape_from_lava/ground.dae" type="PackedScene" id=4]
 [ext_resource path="res://common/scenes/waypoint/waypoint.tscn" type="PackedScene" id=5]
-[ext_resource path="res://plugins/minigames/escape_from_lava_1v3/door.tscn" type="PackedScene" id=6]
+[ext_resource path="res://plugins/minigames/escape_from_lava/door.tscn" type="PackedScene" id=6]
 [ext_resource path="res://assets/fonts/title_font.tres" type="DynamicFont" id=7]
 [ext_resource path="res://common/scenes/control_view/control_view_2d.tscn" type="PackedScene" id=8]
 [ext_resource path="res://assets/music/minigames/escape from lava.ogg" type="AudioStream" id=9]
@@ -262,29 +262,29 @@ valign = 1
 anchor_top = 1.0
 anchor_bottom = 1.0
 margin_left = 64.0
-margin_top = -192.0
+margin_top = -256.0
 margin_right = 192.0
-margin_bottom = -64.0
+margin_bottom = 0.0
 
 [node name="ControlView2D2" parent="Screen" instance=ExtResource( 8 )]
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-margin_left = -64.0
-margin_top = -192.0
+margin_left = -128.0
+margin_top = -256.0
 margin_right = 64.0
-margin_bottom = -64.0
+margin_bottom = 0.0
 
 [node name="ControlView2D3" parent="Screen" instance=ExtResource( 8 )]
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -192.0
-margin_top = -192.0
+margin_left = -300.0
+margin_top = -256.0
 margin_right = -64.0
-margin_bottom = -64.0
+margin_bottom = 0.0
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 pause_mode = 2

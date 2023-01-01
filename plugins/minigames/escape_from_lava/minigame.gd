@@ -2,72 +2,90 @@ extends Spatial
 
 const LAVA_RISE_SPEED = 0.25
 
-var winners = [0, 0, 0, 0]
-var num_players_alive = 4
-var num_players_finished = 0
+# Player Ids that reached the finish line
+var winners = []
+# Player Ids that got knocked out by the lava
+var dead = []
+
+onready var player_count := len(Utility.get_nodes_in_group(self, "players"))
+
+onready var lobby := Lobby.get_lobby(self)
 
 func process_stage(stage):
 	var index = (randi() % stage.get_child_count())
 	stage.get_child(index).can_be_opened = false
 
 func _ready():
+	if multiplayer.is_network_server():
+		_do_server_setup()
+
+func _do_server_setup():
 	process_stage($Stage1)
 	process_stage($Stage2)
 	process_stage($Stage3)
-	
-	if Global.minigame_state.minigame_type == Global.MINIGAME_TYPES.DUEL:
-		winners = [0, 0]
-		num_players_alive = 2
 
-
-func _process(delta):
+func _client_process(delta):
 	var min_progress = null
 	
-	for player in get_tree().get_nodes_in_group("players"):
+	for player in Utility.get_nodes_in_group(self, "players"):
 		if not player.is_dead() and (min_progress == null or player.translation.z < min_progress.z):
 			min_progress = player.translation
 	
 	if min_progress != null:
 		$Camera.translation +=  (Vector3(0, min_progress.y, min_progress.z) + Vector3(0, 3, -4) - $Camera.translation) * delta
-	
-	$Lava.translation += Vector3(0, 1, 0) * delta * LAVA_RISE_SPEED
 
+
+func _server_process(delta):
+	$Lava.translation += Vector3(0, 1, 0) * delta * LAVA_RISE_SPEED
+	lobby.broadcast(self, "set_lava_height", [$Lava.translation.y])
+
+puppetsync func set_lava_height(height: float):
+	$Lava.translation.y = height
 
 func _on_Lava_body_entered(body):
+	if not lobby.is_network_master():
+		return
+	
 	if body.is_in_group("players"):
 		if not body.is_dead():
 			body.die()
 			
-			winners[num_players_alive - 1] = body.player_id
-			num_players_alive -= 1
+			dead.push_front(body.info.player_id)
 			
-			if num_players_alive == num_players_finished:
-				for player in get_tree().get_nodes_in_group("players"):
-					if not player.is_dead() and not player.has_finished:
-						player.die()
-						winners[num_players_alive - 1] = player.player_id
-						num_players_alive -= 1
-				end_game()
+			check_game_over()
 	elif body.is_in_group("door"):
 		body.destroy()
 
 
 func _on_Finish_body_entered(body):
-	if body.is_in_group("players"):
-		winners[num_players_finished] = body.player_id
-		num_players_finished += 1
-		body.has_finished = true
+	if not lobby.is_network_master():
+		return
+	
+	if body.is_in_group("players") and not body.is_dead():
+		winners.push_back(body.info.player_id)
 		body.die()
-		
-		if num_players_alive == num_players_finished:
-			end_game()
+		check_game_over()
 
-func end_game():
+func check_game_over():
+	# There is at most one surviving player
+	if len(winners) + len(dead) >= player_count - 1:
+		var count = 0
+		# Find the remaining player if any and declare them as winner
+		for node in Utility.get_nodes_in_group(self, "players"):
+			if not node.is_dead():
+				winners.push_back(node.info.player_id)
+				count += 1
+				node.die()
+		# Assert that we did not fuck up somewhere
+		assert(count <= 1)
+		lobby.broadcast(self, "end_game")
+		$EndTimer.start()
+
+puppetsync func end_game():
 	$Screen/Label.show()
-	$EndTimer.start()
 
 func _on_EndTimer_timeout():
-	if Global.minigame_state.minigame_type == Global.MINIGAME_TYPES.DUEL or Global.minigame_state.minigame_type == Global.MINIGAME_TYPES.FREE_FOR_ALL:
-		Global.minigame_win_by_position(winners)
+	if lobby.minigame_state.minigame_type == lobby.MINIGAME_TYPES.DUEL or lobby.minigame_state.minigame_type == lobby.MINIGAME_TYPES.FREE_FOR_ALL:
+		lobby.minigame_win_by_position(winners + dead)
 	else:
-		Global.minigame_team_win_by_player(winners[0])
+		lobby.minigame_team_win_by_player((winners + dead)[0])

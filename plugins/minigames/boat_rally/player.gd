@@ -44,7 +44,7 @@ func _process(delta: float):
 			return
 		
 		var rocks = []
-		for rock in get_tree().get_nodes_in_group("rock"):
+		for rock in Utility.get_nodes_in_group(get_parent(), "rock"):
 			if rock.translation.z < pos.z + 10 and rock.translation.z > pos.z and abs(rock.translation.x - pos.x) < 6:
 				rocks.append(rock)
 		

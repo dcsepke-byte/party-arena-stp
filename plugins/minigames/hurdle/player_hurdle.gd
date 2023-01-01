@@ -68,7 +68,7 @@ func process_ai(state: PhysicsDirectBodyState):
 	state.linear_velocity += dir * speed
 	face_direction(dir, state)
 	
-	for hurdle in get_tree().get_nodes_in_group("hurdles"):
+	for hurdle in Utility.get_nodes_in_group(get_parent(), "hurdles"):
 		if (hurdle.translation - self.translation).length_squared() <= 1.0:
 			jump()
 
