@@ -248,7 +248,6 @@ func load_board():
 			_load_interactive(dir.get_current_dir() + "/" + file_name, self, "_install_translation_board", file_name)
 
 	dir.list_dir_end()
-	_goto_scene_board()
 
 func goto_minigame(is_try: bool):
 	rpc_id(1, "_goto_minigame", is_try)

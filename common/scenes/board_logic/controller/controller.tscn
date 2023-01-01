@@ -1343,6 +1343,11 @@ visible = false
 [node name="SpeechDialog" parent="Screen" instance=ExtResource( 16 )]
 visible = false
 
+[node name="BeforeSetupCurtain" type="ColorRect" parent="Screen"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.352941, 0.788235, 0.866667, 1 )
+
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( 1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 4, 4 )
 current = true

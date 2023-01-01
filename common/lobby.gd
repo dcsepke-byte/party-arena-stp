@@ -55,7 +55,7 @@ class PlayerState:
 	var info: Lobby.PlayerInfo
 	var cookies := 10
 	var cakes := 0
-	var items := [ preload("res://plugins/items/dice/item.gd").new().serialize() ]
+	var items := [ load("res://plugins/items/dice/item.gd").new().serialize() ]
 	var roll_modifiers := []
 	
 	func _init(info: Lobby.PlayerInfo):

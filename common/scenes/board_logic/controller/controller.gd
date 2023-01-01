@@ -104,6 +104,7 @@ func _ready() -> void:
 				p.space = get_node(start_node)
 			p.teleport_to(p.space)
 			p.update_client()
+		lobby.broadcast(self, "_setup_finished")
 	else:
 		var pause_menu = load("res://client/menus/pause_menu.tscn").instance()
 		pause_menu.can_save_game = true
@@ -302,6 +303,12 @@ func get_player_by_player_id(id: int) -> PlayerBoard:
 		if player.info.player_id == id:
 			return player
 	return null
+
+puppet func _setup_finished():
+	# We simulate a continuation of the loading screen until the server is fully set up
+	# The server may have loaded the game slower than we did after all
+	# This prevents us from rendering an incomplete (and broken) scene
+	$Screen/BeforeSetupCurtain.free()
 
 puppet func set_turn(turn: int, max_turn: int):
 	$Screen/Turn.text = tr("CONTEXT_LABEL_TURN_NUM").format({"turn": turn, "total": max_turn})
