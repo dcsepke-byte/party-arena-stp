@@ -12,6 +12,7 @@ enum STATE {
 	IDLE,
 	RUNNING,
 	JUMP,
+	STUNNED,
 	DEAD
 }
 
@@ -173,7 +174,14 @@ func knockout(mov: Vector3):
 		movement = mov
 		get_parent().lobby.broadcast(get_parent(), "die", [info.player_id, movement])
 
-func stun(duration: float):
+remote func _client_stun(duration: float):
+	# Only allowed by the server
+	if multiplayer.get_rpc_sender_id() != 1:
+		return
 	$Model.play_animation("stun")
+	self.state = STATE.STUNNED
 	self.stun_duration = max(self.stun_duration, duration)
 
+func stun(duration: float):
+	get_parent().lobby.broadcast(self, "_client_stun", [duration])
+	self.stun_duration = max(self.stun_duration, duration)

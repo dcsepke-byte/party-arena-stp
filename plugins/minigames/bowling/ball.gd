@@ -8,14 +8,14 @@ var time = 0
 puppet func die():
 	queue_free()
 
-func _physics_process(delta):
+puppet func _position_update(pos: Vector3):
+	self.translation = pos
+
+func _server_process(delta):
 	time += delta
 	
 	var forward = Vector3(0, 0, -1)
 	var collider = move_and_collide(forward * SPEED * delta)
-	
-	if not multiplayer.is_network_server():
-		return
 	
 	if time > MAX_TIME:
 		get_parent().lobby.broadcast(self, "die")
@@ -28,3 +28,4 @@ func _physics_process(delta):
 			get_parent().lobby.broadcast(self, "die")
 			queue_free()
 			object.knockout(Vector3(0, 3.5, -8))
+	get_parent().lobby.broadcast_unreliable(self, "_position_update", [self.translation])
