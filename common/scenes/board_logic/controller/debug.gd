@@ -1,4 +1,4 @@
-extends WindowDialog
+extends Node
 
 enum STATES {
 	ADD_COOKIES,
@@ -22,7 +22,7 @@ func setup():
 		return
 	# A Menu cannot be displayed on the server side anyways
 	# Therefore no need for setup
-	if multiplayer.is_network_server():
+	if multiplayer.is_server():
 		return
 	# If we're having a local multiplayer, there is only one lobby anyways
 	# Therefore getting all controllers is safe (there can only be one!)
@@ -34,44 +34,44 @@ func setup():
 		var button = Button.new()
 		
 		button.text = p.info.name
-		button.add_font_override("font", preload("res://assets/fonts/button_font.tres"))
-		button.connect("pressed", self, "_on_player_pressed", [p.info.player_id])
+		button.theme_type_variation = &"HeaderMedium"
+		button.pressed.connect(_on_player_pressed.bind(p.info.player_id))
 		
 		$List/Players.add_child(button)
 	
-	var loader = PluginSystem.minigame_loader
+	var loader := PluginSystem.minigame_loader
 	
-	for minigame in loader.minigames:
+	for minigame in loader.get_minigames():
 		for type in minigame.type:
 			var button = Button.new()
 			
 			button.text = minigame.filename.split('/')[-2]
-			button.add_font_override("font", preload("res://assets/fonts/button_font.tres"))
+			button.theme_type_variation = &"HeaderMedium"
 			match type:
 				"Duel":
-					button.connect("pressed", self, "_on_minigame_pressed", [minigame, Lobby.MINIGAME_TYPES.DUEL])
-					$List/Minigames/TabContainer/Duel/VBoxContainer.add_child(button)
+					button.pressed.connect(_on_minigame_pressed.bind(minigame, Lobby.MINIGAME_TYPES.DUEL))
+					$List/Minigames/Duel/VBoxContainer.add_child(button)
 				"1v3":
-					button.connect("pressed", self, "_on_minigame_pressed", [minigame, Lobby.MINIGAME_TYPES.ONE_VS_THREE])
-					$List/Minigames/TabContainer/"1v3"/VBoxContainer.add_child(button)
+					button.pressed.connect(_on_minigame_pressed.bind(minigame, Lobby.MINIGAME_TYPES.ONE_VS_THREE))
+					$List/Minigames/"1v3"/VBoxContainer.add_child(button)
 				"2v2":
-					button.connect("pressed", self, "_on_minigame_pressed", [minigame, Lobby.MINIGAME_TYPES.TWO_VS_TWO])
-					$List/Minigames/TabContainer/"2v2"/VBoxContainer.add_child(button)
+					button.pressed.connect(_on_minigame_pressed.bind(minigame, Lobby.MINIGAME_TYPES.TWO_VS_TWO))
+					$List/Minigames/"2v2"/VBoxContainer.add_child(button)
 				"FFA":
-					button.connect("pressed", self, "_on_minigame_pressed", [minigame, Lobby.MINIGAME_TYPES.FREE_FOR_ALL])
-					$List/Minigames/TabContainer/FFA/VBoxContainer.add_child(button)
+					button.pressed.connect(_on_minigame_pressed.bind(minigame, Lobby.MINIGAME_TYPES.FREE_FOR_ALL))
+					$List/Minigames/FFA/VBoxContainer.add_child(button)
 				"NolokSolo":
-					button.connect("pressed", self, "_on_minigame_pressed", [minigame, Lobby.MINIGAME_TYPES.NOLOK_SOLO])
-					$List/Minigames/TabContainer/NolokSolo/VBoxContainer.add_child(button)
+					button.pressed.connect(_on_minigame_pressed.bind(minigame, Lobby.MINIGAME_TYPES.NOLOK_SOLO))
+					$List/Minigames/NolokSolo/VBoxContainer.add_child(button)
 				"NolokCoop":
-					button.connect("pressed", self, "_on_minigame_pressed", [minigame, Lobby.MINIGAME_TYPES.NOLOK_COOP])
-					$List/Minigames/TabContainer/NolokCoop/VBoxContainer.add_child(button)
+					button.pressed.connect(_on_minigame_pressed.bind(minigame, Lobby.MINIGAME_TYPES.NOLOK_COOP))
+					$List/Minigames/NolokCoop/VBoxContainer.add_child(button)
 				"GnuSolo":
-					button.connect("pressed", self, "_on_minigame_pressed", [minigame, Lobby.MINIGAME_TYPES.GNU_SOLO])
-					$List/Minigames/TabContainer/GnuSolo/VBoxContainer.add_child(button)
+					button.pressed.connect(_on_minigame_pressed.bind(minigame, Lobby.MINIGAME_TYPES.GNU_SOLO))
+					$List/Minigames/GnuSolo/VBoxContainer.add_child(button)
 				"GnuCoop":
-					button.connect("pressed", self, "_on_minigame_pressed", [minigame, Lobby.MINIGAME_TYPES.GNU_COOP])
-					$List/Minigames/TabContainer/GnuCoop/VBoxContainer.add_child(button)
+					button.pressed.connect(_on_minigame_pressed.bind(minigame, Lobby.MINIGAME_TYPES.GNU_COOP))
+					$List/Minigames/GnuCoop/VBoxContainer.add_child(button)
 				_:
 					push_warning("No such minigame type: " + type)
 	
@@ -79,8 +79,8 @@ func setup():
 		var button = Button.new()
 		
 		button.text = item.split('/')[-2]
-		button.add_font_override("font", preload("res://assets/fonts/button_font.tres"))
-		button.connect("pressed", self, "_on_item_selected", [item])
+		button.theme_type_variation = &"HeaderMedium"
+		button.pressed.connect(_on_item_selected.bind(item))
 		
 		$List/Items.add_child(button)
 
@@ -88,7 +88,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	# Only show if this interface is useful
 	# (aka setup was run and we have found a controller)
 	if event.is_action_pressed("debug") and controller:
-		popup()
+		$Main.popup()
 
 func hide_lists():
 	$List/Players.hide()
@@ -98,40 +98,40 @@ func hide_lists():
 
 func _on_Skip_pressed():
 	lobby.turn += 1
-	controller.lobby.broadcast(controller, "set_turn", [lobby.turn, lobby.overrides.max_turns])
+	controller.lobby.broadcast(controller.set_turn.bind(lobby.turn, lobby.overrides.max_turns))
 
 func _on_AddCookies_pressed():
 	hide_lists()
 	$List/Players.show()
-	$List.popup()
+	$List.popup_centered()
 	
 	state = STATES.ADD_COOKIES
 
 func _on_AddCake_pressed():
 	hide_lists()
 	$List/Players.show()
-	$List.popup()
+	$List.popup_centered()
 	
 	state = STATES.ADD_CAKES
 
 func _on_Move_pressed():
 	hide_lists()
 	$List/Inputs.show()
-	$List.popup()
+	$List.popup_centered()
 	
 	state = STATES.MOVE
 
 func _on_PlayersTurn_pressed():
 	hide_lists()
 	$List/Players.show()
-	$List.popup()
+	$List.popup_centered()
 	
 	state = STATES.GOTO_PLAYER
 
 func _on_Minigame_pressed():
 	hide_lists()
 	$List/Minigames.show()
-	$List.popup()
+	$List.popup_centered()
 
 func _on_player_pressed(id):
 	var player = players[id - 1]
@@ -171,8 +171,8 @@ func _on_minigame_pressed(minigame, type):
 			lobby.minigame_reward = Lobby.MinigameReward.new()
 			lobby.minigame_reward.duel_reward = Lobby.MINIGAME_DUEL_REWARDS.TEN_COOKIES
 			# Send the minigame reward to the client
-			lobby.broadcast(controller, "minigame_duel_reward_animation", [lobby.minigame_reward.duel_reward])
-			yield(controller.minigame_duel_reward_animation(lobby.minigame_reward.duel_reward), "completed")
+			lobby.broadcast(controller.minigame_duel_reward_animation.bind(lobby.minigame_reward.duel_reward))
+			await controller.minigame_duel_reward_animation(lobby.minigame_reward.duel_reward)
 		Lobby.MINIGAME_TYPES.NOLOK_SOLO, Lobby.MINIGAME_TYPES.GNU_SOLO:
 			state.minigame_teams = [[1], []]
 	
@@ -184,23 +184,23 @@ func _on_minigame_pressed(minigame, type):
 	
 	lobby.minigame_state = state
 	# Prevent the player from accidentally rolling if they haven't already
-	lobby.broadcast(controller, "splash_ended")
+	lobby.broadcast(controller.splash_ended)
 	controller.has_rolled = true
-	lobby.broadcast(controller, "show_minigame", [state.encode()])
-	hide()
+	lobby.broadcast(controller.show_minigame.bind(state.encode()))
+	$Main.hide()
 	$List.hide()
 
 func _on_Item_pressed():
 	hide_lists()
 	$List/Players.show()
-	$List.popup()
+	$List.popup_centered()
 	
 	state = STATES.ADD_ITEMS
 
 func _on_item_selected(item):
 	selected_player.give_item(load(item).new())
 	$List.hide()
-	hide()
+	$Main.hide()
 
 func _on_Ok_pressed():
 	match state:
@@ -208,7 +208,9 @@ func _on_Ok_pressed():
 			var steps = int($List/Inputs/Number.value)
 			controller.has_rolled = true
 			controller.cancel_timer()
-			controller.emit_signal("rolled", players[controller.player_turn - 1], steps)
+			lobby.broadcast(controller.splash_ended)
+			controller.rolled.emit(players[controller.player_turn - 1], steps)
+			lobby.broadcast(controller._rolled.bind(steps))
 	
 	$List.hide()
-	hide()
+	$Main.hide()

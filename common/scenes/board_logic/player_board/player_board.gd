@@ -1,4 +1,4 @@
-extends Spatial
+extends Node3D
 class_name PlayerBoard
 
 const MOVEMENT_SPEED = 7 # The speed used for walking to destination
@@ -19,8 +19,8 @@ signal walking_ended
 var info: Lobby.PlayerInfo
 
 var space: NodeBoard # Space on the board the player is on
-var cookies := 0 setget set_cookies
-var cakes := 0 setget set_cakes
+var cookies := 0: set = set_cookies
+var cakes := 0: set = set_cakes
 var cookies_gui := -1
 var gui_timer: float = GUI_TIMER
 var target_rotation := 0.0
@@ -33,19 +33,19 @@ var is_walking := false
 var items := []
 var roll_modifiers := []
 
-puppet func set_cookies(c: int):
+@rpc func set_cookies(c: int):
 	cookies = c
 	if cookies_gui == -1:
 		cookies_gui = c
 	controller.update_player_info()
-	if multiplayer.is_network_server():
-		controller.lobby.broadcast(self, "set_cookies", [c])
+	if multiplayer.is_server():
+		controller.lobby.broadcast(set_cookies.bind(c))
 
-puppet func set_cakes(c: int):
+@rpc func set_cakes(c: int):
 	cakes = c
 	controller.update_player_info()
-	if multiplayer.is_network_server():
-		controller.lobby.broadcast(self, "set_cakes", [c])
+	if multiplayer.is_server():
+		controller.lobby.broadcast(set_cakes.bind(c))
 
 func serialize_items() -> Array:
 	var serialized := []
@@ -72,15 +72,15 @@ func give_item(item: Item) -> bool:
 func remove_item(item: Item) -> bool:
 	var index: int = items.find(item)
 	if index >= 0:
-		items.remove(index)
+		items.remove_at(index)
 		update_client()
 		return true
 	return false
 
 func update_client():
-	controller.lobby.broadcast(self, "set_items", [serialize_items()])
+	controller.lobby.broadcast(set_items.bind(serialize_items()))
 
-puppet func set_items(data: Array):
+@rpc func set_items(data: Array):
 	var items = deserialize_items(data)
 	if items:
 		self.items = items
@@ -107,46 +107,46 @@ func roll_modifiers_count_down():
 	
 	roll_modifiers = newarr
 
-func walk_to(new_space: Spatial) -> void:
+func walk_to(new_space: Node3D) -> void:
 	var old_space: NodeBoard = space
 	space = new_space
 	controller.update_space(old_space)
 	controller.update_space(new_space)
 
-func teleport_to(new_space: Spatial) -> void:
+func teleport_to(new_space: Node3D) -> void:
 	var old_space: NodeBoard = space
 	space = new_space
 	if old_space:
 		controller.update_space(old_space)
 	controller.update_space(new_space)
-	translation = destination.back().position
-	controller.lobby.broadcast(self, "_client_update_position", [get_path_to(new_space), translation])
+	position = destination.back().position
+	controller.lobby.broadcast(_client_update_position.bind(get_path_to(new_space), position))
 
-func _internal_walk_to(space: Spatial, pos: Vector3) -> void:
+func _internal_walk_to(space: Node3D, pos: Vector3) -> void:
 	var state = WalkingState.new()
 	state.space = space
 	state.position = pos
 	destination.append(state)
-	controller.lobby.broadcast(self, "_client_walk_to", [get_path_to(space), pos])
+	controller.lobby.broadcast(_client_walk_to.bind(get_path_to(space), pos))
 
-puppet func _client_walk_to(new_space: NodePath, position: Vector3):
+@rpc func _client_walk_to(new_space: NodePath, pos: Vector3):
 	var space := get_node(new_space)
 	# Check if the node we got is part of the game
-	if not controller.lobby.is_a_parent_of(space):
+	if not controller.lobby.is_ancestor_of(space):
 		controller.lobby.leave()
 	self.space = space
-	var state = WalkingState.new()
+	var state := WalkingState.new()
 	state.space = self.space
-	state.position = position
+	state.position = pos
 	self.destination.push_back(state)
 
-puppet func _client_update_position(new_space: NodePath, position: Vector3):
+@rpc func _client_update_position(new_space: NodePath, pos: Vector3):
 	var space := get_node(new_space)
 	# Check if the node we got is a part of the game
-	if not controller.lobby.is_a_parent_of(space):
+	if not controller.lobby.is_ancestor_of(space):
 		controller.lobby.leave()
 	self.space = space
-	self.translation = position
+	self.position = pos
 	self.destination.clear()
 
 func _physics_process(delta: float) -> void:
@@ -155,15 +155,15 @@ func _physics_process(delta: float) -> void:
 			$Model.play_animation("walk")
 			is_walking = true
 
-		var dir: Vector3 = destination[0].position - translation
+		var dir: Vector3 = destination[0].position - position
 		var movement: Vector3 = MOVEMENT_SPEED * dir.normalized() * delta
-		translation += movement
+		position += movement
 
 		target_rotation = atan2(dir.normalized().x, dir.normalized().z)
 
 		if dir.length() < 2 * delta * MOVEMENT_SPEED:
 			var state = destination.pop_front()
-			emit_signal("walking_step", state.space)
+			walking_step.emit(state.space)
 
 		if destination.size() == 0:
 			target_rotation = 0
@@ -172,7 +172,7 @@ func _physics_process(delta: float) -> void:
 			is_walking = false
 
 			controller.update_player_info()
-			emit_signal("walking_ended")
+			walking_ended.emit()
 	else:
 		target_rotation = 0
 		if cookies_gui < cookies:
@@ -192,7 +192,7 @@ func _physics_process(delta: float) -> void:
 
 	var dist: float = rotation.y - target_rotation
 
-	if abs(dist) > deg2rad(0.1):
+	if abs(dist) > deg_to_rad(0.1):
 		while dist > PI:
 			dist -= TAU
 		while dist < -PI:

@@ -55,7 +55,7 @@ Retrieved from: [Sketchfab](https://sketchfab.com/3d-models/simple-bomb-49ab3dbd
 License: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/legalcode)
 
 ## assets/models/bed
-### bed.escn | bed.blend
+### bed.glb | bed.blend
 
 Public Domain by Clint Bellanger
 
@@ -95,7 +95,7 @@ Retrieved from [Sketchfab](https://sketchfab.com/3d-models/stylized-cannon-033ae
 License: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/legalcode)
 
 ## assets/models/door/
-### WoodenDoor.blend | WoodenDoor.dae
+### WoodenDoor.blend | WoodenDoor.glb
 Copyright Danimal and Yughues
 
 Retrieved from [Open Game Art](https://opengameart.org/content/wooden-door)
@@ -112,7 +112,7 @@ Retrieved from [Open Game Art](https://opengameart.org/content/wooden-door)
 License: [CC-BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/legalcode)
 
 ## assets/models/ghost
-### ghost.escn | ghost.blend
+### ghost.glb | ghost.blend
 
 Copyright © 2019 Florian Kothmeier
 Based upon the "Jack-o-Lantern" model by ulf
@@ -240,7 +240,7 @@ Retrieved from: [Super Tux Kart Sourceforge](https://sourceforge.net/p/supertuxk
 License: [GPL 2.0](http://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
 
 ## client/menus/victory_screen
-### stage.escn | stage.blend
+### stage.glb | stage.blend
 
 Copyright © 2020 Florian Kothmeier
 
@@ -274,7 +274,7 @@ Copyright © 2019 Florian Kothmeier
 
 License: [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/legalcode)
 
-### dragon\*.escn
+### dragon\*.glb
 
 Copyright © 2019 Florian Kothmeier
 
@@ -559,7 +559,7 @@ Retrieved from [Open Game Art](https://opengameart.org/content/farm-0)
 
 License: [GPLv3](https://www.gnu.org/licenses/gpl-3.0.txt)
 
-### background.escn | background.blend
+### background.glb | background.blend
 
 Copyright © 2020 Florian Kothmeier
 
@@ -579,7 +579,7 @@ Retrieved from [Open Game Art](https://opengameart.org/content/simple-farm-asset
 License: [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/legalcode)
 
 ## plugins/minigames/haunted_dreams
-### room.escn | room.blend
+### room.glb | room.blend
 
 Copyright © Vytautas Butėnas, Florian Kothmeier
 
@@ -711,48 +711,16 @@ Copyright © Florian Kothmeier
 License: [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/legalcode)
 
 ## plugins/minigames/hurdle
-### racetrack_crowd.png | racetrack_wall.png
-
-Copyright © 2008 thomas oppl
-
-Retrieved from [Super Tux Kart SVN](https://svn.code.sf.net/p/supertuxkart/code/media/trunk/arenas/arena_stadium/)
-
-License: [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/legalcode)
-
-### 01tizeta_cem512.jpg
-
-Copyright © Tiziana
-
-Retrieved from [Open Game Art](https://opengameart.org/content/white-asphalt-tilling-alt-512px)
-
-License: [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/legalcode)
-
-### green_point_park_2k.hdr
-
-Copyright © 2016 Greg Zaal
-
-Retrived from [HDRIHaven](https://hdrihaven.com/hdri/?c=skies&h=green_point_park)
-
-License: [CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/legalcode)
-
 ### screenshot.png
 
-Copyright © Florian Kothmeier
+Copyright © 2022 Florian Kothmeier
 
 License: [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/legalcode)
 
 ## plugins/minigames/hurdle/ground
-### asphalt_\*
+### conveyor_belt.glb
 
-Public Domain by StruffelProductions
-
-Retrived from [CC0 Textures](https://cc0textures.com/home)
-
-License: [CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/legalcode)
-
-### ground_model.escn
-
-Copyright © Jakob Sinclair
+Copyright © Florian Kothmeier
 
 License: [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/legalcode)
 
@@ -810,7 +778,7 @@ Coyright © Florian Kothmeier
 License: [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/legalcode)
 
 ## assets/models/ice
-### ice.escn | iceberg.blend
+### ice.obj | iceberg.blend
 
 Copyright © Florian Kothmeier
 

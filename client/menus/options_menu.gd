@@ -14,29 +14,29 @@ func _ready():
 	var language_control = $Menu/TabContainer/Visual/Language/OptionButton
 	for i in languages.size():
 		language_control.add_item(
-				TranslationServer.get_locale_name(languages[i]), i + 1)
-		language_control.set_item_metadata(i + 1, languages[i])
+				TranslationServer.get_locale_name(languages[i]), i+1)
+		language_control.set_item_metadata(i+1, languages[i])
 	
 	load_options()
 
 func _input(event):
-	if get_focus_owner() and $Menu/TabContainer.is_a_parent_of(get_focus_owner()):
+	if get_viewport().gui_get_focus_owner() and $Menu/TabContainer.is_ancestor_of(get_viewport().gui_get_focus_owner()):
 		if event.is_action_pressed("ui_focus_prev"):
 			$Menu/TabContainer.current_tab = ($Menu/TabContainer.current_tab + $Menu/TabContainer.get_tab_count() - 1) % $Menu/TabContainer.get_tab_count()
 			$Menu/TabContainer.get_current_tab_control().get_child(0).grab_focus()
-			get_tree().set_input_as_handled()
+			get_viewport().set_input_as_handled()
 		elif event.is_action_pressed("ui_focus_next"):
 			$Menu/TabContainer.current_tab = ($Menu/TabContainer.current_tab + 1) % $Menu/TabContainer.get_tab_count()
 			$Menu/TabContainer.get_current_tab_control().get_child(0).grab_focus()
-			get_tree().set_input_as_handled()
+			get_viewport().set_input_as_handled()
 
 func _on_Fullscreen_toggled(button_pressed):
-	OS.window_fullscreen = button_pressed
+	get_window().mode = Window.MODE_EXCLUSIVE_FULLSCREEN if (button_pressed) else Window.MODE_WINDOWED
 	
 	save_option("visual", "fullscreen", button_pressed)
 
 func _on_VSync_toggled(button_pressed):
-	OS.vsync_enabled = button_pressed
+	DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_ENABLED if (button_pressed) else DisplayServer.VSYNC_DISABLED)
 	
 	save_option("visual", "vsync", button_pressed)
 
@@ -49,34 +49,32 @@ func _on_FXAA_toggled(button_pressed):
 func _on_Language_item_selected(ID):
 	var locales = ProjectSettings.get("locale/locale_filter")[1]
 	var option_meta = $Menu/TabContainer/Visual/Language/OptionButton.get_item_metadata(ID)
-	if option_meta == "":
-		TranslationServer.set_locale(OS.get_locale())
-	elif not locales.has(option_meta):
+	if not locales.has(option_meta):
 		TranslationServer.set_locale(OS.get_locale())
 		
 		save_option("visual", "language", "")
-		Global.emit_signal("language_changed")
+		Global.language_changed.emit()
 		return
 	
 	TranslationServer.set_locale(option_meta)
 	
 	save_option("visual", "language", option_meta)
-	Global.emit_signal("language_changed")
+	Global.language_changed.emit()
 
 func _on_FrameCap_item_selected(ID):
 	match ID:
 		0:
-			Engine.target_fps = 30
+			Engine.max_fps = 30
 		1:
-			Engine.target_fps = 60
+			Engine.max_fps = 60
 		2:
-			Engine.target_fps = 120
+			Engine.max_fps = 120
 		3:
-			Engine.target_fps = 144
+			Engine.max_fps = 144
 		4:
-			Engine.target_fps = 240
+			Engine.max_fps = 240
 		5:
-			Engine.target_fps = 0 # A zero value uncaps the frames.
+			Engine.max_fps = 0 # A zero value uncaps the frames.
 	
 	save_option("visual", "frame_cap", ID)
 
@@ -126,7 +124,7 @@ func _on_PauseUnfocus_toggled(button_pressed):
 
 func get_option_value_safely(section, key, default, min_value=null, max_value=null):
 	var value = _options_file.get_value(section, key, default)
-	if typeof(value) != typeof(default) or min_value != null and value < min_value or max_value != null and value > max_value:
+	if typeof(value) != typeof(default) or (min_value != null and value < min_value) or (max_value != null and value > max_value):
 		return default
 	
 	return value
@@ -134,8 +132,7 @@ func get_option_value_safely(section, key, default, min_value=null, max_value=nu
 func load_options():
 	var err = _options_file.load(USER_OPTIONS_FILE)
 	if err != OK:
-		print("Error while loading options: " + Utility.error_code_to_string(err))
-		return
+		print("Error while loading options: " + error_string(err))
 	
 	_is_loading_options = true # Avoid saving options while loading them.
 	
@@ -148,14 +145,14 @@ func load_options():
 	_on_Language_item_selected(language_id)
 	$Menu/TabContainer/Visual/Language/OptionButton.select(language_id)
 	
-	OS.window_fullscreen = get_option_value_safely("visual", "fullscreen", false)
-	$Menu/TabContainer/Visual/Fullscreen.pressed = OS.window_fullscreen
+	get_window().mode = Window.MODE_EXCLUSIVE_FULLSCREEN if (get_option_value_safely("visual", "fullscreen", false)) else Window.MODE_WINDOWED
+	$Menu/TabContainer/Visual/Fullscreen.button_pressed = ((get_window().mode == Window.MODE_EXCLUSIVE_FULLSCREEN) or (get_window().mode == Window.MODE_FULLSCREEN))
 	
 	var fxaa = get_option_value_safely("visual", "fxaa", false)
-	$Menu/TabContainer/Visual/FXAA.pressed = fxaa
+	$Menu/TabContainer/Visual/FXAA.button_pressed = fxaa
 	
-	OS.vsync_enabled = get_option_value_safely("visual", "vsync", false)
-	$Menu/TabContainer/Visual/VSync.pressed = OS.vsync_enabled
+	#DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_ENABLED if (get_option_value_safely("visual", "vsync", false)) else DisplayServer.VSYNC_DISABLED)
+	$Menu/TabContainer/Visual/VSync.button_pressed = (DisplayServer.window_get_vsync_mode() != DisplayServer.VSYNC_DISABLED)
 	
 	var frame_id = get_option_value_safely("visual", "frame_cap", 1, 0, 5)
 	_on_FrameCap_item_selected(frame_id)
@@ -164,19 +161,19 @@ func load_options():
 	var msaa = get_option_value_safely("visual", "msaa", 0)
 	$Menu/TabContainer/Visual/MSAA/OptionButton.select(msaa)
 	
-	var quality = get_option_value_safely("visual", "quality", 0)
+	var quality = get_option_value_safely("visual", "quality", 1)
 	$Menu/TabContainer/Visual/Quality/OptionButton.select(quality)
 	
 	AudioServer.set_bus_mute(0, get_option_value_safely("audio", "master_muted", false))
 	AudioServer.set_bus_mute(1, get_option_value_safely("audio", "music_muted", false))
 	AudioServer.set_bus_mute(2, get_option_value_safely("audio", "effects_muted", false))
 	
-	$Menu/TabContainer/Audio/Master/CheckBox.pressed = not AudioServer.is_bus_mute(0)
-	$Menu/TabContainer/Audio/Music/CheckBox.pressed = not AudioServer.is_bus_mute(1)
-	$Menu/TabContainer/Audio/Effects/CheckBox.pressed = not AudioServer.is_bus_mute(2)
+	$Menu/TabContainer/Audio/Master/CheckBox.button_pressed = not AudioServer.is_bus_mute(0)
+	$Menu/TabContainer/Audio/Music/CheckBox.button_pressed = not AudioServer.is_bus_mute(1)
+	$Menu/TabContainer/Audio/Effects/CheckBox.button_pressed = not AudioServer.is_bus_mute(2)
 	
 	Global.mute_window_unfocus = get_option_value_safely("audio", "mute_window_unfocus", true)
-	$Menu/TabContainer/Audio/MuteUnfocus.pressed = Global.mute_window_unfocus
+	$Menu/TabContainer/Audio/MuteUnfocus.button_pressed = Global.mute_window_unfocus
 	
 	# Setting the 'value' of 'Range' nodes directly also fires their signals.
 	$Menu/TabContainer/Audio/MasterVolume.value = get_option_value_safely("audio", "master_volume", 0.0, -80, 0)
@@ -184,7 +181,7 @@ func load_options():
 	$Menu/TabContainer/Audio/EffectsVolume.value = get_option_value_safely("audio", "effects_volume", 0.0, -80, 0)
 	
 	Global.pause_window_unfocus = get_option_value_safely("misc", "pause_window_unfocus", true)
-	$Menu/TabContainer/Misc/PauseUnfocus.pressed = Global.pause_window_unfocus
+	$Menu/TabContainer/Misc/PauseUnfocus.button_pressed = Global.pause_window_unfocus
 	
 	_is_loading_options = false
 
@@ -195,52 +192,29 @@ func save_option(section, key, value):
 	_options_file.set_value(section, key, value)
 	var err = _options_file.save(USER_OPTIONS_FILE)
 	if err != OK:
-		print("Error while saving options: " + Utility.error_code_to_string(err))
+		print("Error while saving options: " + error_string(err))
 
 func _on_GraphicQuality_item_selected(ID):
+	# Taken from: https://github.com/godotengine/godot-demo-projects/blob/0dfb54ff7f31960bec814d23dedc031227ac176e/3d/graphics_settings/settings.gd#L160
 	match ID:
-		0: # High
-			ProjectSettings.set_setting("rendering/quality/shadow_atlas/size", 8192)
-			ProjectSettings.set_setting("rendering/quality/directional_shadow/size", 8192)
-			ProjectSettings.set_setting("rendering/quality/shadows/filter_mode", 1)
-			ProjectSettings.set_setting("rendering/quality/shading/force_vertex_shading", false)
+		0: # Ultra
+			RenderingServer.directional_shadow_atlas_set_size(16384, true)
+			get_viewport().positional_shadow_atlas_size = 16384
+			RenderingServer.directional_soft_shadow_filter_set_quality(RenderingServer.SHADOW_QUALITY_SOFT_ULTRA)
+			RenderingServer.positional_soft_shadow_filter_set_quality(RenderingServer.SHADOW_QUALITY_SOFT_ULTRA)
 		1: # Medium
-			ProjectSettings.set_setting("rendering/quality/shadow_atlas/size", 4096)
-			ProjectSettings.set_setting("rendering/quality/directional_shadow/size", 4096)
-			ProjectSettings.set_setting("rendering/quality/shadows/filter_mode", 1)
-			ProjectSettings.set_setting("rendering/quality/shading/force_vertex_shading", false)
+			RenderingServer.directional_shadow_atlas_set_size(4096, true)
+			get_viewport().positional_shadow_atlas_size = 4096
+			RenderingServer.directional_soft_shadow_filter_set_quality(RenderingServer.SHADOW_QUALITY_SOFT_LOW)
+			RenderingServer.positional_soft_shadow_filter_set_quality(RenderingServer.SHADOW_QUALITY_SOFT_LOW)
 		2: # Low
-			ProjectSettings.set_setting("rendering/quality/shadow_atlas/size", 2048)
-			ProjectSettings.set_setting("rendering/quality/directional_shadow/size", 2048)
-			ProjectSettings.set_setting("rendering/quality/shadows/filter_mode", 0)
-			ProjectSettings.set_setting("rendering/quality/shading/force_vertex_shading", false)
-	$Menu/AcceptDialog.dialog_text = "MENU_GRAPHIC_QUALITY_REBOOT_NOTICE"
-	
-	$Menu/AcceptDialog.popup_centered()
+			RenderingServer.directional_shadow_atlas_set_size(512, true)
+			# Disable positional (omni/spot) light shadows entirely to further improve performance.
+			# These often don't contribute as much to a scene compared to directional light shadows.
+			get_viewport().positional_shadow_atlas_size = 0
+			RenderingServer.directional_soft_shadow_filter_set_quality(RenderingServer.SHADOW_QUALITY_HARD)
+			RenderingServer.positional_soft_shadow_filter_set_quality(RenderingServer.SHADOW_QUALITY_HARD)
 	save_option("visual", "quality", ID)
-	
-	# Kind of ugly way to get it working
-	# The graphic options must be loaded before the engine starts up, because
-	# some options can not be changed after initialization
-	#
-	# So the only possibility to change them is to change the value loaded in the project settings
-	# But we don't want to override the local render settings on a new version (it's stored in the pck distributed with the game after all)
-	# 
-	# Luckily, Godot offers a way to load a custom project settings file, which we naturally point to 'user://render_settings.godot'
-	# There we are able to change all settings we like and they will persist
-	# But we should not just save the options with `ProjectSettings.save_custom`
-	# because this will save everything, but we just want the render settings, as the remaining settings could be updated in a new game version
-	#
-	# Therefore we're forging such a file. This is an horrible hack and I hope Godot 4.0 will have a better way to do this
-	#
-	# Idea found here: https://github.com/godotengine/godot/issues/30087#issuecomment-505879289
-	var file = ConfigFile.new()
-	file.set_value("rendering", "quality/shadow_atlas/size", ProjectSettings.get_setting("rendering/quality/shadow_atlas/size"))
-	file.set_value("rendering", "quality/directional_shadow/size", ProjectSettings.get_setting("rendering/quality/directional_shadow/size"))
-	file.set_value("rendering", "quality/shadows/filter_mode", ProjectSettings.get_setting("rendering/quality/shadows/filter_mode"))
-	file.set_value("rendering", "quality/shading/force_vertex_shading", ProjectSettings.get_setting("rendering/quality/shading/force_vertex_shading"))
-
-	file.save("user://render_settings.godot")
 
 func _on_change_controls_pressed(player_id: int):
 	$Menu.hide()
@@ -272,7 +246,7 @@ func process_hyperlinks(input: String) -> String:
 	out += input
 	return out
 
-func print_licenses(f: File) -> String:
+func print_licenses(f: FileAccess) -> String:
 	var text = ""
 	
 	var current_dir := ""
@@ -291,7 +265,7 @@ func print_licenses(f: File) -> String:
 				text += "[color=#ffffff]" + current_dir + file.lstrip(" \t\v").rstrip(" \t\v") + ":[/color]\n"
 			has_files = true
 		else:
-			if not has_files: # Special edge case: toplevel entries start with '## '
+			if not has_files: # Special edge case: top_level entries start with '## '
 				text += "[color=#ffffff]" + current_dir.substr(0, current_dir.length() - 1) + ":[/color]\n"
 				has_files = true
 			text += "[indent]" + process_hyperlinks(line) + '[/indent]\n'
@@ -305,35 +279,27 @@ func _on_TabContainer_tab_selected(tab):
 
 [center]with [color=#66aa00]ART[/color] by:[/center]
 """
-		var license_art := File.new()
-		license_art.open("res://licenses/LICENSE-ART.md", File.READ)
+		var license_art := FileAccess.open("res://licenses/LICENSE-ART.md", FileAccess.READ)
 		text += print_licenses(license_art)
 		license_art.close()
 	
 		text += "[center]and [color=#66aa00]MUSIC[/color] by:[/center]\n"
 	
-		var license_music := File.new()
-		license_music.open("res://licenses/LICENSE-MUSIC.md", File.READ)
+		var license_music := FileAccess.open("res://licenses/LICENSE-MUSIC.md", FileAccess.READ)
 		text += print_licenses(license_music)
 		license_music.close()
 	
 		text += "[center][color=#66aa00]SHADERS[/color] by:[/center]\n"
 	
-		var license_shader := File.new()
-		license_shader.open("res://licenses/LICENSE-SHADER.md", File.READ)
+		var license_shader := FileAccess.open("res://licenses/LICENSE-SHADER.md", FileAccess.READ)
 		text += print_licenses(license_shader)
 		license_shader.close()
 	
-		var license_fonts := File.new()
-		license_fonts.open("res://licenses/LICENSE-FONTS.md", File.READ)
+		var license_fonts := FileAccess.open("res://licenses/LICENSE-FONTS.md", FileAccess.READ)
 		text += print_licenses(license_fonts)
 		license_shader.close()
 		
-		$Menu/TabContainer/Credits/RichTextLabel.bbcode_text = text
+		$Menu/TabContainer/Credits/RichTextLabel.text = text
 
 func _on_Credits_meta_clicked(meta):
 	OS.shell_open(meta) # Open links in the credits
-	
-
-
-

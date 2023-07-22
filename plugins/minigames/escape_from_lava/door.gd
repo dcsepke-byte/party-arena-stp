@@ -1,23 +1,24 @@
-extends StaticBody
+extends StaticBody3D
 
-var can_be_opened = true setget set_can_be_opened
+var can_be_opened = true
+
+@rpc("authority", "call_local") func _client_destroy():
+	$CollisionShape3D.set_deferred("disabled", true)
+	$"WoodenDoor/AnimationPlayer".play("destroy")
 
 func destroy():
-	$"Scene Root/AnimationPlayer".play("destroy")
-	$CollisionShape.disabled = true
+	Lobby.get_lobby(self).broadcast(_client_destroy)
+	_client_destroy()
+
+@rpc("authority", "call_local") func _client_open():
+	$CollisionShape3D.set_deferred("disabled", true)
+	$"WoodenDoor/AnimationPlayer".play("open")
 
 func open():
-	if can_be_opened:
-		$"Scene Root/AnimationPlayer".play("open")
-		$CollisionShape.disabled = true
+	if is_multiplayer_authority() and can_be_opened:
+		Lobby.get_lobby(self).broadcast(_client_open)
+		_client_open()
 		can_be_opened = false
-
-func set_can_be_opened(enabled: bool):
-	set_enabled(enabled)
-	Lobby.get_lobby(self).broadcast(self, "set_enabled", [enabled])
-
-puppet func set_enabled(enabled: bool):
-	can_be_opened = enabled
 
 func _on_Area_body_entered(body):
 	if body.is_in_group("players"):

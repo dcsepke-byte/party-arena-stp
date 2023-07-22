@@ -1,11 +1,11 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=2 format=3 uid="uid://bwy7gmeseew1j"]
 
-[ext_resource path="res://common/scenes/sound_button/sound_button.gd" type="Script" id=1]
+[ext_resource type="Script" path="res://common/scenes/sound_button/sound_button.gd" id="1"]
 
 [node name="Button" type="Button"]
-margin_right = 12.0
-margin_bottom = 20.0
-script = ExtResource( 1 )
+offset_right = 12.0
+offset_bottom = 20.0
+script = ExtResource("1")
 
 [connection signal="button_down" from="." to="." method="_cancel_sound"]
 [connection signal="focus_exited" from="." to="." method="_select"]

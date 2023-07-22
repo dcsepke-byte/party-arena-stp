@@ -1,10 +1,10 @@
-extends Spatial
+extends Node3D
 
 signal return_to_menu
 
 func _input(event):
 	if event.is_action_pressed("player1_ok"):
-		emit_signal("return_to_menu")
+		return_to_menu.emit()
 
 func _ready():
 	var lobby := Lobby.get_lobby(self)
@@ -35,18 +35,18 @@ func _ready():
 	for w in winner:
 		winner_names.append(w.info.name)
 	
-	yield(get_tree().create_timer(1), "timeout")
+	await get_tree().create_timer(1).timeout
 	
 	$Scene/AnimationPlayer.play("KeyAction")
 	
-	yield(get_tree().create_timer(2), "timeout")
+	await get_tree().create_timer(2).timeout
 	
 	var sara_tex = "res://common/scenes/board_logic/controller/icons/sara.png"
 	$SpeechDialog.show_dialog("CONTEXT_SPEAKER_SARA", sara_tex, "CONTEXT_WINNER_ANNOUNCEMENT", 1)
-	yield($SpeechDialog, "dialog_finished")
+	await $SpeechDialog.dialog_finished
 	
 	$AudioStreamPlayer2/AnimationPlayer.play("fade_out")
-	yield(get_tree().create_timer(1), "timeout")
+	await get_tree().create_timer(1).timeout
 	$AudioStreamPlayer.play()
 	
 	var pos = Vector3(-(len(winner) - 1) / 2.0, 0, 2)
@@ -63,9 +63,9 @@ func _ready():
 		4: $SpeechDialog.show_dialog("CONTEXT_SPEAKER_SARA", sara_tex, "CONTEXT_WINNER_REVEAL_FOUR_PLAYER", 1, winner_names)
 	$CameraMovement.play("closeup")
 	
-	yield($SpeechDialog, "dialog_finished")
+	await $SpeechDialog.dialog_finished
 	$Summary.show()
 	
-	yield(self, "return_to_menu")
+	await self.return_to_menu
 	
 	lobby.end()

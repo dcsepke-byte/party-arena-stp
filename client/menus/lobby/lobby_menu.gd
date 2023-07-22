@@ -7,9 +7,9 @@ var servermenu
 
 func _ready():
 	lobby.set_current_scene(mainmenu)
-	lobby.connect("board_selected", self, "_on_board_selected")
-	lobby.connect("player_info_updated", self, "_on_player_info_updated")
-	lobby.connect("settings_changed", self, "_on_settings_changed")
+	lobby.board_selected.connect(_on_board_selected)
+	lobby.player_info_updated.connect(_on_player_info_updated)
+	lobby.changed.connect(_on_settings_changed)
 	$MarginContainer/VBoxContainer/Content/VBoxContainer/Board.disabled = true
 	$MarginContainer/VBoxContainer/Footer/Start.disabled = true
 	$MarginContainer/VBoxContainer/Footer/HBoxContainer/Lobby.text = "Join code: " + lobby.name
@@ -27,44 +27,46 @@ func _on_settings_changed(settings: Array):
 		root.remove_child(child)
 	var label := Label.new()
 	label.text = "MENU_LOBBY_SETTINGS"
-	label.align = Label.ALIGN_CENTER
+	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	label.theme_type_variation = &"HeaderMedium"
 	root.add_child(label)
 	for entry in settings:
 		var id = entry[0]
 		var setting = entry[1]
 		match setting.type:
-			Lobby.Settings.TYPE_BOOL:
+			Lobby.Settings.TYPES.BOOL:
 				var checkbox := CheckButton.new()
 				checkbox.text = setting.name
-				checkbox.pressed = setting.value
-				checkbox.disabled = not lobby.is_lobby_owner(multiplayer.get_network_unique_id())
-				checkbox.connect("toggled", self, "_on_change_setting", [id])
+				checkbox.button_pressed = setting.value
+				checkbox.disabled = not lobby.is_lobby_owner(multiplayer.get_unique_id())
+				checkbox.toggled.connect(_on_change_setting.bind(id))
 				root.add_child(checkbox)
-			Lobby.Settings.TYPE_INT:
+			Lobby.Settings.TYPES.INT:
 				var container := HBoxContainer.new()
 				var option_label := Label.new()
 				var slider := SpinBox.new()
 				slider.min_value = setting.value[1]
 				slider.max_value = setting.value[2]
 				slider.value = setting.value[0]
-				slider.editable = lobby.is_lobby_owner(multiplayer.get_network_unique_id())
+				slider.editable = lobby.is_lobby_owner(multiplayer.get_unique_id())
 				option_label.text = setting.name
 				option_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-				slider.connect("value_changed", self, "_on_setting_slider_change", [id])
+				slider.value_changed.connect(_on_setting_slider_change.bind(id))
 				container.add_child(option_label)
 				container.add_child(slider)
 				root.add_child(container)
-			Lobby.Settings.TYPE_OPTIONS:
+			Lobby.Settings.TYPES.OPTIONS:
 				var container := HBoxContainer.new()
 				var option_label := Label.new()
 				var optionbutton := OptionButton.new()
 				for option in setting.value[1]:
-					optionbutton.add_item(option)
+					optionbutton.add_item(tr(option))
 				optionbutton.select(setting.value[1].find(setting.value[0]))
-				optionbutton.disabled = not lobby.is_lobby_owner(multiplayer.get_network_unique_id())
+				optionbutton.disabled = not lobby.is_lobby_owner(multiplayer.get_unique_id())
 				option_label.text = setting.name
 				option_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-				optionbutton.connect("item_selected", self, "_on_setting_option_change", [optionbutton, id])
+				optionbutton.item_selected.connect(_on_setting_option_change.bind(optionbutton, id))
 				container.add_child(option_label)
 				container.add_child(optionbutton)
 				root.add_child(container)
@@ -82,9 +84,9 @@ func _on_board_selected(board: String):
 	$MarginContainer/VBoxContainer/Content/VBoxContainer/Board.text = board
 
 func _on_player_info_updated(info: Array):
-	var owner: bool = lobby.is_lobby_owner(multiplayer.get_network_unique_id())
-	$MarginContainer/VBoxContainer/Content/VBoxContainer/Board.disabled = not owner
-	$MarginContainer/VBoxContainer/Footer/Start.disabled = not owner
+	var is_owner: bool = lobby.is_lobby_owner(multiplayer.get_unique_id())
+	$MarginContainer/VBoxContainer/Content/VBoxContainer/Board.disabled = not is_owner
+	$MarginContainer/VBoxContainer/Footer/Start.disabled = not is_owner
 	
 	var characters = $MarginContainer/VBoxContainer/Content/VBoxContainer/Characters
 	for child in characters.get_children():
@@ -93,28 +95,28 @@ func _on_player_info_updated(info: Array):
 	
 	var remaining_player_indices = range(4)
 	for playerinfo in info:
-		if playerinfo.addr.peer_id == multiplayer.get_network_unique_id():
+		if playerinfo.addr.peer_id == multiplayer.get_unique_id():
 			remaining_player_indices.erase(playerinfo.addr.idx)
-		var player = preload("res://client/menus/lobby/lobby_player.tscn").instance()
-		var name: LineEdit = player.get_node("PanelContainer/HBoxContainer/Name")
+		var player = preload("res://client/menus/lobby/lobby_player.tscn").instantiate()
+		var playername: LineEdit = player.get_node("PanelContainer/HBoxContainer/Name")
 		var character: Button = player.get_node("PanelContainer/HBoxContainer/Character")
 		var remove: Button = player.get_node("PanelContainer/HBoxContainer/Remove")
-		name.text = playerinfo.name
-		name.connect("text_entered", self, "_on_name_changed", [playerinfo.addr.idx])
+		playername.text = playerinfo.name
+		playername.text_submitted.connect(_on_name_changed.bind(playerinfo.addr.idx))
 		if playerinfo.character:
 			character.icon = PluginSystem.character_loader.load_character_icon(playerinfo.character)
-		character.connect("pressed", self, "_on_character_select", [playerinfo.addr])
-		remove.connect("pressed", self, "_on_remove_player", [playerinfo.addr.idx])
-		if playerinfo.addr.peer_id != multiplayer.get_network_unique_id():
-			name.editable = false
+		character.pressed.connect(_on_character_select.bind(playerinfo.addr))
+		remove.pressed.connect(_on_remove_player.bind(playerinfo.addr.idx))
+		if playerinfo.addr.peer_id != multiplayer.get_unique_id():
+			playername.editable = false
 			character.disabled = true
 			remove.disabled = true
 		characters.add_child(player)
 
 	while characters.get_child_count() < lobby.LOBBY_SIZE:
-		var placeholder = preload("res://client/menus/lobby/player_join_placeholder.tscn").instance()
+		var placeholder = preload("res://client/menus/lobby/player_join_placeholder.tscn").instantiate()
 		placeholder.available = remaining_player_indices
-		placeholder.connect("add_player", self, "_on_add_player")
+		placeholder.add_player.connect(_on_add_player)
 		characters.add_child(placeholder)
 
 func _on_add_player(idx: int):
@@ -123,11 +125,11 @@ func _on_add_player(idx: int):
 func _on_remove_player(idx: int):
 	lobby.remove_player(idx)
 
-func _on_name_changed(name: String, idx: int):
-	lobby.set_player_name(idx, name)
+func _on_name_changed(playername: String, idx: int):
+	lobby.set_player_name(idx, playername)
 
 func _on_character_select(addr):
-	$CharacterMenu.connect("character_selected", self, "_on_CharacterMenu_character_selected", [addr.idx], CONNECT_ONESHOT)
+	$CharacterMenu.character_selected.connect(_on_CharacterMenu_character_selected.bind(addr.idx), CONNECT_ONE_SHOT)
 	$CharacterMenu.select_character(lobby.get_player_by_addr(addr).character)
 
 func _on_CharacterMenu_character_selected(character: String, idx: int) -> void:
@@ -149,4 +151,4 @@ func _on_Start_pressed() -> void:
 	lobby.start()
 
 func _on_lobby_code_copy() -> void:
-	OS.clipboard = lobby.name
+	DisplayServer.clipboard_set(lobby.name)

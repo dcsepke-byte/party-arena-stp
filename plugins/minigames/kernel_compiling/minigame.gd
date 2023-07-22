@@ -1,6 +1,6 @@
-extends Spatial
+extends Node3D
 
-onready var num_players = Utility.get_nodes_in_group(self, "players").size()
+@onready var num_players = Utility.get_nodes_in_group(self, "players").size()
 
 var lobby: Lobby
 var game_ended := false
@@ -14,8 +14,8 @@ func get_player(i):
 func update_progress():
 	# In 2v2 mode, players share the same score, therefore we only have to take a look at one Player of each team
 	# This is called by player.update_progress() when we're in 2v2 mode
-	$Team1Progress/Sprite3D.material_override.set_shader_param("percentage", $Player1.get_percentage())
-	$Team2Progress/Sprite3D.material_override.set_shader_param("percentage", $Player3.get_percentage())
+	$Team1Progress/Sprite3D.material_override.set_shader_parameter("percentage", $Player1.get_percentage())
+	$Team2Progress/Sprite3D.material_override.set_shader_parameter("percentage", $Player3.get_percentage())
 
 func stop_game():
 	game_ended = true
@@ -28,9 +28,9 @@ func stop_game():
 func _ready():
 	match lobby.minigame_state.minigame_type:
 		Lobby.MINIGAME_TYPES.DUEL:
-			$Player1.translation = Vector3(0.3, 0, -1)
+			$Player1.position = Vector3(0.3, 0, -1)
 			$Player1.rotation_degrees = Vector3(0, -85, 0)
-			$Player2.translation = Vector3(0.3, 0, 1)
+			$Player2.position = Vector3(0.3, 0, 1)
 			$Player2.rotation_degrees = Vector3(0, -95, 0)
 		Lobby.MINIGAME_TYPES.TWO_VS_TWO:
 			$Player1.teammate = $Player2
@@ -59,7 +59,7 @@ func _on_Timer_timeout():
 				lobby.minigame_team_win(1)
 
 func _on_Countdown_finish():
-	if not multiplayer.is_network_server():
+	if not multiplayer.is_server():
 		return
 	for i in range(num_players):
 		get_player(i + 1).generate_next_action()

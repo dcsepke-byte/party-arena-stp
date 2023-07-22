@@ -627,6 +627,9 @@ msgstr "Cannot save the game at this time"
 msgid "SAVE_GAME_DISABLED"
 msgstr "Saving games is disabled on this server"
 
+msgid "MENU_OPTIONS_FXAA"
+msgstr "FXAA"
+
 #~ msgid "MENU_LABEL_CONNECTION_ERROR"
 #~ msgstr "Connection Error"
 
@@ -686,9 +689,6 @@ msgstr "Saving games is disabled on this server"
 
 #~ msgid "MENU_LABEL_XBOX"
 #~ msgstr "XBOX"
-
-#~ msgid "MENU_OPTIONS_FXAA"
-#~ msgstr "FXAA"
 
 #~ msgid "MENU_LABEL_LINEAR"
 #~ msgstr "Linear"

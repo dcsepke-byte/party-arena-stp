@@ -4,22 +4,21 @@ extends Node
 # .zip or .pck file format.
 const PLUGIN_DIRECTORY := "plugins"
 
-onready var board_loader := BoardLoader.new() # preload("res://common/scripts/loader/board_loader.gd").new()
-onready var minigame_loader := MinigameLoader.new() # preload("res://common/scripts/loader/minigame_loader.gd").new()
-onready var character_loader := CharacterLoader.new() # preload("res://common/scripts/loader/character_loader.gd").new()
-onready var item_loader := ItemLoader.new() # preload("res://common/scripts/loader/item_loader.gd").new()
+@onready var board_loader := BoardLoader.new()
+@onready var minigame_loader := MinigameLoader.new()
+@onready var character_loader := CharacterLoader.new()
+@onready var item_loader := ItemLoader.new()
 
-func load_files_from_path(path: String, filename: Array, object: Object,
-		method: String):
-	var dir := Directory.new()
-
-	var err: int = dir.open(path)
-	if err != OK:
-		print("Unable to open directory '{0}'. Reason: {1}".format([path, 
-				Utility.error_code_to_string(err)]))
+func load_files_from_path(path: String, filename: Array, callback: Callable):
+	var dir := DirAccess.open(path)
+	if not dir:
+		print("Unable to open directory '{0}'. Reason: {1}".format([path,
+			error_string(DirAccess.get_open_error())]))
 		return
 
-	dir.list_dir_begin(true) # Parameter indicates to skip "." and "..".
+	dir.include_hidden = true
+	dir.include_navigational = false
+	dir.list_dir_begin()
 
 	while true:
 		var entry: String = dir.get_next()
@@ -28,20 +27,19 @@ func load_files_from_path(path: String, filename: Array, object: Object,
 			break
 		elif dir.current_is_dir():
 			for file in filename:
-				if dir.file_exists(path + "/" + entry + "/" + file):
-					object.call(method, path + "/" + entry + "/" + file)
+				if dir.file_exists(entry + "/" + file) or dir.file_exists(entry + "/" + file + ".remap"):
+					callback.call(path + "/" + entry + "/" + file)
 
 	dir.list_dir_end()
 
 # Loads all .pck and .zip files into the res:// file system.
 func read_content_packs() -> void:
-	var dir := Directory.new()
-	var err: int = dir.open(PLUGIN_DIRECTORY)
-	if err != OK:
+	var dir := DirAccess.open(PLUGIN_DIRECTORY)
+	if not dir:
 		print("Unable to open directory '{0}'. Reason: {1}".format([
-				PLUGIN_DIRECTORY, Utility.error_code_to_string((err))]))
+				PLUGIN_DIRECTORY, error_string(DirAccess.get_open_error())]))
 		return
-	dir.list_dir_begin(true) # Parameter indicates to skip "." and "..".
+	dir.list_dir_begin()  # Parameter indicates to skip "." and "..".# TODOGODOT4 fill missing arguments https://github.com/godotengine/godot/pull/40547
 
 	while true:
 		var file: String = dir.get_next()
@@ -56,8 +54,8 @@ func read_content_packs() -> void:
 			else:
 				print("Error while loading plugin: " + file)
 		elif not dir.current_is_dir():
-			print("Failed to load plugin: '{0}' is neither a .pck" + \
-					" nor a .zip file".format([file]))
+			print("Failed to load plugin: '{0}' is neither a super.pck" + \
+					" nor a super.zip file".format([file]))
 	dir.list_dir_end()
 
 func _init() -> void:

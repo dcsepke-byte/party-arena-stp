@@ -1,4 +1,4 @@
-extends Spatial
+extends Node3D
 
 const MAX_CONSECUTIVE_HURDLES := 1
 
@@ -14,7 +14,7 @@ var time_to_direction_change := 1.0
 var stop := false
 
 var lobby: Lobby
-onready var players = Utility.get_nodes_in_group(self, "players")
+@onready var players = Utility.get_nodes_in_group(self, "players")
 
 func _enter_tree() -> void:
 	lobby = Lobby.get_lobby(self)
@@ -31,14 +31,14 @@ func update_speed(delta: float):
 		if speedup_timeout <= 0.0:
 			speedup_timeout = 0.0
 
-puppet func change_direction():
+@rpc func change_direction():
 	direction = -direction
 
 func _client_process(delta: float):
 	if stop:
 		return
 	update_speed(delta)
-	$conveyor_belt/AnimationPlayer.playback_speed = direction
+	$conveyor_belt/AnimationPlayer.speed_scale = direction
 
 func _server_process(delta: float):
 	if stop:
@@ -47,20 +47,20 @@ func _server_process(delta: float):
 	time_to_direction_change -= delta
 	if time_to_direction_change <= 0.0:
 		direction = -direction
-		lobby.broadcast(self, "change_direction")
+		lobby.broadcast(change_direction)
 		time_to_direction_change += randf() * 5.0 + 1.0
 	for player in players:
-		if not player.dead and player.translation.y < -10:
+		if not player.dead and player.position.y < -10:
 			player.dead = true
 			player.hide()
 			placement[players_alive - 1] = player.info.player_id
 			players_alive -= 1
 			if players_alive <= 1:
 				stop = true
-				lobby.broadcast(self, "stop")
-				get_tree().create_timer(1).connect("timeout", self, "finished")
+				lobby.broadcast(do_stop)
+				get_tree().create_timer(1).timeout.connect(finished)
 
-puppet func stop():
+@rpc func do_stop():
 	stop = true
 
 func finished():

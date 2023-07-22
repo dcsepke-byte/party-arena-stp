@@ -1,8 +1,8 @@
-extends Spatial
+extends Node3D
 
 var lobby: Lobby
 
-onready var players = Utility.get_nodes_in_group(self, "players")
+@onready var players = Utility.get_nodes_in_group(self, "players")
 
 var losses = 0 # Number of players that have been knocked-out
 var placement# Placements, is filled with player id in order. Index 0 is first place
@@ -38,9 +38,9 @@ func _ready():
 	precompute_ground_edges()
 
 func precompute_ground_edges():
-	var collision_shape = $Ground/StaticBody/CollisionShape
+	var collision_shape = $Ground/StaticBody3D/CollisionShape3D
 	var faces = collision_shape.shape.get_faces()
-	var transform = collision_shape.global_transform
+	var newtransform = collision_shape.global_transform
 	var inward_edges = {}
 	
 	var i = 0
@@ -62,8 +62,8 @@ func precompute_ground_edges():
 			else:
 				p2 = faces[i]
 			
-			var edge = [transform * p1, transform * p2]
-			var inv_edge = [transform * p2, transform * p1]
+			var edge = [newtransform * p1, newtransform * p2]
+			var inv_edge = [newtransform * p2, newtransform * p1]
 			# Idea: each face that is not an outer edge is present two times
 			# Therefore to get the outer edges, we have to get all edges
 			# that are present only once
@@ -106,7 +106,7 @@ func _server_process(delta):
 	if human_players == 0 and len(players) > 0:
 		players[0].max_speed = 5.0
 	for p in players:
-		if p.translation.y < -10:
+		if p.position.y < -10:
 			losses += 1
 			placement[placement.size() - losses] = p.info.player_id # Assign placement before deleting player
 			if losses == placement.size():
@@ -114,7 +114,7 @@ func _server_process(delta):
 			if not p.info.is_ai():
 				human_players -= 1
 			players.erase(p)
-			lobby.broadcast(self, "player_out", [p.info.player_id])
+			lobby.broadcast(player_out.bind(p.info.player_id))
 			p.queue_free()
 	
 	if win_condition(players) and not timer_end_start:
@@ -123,15 +123,15 @@ func _server_process(delta):
 			placement[0] = players[0].info.player_id
 			players[0].winner = true
 		
-		if not players.empty():
+		if not players.is_empty():
 			winner_team = players[0].team
 		timer_end_start = true
 		
 		match lobby.minigame_state.minigame_type:
 			Lobby.MINIGAME_TYPES.FREE_FOR_ALL, Lobby.MINIGAME_TYPES.DUEL:
-				lobby.broadcast(self, "win_player", [placement[0]])
+				lobby.broadcast(win_player.bind(placement[0]))
 			Lobby.MINIGAME_TYPES.TWO_VS_TWO:
-				lobby.broadcast(self, "win_team", [winner_team + 1])
+				lobby.broadcast(win_team.bind(winner_team + 1))
 	
 	if timer_end_start:
 		timer_end -= delta
@@ -142,7 +142,7 @@ func _server_process(delta):
 				Lobby.MINIGAME_TYPES.TWO_VS_TWO:
 					lobby.minigame_team_win(winner_team)
 
-puppet func player_out(player_id: int):
+@rpc func player_out(player_id: int):
 	for player in players:
 		if player.info.player_id == player_id:
 			players.erase(player)
@@ -150,12 +150,12 @@ puppet func player_out(player_id: int):
 			player.active = false
 			break
 
-puppet func win_player(player_id: int):
+@rpc func win_player(player_id: int):
 	var player = lobby.get_player_by_id(player_id)
 	$Environment/Screen/Message.text = tr("KNOCK_OFF_PLAYER_WINS_MSG").format({"player": player.name})
 	$Environment/Screen/Message.show()
 	players[0].winner = true
 
-puppet func win_team(team: int):
+@rpc func win_team(team: int):
 	$Environment/Screen/Message.text = tr("KNOCK_OFF_TEAM_WINS_MSG").format({"team": team})
 	$Environment/Screen/Message.show()

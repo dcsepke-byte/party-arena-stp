@@ -12,21 +12,21 @@ build/plugins:
 linux: linux_executable resources
 
 linux_executable: build
-	godot --export "Linux/X11" "build/supertuxparty" --no-window
+	godot --export-release --headless "Linux Client" "build/supertuxparty" --no-window
 
 resources: build build/plugins
-	godot --export "Resources" "build/plugins/default.pck" --no-window
+	godot --export-release --headless "Resources" "build/plugins/default.pck" --no-window
 
 
 windows: windows_executable resources
 
 windows_executable: build
-	godot --export "Windows Desktop" "build/Supertuxparty.exe" --no-window
+	godot --export-release --headless "Windows Desktop" "build/Supertuxparty.exe" --no-window
 
 macos: macos_executable resources
 
 macos_executable:
-	godot --export "Mac OSX" "build/supertuxparty.app" --no-window
+	godot --export-release --headless "Mac OSX Client" "build/supertuxparty.app" --no-window
 
 install:
 	mkdir -p /usr/share/supertuxparty

@@ -1,10 +1,8 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=2 format=3 uid="uid://d11bsercmay0e"]
 
-[ext_resource path="res://server/game.gd" type="Script" id=1]
+[ext_resource type="Script" path="res://server/game.gd" id="1"]
 
-[node name="Server" type="Viewport"]
-own_world = true
-render_target_update_mode = 0
+[node name="Server" type="Node"]
 
 [node name="Game" type="Node" parent="."]
-script = ExtResource( 1 )
+script = ExtResource("1")

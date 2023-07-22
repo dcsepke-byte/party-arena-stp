@@ -6,7 +6,7 @@ func setup_scene():
 	for p in lobby.minigame_summary.placement:
 		for player_id in p:
 			i += 1
-			var node: Position3D = get_node("ViewportContainer/Viewport/Placement" + str(i))
+			var node: Marker3D = get_node("SubViewportContainer/SubViewport/Placement" + str(i))
 			load_character(player_id, node, "happy" if pos < 4 else "sad")
 			
 			var ui_container: Control = node.get_node("VBoxContainer")
@@ -21,3 +21,4 @@ func setup_scene():
 
 func _ready():
 	setup_scene()
+	super._ready()

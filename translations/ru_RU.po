@@ -693,5 +693,5 @@ msgstr "Одиночная Nolok мини-игра"
 #~ msgid "MENU_CONTROLS_GAMEPAD_START"
 #~ msgstr "Кнопка гейпада Start"
 
-#~ msgid "MENU_OPTIONS_FXAA"
-#~ msgstr "FXAA"
+msgid "MENU_OPTIONS_FXAA"
+msgstr "FXAA"

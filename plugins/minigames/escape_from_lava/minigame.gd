@@ -1,4 +1,4 @@
-extends Spatial
+extends Node3D
 
 const LAVA_RISE_SPEED = 0.25
 
@@ -7,16 +7,15 @@ var winners = []
 # Player Ids that got knocked out by the lava
 var dead = []
 
-onready var player_count := len(Utility.get_nodes_in_group(self, "players"))
-
-onready var lobby := Lobby.get_lobby(self)
+@onready var player_count := len(Utility.get_nodes_in_group(self, "players"))
+@onready var lobby := Lobby.get_lobby(self)
 
 func process_stage(stage):
 	var index = (randi() % stage.get_child_count())
 	stage.get_child(index).can_be_opened = false
 
 func _ready():
-	if multiplayer.is_network_server():
+	if multiplayer.is_server():
 		_do_server_setup()
 
 func _do_server_setup():
@@ -28,22 +27,21 @@ func _client_process(delta):
 	var min_progress = null
 	
 	for player in Utility.get_nodes_in_group(self, "players"):
-		if not player.is_dead() and (min_progress == null or player.translation.z < min_progress.z):
-			min_progress = player.translation
+		if not player.is_dead() and (min_progress == null or player.position.z < min_progress.z):
+			min_progress = player.position
 	
 	if min_progress != null:
-		$Camera.translation +=  (Vector3(0, min_progress.y, min_progress.z) + Vector3(0, 3, -4) - $Camera.translation) * delta
-
+		$Camera3D.position +=  (Vector3(0, min_progress.y, min_progress.z) + Vector3(0, 3, -4) - $Camera3D.position) * delta
 
 func _server_process(delta):
-	$Lava.translation += Vector3(0, 1, 0) * delta * LAVA_RISE_SPEED
-	lobby.broadcast(self, "set_lava_height", [$Lava.translation.y])
+	$Lava.position += Vector3(0, 1, 0) * delta * LAVA_RISE_SPEED
+	lobby.broadcast(set_lava_height.bind($Lava.position.y))
 
-puppetsync func set_lava_height(height: float):
-	$Lava.translation.y = height
+@rpc func set_lava_height(height: float):
+	$Lava.position.y = height
 
 func _on_Lava_body_entered(body):
-	if not lobby.is_network_master():
+	if not is_multiplayer_authority():
 		return
 	
 	if body.is_in_group("players"):
@@ -58,7 +56,7 @@ func _on_Lava_body_entered(body):
 
 
 func _on_Finish_body_entered(body):
-	if not lobby.is_network_master():
+	if not is_multiplayer_authority():
 		return
 	
 	if body.is_in_group("players") and not body.is_dead():
@@ -78,10 +76,10 @@ func check_game_over():
 				node.die()
 		# Assert that we did not fuck up somewhere
 		assert(count <= 1)
-		lobby.broadcast(self, "end_game")
+		lobby.broadcast(end_game)
 		$EndTimer.start()
 
-puppetsync func end_game():
+@rpc func end_game():
 	$Screen/Label.show()
 
 func _on_EndTimer_timeout():

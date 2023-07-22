@@ -1,24 +1,25 @@
+## Prefab implementation to query players about confirmation or input
 extends Control
+class_name SpeechDialog
 
-#warning-ignore: unused_signal
 signal dialog_finished
-#warning-ignore: unused_signal
 signal dialog_option_taken(accepted)
 
 const CLICK_SOUND = preload("res://assets/sounds/ui/rollover2.wav")
 const SELECT_SOUND = preload("res://assets/sounds/ui/click1.wav")
 
 enum TYPES {
+	INVALID = -1,
 	DIALOG,
 	YESNO,
 	RANGE
 }
 
-onready var lobby := Lobby.get_lobby(self)
+@onready var lobby := Lobby.get_lobby(self)
 
 var player_id := -1
 
-var type := -1
+var type: TYPES = TYPES.INVALID
 var _local := false
 
 func _ready() -> void:
@@ -34,27 +35,27 @@ func start_timer_for_player(player_id: int):
 	assert(current_timer == null, "A previous timer was not stopped")
 	var addr := lobby.get_player_by_id(player_id).addr
 	current_timer = get_tree().create_timer(lobby.timeout)
-	current_timer.connect("timeout", self, "player_timeout", [addr])
+	current_timer.timeout.connect(player_timeout.bind(addr))
 
 func cancel_timer():
 	if not current_timer:
 		return
-	current_timer.disconnect("timeout", self, "player_timeout")
+	current_timer.timeout.disconnect(player_timeout)
 	current_timer = null
 
-puppet func _accept_dialog():
+@rpc func _accept_dialog():
 	hide()
 	$HBoxContainer/NinePatchRect/Buttons.hide()
 	$HBoxContainer/NinePatchRect/Range.hide()
-	type = -1
+	type = TYPES.INVALID
 	player_id = -1
 	UISound.stream = CLICK_SOUND
 	UISound.play()
 
 func _ok_event():
 	if has_focus() and type == TYPES.DIALOG:
-		var scrollbar = $HBoxContainer/NinePatchRect/MarginContainer/Text.get_v_scroll()
-		var height = $HBoxContainer/NinePatchRect/MarginContainer/Text.rect_size.y
+		var scrollbar = $HBoxContainer/NinePatchRect/MarginContainer/Text.get_v_scroll_bar()
+		var height = $HBoxContainer/NinePatchRect/MarginContainer/Text.size.y
 		if scrollbar.value < scrollbar.max_value - height:
 			scrollbar.value += height
 		else:
@@ -62,110 +63,108 @@ func _ok_event():
 				_internal_accept(null)
 				_accept_dialog()
 			else:
-				rpc_id(1, "accept", null)
+				accept.rpc_id(1, null)
 	elif $HBoxContainer/NinePatchRect/Buttons/Yes.has_focus():
 			if _local:
 				_internal_accept(true)
 				_accept_dialog()
 			else:
-				rpc_id(1, "accept", true)
+				accept.rpc_id(1, true)
 	elif $HBoxContainer/NinePatchRect/Buttons/No.has_focus():
 			if _local:
 				_internal_accept(false)
 				_accept_dialog()
 			else:
-				rpc_id(1, "accept", false)
+				accept.rpc_id(1, false)
 	elif $HBoxContainer/NinePatchRect/Range.visible:
 			if _local:
 				_internal_accept(null)
 				_accept_dialog()
 			else:
-				rpc_id(1, "accept", null)
+				accept.rpc_id(1, null)
 
 func _input(event: InputEvent) -> void:
 	if player_id == -1:
 		return
 	var is_action: bool = event.is_action_pressed("player%d_ok" % player_id)
 	if is_action:
-		get_tree().set_input_as_handled()
+		get_viewport().set_input_as_handled()
 		_ok_event()
 		return
 	var is_up: bool = event.is_action_pressed("player%d_up" % player_id)
 	var is_down: bool = event.is_action_pressed("player%d_down" % player_id)
 	if is_up or is_down:
 		if $HBoxContainer/NinePatchRect/Range.visible:
-			get_tree().set_input_as_handled()
+			get_viewport().set_input_as_handled()
 			if is_up:
 				$HBoxContainer/NinePatchRect/Range.value += 1
 			else:
 				$HBoxContainer/NinePatchRect/Range.value -= 1
 			if not _local:
-				rpc_id(1, "query_value_changed", $HBoxContainer/NinePatchRect/Range.value)
+				query_value_changed.rpc_id(1, $HBoxContainer/NinePatchRect/Range.value)
 
-func _setup(speaker: String, texture: Texture, text: String, format_args, player_id: int):
+func _setup(speaker: String, texture: Texture2D, text: String, format_args, player_id: int):
 	_local = false
 	$HBoxContainer/TextureRect.texture = texture
 	self.player_id = player_id
 	show()
 	$HBoxContainer/NinePatchRect/Name.text = speaker
-	$HBoxContainer/NinePatchRect/MarginContainer/Text.bbcode_text = tr(text).format(format_args)
+	$HBoxContainer/NinePatchRect/MarginContainer/Text.text = tr(text).format(format_args)
 
-master func accept(arg):
+@rpc("any_peer", "call_local") func accept(arg):
 	if player_id == -1:
 		return
-	if lobby.get_player_by_id(player_id).addr.peer_id != multiplayer.get_rpc_sender_id():
+	if lobby.get_player_by_id(player_id).addr.peer_id != multiplayer.get_remote_sender_id():
 		return
 	cancel_timer()
+	lobby.broadcast(_accept_dialog)
 	_internal_accept(arg)
-	lobby.broadcast(self, "_accept_dialog")
 
 func _internal_accept(arg):
 	match type:
 		TYPES.DIALOG:
-			emit_signal("dialog_finished")
+			dialog_finished.emit()
 		TYPES.YESNO:
-			emit_signal("dialog_option_taken", arg as bool)
+			dialog_option_taken.emit(arg as bool)
 		TYPES.RANGE:
-			emit_signal("dialog_option_taken", $HBoxContainer/NinePatchRect/Range.value)
+			dialog_option_taken.emit($HBoxContainer/NinePatchRect/Range.value)
 		_:
 			return
-	type = -1
+	type = TYPES.INVALID
+	player_id = -1
 
 func show_dialog(speaker: String, texture: String, text: String, player_id: int, format_args = {}) -> void:
-	if multiplayer.is_network_server():
+	if multiplayer.is_server():
 		_local = false
 		self.player_id = player_id
 		type = TYPES.DIALOG
 		start_timer_for_player(player_id)
-		lobby.broadcast(self, "_client_show_dialog", [speaker, texture, text, format_args, player_id])
+		lobby.broadcast(_client_show_dialog.bind(speaker, texture, text, format_args, player_id))
 		if lobby.get_player_by_id(player_id).is_ai():
-			get_tree().create_timer(1.0).connect("timeout", self, "rpc_id", [1, "accept", null])
+			get_tree().create_timer(1.0).timeout.connect(func (): self.accept.rpc_id(1, null))
 	else:
 		_client_show_dialog(speaker, texture, text, format_args, player_id)
 		_local = true
 
-puppet func _client_show_dialog(speaker: String, texture: String, text: String, format_args, player_id: int) -> void:
+@rpc func _client_show_dialog(speaker: String, texture: String, text: String, format_args, player_id: int) -> void:
 	type = TYPES.DIALOG
 	_setup(speaker, load(texture), text, format_args, player_id)
 	grab_focus()
-	
-	if lobby.get_player_by_id(player_id).is_ai():
-		get_tree().create_timer(2).connect("timeout", self, "_accept_dialog", ["dialog_finished", null])
 
 func show_accept_dialog(speaker: String, texture: String, text: String, player_id: int, format_args = {}) -> void:
-	if multiplayer.is_network_server():
+	if multiplayer.is_server():
 		_local = false
 		self.player_id = player_id
 		type = TYPES.YESNO
 		start_timer_for_player(player_id)
-		lobby.broadcast(self, "_client_show_accept_dialog", [speaker, texture, text, format_args, player_id])
+		lobby.broadcast(_client_show_accept_dialog.bind(speaker, texture, text, format_args, player_id))
 		if lobby.get_player_by_id(player_id).is_ai():
-			get_tree().create_timer(1.0).connect("timeout", self, "rpc_id", [1, "accept", true])
+			get_tree().create_timer(1.0).timeout.connect(func (): self.accept.rpc_id(1, true))
 	else:
 		_client_show_accept_dialog(speaker, texture, text, format_args, player_id)
 		_local = true
 
-puppet func _client_show_accept_dialog(speaker: String, texture: String, text: String, format_args, player_id: int):
+@rpc func _client_show_accept_dialog(speaker: String, texture: String, text: String, format_args, player_id: int):
 	_setup(speaker, load(texture), text, format_args, player_id)
 	type = TYPES.YESNO
 	if lobby.get_player_by_id(player_id).is_local():
@@ -173,20 +172,20 @@ puppet func _client_show_accept_dialog(speaker: String, texture: String, text: S
 		$HBoxContainer/NinePatchRect/Buttons/Yes.grab_focus()
 
 func show_query_dialog(speaker: String, texture: String, text: String, player_id: int, minimum: int, maximum: int, start_value: int, format_args = {}) -> void:
-	if multiplayer.is_network_server():
-		_local = true
+	if multiplayer.is_server():
+		_local = false
 		self.player_id = player_id
 		type = TYPES.RANGE
 		start_timer_for_player(player_id)
 		$HBoxContainer/NinePatchRect/Range.min_value = minimum
 		$HBoxContainer/NinePatchRect/Range.max_value = maximum
 		$HBoxContainer/NinePatchRect/Range.value = start_value
-		lobby.broadcast(self, "_client_show_query_dialog", [speaker, texture, text, format_args, player_id, minimum, maximum, start_value])
+		lobby.broadcast(_client_show_query_dialog.bind(speaker, texture, text, format_args, player_id, minimum, maximum, start_value))
 		if lobby.get_player_by_id(player_id).is_ai():
-			get_tree().create_timer(1.0).connect("timeout", self, "rpc_id", [1, "accept", null])
+			get_tree().create_timer(1.0).timeout.connect(func (): self.accept.rpc_id(1, null))
 	else:
 		_client_show_query_dialog(speaker, texture, text, format_args, player_id, minimum, maximum, start_value)
-		_local = false
+		_local = true
 
 func _client_show_query_dialog(speaker: String, texture: String, text: String, format_args, player_id: int, minimum: int, maximum: int, start_value: int):
 	type = TYPES.RANGE
@@ -197,13 +196,15 @@ func _client_show_query_dialog(speaker: String, texture: String, text: String, f
 	$HBoxContainer/NinePatchRect/Range.disabled = not lobby.get_player_by_id(player_id).is_local()
 	$HBoxContainer/NinePatchRect/Range.show()
 
-master func query_value_changed(new: int):
+@rpc("any_peer") func query_value_changed(new: int):
+	if lobby.get_player_by_id(player_id).addr.peer_id != multiplayer.get_remote_sender_id():
+		return
 	$HBoxContainer/NinePatchRect/Range.value = new
 	# The Range node will do the bounds check for us
 	var sanitized = $HBoxContainer/NinePatchRect/Range.value
-	lobby.broadcast(self, "_client_query_value_changed", [sanitized])
+	lobby.broadcast(_client_query_value_changed.bind(sanitized))
 
-puppet func _client_query_value_changed(new: int):
+@rpc func _client_query_value_changed(new: int):
 	$HBoxContainer/NinePatchRect/Range.value = new
 
 func _on_focus_entered(node: String) -> void:

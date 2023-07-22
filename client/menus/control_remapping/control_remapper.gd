@@ -5,7 +5,7 @@ const ACTIONS := ["up", "left", "down", "right", "ok", "pause",
 
 signal quit
 
-var player_id setget set_player_id
+var player_id : set = set_player_id
 
 func set_player_id(id: int):
 	player_id = id
@@ -21,4 +21,4 @@ func set_player_id(id: int):
 
 func _on_Back_pressed():
 	hide()
-	emit_signal("quit")
+	quit.emit()

@@ -1,10 +1,10 @@
-tool
-extends Spatial
+@tool
+extends Node3D
 
-export var moving: bool = false
-export var speed: int = 3
+@export var moving: bool = false
+@export var speed: int = 3
 
-export(Array, Vector3) var path
+@export var path: Array[Vector3]
 
 var index = 0
 

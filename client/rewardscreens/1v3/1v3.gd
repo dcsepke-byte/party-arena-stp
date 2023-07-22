@@ -5,7 +5,7 @@ func setup_scene():
 	var placement: int = lobby.minigame_summary.placement
 	for team_id in range(len(lobby.minigame_summary.state.minigame_teams)):
 		for player_id in lobby.minigame_summary.state.minigame_teams[team_id]:
-			var node: Position3D = get_node("ViewportContainer/Viewport/Placement" + str(i))
+			var node: Marker3D = get_node("SubViewportContainer/SubViewport/Placement" + str(i))
 			load_character(player_id, node, "happy" if placement == team_id else "sad")
 			
 			var ui_container = node.get_node("VBoxContainer")
@@ -22,3 +22,4 @@ func setup_scene():
 
 func _ready():
 	setup_scene()
+	super._ready()

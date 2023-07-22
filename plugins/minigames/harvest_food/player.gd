@@ -1,4 +1,4 @@
-extends KinematicBody
+extends CharacterBody3D
 
 const MOVEMENT_SPEED = 2.5
 
@@ -17,7 +17,7 @@ var plant_spots
 var current_destination = null
 
 func _ready():
-	set_network_master(info.addr.peer_id)
+	set_multiplayer_authority(info.addr.peer_id)
 	if get_parent().lobby.minigame_state.minigame_type == Lobby.MINIGAME_TYPES.DUEL:
 		plant_spots = [$"../Area2", $"../Area4"]
 	else:
@@ -31,7 +31,7 @@ func has_player(colliders, blacklist):
 	return false
 
 func _physics_process(delta):
-	if not is_network_master():
+	if not is_multiplayer_authority():
 		return
 	var dir = Vector3()
 	
@@ -50,16 +50,16 @@ func _physics_process(delta):
 					if not has_player(colliders, []):
 						spots.append(plant)
 				
-				if not spots.empty():
+				if not spots.is_empty():
 					current_destination = spots[randi() % spots.size()]
 			
 			if current_destination:
-				var destination_vec = current_destination.translation - self.translation
+				var destination_vec = current_destination.position - self.position
 				
 				if destination_vec.length_squared() > 0.01:
 					dir = destination_vec.normalized()
 	else:
-		dir = current_destination - translation
+		dir = current_destination - position
 		if dir.length_squared() > pow(delta, 2) + 0.01:
 			dir = Vector3(dir.x, 0, dir.z).normalized()
 		else:
@@ -67,7 +67,9 @@ func _physics_process(delta):
 			rotation = Vector3(0, -PI/2, 0)
 	
 	movement += Vector3(0, -9.81, 0) * delta
-	move_and_slide(movement + dir * MOVEMENT_SPEED, Vector3(0, 1, 0))
+	set_velocity(movement + dir * MOVEMENT_SPEED)
+	set_up_direction(Vector3(0, 1, 0))
+	move_and_slide()
 	
 	if dir.length_squared() > 0:
 		rotation.y = atan2(dir.x, dir.z)
@@ -79,18 +81,18 @@ func _physics_process(delta):
 		play_animation("idle")
 		is_walking = false
 	
-	get_parent().lobby.broadcast_unreliable(self, "position_updated", [translation, rotation, is_walking])
+	get_parent().lobby.broadcast(position_updated.bind(position, rotation, is_walking))
 	if is_on_floor():
 		movement = Vector3()
 
-puppet func position_updated(trans: Vector3, rot: Vector3, walking: bool):
+@rpc("unreliable") func position_updated(pos: Vector3, rot: Vector3, walking: bool):
 	if not is_walking and walking:
 		play_animation("run")
 	elif is_walking and not walking:
 		play_animation("idle")
-	translation = trans
+	position = pos
 	rotation = rot
 	is_walking = walking
 
-func play_animation(name):
-	$Model.play_animation(name)
+func play_animation(anim_name):
+	$Model.play_animation(anim_name)

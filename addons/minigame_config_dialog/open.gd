@@ -1,4 +1,4 @@
-tool
+@tool
 extends PopupPanel
 
 signal selected(item)
@@ -11,13 +11,13 @@ func set_options(list: Array):
 	for item in list:
 		var button := Button.new()
 		button.text = item
-		button.connect("pressed", self, "_on_selected", [item])
+		button.pressed.connect(_on_selected.bind(item))
 		$VBoxContainer/ScrollContainer/VBoxContainer.add_child(button)
 
 func _on_selected(item):
-	emit_signal("selected", item)
+	selected.emit(item)
 	hide()
 
 func _on_Close_pressed():
-	emit_signal("selected", null)
+	selected.emit(null)
 	hide()

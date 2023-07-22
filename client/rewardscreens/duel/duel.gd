@@ -6,7 +6,7 @@ func setup_scene():
 	for p in lobby.minigame_summary.placement:
 		for player_id in p:
 			i += 1
-			var node: Position3D = get_node("ViewportContainer/Viewport/Placement" + str(i))
+			var node: Marker3D = get_node("SubViewportContainer/SubViewport/Placement" + str(i))
 			load_character(player_id, node, "happy" if i == 1 and not is_tie else "sad")
 			
 			var ui_container: Control = node.get_node("VBoxContainer")
@@ -19,6 +19,7 @@ func setup_scene():
 				lobby.MINIGAME_DUEL_REWARDS.TEN_COOKIES:
 					cookie_text.total_cookies = lobby.get_playerstate(player_id).cookies
 				_:
+					@warning_ignore("assert_always_false")
 					assert(false, "Invalid duel reward: {0}".format([lobby.minigame_reward.duel_reward]))
 			position_beneath(node, ui_container)
 			if not is_tie:
@@ -27,9 +28,10 @@ func setup_scene():
 				else:
 					cookie_text.cookies = -lobby.minigame_summary.reward
 	if not is_tie:
-		position_above($ViewportContainer/Viewport/Placement1, $ViewportContainer/Viewport/Placement1/WinnerText)
+		position_above($SubViewportContainer/SubViewport/Placement1, $SubViewportContainer/SubViewport/Placement1/WinnerText)
 	else:
-		$ViewportContainer/Viewport/Placement1/WinnerText.hide()
+		$SubViewportContainer/SubViewport/Placement1/WinnerText.hide()
 
 func _ready():
 	setup_scene()
+	super._ready()

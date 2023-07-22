@@ -1,6 +1,6 @@
-extends Spatial
+extends Node3D
 
-func handle_event(player: Spatial, space: Spatial):
+func handle_event(player: Node3D, space: Node3D):
 	match space.name:
 		"Node6":
 			player.walk_to($Nodes/Node27)
@@ -23,5 +23,5 @@ func handle_event(player: Spatial, space: Spatial):
 		"Node50":
 			player.walk_to($Nodes/Node15)
 
-	yield(player, "walking_ended")
-	$Controller.continue()
+	await player.walking_ended
+	$Controller.board_continue()

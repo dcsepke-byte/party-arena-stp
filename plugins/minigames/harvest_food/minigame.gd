@@ -1,4 +1,4 @@
-extends Spatial
+extends Node3D
 
 var lobby: Lobby
 
@@ -30,10 +30,10 @@ func _ready():
 		
 		$Area1.queue_free()
 		$Area3.queue_free()
-	if multiplayer.is_network_server():
+	if multiplayer.is_server():
 		spawn_plants()
 	else:
-		$Timer.disconnect("timeout", self, "_on_Timer_timeout")
+		$Timer.timeout.disconnect(_on_Timer_timeout)
 
 func spawn_plants():
 	rotten_index = randi() % plants.size()
@@ -43,42 +43,42 @@ func spawn_plants():
 		var plant
 		if i == rotten_index:
 			idx.append(randi() % ROTTEN_PLANTS.size())
-			plant = ROTTEN_PLANTS[idx[-1]].instance()
+			plant = ROTTEN_PLANTS[idx[-1]].instantiate()
 		else:
 			idx.append(randi() % NORMAL_PLANTS.size())
-			plant = NORMAL_PLANTS[idx[-1]].instance()
+			plant = NORMAL_PLANTS[idx[-1]].instantiate()
 		
 		plants[i].add_child(plant)
 	# TODO: this exposes which plant is rotten to the client, allowing to "cheat"
 	# Will need to be fixed when this minigame is reworked
-	lobby.broadcast(self, "_client_spawn_plants", [idx, rotten_index])
+	lobby.broadcast(_client_spawn_plants.bind(idx, rotten_index))
 	$Timer.start()
 
-puppet func _client_spawn_plants(idx: Array, rotten_index: int):
+@rpc func _client_spawn_plants(idx: Array, rotten_index: int):
 	self.rotten_index = rotten_index
 	for i in range(plants.size()):
 		var plant
 		if i == rotten_index:
-			plant = ROTTEN_PLANTS[idx[i]].instance()
+			plant = ROTTEN_PLANTS[idx[i]].instantiate()
 		else:
-			plant = NORMAL_PLANTS[idx[i]].instance()
+			plant = NORMAL_PLANTS[idx[i]].instantiate()
 		
 		plants[i].add_child(plant)
 	$Timer.start()
 
-puppet func round_finished():
+@rpc func round_finished():
 	$Timer.stop()
 	# Move every player in front of the spot
 	$Player1.input_disabled = true
-	$Player1.current_destination = $Player1.translation - $Player1.translation.normalized()
+	$Player1.current_destination = $Player1.position - $Player1.position.normalized()
 	$Player2.input_disabled = true
-	$Player2.current_destination = $Player2.translation - $Player2.translation.normalized()
+	$Player2.current_destination = $Player2.position - $Player2.position.normalized()
 	if lobby.minigame_state.minigame_type != Lobby.MINIGAME_TYPES.DUEL:
 		$Player3.input_disabled = true
-		$Player3.current_destination = $Player3.translation - $Player3.translation.normalized()
+		$Player3.current_destination = $Player3.position - $Player3.position.normalized()
 		$Player3.rotation = Vector3(0, -PI/2, 0)
 		$Player4.input_disabled = true
-		$Player4.current_destination = $Player4.translation - $Player4.translation.normalized()
+		$Player4.current_destination = $Player4.position - $Player4.position.normalized()
 		$Player4.rotation = Vector3(0, -PI/2, 0)
 	
 	for i in range(plants.size()):
@@ -98,23 +98,23 @@ puppet func round_finished():
 		var animationplayer = plants[i].get_node("Plant/AnimationPlayer")
 		animationplayer.play("show")
 
-puppet func reset():
+@rpc func reset():
 	$Player1.input_disabled = false
 	$Player1.play_animation("idle")
-	$Player1.translation = Vector3(-1, 0, -1)
+	$Player1.position = Vector3(-1, 0, -1)
 	$Player1.current_destination = null
 	$Player2.input_disabled = false
 	$Player2.play_animation("idle")
-	$Player2.translation = Vector3(1, 0, -1)
+	$Player2.position = Vector3(1, 0, -1)
 	$Player2.current_destination = null
 	if lobby.minigame_state.minigame_type != Lobby.MINIGAME_TYPES.DUEL:
 		$Player3.input_disabled = false
 		$Player3.play_animation("idle")
-		$Player3.translation = Vector3(1, 0, 1)
+		$Player3.position = Vector3(1, 0, 1)
 		$Player3.current_destination = null
 		$Player4.input_disabled = false
 		$Player4.play_animation("idle")
-		$Player4.translation = Vector3(-1, 0, 1)
+		$Player4.position = Vector3(-1, 0, 1)
 		$Player4.current_destination = null
 	
 	$Screen/Message.text = ""
@@ -135,7 +135,7 @@ func _on_Timer_timeout():
 					collider.plants += 1
 	rounds -= 1
 	
-	lobby.broadcast(self, "round_finished")
+	lobby.broadcast(round_finished)
 	
 	# Update scores
 	$Screen/ScoreOverlay.set_score($Player1.info.player_id, $Player1.plants)
@@ -144,10 +144,10 @@ func _on_Timer_timeout():
 		$Screen/ScoreOverlay.set_score($Player3.info.player_id, $Player3.plants)
 		$Screen/ScoreOverlay.set_score($Player4.info.player_id, $Player4.plants)
 	# Wait 5 seconds
-	yield(get_tree().create_timer(5.0), "timeout")
+	await get_tree().create_timer(5.0).timeout
 	
 	reset()
-	lobby.broadcast(self, "reset")
+	lobby.broadcast(reset)
 	
 	if rounds > 0:
 		spawn_plants()
@@ -161,4 +161,4 @@ func _on_Timer_timeout():
 				lobby.minigame_team_win_by_points([$Player1.plants + $Player2.plants, $Player3.plants + $Player4.plants])
 
 func _client_process(_delta):
-	$Screen/Time.text = str(stepify($Timer.time_left, 0.01))
+	$Screen/Time.text = "%.2f" % snapped($Timer.time_left, 0.01)

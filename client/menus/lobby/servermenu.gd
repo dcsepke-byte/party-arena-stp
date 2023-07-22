@@ -5,7 +5,7 @@ var server
 var mainmenu
 
 func _ready():
-	server.connect("public_lobbies", self, "_on_public_lobbies_updated")
+	server.public_lobbies.connect(_on_public_lobbies_updated)
 	$VBoxContainer/Footer/Create.grab_focus()
 	refresh()
 	
@@ -29,15 +29,15 @@ func _on_public_lobbies_updated(list):
 	for entry in list:
 		var button := Button.new()
 		button.text = entry[0]
-		button.connect("pressed", self, "_on_join_lobby", [entry[0]])
+		button.pressed.connect(self._on_join_lobby.bind(entry[0]))
 		$VBoxContainer/ScrollContainer/List.add_child(button)
 
 func _on_join_lobby(id: String) -> void:
-	var lobby = yield(server.join_lobby(id), "completed")
+	var lobby = await server.join_lobby(id).completed
 	lobby_joined(lobby)
 
 func lobby_joined(lobby: Lobby):
-	lobby_menu = preload("res://client/menus/lobby/lobby_menu.tscn").instance()
+	lobby_menu = preload("res://client/menus/lobby/lobby_menu.tscn").instantiate()
 	lobby_menu.lobby = lobby
 	lobby_menu.mainmenu = mainmenu
 	lobby_menu.servermenu = self
@@ -45,9 +45,9 @@ func lobby_joined(lobby: Lobby):
 	hide()
 
 func _on_lobby_create() -> void:
-	var lobby = yield(server.create_lobby(), "completed")
+	var lobby = await server.create_lobby().completed
 	if lobby:
-		lobby_menu = preload("res://client/menus/lobby/lobby_menu.tscn").instance()
+		lobby_menu = preload("res://client/menus/lobby/lobby_menu.tscn").instantiate()
 		lobby_menu.lobby = lobby
 		lobby_menu.mainmenu = mainmenu
 		lobby_menu.servermenu = self
@@ -59,9 +59,9 @@ func _on_Leave_pressed() -> void:
 	queue_free()
 
 func _on_Join_pressed() -> void:
-	var lobby = yield(server.join_lobby($VBoxContainer/Footer/HBoxContainer/LineEdit.text), "completed")
+	var lobby = await server.join_lobby($VBoxContainer/Footer/HBoxContainer/LineEdit.text).completed
 	if lobby:
-		lobby_menu = preload("res://client/menus/lobby/lobby_menu.tscn").instance()
+		lobby_menu = preload("res://client/menus/lobby/lobby_menu.tscn").instantiate()
 		lobby_menu.lobby = lobby
 		lobby_menu.mainmenu = mainmenu
 		lobby_menu.servermenu = self

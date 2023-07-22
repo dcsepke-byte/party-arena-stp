@@ -1,11 +1,11 @@
-extends KinematicBody
+extends CharacterBody3D
 
 const SPEED := 3
 
 var info: Lobby.PlayerInfo
 
 func _ready():
-	set_network_master(info.addr.peer_id)
+	set_multiplayer_authority(info.addr.peer_id)
 
 func _process(_delta):
 	if not info.is_local():
@@ -19,14 +19,14 @@ func _process(_delta):
 		var target
 		var dist = INF
 		for ghost in Utility.get_nodes_in_group(get_parent(), "ghost"):
-			var ndist = (ghost.translation - self.translation).length_squared()
-			if ghost.translation.length_squared() < 25 and dist > ndist:
+			var ndist = (ghost.position - self.position).length_squared()
+			if ghost.position.length_squared() < 25 and dist > ndist:
 				target = ghost
 				dist = ndist
 		
 		if target:
-			var array = Array(get_parent().get_simple_path(self.translation, target.translation))
-			dir = (array[1] - self.translation).normalized() * SPEED
+			$Navigation.target_position = target.position
+			dir = ($Navigation.get_next_path_position() - self.position).normalized() * SPEED
 			dir.y = 0
 	
 	var animation := "idle"
@@ -36,10 +36,11 @@ func _process(_delta):
 		animation = "run"
 	
 	$Model.play_animation(animation)
-	move_and_slide(dir + Vector3(0, -1, 0))
-	get_parent().lobby.broadcast_unreliable(self, "position_updated", [self.translation, rotation, animation])
+	set_velocity(dir + Vector3(0, -1, 0))
+	move_and_slide()
+	get_parent().lobby.broadcast(position_updated.bind(position, rotation, animation))
 
-puppet func position_updated(trans, rot, anim):
-	self.translation = trans
+@rpc func position_updated(trans, rot, anim):
+	self.position = trans
 	self.rotation = rot
 	$Model.play_animation(anim)

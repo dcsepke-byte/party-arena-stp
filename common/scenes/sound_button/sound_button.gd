@@ -1,6 +1,6 @@
 extends Control
 
-export(String, FILE) var custom_click
+@export_file var custom_click
 
 var _click_sound = preload("res://assets/sounds/ui/rollover2.wav")
 var _select_sound = preload("res://assets/sounds/ui/click1.wav")
