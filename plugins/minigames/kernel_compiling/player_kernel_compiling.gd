@@ -1,4 +1,4 @@
-extends Spatial
+extends Node3D
 
 const ACTIONS := ["up", "down", "left", "right", "action1", "action2", "action3", "action4"]
 
@@ -13,7 +13,7 @@ var disabled_input = false
 var teammate: Node
 
 var presses := 0
-onready var NEEDED_BUTTON_PRESSES := 25 if info.lobby.minigame_state.minigame_type != Lobby.MINIGAME_TYPES.TWO_VS_TWO else 50
+@onready var NEEDED_BUTTON_PRESSES := 25 if info.lobby.minigame_state.minigame_type != Lobby.MINIGAME_TYPES.TWO_VS_TWO else 50
 
 var AI_MIN_WAIT_TIME: float
 var AI_MAX_WAIT_TIME: float
@@ -31,9 +31,9 @@ func generate_next_action():
 		return
 	var action = ACTIONS[randi() % ACTIONS.size()]
 	next_action = "player" + str(info.player_id) + "_" + action
-	info.lobby.broadcast(self, "set_action", [action])
+	info.lobby.broadcast(set_action.bind(action))
 
-puppet func set_action(action: String):
+@rpc func set_action(action: String):
 	if action == "":
 		next_action = ""
 		$Screen/ControlView.clear_display()
@@ -45,13 +45,13 @@ puppet func set_action(action: String):
 
 func clear_action():
 	next_action = ""
-	info.lobby.broadcast(self, "set_action", [""])
+	info.lobby.broadcast(set_action.bind(""))
 
 func update_progress():
 	# If each player has their own progress bar (every mode exect 2v2), then do it locally
 	# Otherwise, let the minigame root node handle the combined progress bars for each team
 	if info.lobby.minigame_state.minigame_type != Lobby.MINIGAME_TYPES.TWO_VS_TWO:
-		$Progress/Sprite3D.material_override.set_shader_param("percentage", get_percentage())
+		$Progress/Sprite3D.material_override.set_shader_parameter("percentage", get_percentage())
 	else:
 		get_parent().update_progress()
 
@@ -59,7 +59,7 @@ func _ready():
 	$Model.jump_to_animation("sit")
 	
 	if info.lobby.minigame_state.minigame_type == Lobby.MINIGAME_TYPES.TWO_VS_TWO:
-		$Screen.translation.y -= 0.15
+		$Screen.position.y -= 0.15
 		$Progress.hide()
 	
 	if info.is_ai():
@@ -74,27 +74,27 @@ func _ready():
 				AI_MIN_WAIT_TIME = 0.6
 				AI_MAX_WAIT_TIME = 0.8
 		
-		ai_wait_time = rand_range(AI_MIN_WAIT_TIME, AI_MAX_WAIT_TIME)
+		ai_wait_time = randf_range(AI_MIN_WAIT_TIME, AI_MAX_WAIT_TIME)
 
 func press():
-	rpc_id(1, "pressed")
+	pressed.rpc_id(1)
 
-mastersync func pressed():
-	if info.addr.peer_id != multiplayer.get_rpc_sender_id():
+@rpc("any_peer", "call_local") func pressed():
+	if info.addr.peer_id != multiplayer.get_remote_sender_id():
 		return
 	if next_action == "":
 		return
 	presses += 1
 	if teammate:
 		teammate.presses += 1
-	info.lobby.broadcast(self, "_client_pressed")
+	info.lobby.broadcast(_client_pressed)
 	clear_action()
 	if presses < NEEDED_BUTTON_PRESSES:
-		get_tree().create_timer(0.25).connect("timeout", self, "generate_next_action")
+		get_tree().create_timer(0.25).timeout.connect(generate_next_action)
 	else:
 		get_parent().stop_game()
 
-puppet func _client_pressed():
+@rpc func _client_pressed():
 	presses += 1
 	if teammate:
 		teammate.presses += 1
@@ -106,7 +106,7 @@ func _server_process(delta):
 		ai_wait_time -= delta
 		if ai_wait_time <= 0:
 			press()
-			ai_wait_time = rand_range(AI_MIN_WAIT_TIME, AI_MAX_WAIT_TIME)
+			ai_wait_time = randf_range(AI_MIN_WAIT_TIME, AI_MAX_WAIT_TIME)
 
 func _input(event):
 	if not info.is_local() or info.is_ai():

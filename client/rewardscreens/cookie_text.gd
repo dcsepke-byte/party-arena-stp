@@ -1,15 +1,15 @@
 extends VBoxContainer
 
-var cookies := 0 setget set_cookies
-var total_cookies := 0 setget set_total_cookies
+var cookies := 0: set = set_cookies
+var total_cookies := 0: set = set_total_cookies
 
-export var icon: Texture = preload("res://common/scenes/board_logic/controller/icons/cookie.png") setget set_display_icon, get_display_icon
+@export var icon: Texture2D = preload("res://common/scenes/board_logic/controller/icons/cookie.png"): get = get_display_icon, set = set_display_icon
 
 func set_display_icon(icon):
 	$Line1/TextureRect.texture = icon
 	$Line2/TextureRect.texture = icon
 
-func get_display_icon() -> Texture:
+func get_display_icon() -> Texture2D:
 	return $Line1/TextureRect.texture
 
 func set_cookies(c: int):

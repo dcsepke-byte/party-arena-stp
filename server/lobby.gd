@@ -9,17 +9,6 @@ class BoardOverrides:
 	# Option to choose how players are awarded after completing a mini-game.
 	var award: int = Lobby.AWARD_TYPE.LINEAR
 
-enum NOLOK_ACTION_TYPES {
-	SOLO_MINIGAME,
-	COOP_MINIGAME,
-	BOARD_EFFECT
-}
-
-enum GNU_ACTION_TYPES {
-	SOLO_MINIGAME,
-	COOP_MINIGAME
-}
-
 const MINIGAME_REWARD_SCREEN = preload("res://server//rewardscreens/rewardscreen.tscn")
 
 var overrides: BoardOverrides = BoardOverrides.new()
@@ -51,10 +40,10 @@ func _init():
 		settings["main/public"] = Settings.new_bool("MENU_SETTINGS_PUBLIC", false)
 	settings["main/enable_timeout"] = Settings.new_bool("MENU_SETTINGS_ENABLE_TIMEOUT", not Global.is_local_multiplayer())
 	settings["main/timeout"] = Settings.new_range("MENU_SETTINGS_TIMEOUT", 30, 10, 65535)
-	settings["main/cake_cost"] = Settings.new_range("MENU_SETTINGS_CAKE_COST", 10, 1, 65535)
-	settings["main/turns"] = Settings.new_range("MENU_SETTINGS_TURNS", 30, 10, 65535)
+	settings["main/cake_cost"] = Settings.new_range("MENU_SETTINGS_CAKE_COST", 30, 10, 65535)
+	settings["main/turns"] = Settings.new_range("MENU_SETTINGS_TURNS", 10, 1, 65535)
 	settings["main/award_type"] = Settings.new_options("MENU_SETTINGS_AWARD_TYPE", "MENU_SETTINGS_AWARD_LINEAR", ["MENU_SETTINGS_AWARD_LINEAR", "MENU_SETTINGS_AWARD_WINNER_TAKES_ALL"])
-	connect("setting_changed", self, "_on_setting_changed")
+	setting_changed.connect(_on_setting_changed)
 	current_board = PluginSystem.board_loader.get_loaded_boards()[0]
 
 func _on_setting_changed(setting: Settings):
@@ -80,8 +69,8 @@ func _on_setting_changed(setting: Settings):
 				"MENU_SETTINGS_AWARD_WINNER_TAKES_ALL":
 					overrides.award = AWARD_TYPE.WINNER_ONLY
 
-func next_ai_addr():
-	var idx = num_ai
+func next_ai_addr() -> PlayerAddress:
+	var idx := num_ai
 	num_ai += 1
 	return PlayerAddress.new(1, idx)
 
@@ -95,13 +84,42 @@ func add_ai_players():
 		remaining[idx] = remaining[-1]
 		remaining[-1] = character
 		remaining.pop_back()
-		var name := "{0} Bot".format([character])
-		player_info.append(PlayerInfo.new(self, next_ai_addr(), name, character))
+		var botname := "{0} Bot".format([character])
+		player_info.append(PlayerInfo.new(self, next_ai_addr(), botname, character))
 
-master func start():
-	if is_lobby_owner(multiplayer.get_rpc_sender_id()):
+
+# Some boilerplate rpc function definitions
+# This is necessary, because since Godot4 these methods must be declared
+# on the sending side as well
+@rpc
+func add_player_failed(): pass
+@rpc
+func update_settings(_settings: Array): pass
+@rpc
+func board_select(_board: String): pass
+@rpc
+func lobby_joined(_players: Array): pass
+@rpc
+func replace_by_ai(_id: int, _addr: Array): pass
+@rpc
+func return_to_board(): pass
+@rpc
+func load_minigame(): pass
+@rpc
+func playerstate_updated(_players: Array): pass
+@rpc
+func minigame_ended(_was_try: bool, _placement, _reward): pass
+@rpc
+func finish_loading(): pass
+@rpc
+func game_started(): pass
+@rpc
+func game_ended(): pass
+
+@rpc("any_peer") func server_start():
+	if is_lobby_owner(multiplayer.get_remote_sender_id()):
 		# Check if the preconditions to start are met
-		if not current_board:
+		if current_board.is_empty():
 			return
 		for player in player_info:
 			if player.name == "" or player.character == "":
@@ -110,24 +128,24 @@ master func start():
 		started = true
 		add_ai_players()
 		update_playerlist()
-		broadcast(self, "game_start", [])
-		assign_player_ids()
+		broadcast(game_started)
+		_assign_player_ids()
 		load_board()
 
-master func select_board(board: String):
+@rpc("any_peer") func server_select_board(board: String):
 	if not board in PluginSystem.board_loader.get_loaded_boards():
 		return
 	if loaded_from_savegame:
 		return
-	if is_lobby_owner(multiplayer.get_rpc_sender_id()):
-		self.current_board = board
+	if is_lobby_owner(multiplayer.get_remote_sender_id()):
+		current_board = board
 		var cake_cost := 30
 		var max_turns := 10
-		var scene: SceneState = load(PluginSystem.board_loader.get_board_path(self.current_board)).get_state()
+		var scene: SceneState = load(PluginSystem.board_loader.get_board_path(current_board)).get_state()
 		for i in range(scene.get_node_count()):
 			var instance: PackedScene = scene.get_node_instance(i)
 			if instance:
-				var groups: PoolStringArray = instance.get_state().get_node_groups(0)
+				var groups: PackedStringArray = instance.get_state().get_node_groups(0)
 				if "Controller" in groups:
 					for prop in range(scene.get_node_property_count(i)):
 						match scene.get_node_property_name(i, prop):
@@ -140,22 +158,22 @@ master func select_board(board: String):
 		send_board()
 		send_settings()
 
-master func select_character(idx: int, character: String):
+@rpc("any_peer") func server_select_character(idx: int, character: String):
 	if not character in PluginSystem.character_loader.get_loaded_characters():
 		return
 	if loaded_from_savegame:
 		return
-	var target = PlayerAddress.new(multiplayer.get_rpc_sender_id(), idx)
+	var target = PlayerAddress.new(multiplayer.get_remote_sender_id(), idx)
 	var player = get_player_by_addr(target)
 	if player:
 		player.character = character
 		update_playerlist()
 
-master func set_player_name(idx: int, name: String):
-	var target = PlayerAddress.new(multiplayer.get_rpc_sender_id(), idx)
+@rpc("any_peer") func server_set_player_name(idx: int, playername: String):
+	var target = PlayerAddress.new(multiplayer.get_remote_sender_id(), idx)
 	var player = get_player_by_addr(target)
 	if player:
-		player.name = name
+		player.name = playername
 		update_playerlist()
 
 func end():
@@ -165,33 +183,33 @@ func end():
 	# TODO: only leave autofill AIs?
 	leave(1)
 	num_ai = 0
-	self.playerstates.clear()
+	playerstates.clear()
 	player_turn = 1
 	turn = 1
 	trap_states.clear()
 	cake_space = NodePath()
-	current_scene.queue_free()
-	current_scene = null
-	broadcast(self, "game_ended")
+	_current_scene.queue_free()
+	_current_scene = null
+	broadcast(game_ended)
 
 func is_public() -> bool:
 	if not "main/public" in settings:
 		return false
 	return settings["main/public"].get_value()
 
-master func add_player(idx: int):
-	var peer := multiplayer.get_rpc_sender_id()
+@rpc("any_peer") func server_add_player(idx: int):
+	var peer := multiplayer.get_remote_sender_id()
 	if not join(PlayerAddress.new(peer, idx)):
-		rpc_id(peer, "add_player_failed")
+		add_player_failed.rpc_id(peer)
 		return
 	update_playerlist()
 
-master func remove_player(idx: int):
+@rpc("any_peer") func server_remove_player(idx: int):
 	# Only available while in the lobby
 	if started:
 		return
 	# Is this the last player from that id?
-	var peer := multiplayer.get_rpc_sender_id()
+	var peer := multiplayer.get_remote_sender_id()
 	var count := 0
 	for player in player_info:
 		if player.addr.peer_id == peer:
@@ -204,7 +222,7 @@ master func remove_player(idx: int):
 	var i := 0
 	for player in player_info:
 		if player.addr.peer_id == peer and player.addr.idx == idx:
-			player_info.remove(i)
+			player_info.remove_at(i)
 			update_playerlist()
 			return
 		i += 1
@@ -214,28 +232,28 @@ func join(addr: PlayerAddress) -> bool:
 	if started:
 		return false
 	# Lobby full?
-	var player_count := len(self.player_info)
+	var player_count := len(player_info)
 	if player_count == LOBBY_SIZE:
 		return false
 	# No duplicate players
-	for player in self.player_info:
+	for player in player_info:
 		if player.addr.eq(addr):
 			return false
 	# Prevent race condition with lobby deletion when last player leaves
 	if is_queued_for_deletion():
 		return false
-	self.player_info.append(PlayerInfo.new(self, addr, "Player" + str(player_count + 1), ""))
+	player_info.append(PlayerInfo.new(self, addr, "Player" + str(player_count + 1), ""))
 	return true
 
-master func update_setting(id: String, value):
-	if not is_lobby_owner(multiplayer.get_rpc_sender_id()):
+@rpc("any_peer") func server_update_setting(id: String, value):
+	if not is_lobby_owner(multiplayer.get_remote_sender_id()):
 		return
 	if change_setting(id, value):
 		send_settings()
 
 func change_setting(id: String, value) -> bool:
 	if id in settings and settings[id].update_value(value):
-		emit_signal("setting_changed", settings[id])
+		setting_changed.emit(settings[id])
 		return true
 	return false
 
@@ -245,28 +263,28 @@ func send_settings(peer := -1):
 	for id in settings:
 		encoded.append([id, settings[id].encode()])
 	if peer == -1:
-		broadcast(self, "update_settings", [encoded])
+		broadcast(update_settings.bind(encoded))
 	else:
-		rpc_id(peer, "update_settings", encoded)
+		update_settings.rpc_id(peer, encoded)
 
 func send_board(peer := -1):
 	if peer == -1:
-		broadcast(self, "board_selected", [current_board])
+		broadcast(board_select.bind(current_board))
 	else:
-		rpc_id(peer, "board_selected", current_board)
+		board_select.rpc_id(peer, current_board)
 
 func update_playerlist(peer := -1):
 	# Send players the updated list
 	var encoded := []
-	for player in self.player_info:
+	for player in player_info:
 		encoded.append(player.encode())
 	if peer == -1:
-		broadcast(self, "lobby_joined", [encoded])
+		broadcast(lobby_joined.bind(encoded))
 	else:
-		rpc_id(peer, "lobby_joined", encoded)
+		lobby_joined.rpc_id(peer, encoded)
 
-master func refresh():
-	var peer := multiplayer.get_rpc_sender_id()
+@rpc("any_peer") func server_refresh():
+	var peer := multiplayer.get_remote_sender_id()
 	if has_peer(peer):
 		update_playerlist(peer)
 		send_settings(peer)
@@ -286,16 +304,16 @@ func leave(id: int):
 			# Updating this will update other code as well
 			player.addr = next_ai_addr()
 			keep.append(player)
-			broadcast(self, "replace_by_ai", [player.player_id, player.addr.encode()])
-			emit_signal("player_left", player.player_id)
-	self.player_info = keep
+			broadcast(replace_by_ai.bind(player.player_id, player.addr.encode()))
+			player_left.emit(player.player_id)
+	player_info = keep
 	update_playerlist()
 	if human_players == 0:
 		queue_free()
 
 func kick(id: int, reason: String):
 	print("Kicking Player {0} ({1})".format([id, reason]))
-	(multiplayer.network_peer as NetworkedMultiplayerENet).disconnect_peer(id)
+	multiplayer.multiplayer_peer.disconnect_peer(id)
 
 func delete():
 	queue_free()
@@ -304,7 +322,7 @@ func delete():
 
 # Internal function for actually changing scene without saving any game state.
 func _goto_scene(path: String) -> void:
-	_interactive_load_scene(path, null, "", null)
+	_interactive_load_scene(path, Callable())
 
 # Goto a specific scene without saving player states.
 func goto_scene(path: String) -> void:
@@ -312,7 +330,7 @@ func goto_scene(path: String) -> void:
 
 # Internal function for changing scene to a minigame while handling player objects.
 func _goto_scene_minigame(path: String) -> void:
-	_interactive_load_scene(path, self, "_goto_scene_minigame_callback", null)
+	_interactive_load_scene(path, _goto_scene_minigame_callback)
 
 # Internal function for changing scene to a board while handling player objects.
 func _goto_scene_board() -> void:
@@ -320,10 +338,10 @@ func _goto_scene_board() -> void:
 		# The game has ended, prepare the lobby for another round
 		end()
 		return
-	broadcast(self, "return_to_board")
-	_interactive_load_scene(PluginSystem.board_loader.get_board_path(current_board), self, "_goto_scene_board_callback", null)
+	broadcast(return_to_board)
+	_interactive_load_scene(PluginSystem.board_loader.get_board_path(current_board), _goto_scene_board_callback)
 
-func _goto_scene_minigame_callback(scene: Node, _arg):
+func _goto_scene_minigame_callback(scene: Node):
 	var i := 1
 	for team_id in minigame_state.minigame_teams.size():
 		var team = minigame_state.minigame_teams[team_id]
@@ -341,19 +359,19 @@ func _goto_scene_minigame_callback(scene: Node, _arg):
 			player.queue_free()
 		i += 1
 
-func _goto_scene_board_callback(scene: Node, _arg):
+func _goto_scene_board_callback(scene: Node):
 	for i in range(LOBBY_SIZE):
 		var player = scene.get_node("Player" + str(i + 1))
 		_load_player(player, player_info[i])
 
-master func _goto_minigame(is_try: bool):
+@rpc("any_peer") func _goto_minigame(is_try: bool):
 	if not minigame_state:
 		return
 	# TODO: wait for all players to accept?
-	if not is_lobby_owner(multiplayer.get_rpc_sender_id()):
+	if not is_lobby_owner(multiplayer.get_remote_sender_id()):
 		return
 	minigame_state.is_try = is_try
-	broadcast(self, "load_minigame")
+	broadcast(load_minigame)
 	goto_minigame()
 
 # Change scene to one of the mini-games.
@@ -386,7 +404,7 @@ func goto_minigame() -> void:
 	var encoded := []
 	for state in playerstates:
 		encoded.append(state.encode())
-	broadcast(self, "playerstate_updated", [encoded])
+	broadcast(playerstate_updated.bind(encoded))
 	call_deferred("_goto_scene_minigame", minigame_state.minigame_config.scene_path)
 
 func duplicate_items(items: Array) -> Array:
@@ -420,8 +438,8 @@ func get_ffa_reward(pos: int):
 func _goto_board(placement) -> void:
 	# Only award if the players were not trying the minigame out
 	if minigame_state.is_try:
-		call_deferred("_goto_scene_board")
-		broadcast(self, "minigame_ended", [true, null, null])
+		_goto_scene_board.call_deferred()
+		broadcast(minigame_ended.bind(true, null, null))
 		return
 
 	var minigame_type = minigame_state.minigame_type
@@ -441,7 +459,7 @@ func _goto_board(placement) -> void:
 					minigame_summary.reward.append(get_ffa_reward(place))
 					playerstates[player_id - 1].cookies += get_ffa_reward(place)
 				place += len(position)
-			call_deferred("_goto_scene_instant", MINIGAME_REWARD_SCREEN)
+			_goto_scene_instant.call_deferred(MINIGAME_REWARD_SCREEN)
 		MINIGAME_TYPES.TWO_VS_TWO:
 			if placement != -1:
 				minigame_summary.reward = [10, 10, 0, 0]
@@ -449,7 +467,7 @@ func _goto_board(placement) -> void:
 					playerstates[player_id - 1].cookies += 10
 			else:
 				minigame_summary.reward = [0, 0, 0, 0]
-			call_deferred("_goto_scene_instant", MINIGAME_REWARD_SCREEN)
+			_goto_scene_instant.call_deferred(MINIGAME_REWARD_SCREEN)
 		MINIGAME_TYPES.ONE_VS_THREE:
 			if placement == 1: # Solo player won
 				minigame_summary.reward = [0, 0, 0, 10]
@@ -462,7 +480,7 @@ func _goto_board(placement) -> void:
 				playerstates[minigame_teams[0][i] - 1].cookies += minigame_summary.reward[i]
 			playerstates[minigame_teams[1][0] - 1].cookies += minigame_summary.reward[3]
 
-			call_deferred("_goto_scene_instant", MINIGAME_REWARD_SCREEN)
+			_goto_scene_instant.call_deferred(MINIGAME_REWARD_SCREEN)
 		MINIGAME_TYPES.DUEL:
 			if len(placement) == 2:
 				var winning_player = playerstates[placement[0][0] - 1]
@@ -482,7 +500,7 @@ func _goto_board(placement) -> void:
 				# No cookies were transferred between players
 				minigame_summary.reward = 0
 
-			call_deferred("_goto_scene_instant", MINIGAME_REWARD_SCREEN)
+			_goto_scene_instant.call_deferred(MINIGAME_REWARD_SCREEN)
 		MINIGAME_TYPES.NOLOK_SOLO:
 			if not placement:
 				var player = playerstates[minigame_teams[0][0] - 1]
@@ -491,17 +509,17 @@ func _goto_board(placement) -> void:
 			else:
 				minigame_summary.reward = 0
 
-			call_deferred("_goto_scene_instant", MINIGAME_REWARD_SCREEN)
+			_goto_scene_instant.call_deferred(MINIGAME_REWARD_SCREEN)
 		MINIGAME_TYPES.NOLOK_COOP:
 			minigame_summary.reward = [0, 0, 0, 0]
 			if not placement:
 				for i in range(len(playerstates)):
 					minigame_summary.reward[i] = min(playerstates[i].cookies, 10)
 					playerstates[i].cookies -= minigame_summary.reward[i]
-			call_deferred("_goto_scene_instant", MINIGAME_REWARD_SCREEN)
+			_goto_scene_instant.call_deferred(MINIGAME_REWARD_SCREEN)
 		MINIGAME_TYPES.GNU_SOLO:
-			minigame_summary.reward = minigame_reward.gnu_solo_item_reward
-			call_deferred("_goto_scene_instant", MINIGAME_REWARD_SCREEN)
+			minigame_summary.reward = minigame_reward.gnu_solo_item_reward.serialize()
+			_goto_scene_instant.call_deferred(MINIGAME_REWARD_SCREEN)
 		MINIGAME_TYPES.GNU_COOP:
 			if placement == true:
 				minigame_summary.reward = [10, 10, 10, 10]
@@ -512,12 +530,12 @@ func _goto_board(placement) -> void:
 			for i in range(len(playerstates)):
 				playerstates[i].cookies += minigame_summary.reward[i]
 
-			call_deferred("_goto_scene_instant", MINIGAME_REWARD_SCREEN)
+			_goto_scene_instant.call_deferred(MINIGAME_REWARD_SCREEN)
 	var encoded := []
 	for state in playerstates:
 		encoded.append(state.encode())
-	broadcast(self, "playerstate_updated", [encoded])
-	broadcast(self, "minigame_ended", [false, placement, minigame_summary.reward])
+	broadcast(playerstate_updated.bind(encoded))
+	broadcast(minigame_ended.bind(false, placement, minigame_summary.reward))
 
 func minigame_win_by_points(points: Array) -> void:
 	var players := []
@@ -542,7 +560,7 @@ func minigame_win_by_points(points: Array) -> void:
 				players[insert_index].append(minigame_state.minigame_teams[i][0])
 
 	# We need to sort from high to low.
-	players.invert()
+	players.reverse()
 	_goto_board(players)
 
 func minigame_win_by_position(players: Array) -> void:
@@ -600,12 +618,12 @@ func minigame_gnu_win() -> void:
 func minigame_gnu_loose() -> void:
 	_goto_board(false)
 
-func load_board_state(controller: Spatial) -> void:
+func load_board_state(controller: Node3D) -> void:
 	controller.COOKIES_FOR_CAKE = overrides.cake_cost
 	controller.MAX_TURNS = overrides.max_turns
 
 	if cake_space:
-		var cake_node: Spatial = controller.get_node(cake_space)
+		var cake_node: Node3D = controller.get_node(cake_space)
 		cake_node.cake = true
 
 	controller.player_turn = player_turn
@@ -632,46 +650,46 @@ func load_board_state(controller: Spatial) -> void:
 func load_board() -> void:
 	if not loaded_from_savegame:
 		for i in range(LOBBY_SIZE):
-			playerstates.append(PlayerState.new(self.player_info[i]))
+			playerstates.append(PlayerState.new(player_info[i]))
 			if player_info[i].is_ai():
 				# TODO: adjust difficulty per AI?
 				player_info[i].ai_difficulty = Difficulty.NORMAL
 	var encoded := []
 	for state in playerstates:
 		encoded.append(state.encode())
-	broadcast(self, "playerstate_updated", [encoded])
+	broadcast(playerstate_updated.bind(encoded))
 	_goto_scene_board()
 
-func _interactive_load_scene(path: String, base: Object, method: String, arg):
-	if current_scene:
-		current_scene.queue_free()
-	current_scene = null
-	connect("loading_finished", self, "rpc_id", [1, "client_ready"], CONNECT_ONESHOT)
-	_load_interactive(path, self, "_scene_loaded", [base, method, arg])
+func _interactive_load_scene(path: String, callable: Callable):
+	if _current_scene:
+		_current_scene.queue_free()
+	_current_scene = null
+	loading_finished.connect(func(): self.client_ready.rpc_id(1), CONNECT_ONE_SHOT)
+	_load_interactive(path, _scene_loaded.bind(callable))
 	wait_before_scene_change = {}
 	for player in player_info:
 		wait_before_scene_change[player.addr.peer_id] = true
 
-mastersync func client_ready():
-	if not wait_before_scene_change:
+@rpc("any_peer", "call_local") func client_ready():
+	if wait_before_scene_change.is_empty():
 		return
-	var id := multiplayer.get_rpc_sender_id()
+	var id := multiplayer.get_remote_sender_id()
 	wait_before_scene_change.erase(id)
 	
-	if not wait_before_scene_change:
-		broadcast(self, "loading_finished")
-		change_scene()
+	if wait_before_scene_change.is_empty():
+		broadcast(finish_loading)
+		_change_scene_to_file()
 
-func _scene_loaded(s: PackedScene, arg: Array):
-	loaded_scene = s.instance()
-
-	if arg[0]:
-		arg[0].call(arg[1], loaded_scene, arg[2])
+func _scene_loaded(s: PackedScene, callable: Callable):
+	_loaded_scene = s.instantiate()
+	callable.call(_loaded_scene)
 
 # ----- Savegame code ----- #
 
-master func load_savegame(data: Dictionary) -> void:
-	if not enable_savegames or not is_lobby_owner(multiplayer.get_rpc_sender_id()):
+@rpc func save_game_callback(_data: Dictionary, _err: String): pass
+
+@rpc func load_savegame(data: Dictionary) -> void:
+	if not enable_savegames or not is_lobby_owner(multiplayer.get_remote_sender_id()):
 		return
 
 	var savegame := SaveGameLoader.SaveGame.from_data(data)
@@ -683,9 +701,9 @@ master func load_savegame(data: Dictionary) -> void:
 		var addr := PlayerAddress.new(multiplayer.get_network_connected_peers()[0], i)
 		if savegame.players[i].is_ai:
 			addr = next_ai_addr()
-		var name: String = savegame.players[i].player_name
+		var player_name: String = savegame.players[i].player_name
 		var character: String = savegame.players[i].character
-		var info := PlayerInfo.new(self, addr, name, character)
+		var info := PlayerInfo.new(self, addr, player_name, character)
 		info.player_id = i + 1
 		info.ai_difficulty = savegame.players[i].ai_difficulty
 		
@@ -701,15 +719,14 @@ master func load_savegame(data: Dictionary) -> void:
 	cake_space = savegame.board_state.cake_space
 	if savegame.minigame_state.minigame_config:
 		minigame_state = MinigameState.new()
-		minigame_state.minigame_config = PluginSystem.minigame_loader \
-			.parse_file(savegame.minigame_state.minigame_config)
+		minigame_state.minigame_config = MinigameLoader.parse_file(savegame.minigame_state.minigame_config)
 		minigame_state.minigame_type = savegame.minigame_state.minigame_type
 		minigame_state.minigame_teams = savegame.minigame_state.minigame_teams
 		minigame_reward = MinigameReward.new()
 		if savegame.minigame_state.has_reward:
 			minigame_reward.duel_reward = savegame.minigame_state.duel_reward
 			if savegame.minigame_state.item_reward:
-				minigame_reward.gnu_solo_item_reward = dict2inst(savegame.minigame_state.item_reward)
+				minigame_reward.gnu_solo_item_reward = dict_to_inst(savegame.minigame_state.item_reward)
 	else:
 		minigame_state = null
 	player_turn = savegame.board_state.player_turn
@@ -723,16 +740,16 @@ master func load_savegame(data: Dictionary) -> void:
 	send_settings()
 	send_board()
 
-master func save_game() -> void:
+@rpc func save_game() -> void:
 	if not enable_savegames:
-		rpc_id(multiplayer.get_rpc_sender_id(), "save_game_callback", {}, "SAVE_GAME_DISABLED")
+		save_game_callback.rpc_id(multiplayer.get_remote_sender_id(), {}, "SAVE_GAME_DISABLED")
 		return
 	
 	var controller_nodes: Array = Utility.get_nodes_in_group(self, "Controller")
 	# Check whether the board is currently loaded
 	# We cannot save the game during a minigame
 	if not controller_nodes:
-		rpc_id(multiplayer.get_rpc_sender_id(), "save_game_callback", {}, "SAVE_GAME_CANNOT_SAVE")
+		save_game_callback.rpc_id(multiplayer.get_remote_sender_id(), {}, "SAVE_GAME_CANNOT_SAVE")
 		return
 	
 	var controller: Controller = controller_nodes[0]
@@ -740,7 +757,7 @@ master func save_game() -> void:
 
 	var savegame := SaveGameLoader.SaveGame.new()
 	savegame.board_state.board_path = current_board;
-	for i in len(self.player_info):
+	for i in len(player_info):
 			var player := savegame.add_player()
 			player.player_name = player_info[i].name
 			player.is_ai = player_info[i].is_ai()
@@ -761,7 +778,7 @@ master func save_game() -> void:
 				savegame.minigame_state.has_reward = true
 				savegame.minigame_state.duel_reward = minigame_reward.duel_reward
 				if minigame_reward.gnu_solo_item_reward:
-					savegame.minigame_state.item_reward = inst2dict(minigame_reward.gnu_solo_item_reward)
+					savegame.minigame_state.item_reward = inst_to_dict(minigame_reward.gnu_solo_item_reward)
 	savegame.board_state.player_turn = controller.player_turn
 	savegame.board_state.turn = turn
 
@@ -770,7 +787,7 @@ master func save_game() -> void:
 	for trap in Utility.get_nodes_in_group(self, "trap"):
 			var state := {
 					node = get_path_to(trap),
-					item = inst2dict(trap.trap),
+					item = inst_to_dict(trap.trap),
 					player = get_path_to(trap.trap_player)
 			}
 
@@ -778,4 +795,4 @@ master func save_game() -> void:
 	
 	for id in settings:
 		savegame.settings[id] = settings[id].get_value();
-	rpc_id(multiplayer.get_rpc_sender_id(), "save_game_callback", savegame.serialize(), "")
+	save_game_callback.rpc_id(multiplayer.get_remote_sender_id(), savegame.serialize(), "")

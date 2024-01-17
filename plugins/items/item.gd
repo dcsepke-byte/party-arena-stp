@@ -1,3 +1,4 @@
+## A usable Item, such as dices for Super Tux Party
 extends Resource
 class_name Item
 
@@ -15,7 +16,7 @@ var is_consumed := true
 var can_be_bought := false
 var item_cost := 0
 
-var icon: Texture
+var icon: Texture2D
 
 # Used when placed onto board.
 # Can only be placed 5 nodes in either direction onto the board, can be changed
@@ -52,16 +53,16 @@ func recreate_state() -> void:
 	load_resources()
 
 func serialize() -> Dictionary:
-	return inst2dict(self)
+	return inst_to_dict(self)
 
 static func deserialize(i: Dictionary) -> Item:
 	# Check if this really is an item
 	# Prevent the loading of potentially malicious scripts
 	if not PluginSystem.item_loader.has_item(i["@path"]):
 		return null
-	if i["@subpath"] != "":
+	if not i["@subpath"].is_empty():
 		return null
 	# Now that we have checked that this is an item it is safe to load
-	var item: Item = dict2inst(i)
+	var item: Item = dict_to_inst(i)
 	item.recreate_state()
 	return item

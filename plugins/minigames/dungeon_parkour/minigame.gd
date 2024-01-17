@@ -1,45 +1,44 @@
-extends Spatial
+extends Node3D
 
-onready var lobby := Lobby.get_lobby(self)
-var fireball = preload("res://plugins/minigames/dungeon_parkour/fireball.tscn")
+@onready var lobby := Lobby.get_lobby(self)
+const fireball := preload("res://plugins/minigames/dungeon_parkour/fireball.tscn")
 
 func _ready():
 	create_fireballs()
 
-puppet func create_fireball(pos: Vector3):
-	var instance = fireball.instance()
-	instance.translation = pos
+@rpc func create_fireball(pos: Vector3):
+	var instance = fireball.instantiate()
+	instance.position = pos
 	add_child(instance)
 
 func create_fireballs():
-	if not multiplayer.is_network_server():
+	if not multiplayer.is_server():
 		return
-	lobby.broadcast(self, "create_fireball", [$Fireball2.translation])
-	create_fireball($Fireball2.translation)
+	lobby.broadcast(create_fireball.bind($Fireball2.position))
+	create_fireball($Fireball2.position)
 	
-	yield(get_tree().create_timer(0.25), "timeout")
+	await get_tree().create_timer(0.25).timeout
 	
-	lobby.broadcast(self, "create_fireball", [$Fireball3.translation])
-	create_fireball($Fireball3.translation)
+	lobby.broadcast(create_fireball.bind($Fireball3.position))
+	create_fireball($Fireball3.position)
 	
-	yield(get_tree().create_timer(0.25), "timeout")
+	await get_tree().create_timer(0.25).timeout
 	
-	lobby.broadcast(self, "create_fireball", [$Fireball1.translation])
-	$Fireball1.translation
+	lobby.broadcast(create_fireball.bind($Fireball1.position))
 
 func _client_process(_delta: float):
-	$Remaining.text = str(stepify($Timer2.time_left, 0.1))
+	$Remaining.text = str(snapped($Timer2.time_left, 0.1))
 
 func _server_process(_delta: float):
-	if $Player1.translation.y < -5:
+	if $Player1.position.y < -5:
 		lobby.minigame_nolok_loose()
 
 func _on_Finish_body_entered(_body):
-	if not multiplayer.is_network_server():
+	if not multiplayer.is_server():
 		return
 	lobby.minigame_nolok_win()
 
 func _on_Timer2_timeout():
-	if not multiplayer.is_network_server():
+	if not multiplayer.is_server():
 		return
 	lobby.minigame_nolok_loose()

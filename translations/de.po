@@ -688,5 +688,5 @@ msgstr "Nolok Solo Minispiel"
 #~ msgid "MENU_CONTROLS_GAMEPAD_START"
 #~ msgstr "Gamepad Start"
 
-#~ msgid "MENU_OPTIONS_FXAA"
-#~ msgstr "FXAA (Fast Approximate Anti-Aliasing)"
+msgid "MENU_OPTIONS_FXAA"
+msgstr "FXAA (Fast Approximate Anti-Aliasing)"

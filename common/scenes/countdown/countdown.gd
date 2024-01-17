@@ -1,12 +1,13 @@
 extends Control
 
-export(float) var countdown_time = 3
-export(bool) var autostart = true
+@export var countdown_time: float = 3
+@export var autostart: bool = true
 
 signal finish
 
-var time_left
-var timer_finished
+@onready var lobby := Lobby.get_lobby(self)
+var time_left: float
+var timer_finished: bool
 
 func _force_animation_update(node):
 	if node is AnimationPlayer and node.is_playing():
@@ -23,30 +24,24 @@ func _ready():
 
 func start():
 	# Force update all animations or they won't be shown properly if they were just started
-	_force_animation_update(get_tree().root)
+	_force_animation_update(lobby)
 
 	timer_finished = false
 	time_left = countdown_time
-	get_tree().paused = true
+	lobby.process_mode = PROCESS_MODE_DISABLED
 	$Label.modulate = Color(1, 1, 1, 1)
 
-func _is_paused():
-	# Pausing the game for all players can only work in local multiplayer
-	# In that case, get_tree().get_nodes_in_group is actually correct,
-	# because the server could only find the pause menu on the client side
-	# Also, we do not have multiple lobbies to take care of
-	if not Global.is_local_multiplayer():
-		return false
-	# Check if the pause menu is open
-	for node in get_tree().get_nodes_in_group("pausemenu"):
-		if node.paused:
-			return true
-	return false
+#func _is_paused():
+	## Check if the pause menu is open
+	#for node in Utility.get_nodes_in_group(lobby, "pausemenu"):
+		#if node.paused:
+			#return true
+	#return false
 
 func _process(delta):
 	# Only let the timer run if the pause menu is not open
-	if not timer_finished and not _is_paused():
-		$Label.text = var2str(int(time_left) + 1)
+	if not timer_finished:# and not _is_paused():
+		$Label.text = str(int(time_left) + 1)
 
 		time_left = max(time_left - delta, 0)
 		if time_left == 0:
@@ -56,6 +51,6 @@ func _on_Timer_timeout():
 	timer_finished = true
 	$Label.text = tr("CONTEXT_LABEL_GO")
 	$AnimationPlayer.play("fadeout")
-	get_tree().paused = false
+	lobby.process_mode = Node.PROCESS_MODE_INHERIT
 
-	emit_signal("finish")
+	finish.emit()

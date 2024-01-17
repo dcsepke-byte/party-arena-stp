@@ -1,9 +1,9 @@
-extends Spatial
+extends Node3D
 
-var variant: int setget set_variant
+var variant: int: set = set_variant
 
 var faceup := false
-onready var lobby: Lobby = get_parent().get_parent().lobby
+@onready var lobby: Lobby = get_parent().get_parent().lobby
 
 func set_variant(value: int):
 	variant = value
@@ -21,21 +21,21 @@ func _ready():
 	load_icon($Player3, lobby.minigame_state.minigame_teams[1][0])
 	load_icon($Player4, lobby.minigame_state.minigame_teams[1][1])
 
-puppet func _client_flip_up(color: Color):
+@rpc func _client_flip_up(color: Color):
 	faceup = true
 	$Front.modulate = color
 	$AnimationPlayer.play("flip_up")
 
-func flip_up(color: Color = Color.white):
-	lobby.broadcast(self, "_client_flip_up", [color])
+func flip_up(color: Color = Color.WHITE):
+	lobby.broadcast(_client_flip_up.bind(color))
 	_client_flip_up(color)
 	return $AnimationPlayer
 
-puppet func _client_flip_down():
+@rpc func _client_flip_down():
 	$AnimationPlayer.play("flip_down")
 
 func flip_down():
-	lobby.broadcast(self, "_client_flip_down")
+	lobby.broadcast(_client_flip_down)
 	_client_flip_down()
 	return $AnimationPlayer
 
@@ -45,10 +45,10 @@ func is_animation_running() -> bool:
 func animation_player() -> AnimationPlayer:
 	return $AnimationPlayer as AnimationPlayer
 
-puppet func show_player(idx: int):
+@rpc func show_player(idx: int):
 	get_node("Player" + str(idx)).show()
 
-puppet func hide_player(idx: int):
+@rpc func hide_player(idx: int):
 	get_node("Player" + str(idx)).hide()
 
 func _on_AnimationPlayer_animation_finished(anim_name):

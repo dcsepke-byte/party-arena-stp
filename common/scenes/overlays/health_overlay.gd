@@ -1,11 +1,11 @@
-tool
+@tool
 extends Control
 
 # The maximum health a teams has, this is also the starting health
 # This is measured in "half"-hearts, e.g. the value 2 is a full heart in display
-export(int, 1, 8) var max_health = 2
+@export var max_health = 2 # (int, 1, 8)
 
-onready var lobby := Lobby.get_lobby(self)
+@onready var lobby := Lobby.get_lobby(self)
 
 var playerid_index = [-1, -1, -1, -1]
 
@@ -16,7 +16,7 @@ func _load_character(player_id: int, team_index: int):
 	var icon := PluginSystem.character_loader.load_character_icon(character)
 
 	var texture := TextureRect.new()
-	texture.rect_min_size = Vector2(64, 64)
+	texture.custom_minimum_size = Vector2(64, 64)
 	texture.expand = true
 	texture.stretch_mode = TextureRect.STRETCH_SCALE
 	texture.texture = icon
@@ -27,36 +27,36 @@ func _load_character(player_id: int, team_index: int):
 func _load_health(team_index: int):
 	var parent = get_node("Player{0}/Health".format([team_index]))
 	for _j in range((max_health + 1) / 2):
-		var heart_container = preload("res://common/scenes/overlays/player_health.tscn").instance()
+		var heart_container = preload("res://common/scenes/overlays/player_health.tscn").instantiate()
 
 		# If it's on the right side, make it being used up from the middle
 		if team_index % 2 == 0:
-			heart_container.fill_mode = TextureProgress.FILL_RIGHT_TO_LEFT
+			heart_container.fill_mode = TextureProgressBar.FILL_RIGHT_TO_LEFT
 
 		parent.add_child(heart_container)
 
 func _ready():
-	if Engine.editor_hint:
+	if Engine.is_editor_hint():
 		for i in range(4):
 			_load_health(i + 1)
 	else:
 		var i = 1
 		
-		match Global.minigame_state.minigame_type:
-			Global.MINIGAME_TYPES.FREE_FOR_ALL:
-				for player_id in Global.minigame_state.minigame_teams[0]:
+		match lobby.minigame_state.minigame_type:
+			Lobby.MINIGAME_TYPES.FREE_FOR_ALL:
+				for player_id in lobby.minigame_state.minigame_teams[0]:
 					_load_character(player_id, i)
 					_load_health(i)
 					i += 1
 			_:
-				for team in Global.minigame_state.minigame_teams:
+				for team in lobby.minigame_state.minigame_teams:
 					for player_id in team:
 						_load_character(player_id, i)
 					_load_health(i)
 					i += 1
 		
 		# Remove entries that aren't needed
-		while i <= Global.amount_of_players:
+		while i <= 4:
 			get_node("Player{0}".format([i])).queue_free()
 			i += 1
 
@@ -64,9 +64,9 @@ func _ready():
 # This is measured in "half"-hearts, e.g. the value 2 is a full heart in display
 func _update_damage(player_id: int, amount: int):
 	_client_update_damage(player_id, amount)
-	lobby.broadcast(self, "_client_update_damage", [player_id, amount])
+	lobby.broadcast(_client_update_damage.bind(player_id, amount))
 
-puppet func _client_update_damage(player_id: int, amount: int):
+@rpc func _client_update_damage(player_id: int, amount: int):
 	var index = playerid_index[player_id - 1]
 	var children = get_node("Player{0}/Health".format([index])).get_children()
 
@@ -95,7 +95,7 @@ func take_damage(player_id: int, amount: int):
 # This is measured in "half"-hearts, e.g. the value 2 is a full heart in display
 # Amount must be >= 0
 func heal_damage(player_id: int, amount: int):
-	assert(amount >= 0, "HealthOverlay: Amount of heal is < 0")
+	assert(amount >= 0 , "HealthOverlay: Amount of heal is < 0")
 	_update_damage(player_id, -amount)
 
 # Returns the amount of health a team with the player `player_id` has

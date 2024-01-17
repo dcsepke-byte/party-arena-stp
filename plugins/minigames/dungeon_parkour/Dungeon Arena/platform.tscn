@@ -1,111 +1,54 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=3 uid="uid://c568spcblqxwt"]
 
-[ext_resource path="res://plugins/minigames/dungeon_parkour/Dungeon Arena/platform.gd" type="Script" id=1]
-[ext_resource path="res://plugins/minigames/dungeon_parkour/Dungeon Arena/exported/Floor01.escn" type="PackedScene" id=2]
-[ext_resource path="res://plugins/minigames/dungeon_parkour/Dungeon Arena/ColorPaletteRED.png" type="Texture" id=3]
+[ext_resource type="Script" path="res://plugins/minigames/dungeon_parkour/Dungeon Arena/platform.gd" id="1"]
+[ext_resource type="PackedScene" uid="uid://cw2h4mnhthinl" path="res://plugins/minigames/dungeon_parkour/Dungeon Arena/Floor01.tscn" id="2_fkxgv"]
+[ext_resource type="PackedScene" uid="uid://daghbku3qfec" path="res://plugins/minigames/dungeon_parkour/Dungeon Arena/Floor02.tscn" id="3_h2g2g"]
 
-[sub_resource type="SpatialMaterial" id=1]
-albedo_texture = ExtResource( 3 )
+[sub_resource type="BoxShape3D" id="2"]
+size = Vector3(6, 2, 6)
 
-[sub_resource type="BoxShape" id=2]
-extents = Vector3( 3, 1.1, 3 )
+[sub_resource type="BoxShape3D" id="3"]
+size = Vector3(6, 0.1, 6)
 
-[sub_resource type="BoxShape" id=3]
-extents = Vector3( 3, 0.1, 3 )
+[node name="Platform" type="Node3D"]
+script = ExtResource("1")
 
-[node name="Platform" type="Spatial"]
-script = ExtResource( 1 )
+[node name="Body" type="CharacterBody3D" parent="."]
 
-[node name="Body" type="KinematicBody" parent="."]
+[node name="Floor01" parent="Body" instance=ExtResource("2_fkxgv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0)
 
-[node name="Scene Root" parent="Body" instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0 )
+[node name="Floor02" parent="Body" instance=ExtResource("3_h2g2g")]
 
-[node name="Floor01" parent="Body/Scene Root" index="0"]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
-material/0 = SubResource( 1 )
+[node name="Floor06" parent="Body" instance=ExtResource("3_h2g2g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -2)
 
-[node name="Scene Root9" parent="Body" instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, -2 )
+[node name="Floor07" parent="Body" instance=ExtResource("3_h2g2g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -2)
 
-[node name="Floor01" parent="Body/Scene Root9" index="0"]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
-material/0 = SubResource( 1 )
+[node name="Floor08" parent="Body" instance=ExtResource("3_h2g2g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 2)
 
-[node name="Scene Root5" parent="Body" instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, -1, 0 )
+[node name="Floor09" parent="Body" instance=ExtResource("3_h2g2g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 2)
 
-[node name="Floor01" parent="Body/Scene Root5" index="0"]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
-material/0 = SubResource( 1 )
+[node name="Floor03" parent="Body" instance=ExtResource("2_fkxgv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
 
-[node name="Scene Root8" parent="Body" instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, -1, -2 )
+[node name="Floor04" parent="Body" instance=ExtResource("2_fkxgv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
 
-[node name="Floor01" parent="Body/Scene Root8" index="0"]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
-material/0 = SubResource( 1 )
+[node name="Floor05" parent="Body" instance=ExtResource("2_fkxgv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
 
-[node name="Scene Root4" parent="Body" instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 2 )
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Body"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.95, 0)
+shape = SubResource("2")
 
-[node name="Floor01" parent="Body/Scene Root4" index="0"]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
-material/0 = SubResource( 1 )
+[node name="Area3D" type="Area3D" parent="."]
 
-[node name="Scene Root6" parent="Body" instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, -1, 2 )
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+shape = SubResource("3")
 
-[node name="Floor01" parent="Body/Scene Root6" index="0"]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
-material/0 = SubResource( 1 )
-
-[node name="Scene Root2" parent="Body" instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, -1, 0 )
-
-[node name="Floor01" parent="Body/Scene Root2" index="0"]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
-material/0 = SubResource( 1 )
-
-[node name="Scene Root7" parent="Body" instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, -1, -2 )
-
-[node name="Floor01" parent="Body/Scene Root7" index="0"]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
-material/0 = SubResource( 1 )
-
-[node name="Scene Root3" parent="Body" instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, -1, 2 )
-
-[node name="Floor01" parent="Body/Scene Root3" index="0"]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
-material/0 = SubResource( 1 )
-
-[node name="CollisionShape" type="CollisionShape" parent="Body"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.95, 0 )
-shape = SubResource( 2 )
-
-[node name="Area" type="Area" parent="."]
-
-[node name="CollisionShape" type="CollisionShape" parent="Area"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0 )
-shape = SubResource( 3 )
-[connection signal="body_entered" from="Area" to="." method="_on_Area_body_entered"]
-
-[editable path="Body/Scene Root"]
-
-[editable path="Body/Scene Root9"]
-
-[editable path="Body/Scene Root5"]
-
-[editable path="Body/Scene Root8"]
-
-[editable path="Body/Scene Root4"]
-
-[editable path="Body/Scene Root6"]
-
-[editable path="Body/Scene Root2"]
-
-[editable path="Body/Scene Root7"]
-
-[editable path="Body/Scene Root3"]
+[connection signal="body_entered" from="Area3D" to="." method="_on_Area_body_entered"]

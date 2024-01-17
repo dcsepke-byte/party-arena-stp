@@ -1,4 +1,4 @@
-extends Spatial
+extends Node3D
 
 var started := false
 var finished := false
@@ -12,7 +12,7 @@ func card_at(row: int, column: int) -> Node:
 	return get_node("Row{0}/{1}".format([row, column]))
 
 func _ready():
-	if not is_network_master():
+	if not is_multiplayer_authority():
 		return
 	$Player1.blocked = true
 	$Player2.blocked = true
@@ -52,7 +52,7 @@ func _ready():
 	places_left.shuffle()
 	places_right.shuffle()
 
-	while places_left and places_right:
+	while not places_left.is_empty() and not places_right.is_empty():
 		var variant = variants[randi() % len(variants)]
 		places_left.pop_back().variant = variant
 		places_right.pop_back().variant = variant
@@ -63,24 +63,24 @@ func _ready():
 		data[1].append($Row2.get_child(i).variant)
 		data[2].append($Row3.get_child(i).variant)
 		data[3].append($Row4.get_child(i).variant)
-	lobby.broadcast(self, "load_cards", [data])
+	lobby.broadcast(load_cards.bind(data))
 
 	for i in range(6):
 		$Row1.get_child(i).flip_up()
 		$Row2.get_child(i).flip_up()
 		$Row3.get_child(i).flip_up()
 		$Row4.get_child(i).flip_up()
-		yield(get_tree().create_timer(0.1), "timeout")
+		await get_tree().create_timer(0.1).timeout
 
-	yield(get_tree().create_timer(2), "timeout")
+	await get_tree().create_timer(2).timeout
 	for i in range(6):
 		$Row1.get_child(i).flip_down()
 		$Row2.get_child(i).flip_down()
 		$Row3.get_child(i).flip_down()
 		$Row4.get_child(i).flip_down()
-		yield(get_tree().create_timer(0.1), "timeout")
+		await get_tree().create_timer(0.1).timeout
 
-	yield(get_tree().create_timer(0.5), "timeout")
+	await get_tree().create_timer(0.5).timeout
 
 	$Player1.blocked = false
 	$Player2.blocked = false
@@ -88,9 +88,9 @@ func _ready():
 	$Player4.blocked = false
 	started = true
 
-puppet func load_cards(data):
+@rpc func load_cards(data):
 	for i in range(6):
-		if not is_network_master():
+		if not is_multiplayer_authority():
 			$Row1.get_child(i).variant = data[0][i]
 			$Row2.get_child(i).variant = data[1][i]
 			$Row3.get_child(i).variant = data[2][i]

@@ -1,4 +1,4 @@
-extends KinematicBody
+extends CharacterBody3D
 
 const SPEED = 5
 const JUMP_POWER = 8
@@ -15,22 +15,22 @@ var info: Lobby.PlayerInfo
 var acceleration := Vector3(0, 0, 0)
 var state = State.IDLE
 
-var ai_current_waypoint: Spatial = null
+var ai_current_waypoint: Node3D = null
 var ai_rand_start: float
 
 func _ready():
-	set_network_master(info.addr.peer_id)
-	$CameraTracker.set_as_toplevel(true)
+	set_multiplayer_authority(info.addr.peer_id)
+	$CameraTracker.set_as_top_level(true)
 	
 	if info.is_ai():
 		ai_current_waypoint = $"../Ground/Waypoint"
 		ai_rand_start = randf()
 
-puppet func position_updated(trans: Vector3, rot: Vector3, new_state):
-	self.translation = trans
+@rpc func position_updated(trans: Vector3, rot: Vector3, new_state):
+	self.position = trans
 	self.rotation = rot
-	$CameraTracker.translation.x = self.translation.x
-	$CameraTracker.translation.z = self.translation.z
+	$CameraTracker.position.x = self.position.x
+	$CameraTracker.position.z = self.position.z
 	if state != new_state:
 		state = new_state
 		match state:
@@ -62,7 +62,7 @@ func _physics_process(delta):
 		acceleration.z = calc_movement(acceleration.z, (Input.get_action_strength("player%d_down" % info.player_id) - Input.get_action_strength("player%d_up" % info.player_id)) * SPEED)
 		jump = Input.is_action_pressed("player%d_action1" % info.player_id)
 	else:
-		var dir: Vector3 = ai_current_waypoint.global_transform.origin - translation
+		var dir: Vector3 = ai_current_waypoint.global_transform.origin - position
 		dir.y = 0
 		
 		if dir.length() < randf() * 0.5:
@@ -105,8 +105,9 @@ func _physics_process(delta):
 				state = State.JUMP
 	acceleration.y -= GRAVITY * delta
 	
-	move_and_slide(acceleration + get_floor_velocity() * delta, Vector3(0, 1, 0), true)
-	get_parent().lobby.broadcast_unreliable(self, "position_updated", [self.translation, self.rotation, self.state])
+	move_and_slide()
+	set_velocity(acceleration + get_platform_velocity() * delta)
+	get_parent().lobby.broadcast(position_updated.bind(self.position, self.rotation, self.state))
 	
-	$CameraTracker.translation.x = self.translation.x
-	$CameraTracker.translation.z = self.translation.z
+	$CameraTracker.position.x = self.position.x
+	$CameraTracker.position.z = self.position.z

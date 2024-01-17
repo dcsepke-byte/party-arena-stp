@@ -1,6 +1,6 @@
 extends "../common.gd"
 
-func setup_ui(node: Position3D, player_id: int, pos: int, winner: bool):
+func setup_ui(node: Marker3D, player_id: int, pos: int, winner: bool):
 	var ui_container = node.get_node("VBoxContainer")
 	
 	var cookie_text = ui_container.get_node("CookieText")
@@ -24,7 +24,7 @@ func setup_scene():
 		placement = lobby.minigame_summary.placement
 	# Winning team
 	for player_id in lobby.minigame_summary.state.minigame_teams[placement]:
-		var node: Position3D = get_node("ViewportContainer/Viewport/Placement" + str(i))
+		var node: Marker3D = get_node("SubViewportContainer/SubViewport/Placement" + str(i))
 		load_character(player_id, node, "happy" if not tie else "sad")
 		
 		setup_ui(node, player_id, i, not tie)
@@ -32,7 +32,7 @@ func setup_scene():
 
 	# Loosing team
 	for player_id in lobby.minigame_summary.state.minigame_teams[1 - placement]:
-		var node: Position3D = get_node("ViewportContainer/Viewport/Placement" + str(i))
+		var node: Marker3D = get_node("SubViewportContainer/SubViewport/Placement" + str(i))
 		load_character(player_id, node, "sad")
 		
 		setup_ui(node, player_id, i, false)
@@ -40,3 +40,4 @@ func setup_scene():
 
 func _ready():
 	setup_scene()
+	super._ready()

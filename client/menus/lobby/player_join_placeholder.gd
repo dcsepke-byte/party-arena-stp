@@ -13,7 +13,7 @@ func _ready():
 		if not child.visible:
 			child.queue_free()
 
-func _input(event: InputEvent):
+func _unhandled_input(event: InputEvent):
 	for i in range(4):
 		if event.is_action_pressed("player{0}_action1".format([i + 1])):
-			emit_signal("add_player", i)
+			add_player.emit(i)

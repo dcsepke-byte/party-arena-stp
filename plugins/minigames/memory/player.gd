@@ -1,16 +1,16 @@
-extends Spatial
+extends Node3D
 
-const TEAM_COLORS = [Color.lightblue, Color.lightcoral]
+const TEAM_COLORS = [Color.LIGHT_BLUE, Color.LIGHT_CORAL]
 
 var info: Lobby.PlayerInfo
 var ai_difficulty: int
 
-export var idx := 0
-export var row := 1
-export var column := 1
-onready var right_side := column > 4
+@export var idx := 0
+@export var row := 1
+@export var column := 1
+@onready var right_side := column > 4
 
-export var ally: NodePath
+@export var ally: NodePath
 
 # If the player is currently flipping up a card
 # Is true for the entire duration, the card is held open
@@ -18,7 +18,7 @@ var blocked := false
 # The duration the card has been held open
 var holding_card := 0.0
 
-var points := 0 setget set_points
+var points := 0: set = set_points
 
 var ai_target_row := -1
 var ai_target_column := -1
@@ -26,7 +26,7 @@ var ai_target_column := -1
 # Small penalty when flipping up nonmatching pairs
 # Includes the time for the flip down animation to complete
 var cooldown := 0.0
-onready var team := 0 if info.player_id in info.lobby.minigame_state.minigame_teams[0] else 1
+@onready var team := 0 if info.player_id in info.lobby.minigame_state.minigame_teams[0] else 1
 
 func set_points(num: int):
 	points = num
@@ -66,41 +66,41 @@ func random_card(variant: int) -> Array:
 			var card = card_at(row, column)
 			if not card.faceup and (variant < 0 or card.variant == variant):
 				places.push_back([row, column])
-	if not places:
+	if places.is_empty():
 		return [-1, -1]
 	return places[randi() % len(places)]
 
 func _ready():
 	current_card().show_player(self.idx)
 
-puppet func card_flipped():
+@rpc func card_flipped():
 	$Flip.play()
 
-puppet func point_scored():
+@rpc func point_scored():
 	$Point.play()
 
-master func activate():
-	if cooldown:
+@rpc("any_peer", "call_local") func activate():
+	if blocked or cooldown or multiplayer.get_remote_sender_id() != info.addr.peer_id:
 		return
 	if current_card().faceup:
 		return
 
-	info.lobby.broadcast(self, "card_flipped")
+	info.lobby.broadcast(card_flipped)
 	blocked = true
 	holding_card = 0.0
 	var ally_node = get_node(ally)
 	# Make the other player choose a new card (when it's an AI)
 	ally_node.ai_target_row = -1
 	ally_node.ai_target_column = -1
-	yield(current_card().flip_up(TEAM_COLORS[self.team]), "animation_finished")
-	yield(get_tree().create_timer(0.25), "timeout")
+	await current_card().flip_up(TEAM_COLORS[self.team]).animation_finished
+	await get_tree().create_timer(0.25).timeout
 
 	if ally_node.blocked:
 		var ally_card = ally_node.current_card()
 		if ally_card.is_animation_running():
-			yield(ally_card.animation_player(), "animation_finished")
+			await ally_card.animation_player().animation_finished
 		if ally_card.variant == current_card().variant:
-			info.lobby.broadcast(self, "point_scored")
+			info.lobby.broadcast(point_scored)
 			self.points += 1
 		else:
 			# wait for the animation to complete
@@ -135,7 +135,7 @@ func _server_process(delta):
 func _process_ai():
 	if cooldown or blocked:
 		return
-	info.lobby.broadcast(current_card(), "hide_player", [self.idx])
+	info.lobby.broadcast(current_card().hide_player.bind(self.idx))
 	var card = card_at(ai_target_row, ai_target_column)
 	var ally_node = get_node(ally)
 	var variant = -1
@@ -156,14 +156,15 @@ func _process_ai():
 	elif ai_target_column >= 0 and ai_target_column > column:
 		column += 1
 	else:
-		info.lobby.broadcast(current_card(), "show_player", [self.idx])
-		return activate()
-	info.lobby.broadcast(current_card(), "show_player", [self.idx])
+		info.lobby.broadcast(current_card().show_player.bind(self.idx))
+		activate.rpc_id(1)
+		return
+	info.lobby.broadcast(current_card().show_player.bind(self.idx))
 	cooldown = 0.25
 
 func move(dx: int, dy: int):
 	var player = info.lobby.get_player_by_id(info.player_id)
-	if multiplayer.get_rpc_sender_id() != player.addr.peer_id:
+	if multiplayer.get_remote_sender_id() != player.addr.peer_id:
 		return
 	if cooldown or blocked:
 		return
@@ -181,34 +182,42 @@ func move(dx: int, dy: int):
 		return
 	if dy > 0 and row == 4:
 		return
-	info.lobby.broadcast(current_card(), "hide_player", [self.idx])
+	info.lobby.broadcast(current_card().hide_player.bind(self.idx))
 	column += dx
 	row += dy
 	cooldown = 0.1
-	info.lobby.broadcast(current_card(), "show_player", [self.idx])
+	info.lobby.broadcast(current_card().show_player.bind(self.idx))
 
-master func move_left():
+@rpc("any_peer") func move_left():
+	if multiplayer.get_remote_sender_id() != info.addr.peer_id:
+		return
 	move(-1, 0)
 
-master func move_right():
+@rpc("any_peer") func move_right():
+	if multiplayer.get_remote_sender_id() != info.addr.peer_id:
+		return
 	move(1, 0)
 
-master func move_up():
+@rpc("any_peer") func move_up():
+	if multiplayer.get_remote_sender_id() != info.addr.peer_id:
+		return
 	move(0, -1)
 
-master func move_down():
+@rpc("any_peer") func move_down():
+	if multiplayer.get_remote_sender_id() != info.addr.peer_id:
+		return
 	move(0, 1)
 
 func _input(event: InputEvent):
 	if not info.is_local():
 		return
 	if event.is_action_pressed("player{0}_left".format([info.player_id])):
-		rpc_id(1, "move_left")
+		move_left.rpc_id(1)
 	if event.is_action_pressed("player{0}_right".format([info.player_id])):
-		rpc_id(1, "move_right")
+		move_right.rpc_id(1)
 	if event.is_action_pressed("player{0}_up".format([info.player_id])):
-		rpc_id(1, "move_up")
+		move_up.rpc_id(1)
 	if event.is_action_pressed("player{0}_down".format([info.player_id])):
-		rpc_id(1, "move_down")
+		move_down.rpc_id(1)
 	if event.is_action_pressed("player{0}_action1".format([info.player_id])):
-		rpc_id(1, "activate")
+		activate.rpc_id(1)

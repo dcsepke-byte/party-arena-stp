@@ -1,4 +1,4 @@
-extends RigidBody
+extends RigidBody3D
 
 var max_speed = 2
 var accel = 10
@@ -9,7 +9,7 @@ var ai_difficulty: int
 
 var active := true
 
-var winner = false setget set_winner
+var winner = false: set = set_winner
 var minigame_mode: int
 
 var is_walking = false
@@ -21,8 +21,8 @@ func set_winner(win):
 		$Model.play_animation("happy")
 
 func _ready():
-	$Model.set_as_toplevel(true)
-	set_network_master(info.addr.peer_id)
+	$Model.set_as_top_level(true)
+	set_multiplayer_authority(info.addr.peer_id)
 	minigame_mode = info.lobby.minigame_state.minigame_type
 	
 	if info.is_ai():
@@ -36,8 +36,8 @@ func _ready():
 			Lobby.Difficulty.HARD:
 				accel = 11
 
-puppet func position_update(x: Vector3, v: Vector3, rot: float):
-	self.translation = x
+@rpc("unreliable") func position_update(x: Vector3, v: Vector3, rot: float):
+	self.position = x
 	self.angular_velocity = v
 	$Model.rotation.y = rot
 
@@ -61,11 +61,11 @@ func get_distance_to_shape(point):
 	return distance
 
 func is_on_floor():
-	return translation.y > 2.4
+	return position.y > 2.4
 
 func _process(delta):
-	$Model.translation = self.translation + Vector3(0, 0.5, 0)
-	if not is_network_master() or not active:
+	$Model.position = self.position + Vector3(0, 0.5, 0)
+	if not is_multiplayer_authority() or not active:
 		return
 	var dir = Vector3()
 	
@@ -78,18 +78,18 @@ func _process(delta):
 		var farthest_distance = INF
 		for p in get_parent().players:
 			if p != self and (p.team != self.team or minigame_mode == Lobby.MINIGAME_TYPES.FREE_FOR_ALL):
-				var distance = get_distance_to_shape(p.translation)
+				var distance = get_distance_to_shape(p.position)
 				if p.is_on_floor() and (farthest_player == null or farthest_distance > distance):
 					farthest_player = p
 					farthest_distance = distance
 		
 		if farthest_player != null:
-			dir = (farthest_player.translation - translation).rotated(Vector3(0, 1, 0), PI/2)
+			dir = (farthest_player.position - position).rotated(Vector3(0, 1, 0), PI/2)
 		else:
 			
 			# Everybody knocked off the board?
 			# Move towards the center
-			dir = self.translation.rotated(Vector3(0, 1, 0), -PI/2)
+			dir = self.position.rotated(Vector3(0, 1, 0), -PI/2)
 			
 			if dir.length_squared() < 0.1:
 				dir = Vector3()
@@ -97,7 +97,7 @@ func _process(delta):
 	dir = dir.normalized()
 	
 	if dir.length_squared() > 0:
-		add_torque(dir * accel)
+		apply_torque(dir * accel)
 		var target_rotation = atan2(-dir.z, dir.x)
 		
 		var diff1 = (target_rotation - $Model.rotation.y)
@@ -122,4 +122,4 @@ func _process(delta):
 	if angular_velocity.length() > max_speed:
 		angular_velocity = max_speed * angular_velocity.normalized()
 	
-	info.lobby.broadcast_unreliable(self, "position_update", [self.translation, self.angular_velocity, $Model.rotation.y])
+	info.lobby.broadcast(position_update.bind(position, angular_velocity, $Model.rotation.y))

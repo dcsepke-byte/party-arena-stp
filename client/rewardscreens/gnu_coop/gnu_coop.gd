@@ -5,7 +5,7 @@ func setup_scene():
 	for p in lobby.playerstates:
 		i += 1
 		var player_id = p.info.player_id
-		var node: Position3D = get_node("ViewportContainer/Viewport/Placement" + str(i))
+		var node: Marker3D = get_node("SubViewportContainer/SubViewport/Placement" + str(i))
 		var cookies = lobby.minigame_summary.reward[i - 1]
 		if cookies:
 			load_character(player_id, node, "happy")
@@ -22,5 +22,6 @@ func setup_scene():
 
 func _ready():
 	setup_scene()
-	if not lobby.minigame_summary.placement and not multiplayer.is_network_server():
+	super._ready()
+	if not lobby.minigame_summary.placement and not multiplayer.is_server():
 		$Background/AudioStreamPlayer.stream = preload("res://assets/sounds/minigame_end_screen/stuxparty_lossjingle.ogg")

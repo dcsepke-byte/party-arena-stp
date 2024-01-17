@@ -1,4 +1,5 @@
-extends Camera
+extends Camera3D
+class_name SplitScreenCamera
 
 func _process(_delta):
-	$Viewport/Camera.transform = global_transform
+	$SubViewport/Camera3D.transform = global_transform

@@ -1,52 +1,34 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=3 uid="uid://b77wt2hlphw2"]
 
-[ext_resource path="res://assets/fonts/Boogaloo-Regular.ttf" type="DynamicFontData" id=1]
-[ext_resource path="res://assets/defaults/default_theme.tres" type="Theme" id=2]
-[ext_resource path="res://client/menus/loading_screen.gd" type="Script" id=3]
-
-[sub_resource type="DynamicFont" id=1]
-size = 80
-font_data = ExtResource( 1 )
+[ext_resource type="Theme" uid="uid://d3w3vt3s6ujoh" path="res://assets/defaults/default_theme.tres" id="2"]
+[ext_resource type="Texture2D" uid="uid://do4atdfkvupja" path="res://assets/textures/title/Title.png" id="2_u35to"]
+[ext_resource type="Script" path="res://client/menus/loading_screen.gd" id="3"]
 
 [node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-script = ExtResource( 3 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3")
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
-margin_left = 422.0
-margin_top = 268.0
-margin_right = 857.0
-margin_bottom = 451.0
+layout_mode = 2
 
-[node name="Label" type="Label" parent="CenterContainer/VBoxContainer"]
-margin_right = 435.0
-margin_bottom = 96.0
-custom_fonts/font = SubResource( 1 )
-text = "Super Tux Party"
-align = 1
-valign = 1
-
-[node name="Control" type="Control" parent="CenterContainer/VBoxContainer"]
-margin_top = 100.0
-margin_right = 435.0
-margin_bottom = 150.0
-rect_min_size = Vector2( 0, 50 )
+[node name="Label" type="TextureRect" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("2_u35to")
+expand_mode = 4
+stretch_mode = 5
 
 [node name="ProgressBar" type="ProgressBar" parent="CenterContainer/VBoxContainer"]
-margin_top = 154.0
-margin_right = 435.0
-margin_bottom = 183.0
-rect_min_size = Vector2( 200, 20 )
-theme = ExtResource( 2 )
+custom_minimum_size = Vector2(200, 20)
+layout_mode = 2
+theme = ExtResource("2")
 value = 20.0

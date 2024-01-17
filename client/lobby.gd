@@ -1,7 +1,7 @@
 extends Lobby
 
 signal player_info_updated(player_info)
-signal settings_changed(settings)
+signal changed(settings)
 signal board_selected(board)
 signal game_start
 signal savegame_saved
@@ -35,25 +35,25 @@ var savegame_name := ""
 var is_new_savegame := true
 
 func leave():
-	get_tree().change_scene("res://client/menus/main_menu.tscn")
+	get_tree().change_scene_to_file("res://client/menus/main_menu.tscn")
 	Global.shutdown_connection()
 
-puppet func game_start():
+@rpc func game_started():
 	started = true
-	assign_player_ids()
-	emit_signal("game_start")
+	_assign_player_ids()
+	game_start.emit()
 	load_board()
 
-puppet func board_selected(board: String):
+@rpc func board_select(board: String):
 	if not board in PluginSystem.board_loader.get_loaded_boards():
 		push_error("Unknown board: " + board)
 		leave()
 		return
-	self.current_board = PluginSystem.board_loader.get_board_path(board)
+	current_board = PluginSystem.board_loader.get_board_path(board)
 	
-	emit_signal("board_selected", board)
+	board_selected.emit(board)
 
-puppet func replace_by_ai(player_id: int, new_addr: Array):
+@rpc func replace_by_ai(player_id: int, new_addr: Array):
 	# This does only make sense when the game has already started
 	if not started:
 		return
@@ -62,22 +62,22 @@ puppet func replace_by_ai(player_id: int, new_addr: Array):
 		if player.player_id == player_id:
 			player.addr = addr
 
-puppet func lobby_joined(playerlist: Array):
+@rpc func lobby_joined(playerlist: Array):
 	if started:
 		return
-	var decoded := []
+	var decoded: Array[PlayerInfo] = []
 	for player in playerlist:
-		var obj = PlayerInfo.decode(self, player)
+		var obj := PlayerInfo.decode(self, player)
 		var valid: bool = obj.character == "" or obj.character in PluginSystem.character_loader.get_loaded_characters()
 		if not valid:
 			push_error("Unknown character: " + obj.character)
 			leave()
 			return
 		decoded.append(obj)
-	self.player_info = decoded
-	emit_signal("player_info_updated", self.player_info)
+	player_info = decoded
+	player_info_updated.emit(player_info)
 
-puppet func update_settings(settings: Array):
+@rpc func update_settings(settings: Array):
 	var decoded := []
 	for entry in settings:
 		var obj := Lobby.Settings.decode(entry[1])
@@ -86,48 +86,73 @@ puppet func update_settings(settings: Array):
 			leave()
 			return
 		decoded.append([entry[0], obj])
-	emit_signal("settings_changed", decoded)
+	changed.emit(decoded)
 
-puppet func playerstate_updated(playerstates: Array):
-	var decoded := []
-	for player in playerstates:
-		var obj = PlayerState.decode(self, player)
+@rpc func playerstate_updated(data: Array):
+	var decoded: Array[PlayerState] = []
+	for player in data:
+		var obj := PlayerState.decode(self, player)
 		decoded.append(obj)
-	self.playerstates = decoded
+	playerstates = decoded
 
-puppet func add_player_failed():
+@rpc func add_player_failed():
 	# TODO: error reporting
 	pass
 
+
+# Some boilerplate rpc function definitions
+# This is necessary, because since Godot4 these methods must be declared
+# on the sending side as well
+@rpc
+func server_update_setting(_id: int, _value): pass
+@rpc
+func server_add_player(_idx: int): pass
+@rpc
+func server_remove_player(_idx: int): pass
+@rpc
+func server_start(): pass
+@rpc
+func server_select_board(_board: String): pass
+@rpc
+func server_select_character(_idx: int, _char: String): pass
+@rpc
+func server_set_player_name(_idx: int, _name: String): pass
+@rpc
+func server_refresh(): pass
+@rpc
+func client_ready(): pass
+@rpc
+func _goto_minigame(_try: bool): pass
+
 func update_setting(id: String, value):
-	rpc_id(1, "update_setting", id, value)
+	server_update_setting.rpc_id(1, id, value)
 
 func add_player(idx: int):
-	rpc_id(1, "add_player", idx)
+	server_add_player.rpc_id(1, idx)
 
 func remove_player(idx: int):
-	rpc_id(1, "remove_player", idx)
+	server_remove_player.rpc_id(1, idx)
 
 func start():
-	rpc_id(1, "start")
+	server_start.rpc_id(1)
 
 func end():
 	playerstates = []
-	current_scene.queue_free()
-	current_scene = null
-	get_tree().change_scene_to(load("res://client/menus/main_menu.tscn"))
+	_current_scene.queue_free()
+	_current_scene = null
+	get_tree().change_scene_to_packed(load("res://client/menus/main_menu.tscn"))
 
 func refresh():
-	rpc_id(1, "refresh")
+	server_refresh.rpc_id(1)
 
 func select_board(board: String):
-	rpc_id(1, "select_board", board)
+	server_select_board.rpc_id(1, board)
 
 func select_character(idx: int, character: String):
-	rpc_id(1, "select_character", idx, character)
+	server_select_character.rpc_id(1, idx, character)
 
-func set_player_name(idx: int, name: String):
-	rpc_id(1, "set_player_name", idx, name)
+func set_player_name(idx: int, playername: String):
+	server_set_player_name.rpc_id(1, idx, playername)
 
 func _input(event: InputEvent) -> void:
 	# Convert local input events to their respective player_id
@@ -155,14 +180,16 @@ func _input(event: InputEvent) -> void:
 		if player.is_local():
 			for action in actions:
 				var action_source := "player{id}_{action}".format({"id": player.addr.idx + 1, "action": action})
-				if event.is_action(action_source):
+				var pressed := event.is_action_pressed(action_source)
+				var released := event.is_action_released(action_source)
+				if pressed or released:
 					# Now build an InputEventAction with
 					var converted := InputEventAction.new()
 					converted.action = "player{id}_{action}".format({"id": player.player_id, "action": action})
-					converted.pressed = event.is_pressed()
+					converted.pressed = pressed
 					converted.strength = event.get_action_strength(action_source)
-					get_tree().set_input_as_handled()
-					get_tree().input_event(converted)
+					get_viewport().set_input_as_handled()
+					Input.parse_input_event(converted)
 					# Do not break/return here as an optimization!
 					# There may be multiple events mapped to the same key
 
@@ -170,12 +197,12 @@ func _input(event: InputEvent) -> void:
 
 # Internal function for actually changing scene without saving any game state.
 func _goto_scene(path: String, wait=true) -> void:
-	_interactive_load_scene(path, null, "", null, wait)
+	_interactive_load_scene(path, func(_arg): pass, wait)
 
 func _goto_scene_board():
-	_interactive_load_scene(current_board, self, "_goto_scene_board_callback", null)
+	_interactive_load_scene(current_board, _goto_scene_board_callback)
 
-func _goto_scene_board_callback(scene: Node, _arg):
+func _goto_scene_board_callback(scene: Node):
 	for t in _minigame_loaded_translations:
 		TranslationServer.remove_translation(t)
 	_minigame_loaded_translations.clear()
@@ -186,10 +213,10 @@ func _goto_scene_board_callback(scene: Node, _arg):
 
 # Internal function for changing scene to a minigame while handling player objects.
 func _goto_scene_minigame(path: String, minigame_state) -> void:
-	_interactive_load_scene(path, self, "_goto_scene_minigame_callback", minigame_state)
+	_interactive_load_scene(path, _goto_scene_minigame_callback.bind(minigame_state))
 
 func _goto_scene_minigame_callback(scene: Node, minigame_state):
-	scene.add_child(preload("res://client/menus/pause_menu.tscn").instance())
+	scene.add_child(preload("res://client/menus/pause_menu.tscn").instantiate())
 
 	var i := 1
 	for team_id in range(len(minigame_state.minigame_teams)):
@@ -216,53 +243,53 @@ func _load_team_indicator(player: Node, info: PlayerInfo, team: int):
 		# Subsequently, we do not need to add a team indicator
 		return
 	# Loading the character here again shouldn't do any actual loading. It should already be cached
-	var model: Spatial = PluginSystem.character_loader.load_character(info.character)
-	var shape: CollisionShape = model.get_node_or_null(model.collision_shape)
+	var model: Node3D = PluginSystem.character_loader.load_character(info.character)
+	var shape: CollisionShape3D = model.get_node_or_null(model.collision_shape)
 	if shape:
 		# global_transform only works when the node is in the scene tree
 		# Therefore, we have to compute it ourselves
 		var transform := shape.transform
 		var parent := shape.get_parent()
 		while parent != null:
-			if parent is Spatial:
+			if parent is Node3D:
 				transform = parent.transform * transform
 			parent = parent.get_parent()
 		var bbox := Utility.get_aabb_from_shape(shape.shape, transform)
 		var indicator: Sprite3D = preload(\
 				"res://client/team_indicator/team_indicator.tscn"\
-				).instance()
+				).instantiate()
 		indicator.modulate = MINIGAME_TEAM_COLORS[team]
-		indicator.translation.y = bbox.size.y / 2 + shape.translation.y + 0.1
+		indicator.position.y = bbox.size.y / 2 + shape.position.y + 0.1
 		player.get_node("Model").add_child(indicator)
 
 func load_board():
-	var dir = Directory.new()
-	dir.open(current_board.get_base_dir() + "/translations")
-	dir.list_dir_begin(true)
-	while true:
-		var file_name = dir.get_next()
-		if file_name == "":
-			break
+	var dir = DirAccess.open(current_board.get_base_dir() + "/translations")
+	if dir:
+		dir.list_dir_begin()
+		while true:
+			var file_name = dir.get_next()
+			if file_name == "":
+				break
 
-		if file_name.ends_with(".translation") or file_name.ends_with(".po"):
-			_load_interactive(dir.get_current_dir() + "/" + file_name, self, "_install_translation_board", file_name)
+			if file_name.ends_with(".translation") or file_name.ends_with(".po"):
+				_load_interactive(dir.get_current_dir() + "/" + file_name, _install_translation_board.bind(file_name))
 
-	dir.list_dir_end()
+		dir.list_dir_end()
 
 func goto_minigame(is_try: bool):
-	rpc_id(1, "_goto_minigame", is_try)
+	_goto_minigame.rpc_id(1, is_try)
 
-puppet func return_to_board():
+@rpc func return_to_board():
 	_goto_scene_board()
 
-puppet func game_ended():
+@rpc func game_ended():
 	_goto_scene("res://client/menus/victory_screen/victory_screen.tscn", false)
 	started = false
 
-puppet func load_minigame():
-	_goto_scene_minigame(self.minigame_state.minigame_config.scene_path, self.minigame_state)
+@rpc func load_minigame():
+	_goto_scene_minigame(minigame_state.minigame_config.scene_path, minigame_state)
 
-puppet func minigame_ended(was_try: bool, placement, reward):
+@rpc func minigame_ended(was_try: bool, placement, reward):
 	if not minigame_state:
 		return
 	if was_try:
@@ -300,9 +327,8 @@ func _install_translation_board(translation, file_name: String):
 	_board_loaded_translations.push_back(translation)
 
 func load_minigame_translations(minigame_config: MinigameLoader.MinigameConfigFile) -> void:
-	var dir := Directory.new()
-	dir.open(minigame_config.translation_directory)
-	dir.list_dir_begin(true)
+	var dir := DirAccess.open(minigame_config.translation_directory)
+	dir.list_dir_begin()
 	while true:
 		var file_name: String = dir.get_next()
 		if file_name == "":
@@ -322,41 +348,40 @@ func _install_translation_minigame(translation, file_name: String):
 	_minigame_loaded_translations.push_back(translation)
 
 const LOADING_SCREEN = preload("res://client/menus/loading_screen.tscn")
-func _interactive_load_scene(path: String, base: Object, method: String, arg, wait := true):
-	if current_scene:
-		current_scene.queue_free()
-	current_scene = LOADING_SCREEN.instance()
-	add_child(current_scene)
+func _interactive_load_scene(path: String, callable: Callable, wait := true):
+	if _current_scene:
+		_current_scene.queue_free()
+	_current_scene = LOADING_SCREEN.instantiate()
+	add_child(_current_scene)
 	if wait:
-		connect("loading_finished", self, "rpc_id", [1, "client_ready"], CONNECT_ONESHOT)
+		loading_finished.connect(func(): self.client_ready.rpc_id(1), CONNECT_ONE_SHOT)
 	else:
-		connect("loading_finished", self, "loading_finished", [], CONNECT_ONESHOT)
-	_load_interactive(path, self, "_scene_loaded", [base, method, arg])
+		loading_finished.connect(finish_loading, CONNECT_ONE_SHOT)
+	assert(callable.is_valid())
+	_load_interactive(path, _scene_loaded.bind(callable))
 
-puppet func loading_finished():
+@rpc func finish_loading():
 	if _objects_to_load == 0:
-		change_scene()
+		_change_scene_to_file()
 	else:
 		# Server is misbehaving
 		leave()
 
-func _scene_loaded(s: PackedScene, arg: Array):
-	loaded_scene = s.instance()
-
-	if arg[0]:
-		arg[0].call(arg[1], loaded_scene, arg[2])
+func _scene_loaded(s: PackedScene, callable: Callable):
+	_loaded_scene = s.instantiate()
+	callable.call(_loaded_scene)
 
 # ----- Save game code ----- #
 
-func load_savegame(name: String, savegame: SaveGameLoader.SaveGame):
+@rpc func load_savegame(filename: String, savegame: SaveGameLoader.SaveGame):
 	is_new_savegame = false
 	current_savegame = savegame
-	savegame_name = name
-	rpc_id(1, "load_savegame", savegame.serialize())
+	savegame_name = filename
+	load_savegame.rpc_id(1, savegame.serialize())
 
 var sent_savegame_request := false
 
-puppet func save_game_callback(data: Dictionary, error: String):
+@rpc func save_game_callback(data: Dictionary, error: String):
 	if error:
 		push_warning(error)
 		Global.show_error(error)
@@ -364,9 +389,9 @@ puppet func save_game_callback(data: Dictionary, error: String):
 		current_savegame = SaveGameLoader.SaveGame.from_data(data)
 		
 		Global.savegame_loader.save(savegame_name, current_savegame)
-		emit_signal("savegame_saved")
+		savegame_saved.emit()
 		sent_savegame_request = false
 
-func save_game() -> void:
+@rpc func save_game() -> void:
 	sent_savegame_request = true
-	rpc_id(1, "save_game")
+	save_game.rpc_id(1)

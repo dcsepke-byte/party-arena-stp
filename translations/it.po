@@ -749,5 +749,5 @@ msgstr "Minigioco Nolok Singolo"
 #~ msgid "MENU_LABEL_TITLE"
 #~ msgstr "Super Tux Party"
 
-#~ msgid "MENU_OPTIONS_FXAA"
-#~ msgstr "FXAA"
+msgid "MENU_OPTIONS_FXAA"
+msgstr "FXAA"

@@ -7,7 +7,7 @@ const SAVEGAME_DIRECTORY = "user://saves/"
 class SaveGamePlayerStateV1:
 	var player_name := ""
 	var is_ai := false
-	var ai_difficulty: int = Lobby.Difficulty.NORMAL
+	var ai_difficulty := Lobby.Difficulty.NORMAL
 	var space: NodePath
 	var character := ""
 	var cookies := 0
@@ -24,18 +24,18 @@ class SaveGameBoardStateV1:
 	var trap_states := []
 
 class SaveGameMinigameStateV1:
-	var minigame_config
-	var minigame_type := -1
+	var minigame_config: String
+	var minigame_type := Lobby.MINIGAME_TYPES.INVALID
 	var minigame_teams := []
 	var has_reward := false
-	var duel_reward := -1
+	var duel_reward := Lobby.MINIGAME_DUEL_REWARDS.INVALID
 	var item_reward: Dictionary = {}
 
 class SaveGame:
 	# Version of the savegame format
 	var version := 1
 
-	var players := []
+	var players: Array[SaveGamePlayerStateV1] = []
 	var board_state := SaveGameBoardStateV1.new()
 	var minigame_state := SaveGameMinigameStateV1.new()
 	var settings := {}
@@ -46,32 +46,32 @@ class SaveGame:
 		return playerstate
 
 	func serialize() -> Dictionary:
-		var save_dict: Dictionary = inst2dict(self)
+		var save_dict: Dictionary = inst_to_dict(self)
 		
 		# 'inst2dict()' is not recursive. Serialize nested objects.
 		var players_serialized := []
 		for player in self.players:
-			players_serialized.append(inst2dict(player))
+			players_serialized.append(inst_to_dict(player))
 		save_dict["players"] = players_serialized
-		save_dict["board_state"] = inst2dict(self.board_state)
-		save_dict["minigame_state"] = inst2dict(self.minigame_state)
+		save_dict["board_state"] = inst_to_dict(self.board_state)
+		save_dict["minigame_state"] = inst_to_dict(self.minigame_state)
 		
 		return save_dict
 	
 	static func from_data(data: Dictionary) -> SaveGame:
-		var savegame: SaveGame = dict2inst(data)
+		var savegame: SaveGame = dict_to_inst(data)
 		if not savegame:
 			return null
 		if not "players" in data:
 			return null
 		for i in data["players"].size():
-			savegame.players[i] = dict2inst(data["players"][i])
+			savegame.players[i] = dict_to_inst(data["players"][i])
 			if not savegame.players[i]:
 				return null
 		for property in ["board_state", "minigame_state"]:
 			if not property in data:
 				return null
-			savegame.set(property, dict2inst(data[property]))
+			savegame.set(property, dict_to_inst(data[property]))
 			if not savegame.get(property):
 				return null
 		return savegame
@@ -81,11 +81,12 @@ var savegames: Dictionary
 func read_savegames() -> void:
 	savegames.clear()
 
-	var dir := Directory.new()
-	if dir.open(SAVEGAME_DIRECTORY) != OK:
+	var dir := DirAccess.open(SAVEGAME_DIRECTORY)
+	if not dir:
 		return
 
-	dir.list_dir_begin(true)
+	dir.include_hidden = true
+	dir.list_dir_begin()
 
 	while true:
 		var filename: String = dir.get_next()
@@ -93,11 +94,10 @@ func read_savegames() -> void:
 		if filename == "":
 			break
 
-		var file := File.new()
 		var path := SAVEGAME_DIRECTORY + filename
-		var err: int = file.open(path, File.READ)
-		if err != OK:
-			print("Couldn't open file '%s'" % path)
+		var file := FileAccess.open(path, FileAccess.READ)
+		if not file:
+			print("Couldn't open file '%s': %s" % [path, error_string(FileAccess.get_open_error())])
 			continue
 
 		var savegame_var = file.get_var()
@@ -121,7 +121,7 @@ func _init():
 func get_num_savegames() -> int:
 	return savegames.size()
 
-func get_filename(i) -> SaveGame:
+func get_filename(i) -> String:
 	return savegames.keys()[i]
 
 func get_savegame(i) -> SaveGame:
@@ -132,18 +132,16 @@ func save(filename: String, savegame: SaveGame) -> bool:
 	# insert new savegame or overwrite previous savegame of that name
 	savegames[filename] = savegame
 
-	var dir := Directory.new()
-	if not dir.dir_exists(SAVEGAME_DIRECTORY):
-		var err: int = dir.make_dir_recursive(SAVEGAME_DIRECTORY)
+	if not DirAccess.dir_exists_absolute(SAVEGAME_DIRECTORY):
+		var err: int = DirAccess.make_dir_recursive_absolute(SAVEGAME_DIRECTORY)
 		if err != OK:
 			print("Failed to create directory '%s'" % SAVEGAME_DIRECTORY)
 			return false
 
-	var file := File.new()
 	var path: String = SAVEGAME_DIRECTORY + filename
-	var err: int = file.open(path, File.WRITE)
-	if err != OK:
-		print("Failed to open file '%s'" % path)
+	var file := FileAccess.open(path, FileAccess.WRITE)
+	if not file:
+		print("Failed to open file '%s': %s" % [path, error_string(FileAccess.get_open_error())])
 		return false
 
 	file.store_var(savegame.serialize())
@@ -156,8 +154,7 @@ func delete_savegame(filename: String) -> void:
 
 	savegames.erase(filename)
 
-	var directory := Directory.new()
-	var path := SAVEGAME_DIRECTORY + filename
-	var err: int = directory.remove(path)
+	var dir := DirAccess.open(SAVEGAME_DIRECTORY)
+	var err := dir.remove(filename)
 	if err != OK:
-		print("Failed to delete file '%s'" % path)
+		print("Failed to delete file '%s'" % [SAVEGAME_DIRECTORY + filename, error_string(err)])

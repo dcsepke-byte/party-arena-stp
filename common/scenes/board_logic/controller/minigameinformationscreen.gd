@@ -2,11 +2,11 @@ extends Control
 
 var state
 
-onready var lobby = Lobby.get_lobby(self)
+@onready var lobby = Lobby.get_lobby(self)
 
 func _ready():
 	hide()
-	self.modulate = Color.transparent
+	self.modulate = Color.TRANSPARENT
 
 func get_team(id: int) -> int:
 	for i in range(len(state.minigame_teams)):
@@ -19,7 +19,7 @@ func _load_content(minigame, players):
 	var TEAM_MINIGAMES = [Lobby.MINIGAME_TYPES.ONE_VS_THREE,
 			Lobby.MINIGAME_TYPES.TWO_VS_TWO]
 
-	$Content/Rows/Description/Text.bbcode_text = tr(minigame.description)
+	$Content/Rows/Description/Text.text = tr(minigame.description)
 
 	var container: GridContainer = $Content/Rows/Controls
 	container.columns = 2 * len(players) + 1
@@ -44,14 +44,15 @@ func _load_content(minigame, players):
 				style.expand_margin_bottom = 8
 				style.corner_radius_top_left = 5
 				style.corner_radius_top_right = 5
-				if minigame.controls.empty():
+				if minigame.controls.is_empty():
 					style.expand_margin_bottom = 2
 					style.corner_radius_bottom_left = 5
 					style.corner_radius_bottom_right = 5
-				header.add_stylebox_override("panel", style)
+				header.add_theme_stylebox_override("panel", style)
 			_:
-				header.add_stylebox_override("panel", StyleBoxEmpty.new())
+				header.add_theme_stylebox_override("panel", StyleBoxEmpty.new())
 		label.text = player.info.name
+		label.theme_type_variation = &"HeaderMedium"
 		var texture = TextureRect.new()
 		var character = lobby.get_player_by_id(player.info.player_id).character
 		texture.texture = PluginSystem.character_loader.load_character_icon(character)
@@ -69,8 +70,8 @@ func _load_content(minigame, players):
 				container.add_child(HSeparator.new())
 			else:
 				container.add_child(Control.new())
-		var label := preload("res://common/scenes/board_logic/controller/templates/control_text.tscn").instance()
-		label.bbcode_text = tr(entry.text)
+		var label := preload("res://common/scenes/board_logic/controller/templates/control_text.tscn").instantiate()
+		label.text = tr(entry.text)
 		container.add_child(label)
 		for player in players:
 			container.add_child(VSeparator.new())
@@ -87,15 +88,15 @@ func _load_content(minigame, players):
 						style.corner_radius_bottom_left = 5
 						style.corner_radius_bottom_right = 5
 						style.expand_margin_bottom = 2
-					panel.add_stylebox_override("panel", style)
+					panel.add_theme_stylebox_override("panel", style)
 				_:
-					panel.add_stylebox_override("panel", StyleBoxEmpty.new())
+					panel.add_theme_stylebox_override("panel", StyleBoxEmpty.new())
 			var controls := VBoxContainer.new()
 			var first_row := HBoxContainer.new()
 			var second_row := HBoxContainer.new()
 			controls.size_flags_vertical = SIZE_SHRINK_CENTER
-			first_row.alignment = BoxContainer.ALIGN_CENTER
-			second_row.alignment = BoxContainer.ALIGN_CENTER
+			first_row.alignment = BoxContainer.ALIGNMENT_CENTER
+			second_row.alignment = BoxContainer.ALIGNMENT_CENTER
 			controls.add_child(first_row)
 			controls.add_child(second_row)
 			if not "team" in entry:
@@ -114,10 +115,10 @@ func _load_content(minigame, players):
 				var action = entry.actions[index]
 				var element
 				if action == "spacer":
-					element = preload("res://common/scenes/board_logic/controller/templates/control_spacer.tscn").instance()
+					element = preload("res://common/scenes/board_logic/controller/templates/control_spacer.tscn").instantiate()
 				else:
 					var action_name = "player{num}_{action}".format({"num": player.info.player_id, "action": action})
-					var input = InputMap.get_action_list(action_name)[0]
+					var input = InputMap.action_get_events(action_name)[0]
 					element = ControlHelper.ui_from_event(input)
 				if index < first_row_count:
 					first_row.add_child(element)
@@ -154,8 +155,7 @@ func show_minigame_info(state: Lobby.MinigameState, players: Array) -> void:
 			for player in players:
 				if player.info.player_id == player_id:
 					filtered_players.append(player)
-	Global.connect("language_changed", self, "_load_content",
-			[state.minigame_config, filtered_players])
+	Global.language_changed.connect(_load_content.bind(state.minigame_config, filtered_players))
 	_load_content(state.minigame_config, filtered_players)
 	if state.minigame_config.image_path != null:
 		$Content/Rows/Description/Screenshot.texture = \

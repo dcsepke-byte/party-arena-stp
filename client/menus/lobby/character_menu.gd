@@ -7,9 +7,9 @@ func _ready():
 	for character in PluginSystem.character_loader.get_loaded_characters():
 		var button := Button.new()
 		button.expand_icon = true
-		button.rect_min_size = Vector2(64, 64)
+		button.custom_minimum_size = Vector2(64, 64)
 		button.icon = PluginSystem.character_loader.load_character_icon(character)
-		button.connect("pressed", self, "_on_character_selected", [character])
+		button.pressed.connect(_on_character_selected.bind(character))
 		$VBoxContainer/GridContainer.add_child(button)
 
 func select_character(character: String):
@@ -23,5 +23,5 @@ func select_character(character: String):
 	show()
 
 func _on_character_selected(character: String):
-	emit_signal("character_selected", character)
+	character_selected.emit(character)
 	hide()

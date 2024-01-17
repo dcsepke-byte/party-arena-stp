@@ -2,7 +2,7 @@ extends Control
 
 signal shopping_completed
 
-onready var controller: Controller =  get_parent().get_parent()
+@onready var controller: Controller =  get_parent().get_parent()
 var current_player: PlayerBoard
 var items := []
 
@@ -10,7 +10,7 @@ var selected_item: Node
 
 func _init():
 	hide()
-	Global.connect("language_changed", self, "_on_refresh_language")
+	Global.language_changed.connect(_on_refresh_language)
 
 func generate_shop_items(space: NodeBoard):
 	assert(current_player, "Generating shop items while no current player is set")
@@ -59,12 +59,12 @@ func ai_do_shopping(player: PlayerBoard) -> void:
 func player_do_shopping(player: PlayerBoard) -> void:
 	self.current_player = player
 	generate_shop_items(player.space)
-	rpc_id(player.info.addr.peer_id, "open_shop", player.info.player_id, items)
+	open_shop.rpc_id(player.info.addr.peer_id, player.info.player_id, items)
 
-master func item_purchased(idx: int):
+@rpc("any_peer") func item_purchased(idx: int):
 	if not current_player:
 		return
-	var network_id := multiplayer.get_rpc_sender_id()
+	var network_id := multiplayer.get_remote_sender_id()
 	if current_player.info.addr.peer_id != network_id:
 		return
 	if idx < 0 or idx > items.size():
@@ -72,29 +72,29 @@ master func item_purchased(idx: int):
 		return
 	var item = load(items[idx]).new()
 	if item.item_cost > current_player.cookies:
-		rpc_id(network_id, "purchase_failed", "CONTEXT_NOTIFICATION_NOT_ENOUGH_COOKIES")
+		purchase_failed.rpc_id(network_id, "CONTEXT_NOTIFICATION_NOT_ENOUGH_COOKIES")
 		return
 	if not current_player.give_item(item):
-		rpc_id(network_id, "purchase_failed", "CONTEXT_NOTIFICATION_NOT_ENOUGH_SPACE")
+		purchase_failed.rpc_id(network_id, "CONTEXT_NOTIFICATION_NOT_ENOUGH_SPACE")
 		return
 	current_player.cookies -= item.item_cost
 
-master func shopping_completed():
+@rpc("any_peer") func server_shopping_completed():
 	if not current_player:
 		return
 	var player_info := controller.lobby.get_player_by_id(current_player.info.player_id)
-	if player_info.addr.peer_id != multiplayer.get_rpc_sender_id():
+	if player_info.addr.peer_id != multiplayer.get_remote_sender_id():
 		return
 	end_shopping()
 
 func end_shopping():
 	self.current_player = null
 	self.items = []
-	emit_signal("shopping_completed")
+	shopping_completed.emit()
 
-puppet func open_shop(player_id: int, items: Array) -> void:
+@rpc func open_shop(player_id: int, items: Array) -> void:
 	if items.size() == 0:
-		rpc_id(1, "shopping_completed")
+		server_shopping_completed.rpc_id(1)
 		return
 	
 	var player = controller.get_player_by_player_id(player_id)
@@ -115,15 +115,15 @@ puppet func open_shop(player_id: int, items: Array) -> void:
 			element.show()
 		else:
 			element.hide()
-			element.item = null
+			element.item = ""
 
 	$Items/Item1.select()
 	show()
 
-func _on_shop_item(idx: int) -> void:
-	rpc_id(1, "item_purchased", idx)
+func _on_shop_item(_player, idx: int, _instance) -> void:
+	item_purchased.rpc_id(1, idx)
 
-puppet func purchase_failed(reason: String):
+@rpc func purchase_failed(reason: String):
 	$Notification.dialog_text = reason
 	$Notification.popup_centered()
 
@@ -136,4 +136,4 @@ func _on_refresh_language():
 
 func _on_Shop_Back_pressed() -> void:
 	hide()
-	rpc_id(1, "shopping_completed")
+	server_shopping_completed.rpc_id(1)

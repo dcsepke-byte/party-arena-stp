@@ -362,6 +362,9 @@ msgstr ""
 msgid "MENU_OPTIONS_GRAPHIC_QUALITY_LOW"
 msgstr ""
 
+msgid "MENU_OPTIONS_FXAA"
+msgstr ""
+
 msgid "MENU_GRAPHIC_QUALITY_REBOOT_NOTICE"
 msgstr ""
 

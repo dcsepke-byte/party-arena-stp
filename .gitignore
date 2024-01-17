@@ -3,3 +3,4 @@
 *.kra
 .import/
 .directory
+.godot/
