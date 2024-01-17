@@ -20,14 +20,14 @@ build:linux:
   <<: *build_base
   script:
     - mkdir build
-    - godot --export-release "Linux Client" "build/supertuxparty"
+    - godot --headless --export-release "Linux Client" "build/supertuxparty"
 
 build:server:
   stage: build_and_test
   <<: *build_base
   script:
     - mkdir build
-    - godot --export-release "Linux Server" "build/supertuxparty_server.pck"
+    - godot --headless --export-release "Linux Server" "build/supertuxparty_server.pck"
     - wget -O godot_linux_server.zip 'https://downloads.tuxfamily.org/godotengine/3.3.2/Godot_v3.3.2-stable_linux_server.64.zip'
     - unzip godot_linux_server.zip
     - mv Godot_v3.3.2-stable_linux_server.64 build/supertuxparty_server
@@ -37,21 +37,21 @@ build:windows:
   <<: *build_base
   script:
     - mkdir build
-    - godot --export-release "Windows Desktop" "build/Supertuxparty.exe"
+    - godot --headless --export-release "Windows Desktop" "build/Supertuxparty.exe"
 
 build:osx:
   stage: build_and_test
   <<: *build_base
   script:
     - mkdir build
-    - godot --export-release "Mac OSX Client" "build/supertuxparty.app"
+    - godot --headless --export-release "Mac OSX Client" "build/supertuxparty.app"
 
 build:plugins:
   stage: build_and_test
   <<: *build_base
   script:
     - mkdir -p build/plugins
-    - godot --export-release "Resources" "build/plugins/default.pck"
+    - godot --headless --export-release "Resources" "build/plugins/default.pck"
 
 build:sources:
   stage: build_and_test
