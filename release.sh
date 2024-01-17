@@ -17,13 +17,8 @@ finalize_build () {
 	zip -r ../super-tux-party-windows-64.zip plugins Supertuxparty.exe Supertuxparty.pck
 	zip -r ../super-tux-party-linux-server-64.zip plugins supertuxparty_server supertuxparty_server.pck
 	
-	mkdir tmp
-	cd tmp
-	unzip ../supertuxparty.app
-	cp -r ../plugins 'Super Tux Party.app/Contents/Resources/plugins'
-	zip -r ../../super-tux-party-osx-64.zip 'Super Tux Party.app'
-	cd ..
-	rm -rf tmp
+	cp -r plugins 'supertuxparty.app/Contents/Resources/plugins'
+	zip -r ../super-tux-party-osx-64.zip 'supertuxparty.app'
 	cd ..
 }
 
