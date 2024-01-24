@@ -364,6 +364,9 @@ msgstr "Mitja"
 msgid "MENU_OPTIONS_GRAPHIC_QUALITY_LOW"
 msgstr "Baixa"
 
+msgid "MENU_OPTIONS_FXAA"
+msgstr ""
+
 msgid "MENU_GRAPHIC_QUALITY_REBOOT_NOTICE"
 msgstr "Canviar la qualitat gràfica només pren efecte després de reiniciar"
 
@@ -605,6 +608,15 @@ msgstr "Minijoc Nolok cooperatiu"
 
 msgid "MINIGAME_TYPE_NOLOK_SOLO"
 msgstr "Minijoc Nolok d'un jugador"
+
+msgid "ERROR"
+msgstr ""
+
+msgid "SAVE_GAME_CANNOT_SAVE"
+msgstr ""
+
+msgid "SAVE_GAME_DISABLED"
+msgstr ""
 
 #~ msgid "MENU_LABEL_CHARACTER"
 #~ msgstr "Personatge:"

@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 0.7\n"
-"PO-Revision-Date: 2021-10-05 18:04+0000\n"
+"PO-Revision-Date: 2023-02-13 11:38+0000\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <https://hosted.weblate.org/projects/super-tux-party/"
 "super-tux-party/he/>\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Weblate 4.9-dev\n"
+"X-Generator: Weblate 4.16-dev\n"
 
 msgid "CONTEXT_LABEL_BUY_CAKE"
 msgstr "קניית עוגה תמורת {amount} עוגיות"
@@ -293,19 +293,30 @@ msgid "DIALOG_NO"
 msgstr "לא"
 
 msgid "MENU_LABEL_CONNECTION_ERROR_TITLE"
-msgstr ""
+msgstr "שגיאת חיבור"
 
 msgid "MENU_LABEL_CONNECTION_TIMEOUT"
 msgstr ""
+"לא ניתן לגשת לשרת.\n"
+"\n"
+"נא ליצור קשר עם הנהלת השרת שלך."
 
 msgid "MENU_LABEL_NO_SERVER_VERSION"
 msgstr ""
+"לא ניתן לאתר את גרסת השרת.\n"
+"\n"
+"נא ליצור קשר עם הנהלת השרת."
 
 msgid "MENU_LABEL_VERSION_MISMATCH_TITLE"
-msgstr ""
+msgstr "הגרסאות לא תואמות"
 
 msgid "MENU_LABEL_VERSION_MISMATCH"
 msgstr ""
+"הגרסה שמופעלת אצלך אינה תואמת לגרסת ה־SuperTuxParty לשרת הזה.\n"
+"הגרסה שלך: {local}\n"
+"גרסת השרת: {remote}\n"
+"\n"
+"נא להוריד גרסה תואמת כדי לשחק בשרת הזה."
 
 msgid "MENU_LABEL_CHOOSE_SERVER"
 msgstr "בחירת שרת:"
@@ -363,6 +374,9 @@ msgstr "בינונית"
 
 msgid "MENU_OPTIONS_GRAPHIC_QUALITY_LOW"
 msgstr "נמוכה"
+
+msgid "MENU_OPTIONS_FXAA"
+msgstr ""
 
 msgid "MENU_GRAPHIC_QUALITY_REBOOT_NOTICE"
 msgstr "שינוי איכות הגרפיקה נכנס לתוקף רק לאחר הפעלה מחדש"
@@ -600,6 +614,15 @@ msgstr "המשחק הקבוצתי של נולוק"
 
 msgid "MINIGAME_TYPE_NOLOK_SOLO"
 msgstr "המשחקון ליחיד של נולוק"
+
+msgid "ERROR"
+msgstr "שגיאה"
+
+msgid "SAVE_GAME_CANNOT_SAVE"
+msgstr "לא ניתן לשמור את המשחק כרגע"
+
+msgid "SAVE_GAME_DISABLED"
+msgstr "שמירת משחקים בשרת הזה מושבתת"
 
 #~ msgid "MENU_LABEL_NOT_READY_ELLIPSIS"
 #~ msgstr "לא מוכנים…"

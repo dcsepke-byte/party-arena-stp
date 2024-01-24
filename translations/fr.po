@@ -364,6 +364,9 @@ msgstr "Moyenne"
 msgid "MENU_OPTIONS_GRAPHIC_QUALITY_LOW"
 msgstr "Basse"
 
+msgid "MENU_OPTIONS_FXAA"
+msgstr ""
+
 msgid "MENU_GRAPHIC_QUALITY_REBOOT_NOTICE"
 msgstr ""
 "Changer la qualité de la vidéo n'a effet seulement qu'après un redémarrage "
@@ -616,6 +619,15 @@ msgstr "Mini-jeu Nolok Coop"
 
 msgid "MINIGAME_TYPE_NOLOK_SOLO"
 msgstr "Mini-jeu Nolok Solo"
+
+msgid "ERROR"
+msgstr ""
+
+msgid "SAVE_GAME_CANNOT_SAVE"
+msgstr ""
+
+msgid "SAVE_GAME_DISABLED"
+msgstr ""
 
 #~ msgid "MENU_LABEL_NOT_READY_ELLIPSIS"
 #~ msgstr "N'est pas prêt…"

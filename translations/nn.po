@@ -367,6 +367,9 @@ msgstr ""
 msgid "MENU_OPTIONS_GRAPHIC_QUALITY_LOW"
 msgstr "Diverse"
 
+msgid "MENU_OPTIONS_FXAA"
+msgstr ""
+
 msgid "MENU_GRAPHIC_QUALITY_REBOOT_NOTICE"
 msgstr ""
 
@@ -569,6 +572,15 @@ msgid "MINIGAME_TYPE_NOLOK_COOP"
 msgstr ""
 
 msgid "MINIGAME_TYPE_NOLOK_SOLO"
+msgstr ""
+
+msgid "ERROR"
+msgstr ""
+
+msgid "SAVE_GAME_CANNOT_SAVE"
+msgstr ""
+
+msgid "SAVE_GAME_DISABLED"
 msgstr ""
 
 #~ msgid "MENU_LABEL_OK"

@@ -364,6 +364,9 @@ msgstr "médio"
 msgid "MENU_OPTIONS_GRAPHIC_QUALITY_LOW"
 msgstr "baixo"
 
+msgid "MENU_OPTIONS_FXAA"
+msgstr ""
+
 msgid "MENU_GRAPHIC_QUALITY_REBOOT_NOTICE"
 msgstr "A alteração da qualidade gráfica só tem efeito após reiniciar"
 
@@ -600,6 +603,15 @@ msgid "MINIGAME_TYPE_NOLOK_COOP"
 msgstr ""
 
 msgid "MINIGAME_TYPE_NOLOK_SOLO"
+msgstr ""
+
+msgid "ERROR"
+msgstr ""
+
+msgid "SAVE_GAME_CANNOT_SAVE"
+msgstr ""
+
+msgid "SAVE_GAME_DISABLED"
 msgstr ""
 
 #~ msgid "MENU_LABEL_CHARACTER"

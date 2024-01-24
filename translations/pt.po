@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 0.7\n"
-"PO-Revision-Date: 2021-05-01 10:31+0000\n"
-"Last-Translator: ssantos <ssantos@web.de>\n"
+"PO-Revision-Date: 2023-08-17 20:45+0000\n"
+"Last-Translator: Fred Maranhão <fred.maranhao@gmail.com>\n"
 "Language-Team: Portuguese <https://hosted.weblate.org/projects/super-tux-"
 "party/super-tux-party/pt/>\n"
 "Language: pt\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 4.7-dev\n"
+"X-Generator: Weblate 5.0-dev\n"
 
 msgid "CONTEXT_LABEL_BUY_CAKE"
 msgstr "Compre um bolo por {amount} biscoitos"
@@ -170,13 +170,13 @@ msgid "MENU_LABEL_DESKTOP"
 msgstr "Sair para o ambiente de trabalho"
 
 msgid "MENU_SETTINGS_AWARD_LINEAR"
-msgstr ""
+msgstr "Linear"
 
 msgid "MENU_LABEL_NEW_GAME"
 msgstr "Novo Jogo"
 
 msgid "MENU_LABEL_START"
-msgstr ""
+msgstr "Início"
 
 msgid "MENU_LABEL_PAUSE"
 msgstr "Pausa"
@@ -191,7 +191,7 @@ msgid "MENU_LABEL_PLAY"
 msgstr "Jogar"
 
 msgid "MENU_LABEL_ONLINE"
-msgstr ""
+msgstr "Jogue na rede"
 
 msgid "MENU_LABEL_PLAYER1"
 msgstr "Jogador1"
@@ -224,16 +224,16 @@ msgid "MENU_LABEL_SELECT_BOARD"
 msgstr "Selecione o tabuleiro:"
 
 msgid "MENU_LABEL_SELECT_CHARACTER"
-msgstr ""
+msgstr "Selecione seu Personagem"
 
 msgid "MENU_LABEL_TRY"
 msgstr "Tentar"
 
 msgid "MENU_SETTINGS_AWARD_WINNER_TAKES_ALL"
-msgstr ""
+msgstr "O ganhador leva tudo"
 
 msgid "MENU_SETTINGS_AWARD_TYPE"
-msgstr ""
+msgstr "Tipo de Prêmio"
 
 msgid "MENU_LABEL_CREDITS"
 msgstr "Créditos"
@@ -260,7 +260,7 @@ msgid "MENU_OPTIONS_FULLSCREEN"
 msgstr "Ecrã inteiro"
 
 msgid "MENU_OPTIONS_MSAA"
-msgstr ""
+msgstr "Anti-Serrilhado Multiamostra (Multisample anti-aliasing - MSAA)"
 
 msgid "MENU_OPTIONS_LANGUAGE"
 msgstr "Idoima"
@@ -293,49 +293,61 @@ msgid "DIALOG_NO"
 msgstr "Não"
 
 msgid "MENU_LABEL_CONNECTION_ERROR_TITLE"
-msgstr ""
+msgstr "Erro de Conexão"
 
 msgid "MENU_LABEL_CONNECTION_TIMEOUT"
 msgstr ""
+"Não foi possível atingir servidor.\n"
+"\n"
+"Por favor, contacte seu administrador do servidor."
 
 msgid "MENU_LABEL_NO_SERVER_VERSION"
 msgstr ""
+"Não foi possível determinar a versão do servidor.\n"
+"\n"
+"Por favor contacte seu administrador do servidor."
 
 msgid "MENU_LABEL_VERSION_MISMATCH_TITLE"
-msgstr ""
+msgstr "Versões não combinam"
 
 msgid "MENU_LABEL_VERSION_MISMATCH"
 msgstr ""
+"Você está rodando uma versão incompatível do SuperTuxParty para este "
+"servidor.\n"
+"Sua versão: {local}\n"
+"Versão do Servidor: {remote}\n"
+"\n"
+"Por favor baixe uma versão compatível para jogar neste servidor."
 
 msgid "MENU_LABEL_CHOOSE_SERVER"
-msgstr ""
+msgstr "Escolher servidor:"
 
 msgid "MENU_LABEL_COPY"
-msgstr ""
+msgstr "Copiar para a área de transferência"
 
 msgid "MENU_LABEL_LOBBY_CREATE"
-msgstr ""
+msgstr "Criar sala de espera"
 
 msgid "MENU_LABEL_LOBBY_JOIN"
-msgstr ""
+msgstr "Entrar na sala de espera"
 
 msgid "MENU_LOBBY_SETTINGS"
-msgstr ""
+msgstr "Opções do Jogo"
 
 msgid "MENU_SETTINGS_PUBLIC"
-msgstr ""
+msgstr "Sala de espera pública"
 
 msgid "MENU_SETTINGS_CAKE_COST"
-msgstr ""
+msgstr "Custo do bolo"
 
 msgid "MENU_SETTINGS_TURNS"
-msgstr ""
+msgstr "giros"
 
 msgid "MENU_SETTINGS_ENABLE_TIMEOUT"
-msgstr ""
+msgstr "expulsar jogadores por inatividade"
 
 msgid "MENU_SETTINGS_TIMEOUT"
-msgstr ""
+msgstr "Limite de tempo"
 
 msgid "AI_DIFFICULTY"
 msgstr "Dificuldade das IA:"
@@ -364,11 +376,14 @@ msgstr "médio"
 msgid "MENU_OPTIONS_GRAPHIC_QUALITY_LOW"
 msgstr "baixo"
 
+msgid "MENU_OPTIONS_FXAA"
+msgstr ""
+
 msgid "MENU_GRAPHIC_QUALITY_REBOOT_NOTICE"
 msgstr "A alteração da qualidade gráfica só tem efeito após reiniciar"
 
 msgid "MENU_LOBBY_ADD_PLAYER"
-msgstr ""
+msgstr "Aperte pra fazer parte"
 
 msgid "CONTEXT_SPEAKER_SARA"
 msgstr "Sara"
@@ -379,10 +394,10 @@ msgstr ""
 "precisamos de um vencedor. E o vencedor é…"
 
 msgid "CONTEXT_WINNER_REVEAL_ONE_PLAYER"
-msgstr ""
+msgstr "[color=#ff3300]{0}[/color]!"
 
 msgid "CONTEXT_WINNER_REVEAL_TWO_PLAYER"
-msgstr ""
+msgstr "[color=#ff3300]{0}[/color] and [color=#33ff00]{1}[/color]!"
 
 msgid "CONTEXT_WINNER_REVEAL_THREE_PLAYER"
 msgstr ""
@@ -599,6 +614,15 @@ msgid "MINIGAME_TYPE_NOLOK_COOP"
 msgstr ""
 
 msgid "MINIGAME_TYPE_NOLOK_SOLO"
+msgstr ""
+
+msgid "ERROR"
+msgstr ""
+
+msgid "SAVE_GAME_CANNOT_SAVE"
+msgstr ""
+
+msgid "SAVE_GAME_DISABLED"
 msgstr ""
 
 #~ msgid "MENU_LABEL_CHARACTER"

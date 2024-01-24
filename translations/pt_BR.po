@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 0.7\n"
-"PO-Revision-Date: 2021-12-09 18:50+0000\n"
-"Last-Translator: jak3z <jose_renato06@outlook.com>\n"
+"PO-Revision-Date: 2023-03-02 15:36+0000\n"
+"Last-Translator: Felipe Nogueira <contato.fnog@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) <https://hosted.weblate.org/projects/"
 "super-tux-party/super-tux-party/pt_BR/>\n"
 "Language: pt_BR\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.10-dev\n"
+"X-Generator: Weblate 4.16.2-dev\n"
 
 msgid "CONTEXT_LABEL_BUY_CAKE"
 msgstr "Compre um bolo por {amount} biscoitos"
@@ -170,13 +170,13 @@ msgid "MENU_LABEL_DESKTOP"
 msgstr "Sair para a Área de Trab"
 
 msgid "MENU_SETTINGS_AWARD_LINEAR"
-msgstr ""
+msgstr "Linear"
 
 msgid "MENU_LABEL_NEW_GAME"
 msgstr "Novo Jogo"
 
 msgid "MENU_LABEL_START"
-msgstr ""
+msgstr "Início"
 
 msgid "MENU_LABEL_PAUSE"
 msgstr "Pausar"
@@ -191,7 +191,7 @@ msgid "MENU_LABEL_PLAY"
 msgstr "Jogar"
 
 msgid "MENU_LABEL_ONLINE"
-msgstr ""
+msgstr "Jogar em rede"
 
 msgid "MENU_LABEL_PLAYER1"
 msgstr "Jogador1"
@@ -224,16 +224,16 @@ msgid "MENU_LABEL_SELECT_BOARD"
 msgstr "Selecione o tabuleiro:"
 
 msgid "MENU_LABEL_SELECT_CHARACTER"
-msgstr ""
+msgstr "Escolha seu personagem"
 
 msgid "MENU_LABEL_TRY"
 msgstr "Tentar"
 
 msgid "MENU_SETTINGS_AWARD_WINNER_TAKES_ALL"
-msgstr ""
+msgstr "O vencedor fica com tudo"
 
 msgid "MENU_SETTINGS_AWARD_TYPE"
-msgstr ""
+msgstr "Tipo de prêmio"
 
 msgid "MENU_LABEL_CREDITS"
 msgstr "Créditos"
@@ -260,7 +260,7 @@ msgid "MENU_OPTIONS_FULLSCREEN"
 msgstr "Tela cheia"
 
 msgid "MENU_OPTIONS_MSAA"
-msgstr ""
+msgstr "Antialiasing multisample (MSAA)"
 
 msgid "MENU_OPTIONS_LANGUAGE"
 msgstr "Linguagem"
@@ -293,49 +293,61 @@ msgid "DIALOG_NO"
 msgstr "Não"
 
 msgid "MENU_LABEL_CONNECTION_ERROR_TITLE"
-msgstr ""
+msgstr "Erro de conexão"
 
 msgid "MENU_LABEL_CONNECTION_TIMEOUT"
 msgstr ""
+"Servidor indisponível.\n"
+"\n"
+"Favor entrar em contato com o administrador do servidor."
 
 msgid "MENU_LABEL_NO_SERVER_VERSION"
 msgstr ""
+"Não consigo determinar a versão do servidor.\n"
+"\n"
+"Favor entrar em contato com o administrador do servidor."
 
 msgid "MENU_LABEL_VERSION_MISMATCH_TITLE"
-msgstr ""
+msgstr "Versão não bate"
 
 msgid "MENU_LABEL_VERSION_MISMATCH"
 msgstr ""
+"Você está rodando uma versão incompatível de SuperTuxParty para este "
+"servidor.\n"
+"Sua versão: {local}\n"
+"Versão do servidor: {remote}\n"
+"\n"
+"Favor baixar uma versão compatível para jogar neste servidor."
 
 msgid "MENU_LABEL_CHOOSE_SERVER"
-msgstr ""
+msgstr "Escolha o servidor:"
 
 msgid "MENU_LABEL_COPY"
-msgstr ""
+msgstr "Copiar para a área de transferência"
 
 msgid "MENU_LABEL_LOBBY_CREATE"
-msgstr ""
+msgstr "Criar Lobby"
 
 msgid "MENU_LABEL_LOBBY_JOIN"
-msgstr ""
+msgstr "Se juntar ao Lobby"
 
 msgid "MENU_LOBBY_SETTINGS"
-msgstr ""
+msgstr "Opções de jogo"
 
 msgid "MENU_SETTINGS_PUBLIC"
-msgstr ""
+msgstr "Lobby público"
 
 msgid "MENU_SETTINGS_CAKE_COST"
-msgstr ""
+msgstr "Costa do bolo"
 
 msgid "MENU_SETTINGS_TURNS"
-msgstr ""
+msgstr "Turnos"
 
 msgid "MENU_SETTINGS_ENABLE_TIMEOUT"
-msgstr ""
+msgstr "Chutar jogadores por inatividade"
 
 msgid "MENU_SETTINGS_TIMEOUT"
-msgstr ""
+msgstr "Limite de tempo"
 
 msgid "AI_DIFFICULTY"
 msgstr "Difficuldade da IA:"
@@ -350,7 +362,7 @@ msgid "DIFFICULTY_HARD"
 msgstr "Difícil"
 
 msgid "CONTEXT_GNU_ACTION_TYPE"
-msgstr ""
+msgstr "Ação GNU"
 
 msgid "MENU_OPTIONS_GRAPHIC_QUALITY"
 msgstr "Qualidade gráfica"
@@ -364,12 +376,15 @@ msgstr "Média"
 msgid "MENU_OPTIONS_GRAPHIC_QUALITY_LOW"
 msgstr "Baixa"
 
+msgid "MENU_OPTIONS_FXAA"
+msgstr ""
+
 msgid "MENU_GRAPHIC_QUALITY_REBOOT_NOTICE"
 msgstr ""
 "Alterações na qualidade do gráfico só entrará em vigor após a reinicialização"
 
 msgid "MENU_LOBBY_ADD_PLAYER"
-msgstr ""
+msgstr "Aperte pra se juntar"
 
 msgid "CONTEXT_SPEAKER_SARA"
 msgstr "Sara"
@@ -429,37 +444,41 @@ msgid "CONTEXT_GNU_SOLO_LOSS"
 msgstr "Isso não funcionou. Talvez na próxima."
 
 msgid "CONTEXT_GNU_COOP_VICTORY"
-msgstr ""
+msgstr "Conseguiu. Esperarei a próxima vez."
 
 msgid "CONTEXT_GNU_COOP_LOSS"
 msgstr ""
+"Embora você não tenha conseguido, você praticou seu trabalho em equipe. "
+"Tenho certeza que da próxima vez você consegue!"
 
 msgid "CONTEXT_NOLOK_NAME"
-msgstr ""
+msgstr "Nolok"
 
 msgid "CONTEXT_NOLOK_ACTION_TYPE"
-msgstr ""
+msgstr "Ação de Nolok"
 
 msgid "CONTEXT_NOLOK_EVENT_START"
-msgstr ""
+msgstr "Minha vez! Sei exatamente, o que fazer…"
 
 msgid "CONTEXT_NOLOK_MINIGAME_SOLO_MODERATION"
 msgstr ""
+"Eu te desafio pra um minijogo! Se você me vencer, pode ficar com suas "
+"coisas. Se eu vencer fico com um de seus bolos…"
 
 msgid "CONTEXT_NOLOK_MINIGAME_SOLO"
-msgstr ""
+msgstr "Minijogo solitário"
 
 msgid "CONTEXT_NOLOK_MINIGAME_COOP_MODERATION"
-msgstr ""
+msgstr "Eu contra todos vocês? Vocês acham que têm alguma chance contra mim?"
 
 msgid "CONTEXT_NOLOK_MINIGAME_COOP"
-msgstr ""
+msgstr "Minijogo cooperativo"
 
 msgid "CONTEXT_NOLOK_SOLO_VICTORY"
-msgstr ""
+msgstr "Fique feliz por eu ter poupado você!"
 
 msgid "CONTEXT_NOLOK_SOLO_LOSS"
-msgstr ""
+msgstr "Ansioso para vencer te novamente!"
 
 msgid "CONTEXT_NOLOK_COOP_VICTORY"
 msgstr ""
@@ -576,6 +595,15 @@ msgid "MINIGAME_TYPE_NOLOK_COOP"
 msgstr ""
 
 msgid "MINIGAME_TYPE_NOLOK_SOLO"
+msgstr ""
+
+msgid "ERROR"
+msgstr ""
+
+msgid "SAVE_GAME_CANNOT_SAVE"
+msgstr ""
+
+msgid "SAVE_GAME_DISABLED"
 msgstr ""
 
 #~ msgid "MENU_LABEL_NOT_READY_ELLIPSIS"

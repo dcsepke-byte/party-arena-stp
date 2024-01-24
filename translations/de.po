@@ -364,6 +364,9 @@ msgstr "Mittel"
 msgid "MENU_OPTIONS_GRAPHIC_QUALITY_LOW"
 msgstr "Niedrig"
 
+msgid "MENU_OPTIONS_FXAA"
+msgstr "FXAA (Fast Approximate Anti-Aliasing)"
+
 msgid "MENU_GRAPHIC_QUALITY_REBOOT_NOTICE"
 msgstr ""
 "Änderungen an der Graphik-Qualität werden erst nach Neustart angewendet"
@@ -613,6 +616,15 @@ msgstr "Nolok Coop Minispiel"
 msgid "MINIGAME_TYPE_NOLOK_SOLO"
 msgstr "Nolok Solo Minispiel"
 
+msgid "ERROR"
+msgstr ""
+
+msgid "SAVE_GAME_CANNOT_SAVE"
+msgstr ""
+
+msgid "SAVE_GAME_DISABLED"
+msgstr ""
+
 #~ msgid "MENU_LABEL_OK"
 #~ msgstr "OK"
 
@@ -687,6 +699,3 @@ msgstr "Nolok Solo Minispiel"
 
 #~ msgid "MENU_CONTROLS_GAMEPAD_START"
 #~ msgstr "Gamepad Start"
-
-msgid "MENU_OPTIONS_FXAA"
-msgstr "FXAA (Fast Approximate Anti-Aliasing)"

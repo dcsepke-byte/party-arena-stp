@@ -368,6 +368,9 @@ msgstr "Middels"
 msgid "MENU_OPTIONS_GRAPHIC_QUALITY_LOW"
 msgstr "Lav"
 
+msgid "MENU_OPTIONS_FXAA"
+msgstr "FXAA"
+
 msgid "MENU_GRAPHIC_QUALITY_REBOOT_NOTICE"
 msgstr "Endring av grafikkvalitet inntreffer ved neste omstart av spillet"
 
@@ -615,6 +618,15 @@ msgstr "Nolok-samarbeidsminispill"
 msgid "MINIGAME_TYPE_NOLOK_SOLO"
 msgstr "Nolok-enkeltspiller-minispill"
 
+msgid "ERROR"
+msgstr ""
+
+msgid "SAVE_GAME_CANNOT_SAVE"
+msgstr ""
+
+msgid "SAVE_GAME_DISABLED"
+msgstr ""
+
 #~ msgid "MENU_LABEL_NOT_READY_ELLIPSIS"
 #~ msgstr "Ikke klar enda…"
 
@@ -716,6 +728,3 @@ msgstr "Nolok-enkeltspiller-minispill"
 
 #~ msgid "MENU_LABEL_TITLE"
 #~ msgstr "Super Tux Party"
-
-msgid "MENU_OPTIONS_FXAA"
-msgstr "FXAA"

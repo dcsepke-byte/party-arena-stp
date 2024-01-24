@@ -364,6 +364,9 @@ msgstr "Ordinara"
 msgid "MENU_OPTIONS_GRAPHIC_QUALITY_LOW"
 msgstr "Malbona"
 
+msgid "MENU_OPTIONS_FXAA"
+msgstr "FXAA"
+
 msgid "MENU_GRAPHIC_QUALITY_REBOOT_NOTICE"
 msgstr "Ŝanĝo de la grafika kvalito efektivos nur post relanĉo"
 
@@ -607,6 +610,15 @@ msgstr "Kunlabora ludeto de Nolok"
 msgid "MINIGAME_TYPE_NOLOK_SOLO"
 msgstr "Unuopa ludeto de Nolok"
 
+msgid "ERROR"
+msgstr ""
+
+msgid "SAVE_GAME_CANNOT_SAVE"
+msgstr ""
+
+msgid "SAVE_GAME_DISABLED"
+msgstr ""
+
 #~ msgid "MENU_LABEL_CHARACTER"
 #~ msgstr "Avataro:"
 
@@ -675,6 +687,3 @@ msgstr "Unuopa ludeto de Nolok"
 
 #~ msgid "MENU_LABEL_TITLE"
 #~ msgstr "Super Tux Party"
-
-msgid "MENU_OPTIONS_FXAA"
-msgstr "FXAA"

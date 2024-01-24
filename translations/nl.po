@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 0.7\n"
-"PO-Revision-Date: 2021-09-23 16:36+0000\n"
+"PO-Revision-Date: 2023-02-13 11:38+0000\n"
 "Last-Translator: Heimen Stoffels <vistausss@fastmail.com>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/super-tux-party/"
 "super-tux-party/nl/>\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.9-dev\n"
+"X-Generator: Weblate 4.16-dev\n"
 
 msgid "CONTEXT_LABEL_BUY_CAKE"
 msgstr "Koop een taart voor {amount} koekjes"
@@ -293,19 +293,30 @@ msgid "DIALOG_NO"
 msgstr "Nee"
 
 msgid "MENU_LABEL_CONNECTION_ERROR_TITLE"
-msgstr ""
+msgstr "Verbindingsfout"
 
 msgid "MENU_LABEL_CONNECTION_TIMEOUT"
 msgstr ""
+"Er kan geen verbinding worden gemaakt met de server.\n"
+"\n"
+"Neem contact op met de serverbeheerder."
 
 msgid "MENU_LABEL_NO_SERVER_VERSION"
 msgstr ""
+"De serverversie kan niet worden vastgesteld.\n"
+"\n"
+"Neem contact op met de serverbeheerder."
 
 msgid "MENU_LABEL_VERSION_MISMATCH_TITLE"
-msgstr ""
+msgstr "Onjuiste versie"
 
 msgid "MENU_LABEL_VERSION_MISMATCH"
 msgstr ""
+"Je versie van SuperTuxParty is niet compatibel met deze server.\n"
+"Jouw versie: {local}\n"
+"Serverversie: {remote}\n"
+"\n"
+"Download een compatibele versie om verbinding te maken met deze server."
 
 msgid "MENU_LABEL_CHOOSE_SERVER"
 msgstr "Kies een server:"
@@ -363,6 +374,9 @@ msgstr "Gemiddeld"
 
 msgid "MENU_OPTIONS_GRAPHIC_QUALITY_LOW"
 msgstr "Laag"
+
+msgid "MENU_OPTIONS_FXAA"
+msgstr ""
 
 msgid "MENU_GRAPHIC_QUALITY_REBOOT_NOTICE"
 msgstr "Herstart om de wijziging toe te passen"
@@ -603,6 +617,15 @@ msgstr "Nolok-samenwerkingsminispel"
 
 msgid "MINIGAME_TYPE_NOLOK_SOLO"
 msgstr "Nolok-solominispel"
+
+msgid "ERROR"
+msgstr "Foutmelding"
+
+msgid "SAVE_GAME_CANNOT_SAVE"
+msgstr "Het spel kan niet worden opgeslagen"
+
+msgid "SAVE_GAME_DISABLED"
+msgstr "Het opslaan van spellen is uitgeschakeld op deze server"
 
 #~ msgid "MENU_LABEL_NOT_READY_ELLIPSIS"
 #~ msgstr "Nog niet klaar…"

@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 0.7\n"
-"PO-Revision-Date: 2020-05-20 16:41+0000\n"
-"Last-Translator: Tuomas Lähteenmäki <lahtis@gmail.com>\n"
+"PO-Revision-Date: 2023-05-07 19:47+0000\n"
+"Last-Translator: Elias Dincau <eldishyper@gmail.com>\n"
 "Language-Team: Finnish <https://hosted.weblate.org/projects/super-tux-party/"
 "super-tux-party/fi/>\n"
 "Language: fi\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.1-dev\n"
+"X-Generator: Weblate 4.18-dev\n"
 
 msgid "CONTEXT_LABEL_BUY_CAKE"
 msgstr "Osta kakku {amount} keksille"
@@ -80,7 +80,7 @@ msgid "MENU_CONTROLS_UNKNOWN_GAMEPAD_AXIS"
 msgstr ""
 
 msgid "MENU_CONTROLS_GENERIC_GAMEPAD_BUTTON"
-msgstr ""
+msgstr "Peliohjain painike  {button}"
 
 msgid "MENU_CONTROLS_MOUSE"
 msgstr "Hiiri"
@@ -140,7 +140,7 @@ msgid "MENU_CONTROLS_DIR_UP"
 msgstr "Ylös"
 
 msgid "MENU_CONTROLS_SCREENSHOT"
-msgstr ""
+msgstr "Ota kuvankaappaus"
 
 msgid "MENU_CONTROLS_DEV_MENU"
 msgstr ""
@@ -335,7 +335,7 @@ msgid "MENU_SETTINGS_ENABLE_TIMEOUT"
 msgstr ""
 
 msgid "MENU_SETTINGS_TIMEOUT"
-msgstr ""
+msgstr "Aikaraja"
 
 msgid "AI_DIFFICULTY"
 msgstr "Tekoälyn vaikeustaso:"
@@ -363,6 +363,9 @@ msgstr "Keskitaso"
 
 msgid "MENU_OPTIONS_GRAPHIC_QUALITY_LOW"
 msgstr "Matala"
+
+msgid "MENU_OPTIONS_FXAA"
+msgstr ""
 
 msgid "MENU_GRAPHIC_QUALITY_REBOOT_NOTICE"
 msgstr ""
@@ -532,61 +535,70 @@ msgid "CONTEXT_CAKE_WANT_BUY"
 msgstr ""
 
 msgid "CONTEXT_CAKE_BUY_AMOUNT"
-msgstr ""
+msgstr "Kuinka monta kakkua haluat ostaa?"
 
 msgid "CONTEXT_CAKE_COLLECTED"
 msgstr ""
 
 msgid "CONTEXT_CAKE_CANT_AFFORD"
-msgstr ""
+msgstr "Valitettavasti sinulla ei ole tarpeeksi keksejä ostaaksesi kakun."
 
 msgid "SHOP_LABEL_TITLE"
-msgstr ""
+msgstr "Tavarakauppa"
 
 msgid "SHOP_LABEL_DESCRIPTION"
-msgstr ""
+msgstr "Esineen tiedot"
 
 msgid "SHOP_ITEM_NO_DESCRIPTION"
-msgstr ""
+msgstr "Ei tietoja"
 
 msgid "REWARDSCREEN_MINIGAME_RESULTS"
-msgstr ""
+msgstr "Minipelin tulokset"
 
 msgid "REWARDSCREEN_MINIGAME_WINNER"
-msgstr ""
+msgstr "Voittaja!"
 
 msgid "REWARDSCREEN_MINIGAME_REWARD"
-msgstr ""
+msgstr "Palkkio:"
 
 msgid "REWARDSCREEN_PRESS_BUTTON"
-msgstr ""
+msgstr "Paina"
 
 msgid "MINIGAME_ACTION_MOVEMENT"
-msgstr ""
+msgstr "Liiku"
 
 msgid "MINIGAME_TYPE_FFA"
-msgstr ""
+msgstr "Kaikki vastaan kaikki minipeli"
 
 msgid "MINIGAME_TYPE_2v2"
-msgstr ""
+msgstr "Kaksi vastaan kaksi minipeli"
 
 msgid "MINIGAME_TYPE_1v3"
-msgstr ""
+msgstr "Yksi vastaan kolme minipeli"
 
 msgid "MINIGAME_TYPE_DUEL"
-msgstr ""
+msgstr "Kaksintaistelu minipeli"
 
 msgid "MINIGAME_TYPE_GNU_COOP"
-msgstr ""
+msgstr "GNU Coop minipeli"
 
 msgid "MINIGAME_TYPE_GNU_SOLO"
-msgstr ""
+msgstr "GNU Solo minipeli"
 
 msgid "MINIGAME_TYPE_NOLOK_COOP"
-msgstr ""
+msgstr "Nolok Coop minipeli"
 
 msgid "MINIGAME_TYPE_NOLOK_SOLO"
-msgstr ""
+msgstr "Nolok Solo minipeli"
+
+msgid "ERROR"
+msgstr "Virhe"
+
+msgid "SAVE_GAME_CANNOT_SAVE"
+msgstr "Peliä ei voi tallentaa tällä hetkellä"
+
+msgid "SAVE_GAME_DISABLED"
+msgstr "Pelien tallentaminen on pois päältä tällä palvelimella"
 
 #~ msgid "MENU_LABEL_CHARACTER"
 #~ msgstr "Hahmo:"

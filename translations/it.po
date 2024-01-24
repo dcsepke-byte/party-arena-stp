@@ -364,6 +364,9 @@ msgstr "Media"
 msgid "MENU_OPTIONS_GRAPHIC_QUALITY_LOW"
 msgstr "Bassa"
 
+msgid "MENU_OPTIONS_FXAA"
+msgstr "FXAA"
+
 msgid "MENU_GRAPHIC_QUALITY_REBOOT_NOTICE"
 msgstr "La modifica della qualità grafica ha effetto solo dopo un riavvio"
 
@@ -608,6 +611,15 @@ msgstr "Minigioco Nolok Cooperativo"
 msgid "MINIGAME_TYPE_NOLOK_SOLO"
 msgstr "Minigioco Nolok Singolo"
 
+msgid "ERROR"
+msgstr ""
+
+msgid "SAVE_GAME_CANNOT_SAVE"
+msgstr ""
+
+msgid "SAVE_GAME_DISABLED"
+msgstr ""
+
 #~ msgid "MENU_LABEL_CHARACTER"
 #~ msgstr "Personaggio:"
 
@@ -748,6 +760,3 @@ msgstr "Minigioco Nolok Singolo"
 
 #~ msgid "MENU_LABEL_TITLE"
 #~ msgstr "Super Tux Party"
-
-msgid "MENU_OPTIONS_FXAA"
-msgstr "FXAA"

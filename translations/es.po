@@ -364,6 +364,9 @@ msgstr "Media"
 msgid "MENU_OPTIONS_GRAPHIC_QUALITY_LOW"
 msgstr "Baja"
 
+msgid "MENU_OPTIONS_FXAA"
+msgstr "FXAA"
+
 msgid "MENU_GRAPHIC_QUALITY_REBOOT_NOTICE"
 msgstr ""
 "El cambio de la calidad gráfica sólo tendrá efecto después de reiniciar"
@@ -608,6 +611,15 @@ msgstr "Minijuego cooperativo de Nolok"
 msgid "MINIGAME_TYPE_NOLOK_SOLO"
 msgstr "Minijuego en solitario de Nolok"
 
+msgid "ERROR"
+msgstr ""
+
+msgid "SAVE_GAME_CANNOT_SAVE"
+msgstr ""
+
+msgid "SAVE_GAME_DISABLED"
+msgstr ""
+
 #~ msgid "MENU_LABEL_NOT_READY_ELLIPSIS"
 #~ msgstr "No está listo…"
 
@@ -705,6 +717,3 @@ msgstr "Minijuego en solitario de Nolok"
 
 #~ msgid "MENU_CONTROLS_GAMEPAD_BUTTON_Y"
 #~ msgstr "Mando botón Y"
-
-msgid "MENU_OPTIONS_FXAA"
-msgstr "FXAA"

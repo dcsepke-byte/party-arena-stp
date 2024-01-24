@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 0.7\n"
-"PO-Revision-Date: 2020-03-31 00:09+0000\n"
-"Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
+"PO-Revision-Date: 2023-02-12 09:40+0000\n"
+"Last-Translator: Guih48 <guih48@gmail.hu>\n"
 "Language-Team: Hungarian <https://hosted.weblate.org/projects/super-tux-"
 "party/super-tux-party/hu/>\n"
 "Language: hu\n"
@@ -14,16 +14,16 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.0-dev\n"
+"X-Generator: Weblate 4.16-dev\n"
 
 msgid "CONTEXT_LABEL_BUY_CAKE"
-msgstr ""
+msgstr "Torta vásárlása {amount} sütiért"
 
 msgid "CONTEXT_LABEL_DUEL_REWARD"
-msgstr ""
+msgstr "Párbaj jutalom:"
 
 msgid "CONTEXT_LABEL_DUEL_SELECT"
-msgstr ""
+msgstr "Ellenfél kiválasztása:"
 
 msgid "CONTEXT_LABEL_FINISH"
 msgstr ""
@@ -44,25 +44,25 @@ msgid "CONTEXT_LABEL_ROLL_PLAYER"
 msgstr ""
 
 msgid "CONTEXT_LABEL_STEAL_ONE_CAKE"
-msgstr ""
+msgstr "A győztes elcsen 1 sütit"
 
 msgid "CONTEXT_LABEL_STEAL_TEN_COOKIES"
-msgstr ""
+msgstr "A győztes elcsen 10 sütit"
 
 msgid "CONTEXT_LABEL_TURN_NUM"
-msgstr ""
+msgstr "Kör {turn}/{total}"
 
 msgid "CONTEXT_LABEL_VS"
 msgstr ""
 
 msgid "CONTEXT_LABEL_YOUR_TURN"
-msgstr ""
+msgstr "Te következel!"
 
 msgid "CONTEXT_NOTIFICATION_NOT_ENOUGH_COOKIES"
-msgstr ""
+msgstr "Nencs elég sütid, hogy ezt megvedd"
 
 msgid "CONTEXT_NOTIFICATION_NOT_ENOUGH_SPACE"
-msgstr ""
+msgstr "Nincs több hely az eszköztáradban"
 
 msgid "MENU_CONTROLS_ACTION_1"
 msgstr ""
@@ -367,6 +367,9 @@ msgstr ""
 msgid "MENU_OPTIONS_GRAPHIC_QUALITY_LOW"
 msgstr "Egyéb"
 
+msgid "MENU_OPTIONS_FXAA"
+msgstr ""
+
 msgid "MENU_GRAPHIC_QUALITY_REBOOT_NOTICE"
 msgstr ""
 
@@ -569,6 +572,15 @@ msgid "MINIGAME_TYPE_NOLOK_COOP"
 msgstr ""
 
 msgid "MINIGAME_TYPE_NOLOK_SOLO"
+msgstr ""
+
+msgid "ERROR"
+msgstr ""
+
+msgid "SAVE_GAME_CANNOT_SAVE"
+msgstr ""
+
+msgid "SAVE_GAME_DISABLED"
 msgstr ""
 
 #~ msgid "MENU_LABEL_OK"
