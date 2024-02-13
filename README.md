@@ -2,11 +2,11 @@
 
 [![Website](https://img.shields.io/website?down_message=offline&up_message=online&url=https%3A%2F%2Fsupertux.party)](https://supertux.party/)
 [![License](https://img.shields.io/badge/License-GPL%20v3.0-orange)](https://www.gnu.org/licenses/gpl-3.0.html)
-[![Godot Version](https://img.shields.io/badge/Godot-v3.2.2-%23478cbf)](https://downloads.tuxfamily.org/godotengine/3.2.2/)
+[![Godot Version](https://img.shields.io/badge/Godot-v4.2-%23478cbf)](https://downloads.tuxfamily.org/godotengine/4.2/)
 [![Mentioned in Awesome Godot](https://awesome.re/mentioned-badge.svg)](https://github.com/godotengine/awesome-godot)
 [![Translated on Weblate](https://hosted.weblate.org/widgets/super-tux-party/-/svg-badge.svg)](https://hosted.weblate.org/engage/super-tux-party/?utm_source=widget)
 [![Matrix](https://img.shields.io/matrix/SuperTuxParty-Extra:matrix.org)](https://app.element.io/#/room/#SuperTuxParty-Dev:matrix.org)
-[![Subreddit subscribers](https://img.shields.io/reddit/subreddit-subscribers/supertuxparty)](https://www.reddit.com/r/SuperTuxParty/)
+[![Subreddit subscribers](https://img.shields.io/reddit/subreddit-subscribers/SuperTuxParty)](https://www.reddit.com/r/SuperTuxParty/)
 
 A [free/libre](https://www.gnu.org/philosophy/free-sw.html) and
 [open-source](https://opensource.org/docs/osd/) party game that is meant to
@@ -52,3 +52,6 @@ We also have a [subreddit](https://www.reddit.com/r/SuperTuxParty/)
 for discussions about the project, and two Matrix rooms for
 [development](https://matrix.to/#/#SuperTuxParty-Dev:matrix.org) and
 [general](https://matrix.to/#/#SuperTuxParty-Extra:matrix.org) talking.
+
+
+[def]: https://downloads.tuxfamily.org/godotengine/3.2.2/
