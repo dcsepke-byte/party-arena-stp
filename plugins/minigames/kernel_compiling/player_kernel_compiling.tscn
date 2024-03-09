@@ -1,7 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://cy4kcp2m25mc3"]
+[gd_scene load_steps=13 format=3 uid="uid://cy4kcp2m25mc3"]
 
 [ext_resource type="Script" path="res://plugins/minigames/kernel_compiling/player_kernel_compiling.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://dhrfbt7i1omqm" path="res://plugins/minigames/kernel_compiling/screen/screen.glb" id="2"]
+[ext_resource type="PackedScene" uid="uid://bbwi5248ob4tm" path="res://assets/models/bed/bed.glb" id="2_eyd5x"]
 [ext_resource type="PackedScene" uid="uid://vkituo8tc8rf" path="res://plugins/minigames/kernel_compiling/screen/progress.glb" id="3"]
 [ext_resource type="PackedScene" uid="uid://bcadvinwdsw4t" path="res://common/scenes/control_view/control_view.tscn" id="4"]
 [ext_resource type="Texture2D" uid="uid://c0aubkywn5qqe" path="res://plugins/minigames/kernel_compiling/screen/fill.png" id="5"]
@@ -23,6 +24,8 @@ script = ExtResource("1")
 
 [node name="Model" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="bed" parent="." instance=ExtResource("2_eyd5x")]
 
 [node name="laptop" parent="." instance=ExtResource("6")]
 transform = Transform3D(-0.25, 0, -8.14603e-08, 0, 0.25, 0, 8.14603e-08, 0, -0.25, 0, 0.75, 0.5)
@@ -52,9 +55,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.681683, 0.973398)
 material_override = SubResource("2")
 pixel_size = 0.0035
 texture = ExtResource("5")
-
-[node name="Scene Root" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.25)
 
 [node name="Correct" type="AudioStreamPlayer3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.33427, 2.12064)

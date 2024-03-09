@@ -10,34 +10,28 @@ const VERSION_STRING := "v1.0-rc1"
 
 ## Create a server running on this machine. [br]
 ## If [param public] is false, the local server will listen only on localhost,
-## otherwise the server will be accessable from any computer in the network
+## otherwise the server will be accessable from any computer in the network. [br]
+## Can be used for singleplayer (public = false) or LAN multiplayer (public = true)
 func create_local_server(public: bool = false) -> Node:
-	var game_server = load("res://server/game.tscn").instantiate()
+	var game_server: Node = load("res://server/game.tscn").instantiate()
 	var server := ENetMultiplayerPeer.new()
 	if not public:
 		server.set_bind_ip("127.0.0.1")
-	if server.create_server(7163) != OK:
+	if server.create_server(0) != OK:
 		return null
-	var client := ENetMultiplayerPeer.new()
-	if client.create_client("127.0.0.1", 7163) != OK:
-		return null
+	var port := server.host.get_local_port()
 	
 	get_tree().root.add_child(game_server)
 	var server_multiplayer := MultiplayerAPI.create_default_interface()
 	server_multiplayer.multiplayer_peer = server
 	get_tree().set_multiplayer(server_multiplayer, game_server.get_node("Game").get_path())
-	game_server.get_node("Game").multiplayer.multiplayer_peer = server
 	game_server.get_node("Game").init_server()
 	
-	var game_client = load("res://client/game.tscn").instantiate()
-	var client_multiplayer := MultiplayerAPI.create_default_interface()
-	client_multiplayer.multiplayer_peer = client
-	get_tree().set_multiplayer(client_multiplayer)
-	get_tree().root.add_child(game_client)
-	get_tree().set_multiplayer(client_multiplayer, game_client.get_node("Game").get_path())
-	game_client.get_node("Game").init_client()
-	
-	return game_client.get_node("Game")
+	var client := connect_remote_server("127.0.0.1", port)
+	# Clean up on error
+	if not client:
+		game_server.queue_free()
+	return client
 
 ## Destroy a server created with [method create_local_server].
 func destroy_local_server():
@@ -46,15 +40,23 @@ func destroy_local_server():
 
 ## Connect to the server running on host [param ip] and port [param port].
 func connect_remote_server(ip: String, port: int) -> Node:
-	var peer = ENetMultiplayerPeer.new()
-	if peer.create_client(ip, port) != OK:
+	var client := ENetMultiplayerPeer.new()
+	if client.create_client(ip, port) != OK:
 		return null
-	var client_multiplayer := MultiplayerAPI.create_default_interface()
-	client_multiplayer.multiplayer_peer = peer
+	
 	var game_client = load("res://client/game.tscn").instantiate()
+	var client_multiplayer := MultiplayerAPI.create_default_interface()
+	client_multiplayer.multiplayer_peer = client
+	
+	# Ugly hack:
+	# The lobby menu for singleplayer games is in the main menu, which is not in the
+	# /root/Client/Game/ subtree...
+	# So we need the client multiplayer menu to work there as well
+	get_tree().set_multiplayer(client_multiplayer)
 	get_tree().root.add_child(game_client)
 	get_tree().set_multiplayer(client_multiplayer, game_client.get_node("Game").get_path())
 	game_client.get_node("Game").init_client()
+	
 	return game_client.get_node("Game")
 
 ## Returns the current local server (if any).

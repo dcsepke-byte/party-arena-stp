@@ -1024,29 +1024,37 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17, -2.5, -15)
 [node name="TreeAppleTall4" parent="Ground" instance=ExtResource("6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17, -2.5, -11)
 
-[node name="Waypoint" parent="Ground" instance=ExtResource("7")]
+[node name="Waypoint" parent="Ground" node_paths=PackedStringArray("nodes") instance=ExtResource("7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17, 0, 0)
+nodes = [NodePath("../Waypoint2")]
 
-[node name="Waypoint2" parent="Ground" instance=ExtResource("7")]
+[node name="Waypoint2" parent="Ground" node_paths=PackedStringArray("nodes") instance=ExtResource("7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 47, 0, 0)
+nodes = [NodePath("../Waypoint3")]
 
-[node name="Waypoint3" parent="Ground" instance=ExtResource("7")]
+[node name="Waypoint3" parent="Ground" node_paths=PackedStringArray("nodes") instance=ExtResource("7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 51, 0, 0)
+nodes = [NodePath("../Waypoint4")]
 
-[node name="Waypoint4" parent="Ground" instance=ExtResource("7")]
+[node name="Waypoint4" parent="Ground" node_paths=PackedStringArray("nodes") instance=ExtResource("7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 57, 0, -28)
+nodes = [NodePath("../Waypoint5")]
 
-[node name="Waypoint5" parent="Ground" instance=ExtResource("7")]
+[node name="Waypoint5" parent="Ground" node_paths=PackedStringArray("nodes") instance=ExtResource("7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 79, 0, -28)
+nodes = [NodePath("../Waypoint6")]
 
-[node name="Waypoint6" parent="Ground" instance=ExtResource("7")]
+[node name="Waypoint6" parent="Ground" node_paths=PackedStringArray("nodes") instance=ExtResource("7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 85, 0, -28)
+nodes = [NodePath("../Waypoint7")]
 
-[node name="Waypoint7" parent="Ground" instance=ExtResource("7")]
+[node name="Waypoint7" parent="Ground" node_paths=PackedStringArray("nodes") instance=ExtResource("7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 91, 0, -28)
+nodes = [NodePath("../Waypoint8")]
 
-[node name="Waypoint8" parent="Ground" instance=ExtResource("7")]
+[node name="Waypoint8" parent="Ground" node_paths=PackedStringArray("nodes") instance=ExtResource("7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 97, 0, -28)
+nodes = [NodePath("../Waypoint9")]
 
 [node name="Waypoint9" parent="Ground" instance=ExtResource("7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 121, 0, -28)

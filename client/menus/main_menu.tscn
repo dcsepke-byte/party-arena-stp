@@ -22,7 +22,7 @@
 [ext_resource type="Texture2D" uid="uid://cdr6c8hds2jfa" path="res://assets/icons/loading/load1.png" id="24"]
 [ext_resource type="Texture2D" uid="uid://ukvokr3k6dn1" path="res://assets/icons/loading/load9.png" id="25"]
 [ext_resource type="Texture2D" uid="uid://oi5xcl2ihxb7" path="res://assets/icons/loading/load15.png" id="26"]
-[ext_resource type="Shader" path="res://client/menus/main_menu_bg.gdshader" id="26_0hf63"]
+[ext_resource type="Shader" path="res://common/main_menu_bg.gdshader" id="26_0hf63"]
 [ext_resource type="Texture2D" uid="uid://bf8ip2wx2vahn" path="res://assets/icons/loading/load11.png" id="27"]
 [ext_resource type="Texture2D" uid="uid://0f02qia2tthu" path="res://assets/icons/loading/load4.png" id="28"]
 [ext_resource type="Texture2D" uid="uid://bdfgcxc28cext" path="res://assets/icons/loading/load12.png" id="29"]

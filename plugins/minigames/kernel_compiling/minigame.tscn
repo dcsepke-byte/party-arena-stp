@@ -168,7 +168,7 @@ transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 31.7, 0, -2.7)
 mesh = ExtResource("7")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-process_mode = 2
+process_mode = 3
 stream = ExtResource("3")
 autoplay = true
 bus = &"Music"

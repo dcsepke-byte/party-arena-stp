@@ -22,7 +22,7 @@ func _ready():
 
 	self.position.y = target.y
 	self.position.z = target.z
-	update_rotation(-up_vector, self)
+	update_rotation(up_vector, self)
 
 func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
 	time -= SPEED * get_parent().direction * state.step
@@ -34,8 +34,4 @@ func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
 	var up_vector = path.transform * -curve.sample_baked_up_vector(offset, true) - path.position
 	var translated_target = Vector3(self.position.x, target.y, target.z)
 	state.linear_velocity = (translated_target - self.position) / state.step
-	update_rotation(-up_vector, state)
-
-#func _on_Hurdle_body_entered(body: Node) -> void:
-#	if body.is_in_group("players"):
-#		body.hit_hurdle()
+	update_rotation(up_vector, state)
