@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://common/scenes/board_logic/controller/minigameinformationscreen.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://bwuce5d5a2314" path="res://assets/icons/cookie-grayscale.png" id="10"]
-[ext_resource type="Shader" path="res://client/menus/main_menu_bg.gdshader" id="11"]
+[ext_resource type="Shader" path="res://common/main_menu_bg.gdshader" id="11"]
 
 [sub_resource type="ShaderMaterial" id="1"]
 shader = ExtResource("11")

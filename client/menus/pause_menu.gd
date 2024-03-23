@@ -21,11 +21,13 @@ func pause() -> void:
 	popup_centered.call_deferred()
 	was_already_paused = get_tree().paused
 	paused = true
-	get_tree().paused = true
+	if Global.is_local_multiplayer():
+		get_tree().paused = true
 
 func unpause() -> void:
 	hide()
-	get_tree().paused = was_already_paused
+	if Global.is_local_multiplayer():
+		get_tree().paused = was_already_paused
 	paused = false
 	was_already_paused = false
 

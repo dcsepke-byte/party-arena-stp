@@ -377,7 +377,7 @@ next = Array[NodePath]([NodePath("../Node16")])
 prev = Array[NodePath]([NodePath("../Node33")])
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-process_mode = 2
+process_mode = 3
 stream = ExtResource("11")
 autoplay = true
 

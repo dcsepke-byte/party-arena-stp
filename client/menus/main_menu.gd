@@ -182,9 +182,9 @@ func _on_ServerList_server_added(text: String, entry: LineEdit):
 	Global.save_storage()
 
 func remote_server(ip) -> void:
-	var server := Global.connect_remote_server(ip, 7634)
+	var server := Global.connect_remote_server(ip, ProjectSettings.get("server/port"))
 	if server == null:
-		$AcceptDialog.window_title = "MENU_LABEL_CONNECTION_ERROR"
+		$AcceptDialog.title = "MENU_LABEL_CONNECTION_ERROR"
 		$AcceptDialog.dialog_text = "MENU_LABEL_CONNECTION_TIMEOUT"
 		$AcceptDialog.popup_centered()
 		return
@@ -196,7 +196,7 @@ func remote_server(ip) -> void:
 
 func _on_connection_failed():
 	$LoadAnimation.hide()
-	$AcceptDialog.window_title = "MENU_LABEL_CONNECTION_ERROR"
+	$AcceptDialog.title = "MENU_LABEL_CONNECTION_ERROR"
 	$AcceptDialog.dialog_text = "MENU_LABEL_CONNECTION_TIMEOUT"
 	$AcceptDialog.popup_centered()
 	get_tree().network_peer.connection_failed.disconnect(_on_connection_failed)
@@ -208,14 +208,14 @@ func _on_connection_succeeded(server):
 	var version = await server.get_version()
 	$LoadAnimation.hide()
 	if version == null:
-		$AcceptDialog.window_title = "MENU_LABEL_CONNECTION_ERROR_TITLE"
+		$AcceptDialog.title = "MENU_LABEL_CONNECTION_ERROR_TITLE"
 		$AcceptDialog.dialog_text = "MENU_LABEL_NO_SERVER_VERSION"
 		$AcceptDialog.popup_centered()
 		get_tree().network_peer = null
 		Global.shutdown_connection()
 		return
 	elif version[0] != Global.PROTOCOL_VERSION:
-		$AcceptDialog.window_title = "MENU_LABEL_VERSION_MISMATCH_TITLE"
+		$AcceptDialog.title = "MENU_LABEL_VERSION_MISMATCH_TITLE"
 		$AcceptDialog.dialog_text = tr("MENU_LABEL_VERSION_MISMATCH").format(
 			{
 				'local': Global.VERSION_STRING,

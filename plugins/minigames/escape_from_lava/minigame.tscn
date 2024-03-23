@@ -225,7 +225,7 @@ text = "ESCAPE_FROM_LAVA_FINISH_MSG"
 horizontal_alignment = 1
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-process_mode = 2
+process_mode = 3
 stream = ExtResource("8")
 autoplay = true
 

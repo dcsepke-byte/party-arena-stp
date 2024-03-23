@@ -97,7 +97,7 @@ func _on_player_info_updated(info: Array):
 	for playerinfo in info:
 		if playerinfo.addr.peer_id == multiplayer.get_unique_id():
 			remaining_player_indices.erase(playerinfo.addr.idx)
-		var player = preload("res://client/menus/lobby/lobby_player.tscn").instantiate()
+		var player := preload("res://client/menus/lobby/lobby_player.tscn").instantiate()
 		var playername: LineEdit = player.get_node("PanelContainer/HBoxContainer/Name")
 		var character: Button = player.get_node("PanelContainer/HBoxContainer/Character")
 		var remove: Button = player.get_node("PanelContainer/HBoxContainer/Remove")

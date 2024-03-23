@@ -33,7 +33,7 @@ func _on_public_lobbies_updated(list):
 		$VBoxContainer/ScrollContainer/List.add_child(button)
 
 func _on_join_lobby(id: String) -> void:
-	var lobby = await server.join_lobby(id).completed
+	var lobby = await server.join_lobby(id)
 	lobby_joined(lobby)
 
 func lobby_joined(lobby: Lobby):
@@ -45,7 +45,7 @@ func lobby_joined(lobby: Lobby):
 	hide()
 
 func _on_lobby_create() -> void:
-	var lobby = await server.create_lobby().completed
+	var lobby = await server.create_lobby()
 	if lobby:
 		lobby_menu = preload("res://client/menus/lobby/lobby_menu.tscn").instantiate()
 		lobby_menu.lobby = lobby
@@ -59,7 +59,7 @@ func _on_Leave_pressed() -> void:
 	queue_free()
 
 func _on_Join_pressed() -> void:
-	var lobby = await server.join_lobby($VBoxContainer/Footer/HBoxContainer/LineEdit.text).completed
+	var lobby = await server.join_lobby($VBoxContainer/Footer/HBoxContainer/LineEdit.text)
 	if lobby:
 		lobby_menu = preload("res://client/menus/lobby/lobby_menu.tscn").instantiate()
 		lobby_menu.lobby = lobby

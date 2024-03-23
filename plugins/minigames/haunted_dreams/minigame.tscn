@@ -167,7 +167,7 @@ autostart = true
 layout_mode = 1
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-process_mode = 2
+process_mode = 3
 stream = ExtResource("7")
 autoplay = true
 bus = &"Music"

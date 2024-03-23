@@ -668,7 +668,7 @@ func _step(player: PlayerBoard, previous_space: NodeBoard, last: bool) -> Array:
 	
 	return [player.space.is_visible_space(), previous_space]
 
-func land_on_space(player):
+func land_on_space(player: PlayerBoard):
 	# Activate the item placed onto the node if any.
 	if player.space.trap != null and player.space.trap.activate_trap(
 		player, player.space.trap_player, self):
@@ -692,7 +692,9 @@ func land_on_space(player):
 				await get_tree().create_timer(1).timeout
 		NodeBoard.NODE_TYPES.YELLOW:
 			var rewards: Array = lobby.MINIGAME_DUEL_REWARDS.values()
-			var reward: int = rewards[randi() % rewards.size()]
+			# Remove the invalid placeholder value from the possible options
+			rewards.erase(Lobby.MINIGAME_DUEL_REWARDS.INVALID)
+			var reward: int = rewards.pick_random()
 			lobby.broadcast(minigame_duel_reward_animation.bind(reward))
 			await minigame_duel_reward_animation(reward)
 

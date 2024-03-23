@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://dq44tcwcjpik6"]
 
-[ext_resource type="Shader" path="res://client/menus/main_menu_bg.gdshader" id="1"]
+[ext_resource type="Shader" path="res://common/main_menu_bg.gdshader" id="1"]
 [ext_resource type="Texture2D" uid="uid://bwuce5d5a2314" path="res://assets/icons/cookie-grayscale.png" id="2"]
 [ext_resource type="AudioStream" uid="uid://bjval734wcyw8" path="res://assets/sounds/minigame_end_screen/stuxparty_endjingle.ogg" id="4"]
 [ext_resource type="Script" path="res://client/rewardscreens/rewardscreen_background.gd" id="5"]

@@ -11,10 +11,7 @@ func _process(delta: float) -> void:
 	Utility.propagate_process_call(self, "_server_process", [delta])
 
 func _on_node_added(node: Node):
-	# Enable our local multiplayer for all nodes that are added on
-	# the (local) server
 	if is_ancestor_of(node):
-#		node.custom_multiplayer = custom_multiplayer
 		# Hack to disable audio playback in the server scene tree
 		# I don't know of a better way to do this :(
 		if (node is AudioStreamPlayer) or (node is AudioStreamPlayer2D) or \
@@ -39,7 +36,7 @@ func lobby_joined(): pass
 func public_lobbies_callback(_lobbies: Array): pass
 
 @rpc("any_peer") func get_version():
-	version_callback.rpc_id(multiplayer.get_rpc_sender_id(), Global.PROTOCOL_VERSION, Global.VERSION_STRING)
+	version_callback.rpc_id(multiplayer.get_remote_sender_id(), Global.PROTOCOL_VERSION, Global.VERSION_STRING)
 
 @rpc("any_peer") func get_public_lobbies():
 	var lobbies := []

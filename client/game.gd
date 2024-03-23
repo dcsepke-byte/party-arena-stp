@@ -61,7 +61,7 @@ func update_lobbies():
 @rpc func get_version():
 	get_version.rpc_id(1)
 	var timer := get_tree().create_timer(3)
-	timer.timeout.connect(_on_version_timeout)
+	timer.timeout.connect(_on_version_timeout, CONNECT_DEFERRED)
 	var res = await version
 	timer.timeout.disconnect(_on_version_timeout)
 	return res
