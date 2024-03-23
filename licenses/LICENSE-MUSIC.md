@@ -57,6 +57,16 @@ Retrieved from [Open Game Art](https://opengameart.org/content/skeleton-waltz-th
 
 License [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/legalcode)
 
+### harvest food.ogg
+
+Public Domain by [Zane Little Music](https://ko-fi.com/zanelittle)
+
+Cut by Florian Kothmeier
+
+Retrieved from [Open Game Art](https://opengameart.org/content/apple-cider)
+
+License [CC0](http://creativecommons.org/publicdomain/zero/1.0/)
+
 ### Iamcompiling_master.ogg
 
 Copyright © franzopow
@@ -71,6 +81,12 @@ Copyright © jobromedia
 Retrieved from [OpenGameArt](https://opengameart.org/content/jbm-sound-effects-pack-1)
 
 License [CC-BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/legalcode)
+
+### countdown.wav
+
+Copyright © Florian Kothmeier
+
+License [CC-BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/legalcode)
 
 ### correct.wav
 

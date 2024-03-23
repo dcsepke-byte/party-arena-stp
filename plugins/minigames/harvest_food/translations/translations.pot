@@ -18,5 +18,5 @@ msgstr ""
 msgid "MINIGAME_DESCRIPTION"
 msgstr ""
 
-msgid "HARVEST_FOOD_SELECT_ROTTEN_PLANT_MSG"
+msgid "MINIGAME_ACTION_PICKUP"
 msgstr ""

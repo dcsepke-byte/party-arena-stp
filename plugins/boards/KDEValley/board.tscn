@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://plugins/boards/KDEValley/board.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://c4c62erhr3xkm" path="res://plugins/boards/KDEValley/landscape/kdevalley.glb" id="2"]
-[ext_resource type="Material" uid="uid://byv360y45sm7g" path="res://assets/models/still_water/water_material.tres" id="3"]
+[ext_resource type="Material" uid="uid://byv360y45sm7g" path="res://assets/materials/water_still.tres" id="3"]
 [ext_resource type="ArrayMesh" uid="uid://dngsl57llrrfp" path="res://assets/models/tree/tree.obj" id="4"]
 [ext_resource type="PackedScene" uid="uid://dcyoe2uryyyef" path="res://common/scenes/board_logic/controller/controller.tscn" id="5"]
 [ext_resource type="PackedScene" uid="uid://wtj7iedl45l7" path="res://common/scenes/board_logic/player_board/player_board.tscn" id="6"]

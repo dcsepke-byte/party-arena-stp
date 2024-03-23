@@ -130,6 +130,35 @@ Retrieved from [Open Game Art](https://opengameart.org/content/jack-o-lantern)
 
 License: [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/legalcode)
 
+## assets/models/food/OBJ
+### Pumpkin.obj
+
+Public Domain by Quaternius
+
+Modified by Florian Kothmeier
+
+Retrieved from [Quaternius.com](https://quaternius.com/packs/ultimatefood.html)
+
+License: [CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/legalcode)
+
+## assets/models/nature/glTF
+### *.gltf
+
+Public Domain by Quaternius
+
+Retrieved from [Quaternius.com](https://quaternius.com/packs/ultimatestylizednature.html)
+
+License: [CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/legalcode)
+
+## assets/models/nature/Textures
+### *.png
+
+Public Domain by Quaternius
+
+Retrieved from [Quaternius.com](https://quaternius.com/packs/ultimatestylizednature.html)
+
+License: [CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/legalcode)
+
 ## common/scenes/board_logic/controller/icons
 ### cake.png
 
