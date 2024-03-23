@@ -35,8 +35,8 @@ func create_local_server(public: bool = false) -> Node:
 
 ## Destroy a server created with [method create_local_server].
 func destroy_local_server():
-	get_node("/root/Client").free()
-	get_node("/root/Server").free()
+	get_node("/root/Client").queue_free()
+	get_node("/root/Server").queue_free()
 
 ## Connect to the server running on host [param ip] and port [param port].
 func connect_remote_server(ip: String, port: int) -> Node:
@@ -65,7 +65,7 @@ func get_current_server() -> Node:
 
 ## Destroy a remote connection created with [method connect_remote_server]
 func destroy_remote_connection():
-	get_node("/root/Client").free()
+	get_node("/root/Client").queue_free()
 
 ## Destroy any currently active networking created with either
 ## [method create_local_server] or [method connect_remote_server]

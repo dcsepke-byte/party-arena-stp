@@ -1,5 +1,8 @@
 extends Control
 
+@onready var server_list := $ServerList/VBoxContainer/ScrollContainer/List
+var add_server_button := Button.new()
+
 var lobby: Node
 
 func _ready() -> void:
@@ -7,16 +10,12 @@ func _ready() -> void:
 	$AudioStreamPlayer.play()
 	$MainMenu/Buttons/Play.grab_focus()
 	
-	var servers: Array = Global.storage.get_value("ServerList", "servers", [])
+	var servers: Array = get_servers()
 	for server in servers:
-		var button := Button.new()
-		button.text = server
-		button.pressed.connect(remote_server.bind(server))
-		$ServerList/VBoxContainer/ScrollContainer/List.add_child(button)
-	var add_button := Button.new()
-	add_button.text = "+"
-	add_button.pressed.connect(_on_ServerList_server_add)
-	$ServerList/VBoxContainer/ScrollContainer/List.add_child(add_button)
+		create_server_entry(server)
+	add_server_button.text = "+"
+	add_server_button.pressed.connect(_on_ServerList_server_add)
+	server_list.add_child(add_server_button)
 	
 	var current_server := Global.get_current_server()
 	if current_server and Global.is_local_multiplayer():
@@ -158,31 +157,88 @@ func _on_ServerList_Leave_pressed() -> void:
 	$MainMenu/Buttons/Play2.grab_focus()
 
 func _on_ServerList_server_add():
-	var list := $ServerList/VBoxContainer/ScrollContainer/List
-	var entry := LineEdit.new()
-	entry.text_submitted.connect(_on_ServerList_server_added.bind(entry))
-	list.add_child(entry)
-	entry.grab_focus()
+	var form := preload("res://client/menus/server_list_add_entry.tscn").instantiate()
+	form.confirmed.connect(_on_ServerList_server_added.bind(form))
+	form.canceled.connect(form.queue_free)
+	server_list.add_child(form)
 	# Make the "+" button the last child again
-	list.get_child(list.get_child_count() - 2).raise()
+	add_server_button.move_to_front()
 
-func _on_ServerList_server_added(text: String, entry: LineEdit):
-	# If there was no text entered, this is not a valid host to connect to
-	if text.is_empty():
-		entry.queue_free()
-		return
-	var button := Button.new()
-	button.text = text
-	entry.replace_by(button)
-	button.grab_focus()
-	# Save to disk
-	var servers: Array = Global.storage.get_value("ServerList", "servers", [])
-	servers.append(text)
+func get_servers() -> Array:
+	return Global.storage.get_value("ServerList", "servers", [])
+
+func save_servers(servers: Array):
 	Global.storage.set_value("ServerList", "servers", servers)
 	Global.save_storage()
 
-func remote_server(ip) -> void:
-	var server := Global.connect_remote_server(ip, ProjectSettings.get("server/port"))
+func _on_ServerList_server_added(data: Dictionary, form: Node):
+	form.queue_free()
+	# Save to disk
+	var servers: Array = get_servers()
+	servers.append(data)
+	save_servers(servers)
+	# Add to menu
+	var entry := create_server_entry(data)
+	entry.get_child(0).grab_focus()
+	# Make the "+" button the last child again
+	add_server_button.move_to_front()
+
+func _on_ServerList_server_edit(entry: Node):
+	var form := preload("res://client/menus/server_list_add_entry.tscn").instantiate()
+	form.load(get_servers()[entry.get_index()])
+	form.confirmed.connect(_on_ServerList_server_replace.bind(form, entry))
+	form.canceled.connect(func():
+		form.add_sibling(entry)
+		form.queue_free())
+	entry.add_sibling(form)
+	entry.get_parent().remove_child(entry)
+
+func _on_ServerList_server_replace(data: Dictionary, form: Node, old_entry: Node):
+	old_entry.free()
+	var servers: Array = get_servers()
+	servers[form.get_index()] = data
+	save_servers(servers)
+	var entry := create_server_entry(data)
+	entry.get_parent().move_child(entry, form.get_index())
+	entry.get_child(0).grab_focus()
+	form.queue_free()
+
+func _on_ServerList_server_delete(entry: Node):
+	var idx := entry.get_index()
+	entry.get_parent().remove_child(entry)
+	entry.queue_free()
+	if idx < server_list.get_child_count() - 1:
+		server_list.get_child(idx).get_child(0).grab_focus()
+	else:
+		add_server_button.grab_focus()
+	var servers: Array = get_servers()
+	servers.remove_at(idx)
+	save_servers(servers)
+
+func create_server_entry(data) -> Container:
+	var container := HBoxContainer.new()
+	var edit := Button.new()
+	edit.icon = preload("res://assets/icons/edit.png")
+	var delete := Button.new()
+	delete.icon = preload("res://assets/icons/delete.png")
+	var button := Button.new()
+	button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	if data is Dictionary:
+		button.text = data["display_name"]
+		button.pressed.connect(remote_server.bind(data["host"], data["port"]))
+	else:
+		button.text = data
+		button.pressed.connect(remote_server.bind(data, ProjectSettings.get("server/port")))
+	edit.pressed.connect(_on_ServerList_server_edit.bind(container))
+	delete.pressed.connect(_on_ServerList_server_delete.bind(container))
+	container.add_child(button)
+	container.add_child(edit)
+	container.add_child(delete)
+	server_list.add_child(container)
+	return container
+
+func remote_server(host: String, port: int) -> void:
+	var server := Global.connect_remote_server(host, port)
 	if server == null:
 		$AcceptDialog.title = "MENU_LABEL_CONNECTION_ERROR"
 		$AcceptDialog.dialog_text = "MENU_LABEL_CONNECTION_TIMEOUT"
@@ -211,7 +267,7 @@ func _on_connection_succeeded(server):
 		$AcceptDialog.title = "MENU_LABEL_CONNECTION_ERROR_TITLE"
 		$AcceptDialog.dialog_text = "MENU_LABEL_NO_SERVER_VERSION"
 		$AcceptDialog.popup_centered()
-		get_tree().network_peer = null
+		get_tree().set_multiplayer(null)
 		Global.shutdown_connection()
 		return
 	elif version[0] != Global.PROTOCOL_VERSION:
@@ -222,7 +278,7 @@ func _on_connection_succeeded(server):
 				'remote': version[1]
 			})
 		$AcceptDialog.popup_centered()
-		get_tree().network_peer = null
+		get_tree().set_multiplayer(null)
 		Global.shutdown_connection()
 		return
 	var servermenu = preload("res://client/menus/lobby/servermenu.tscn").instantiate()
