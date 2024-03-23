@@ -1,164 +1,117 @@
 extends Node3D
 
+const Plant := preload("res://plugins/minigames/harvest_food/plant.gd")
+const Pumpkin := preload("res://plugins/minigames/harvest_food/pumpkin.gd")
+const Player := preload("res://plugins/minigames/harvest_food/player.gd")
+
+const PUMPKIN_MASS: float = 10.0
+
+@onready var plants: Array[Plant] = [
+	$Plant1,
+	$Plant2,
+	$Plant3,
+	$Plant4,
+	$Plant5,
+	$Plant6,
+	$Plant7,
+	$Plant8,
+	$Plant9,
+]
 var lobby: Lobby
-
-const ROTTEN_PLANTS = [
-						preload("res://plugins/minigames/harvest_food/plants/carrot_rotten.tscn"),
-						preload("res://plugins/minigames/harvest_food/plants/radish_rotten.tscn"),
-						preload("res://plugins/minigames/harvest_food/plants/potato_rotten.tscn")
-					  ]
-const NORMAL_PLANTS = [
-						preload("res://plugins/minigames/harvest_food/plants/carrot.tscn"), preload("res://plugins/minigames/harvest_food/plants/carrot.tscn"),
-						preload("res://plugins/minigames/harvest_food/plants/carrot.tscn"), preload("res://plugins/minigames/harvest_food/plants/radish.tscn"),
-						preload("res://plugins/minigames/harvest_food/plants/carrot.tscn"), preload("res://plugins/minigames/harvest_food/plants/potato.tscn")
-					  ]
-
-var rounds = 5
-
-var plants
-var rotten_index
 
 func _enter_tree() -> void:
 	self.lobby = Lobby.get_lobby(self)
 
 func _ready():
+	var groups := [
+		[$Area1, $Player1],
+		[$Area2, $Player2],
+	]
+	plants[0].point_value = 1.0
+	plants[0].active = true
+	plants[1].point_value = 1.0
+	plants[1].active = true
 	if lobby.minigame_state.minigame_type != Lobby.MINIGAME_TYPES.DUEL:
-		plants = [$Area1, $Area2, $Area3, $Area4]
+		groups.append_array([
+			[$Area3, $Player3],
+			[$Area4, $Player4]
+		])
+		plants[2].point_value = 1.0
+		plants[2].active = true
+		plants[3].point_value = 1.0
+		plants[3].active = true
 	else:
-		plants = [$Area2, $Area4]
-		rounds = 3
-		
-		$Area1.queue_free()
 		$Area3.queue_free()
+		$Area4.queue_free()
+	
+	for nodes in groups:
+		# Set up event handler for each plot area
+		nodes[0].body_entered.connect(_on_area_body_entered.bind(nodes[1]))
+		nodes[0].body_exited.connect(_on_area_body_exited.bind(nodes[1]))
+		
+		# Show player icon on each plot area
+		var material: StandardMaterial3D = nodes[0].get_node(^"MeshInstance3D").get_surface_override_material(0)
+		material.albedo_texture = PluginSystem.character_loader.load_character_icon(nodes[1].info.character)
+	
 	if multiplayer.is_server():
-		spawn_plants()
-	else:
-		$Timer.timeout.disconnect(_on_Timer_timeout)
-
-func spawn_plants():
-	rotten_index = randi() % plants.size()
-	
-	var idx := []
-	for i in range(plants.size()):
-		var plant
-		if i == rotten_index:
-			idx.append(randi() % ROTTEN_PLANTS.size())
-			plant = ROTTEN_PLANTS[idx[-1]].instantiate()
-		else:
-			idx.append(randi() % NORMAL_PLANTS.size())
-			plant = NORMAL_PLANTS[idx[-1]].instantiate()
-		
-		plants[i].add_child(plant)
-	# TODO: this exposes which plant is rotten to the client, allowing to "cheat"
-	# Will need to be fixed when this minigame is reworked
-	lobby.broadcast(_client_spawn_plants.bind(idx, rotten_index))
-	$Timer.start()
-
-@rpc func _client_spawn_plants(idx: Array, rotten_index: int):
-	self.rotten_index = rotten_index
-	for i in range(plants.size()):
-		var plant
-		if i == rotten_index:
-			plant = ROTTEN_PLANTS[idx[i]].instantiate()
-		else:
-			plant = NORMAL_PLANTS[idx[i]].instantiate()
-		
-		plants[i].add_child(plant)
-	$Timer.start()
-
-@rpc func round_finished():
-	$Timer.stop()
-	# Move every player in front of the spot
-	$Player1.input_disabled = true
-	$Player1.current_destination = $Player1.position - $Player1.position.normalized()
-	$Player2.input_disabled = true
-	$Player2.current_destination = $Player2.position - $Player2.position.normalized()
-	if lobby.minigame_state.minigame_type != Lobby.MINIGAME_TYPES.DUEL:
-		$Player3.input_disabled = true
-		$Player3.current_destination = $Player3.position - $Player3.position.normalized()
-		$Player3.rotation = Vector3(0, -PI/2, 0)
-		$Player4.input_disabled = true
-		$Player4.current_destination = $Player4.position - $Player4.position.normalized()
-		$Player4.rotation = Vector3(0, -PI/2, 0)
-	
-	for i in range(plants.size()):
-		var colliders = plants[i].get_overlapping_bodies()
-		
-		if i != rotten_index:
-			for collider in colliders:
-				if collider.is_in_group("players"):
-					collider.play_animation("happy")
-		else:
-			for collider in colliders:
-				if collider.is_in_group("players"):
-					collider.play_animation("sad")
-					var player := lobby.get_player_by_id(collider.info.player_id)
-					$Screen/Message.text = tr("HARVEST_FOOD_SELECT_ROTTEN_PLANT_MSG").format({"player": player.name})
-		
-		var animationplayer = plants[i].get_node("Plant/AnimationPlayer")
-		animationplayer.play("show")
-
-@rpc func reset():
-	$Player1.input_disabled = false
-	$Player1.play_animation("idle")
-	$Player1.position = Vector3(-1, 0, -1)
-	$Player1.current_destination = null
-	$Player2.input_disabled = false
-	$Player2.play_animation("idle")
-	$Player2.position = Vector3(1, 0, -1)
-	$Player2.current_destination = null
-	if lobby.minigame_state.minigame_type != Lobby.MINIGAME_TYPES.DUEL:
-		$Player3.input_disabled = false
-		$Player3.play_animation("idle")
-		$Player3.position = Vector3(1, 0, 1)
-		$Player3.current_destination = null
-		$Player4.input_disabled = false
-		$Player4.play_animation("idle")
-		$Player4.position = Vector3(-1, 0, 1)
-		$Player4.current_destination = null
-	
-	$Screen/Message.text = ""
-	
-	for plant in plants:
-		var model = plant.get_node("Plant")
-		
-		plant.remove_child(model)
-		model.queue_free()
+		# Start the game timer on the server
+		$Timer.timeout.connect(_on_Timer_timeout)
 
 func _on_Timer_timeout():
-	for i in range(plants.size()):
-		var colliders = plants[i].get_overlapping_bodies()
-		
-		if i != rotten_index:
-			for collider in colliders:
-				if collider.is_in_group("players"):
-					collider.plants += 1
-	rounds -= 1
-	
-	lobby.broadcast(round_finished)
-	
-	# Update scores
-	$Screen/ScoreOverlay.set_score($Player1.info.player_id, $Player1.plants)
-	$Screen/ScoreOverlay.set_score($Player2.info.player_id, $Player2.plants)
-	if lobby.minigame_state.minigame_type != Lobby.MINIGAME_TYPES.DUEL:
-		$Screen/ScoreOverlay.set_score($Player3.info.player_id, $Player3.plants)
-		$Screen/ScoreOverlay.set_score($Player4.info.player_id, $Player4.plants)
-	# Wait 5 seconds
-	await get_tree().create_timer(5.0).timeout
-	
-	reset()
-	lobby.broadcast(reset)
-	
-	if rounds > 0:
-		spawn_plants()
-	else:
-		match lobby.minigame_state.minigame_type:
-			Lobby.MINIGAME_TYPES.FREE_FOR_ALL:
-				lobby.minigame_win_by_points([$Player1.plants, $Player2.plants, $Player3.plants, $Player4.plants])
-			Lobby.MINIGAME_TYPES.DUEL:
-				lobby.minigame_win_by_points([$Player1.plants, $Player2.plants])
-			Lobby.MINIGAME_TYPES.TWO_VS_TWO:
-				lobby.minigame_team_win_by_points([$Player1.plants + $Player2.plants, $Player3.plants + $Player4.plants])
+	match lobby.minigame_state.minigame_type:
+		Lobby.MINIGAME_TYPES.FREE_FOR_ALL:
+			lobby.minigame_win_by_points([$Player1.score, $Player2.score, $Player3.score, $Player4.score])
+		Lobby.MINIGAME_TYPES.DUEL:
+			lobby.minigame_win_by_points([$Player1.score, $Player2.score])
+		Lobby.MINIGAME_TYPES.TWO_VS_TWO:
+			lobby.minigame_team_win_by_points([$Player1.score + $Player2.score, $Player3.score + $Player4.score])
 
 func _client_process(_delta):
-	$Screen/Time.text = "%.2f" % snapped($Timer.time_left, 0.01)
+	$Screen/Time.text = "%.1f" % $Timer.time_left
+
+# Guarantees consistent names on the client and the server
+var pumpkin_counter := 0
+@rpc func _spawn_pumpkin(size: float, special: bool, pos: Vector3, forward: Vector3):
+	var p: Pumpkin = preload("res://plugins/minigames/harvest_food/pumpkin.tscn").instantiate()
+	add_child(p)
+	p.name = "Pumpkin" + str(pumpkin_counter)
+	pumpkin_counter += 1
+	p.position = pos
+	p.linear_velocity = forward * 5 + Vector3(0, 2, 0)
+	p.mass = size * PUMPKIN_MASS
+	p.point_value = size
+	p.special = special
+
+func throw(size: float, special: bool, pos: Vector3, forward: Vector3):
+	lobby.broadcast(_spawn_pumpkin.bind(size, special, pos, forward))
+	_spawn_pumpkin(size, special, pos, forward)
+
+func grow_new_plant() -> void:
+	var valid: Array[Plant] = []
+	for plant in plants:
+		if not plant.active:
+			valid.append(plant)
+	var target: Plant = valid.pick_random()
+	var special := randf() < 0.1
+	lobby.broadcast(target.activate.bind(special))
+	target.activate(special)
+
+func get_value(body: Pumpkin) -> float:
+	var modifier := 2.0 if body.special else 1.0
+	return body.point_value * modifier
+
+func _on_area_body_entered(body: Pumpkin, player: Player) -> void:
+	# Collision layers are set up so that only plants are registered
+	if not multiplayer.is_server():
+		return
+	
+	player.score += get_value(body)
+	$Screen/ScoreOverlay.set_score(player.info.player_id, player.score)
+
+func _on_area_body_exited(body: Pumpkin, player: Player) -> void:
+	# Collision layers are set up so that only plants are registered
+	if not multiplayer.is_server():
+		return
+	
+	player.score -= get_value(body)
+	$Screen/ScoreOverlay.set_score(player.info.player_id, player.score)

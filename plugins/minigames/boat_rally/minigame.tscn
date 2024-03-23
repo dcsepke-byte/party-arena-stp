@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://c5t00fo6qulet" path="res://plugins/minigames/boat_rally/player.tscn" id="2"]
 [ext_resource type="PackedScene" uid="uid://byw1xf6guwomf" path="res://plugins/minigames/boat_rally/pirate_kit/boat_large.gltf" id="3"]
 [ext_resource type="PackedScene" uid="uid://b0cdd0hbmabu0" path="res://plugins/minigames/boat_rally/formationLarge_rock.tscn" id="4"]
-[ext_resource type="Material" uid="uid://byv360y45sm7g" path="res://assets/models/still_water/water_material.tres" id="5"]
+[ext_resource type="Material" uid="uid://byv360y45sm7g" path="res://assets/materials/water_still.tres" id="5"]
 [ext_resource type="PackedScene" uid="uid://cr761cgcpp4n7" path="res://plugins/minigames/boat_rally/pirate_kit/ship_light.gltf" id="7"]
 [ext_resource type="PackedScene" uid="uid://bmdaus4pimoxb" path="res://common/scenes/countdown/countdown.tscn" id="8"]
 [ext_resource type="AudioStream" uid="uid://bdexpp7pfpreb" path="res://plugins/minigames/boat_rally/cannon-shot.wav" id="9"]

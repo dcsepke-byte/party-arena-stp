@@ -30,6 +30,7 @@ func start():
 	time_left = countdown_time
 	lobby.process_mode = PROCESS_MODE_DISABLED
 	$Label.modulate = Color(1, 1, 1, 1)
+	$AudioStreamPlayer.play()
 
 #func _is_paused():
 	## Check if the pause menu is open

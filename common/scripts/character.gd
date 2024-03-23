@@ -20,6 +20,8 @@ class_name Character
 ##   - happy [br]
 ##   - sad [br]
 ##   - stun [br]
+##   - carry [br]
+##   - run-carry [br]
 func play_animation(anim_name: String):
 	if animations:
 		var player = get_node(animations)

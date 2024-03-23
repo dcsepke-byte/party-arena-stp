@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://bmdaus4pimoxb"]
+[gd_scene load_steps=5 format=3 uid="uid://bmdaus4pimoxb"]
 
 [ext_resource type="Script" path="res://common/scenes/countdown/countdown.gd" id="1"]
+[ext_resource type="AudioStream" uid="uid://cgh13xaon3bgm" path="res://assets/sounds/countdown.wav" id="2_r8jmi"]
 
 [sub_resource type="Animation" id="1"]
 resource_name = "fadeout"
@@ -47,3 +48,6 @@ vertical_alignment = 1
 libraries = {
 "": SubResource("AnimationLibrary_oyk20")
 }
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_r8jmi")

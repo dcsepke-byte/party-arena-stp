@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dw3dff20fschf" path="res://common/scenes/board_logic/node/node.tscn" id="4"]
 [ext_resource type="ArrayMesh" uid="uid://bx30md2fu71s1" path="res://assets/models/bridge/bridge_mesh.obj" id="5"]
 [ext_resource type="Texture2D" uid="uid://dalbc0pyc1yhf" path="res://assets/models/bridge/bridge_diffuse.png" id="6_qfq2n"]
-[ext_resource type="Material" uid="uid://byv360y45sm7g" path="res://assets/models/still_water/water_material.tres" id="7"]
+[ext_resource type="Material" uid="uid://byv360y45sm7g" path="res://assets/materials/water_still.tres" id="7"]
 [ext_resource type="PackedScene" uid="uid://bit17c4rxxhn6" path="res://plugins/boards/test/islands/island1.dae" id="8"]
 [ext_resource type="PackedScene" uid="uid://dw0i25350pfh2" path="res://plugins/boards/test/islands/island2.dae" id="9"]
 [ext_resource type="AudioStream" uid="uid://0efsuq0vlgsi" path="res://assets/music/boards/test board bgm.wav" id="10"]
