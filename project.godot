@@ -25,8 +25,8 @@ buses/default_bus_layout="res://assets/defaults/default_bus_layout.tres"
 Utility="*res://common/scripts/utility.gd"
 Global="*res://common/scripts/global.gd"
 PluginSystem="*res://common/scripts/loader/plugin_system.gd"
-UISound="*res://common/scenes/sound_button/ui_sound.tscn"
 ControlHelper="*res://common/scripts/control_helper.gd"
+UISound="*res://common/scenes/sound_button/ui_sound.tscn"
 
 [debug]
 

@@ -966,14 +966,6 @@ Retrived from [Github](https://github.com/BastiaanOlij/shader_tutorial)
 
 License: [CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/legalcode)
 
-### delete_save.png
-
-Copyright © Godot Engine
-
-Retrieved from [github.com](https://github.com/godotengine/godot-design/blob/master/engine/icons/original/icon_remove.png)
-
-License: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/legalcode)
-
 ### lava.png
 Copyright by Maujoe
 
@@ -1102,6 +1094,23 @@ Retrived from [Open Game Art](https://opengameart.org/content/tux)
 License: [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/legalcode)
 
 ## assets/icons
+
+### delete.png
+
+Copyright © Godot Engine
+
+Retrieved from [github.com](https://github.com/godotengine/godot-design/blob/master/engine/icons/original/icon_remove.png)
+
+License: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/legalcode)
+
+### edit.png
+
+Copyright © Godot Engine
+
+Retrieved from [github.com](https://github.com/godotengine/godot-design/blob/fb3480f4831204d420b0eb7b1bd78335419d299b/engine/icons/original/icon_edit.png)
+
+License: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/legalcode)
+
 ### off.svg | off.png
 
 Copyright © Google
