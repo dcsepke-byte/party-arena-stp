@@ -11,7 +11,10 @@ class BoardOverrides:
 
 const MINIGAME_REWARD_SCREEN = preload("res://server//rewardscreens/rewardscreen.tscn")
 
+const MinigameQueue = preload("res://server/minigame_queue.gd")
+
 var overrides: BoardOverrides = BoardOverrides.new()
+var minigame_queue: MinigameQueue = MinigameQueue.new()
 
 var started := false
 var loaded_from_savegame := false

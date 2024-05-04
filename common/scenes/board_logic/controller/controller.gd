@@ -531,13 +531,13 @@ func prepare_minigame():
 	match [blue_team.size(), red_team.size()]:
 		[4, 0]:
 			state.minigame_type = Lobby.MINIGAME_TYPES.FREE_FOR_ALL
-			state.minigame_config = PluginSystem.minigame_loader.get_random_ffa()
+			state.minigame_config = lobby.minigame_queue.get_random_ffa()
 		[3, 1]:
 			state.minigame_type = Lobby.MINIGAME_TYPES.ONE_VS_THREE
-			state.minigame_config = PluginSystem.minigame_loader.get_random_1v3()
+			state.minigame_config = lobby.minigame_queue.get_random_1v3()
 		[2, 2]:
 			state.minigame_type = Lobby.MINIGAME_TYPES.TWO_VS_TWO
-			state.minigame_config = PluginSystem.minigame_loader.get_random_2v2()
+			state.minigame_config = lobby.minigame_queue.get_random_2v2()
 
 	lobby.turn += 1
 	player_turn = 1
@@ -707,7 +707,7 @@ func land_on_space(player: PlayerBoard):
 				enemies.erase(player)
 				enemy_player = players[randi() % enemies.size()].info.player_id
 
-			var minigame = PluginSystem.minigame_loader.get_random_duel()
+			var minigame = lobby.minigame_queue.get_random_duel()
 			var state := Lobby.MinigameState.new()
 			state.minigame_type = Lobby.MINIGAME_TYPES.DUEL
 			state.minigame_config = minigame
@@ -737,14 +737,14 @@ func land_on_space(player: PlayerBoard):
 					nolok_text = "CONTEXT_NOLOK_MINIGAME_SOLO"
 					state = Lobby.MinigameState.new()
 					state.minigame_type = Lobby.MINIGAME_TYPES.NOLOK_SOLO
-					state.minigame_config = PluginSystem.minigame_loader.get_random_nolok_solo()
+					state.minigame_config = lobby.minigame_queue.get_random_nolok_solo()
 					players.append(player.info.player_id)
 				Lobby.NOLOK_ACTION_TYPES.COOP_MINIGAME:
 					dialog_text = "CONTEXT_NOLOK_MINIGAME_COOP_MODERATION"
 					nolok_text = "CONTEXT_NOLOK_MINIGAME_COOP"
 					state = Lobby.MinigameState.new()
 					state.minigame_type = Lobby.MINIGAME_TYPES.NOLOK_COOP
-					state.minigame_config = PluginSystem.minigame_loader.get_random_nolok_coop()
+					state.minigame_config = lobby.minigame_queue.get_random_nolok_coop()
 					for p in self.players:
 						players.append(p.info.player_id)
 				Lobby.NOLOK_ACTION_TYPES.BOARD_EFFECT:
@@ -806,7 +806,7 @@ func land_on_space(player: PlayerBoard):
 					format_args = {"reward": reward.name}
 
 					state.minigame_type = Lobby.MINIGAME_TYPES.GNU_SOLO
-					state.minigame_config = PluginSystem.minigame_loader.get_random_gnu_solo()
+					state.minigame_config = lobby.minigame_queue.get_random_gnu_solo()
 
 					lobby.minigame_reward = Lobby.MinigameReward.new()
 					lobby.minigame_reward.gnu_solo_item_reward = reward
@@ -815,7 +815,7 @@ func land_on_space(player: PlayerBoard):
 				Lobby.GNU_ACTION_TYPES.COOP_MINIGAME:
 					dialog_text = "CONTEXT_GNU_MINIGAME_COOP_MODERATION"
 					state.minigame_type = Lobby.MINIGAME_TYPES.GNU_COOP
-					state.minigame_config = PluginSystem.minigame_loader.get_random_gnu_coop()
+					state.minigame_config = lobby.minigame_queue.get_random_gnu_coop()
 					for p in self.players:
 						players.push_back(p.info.player_id)
 
