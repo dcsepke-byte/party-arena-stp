@@ -27,7 +27,7 @@ func create_fireballs():
 	lobby.broadcast(create_fireball.bind($Fireball1.position))
 
 func _client_process(_delta: float):
-	$Remaining.text = str(snapped($Timer2.time_left, 0.1))
+	$Remaining.text = "%.1f"%$Timer2.time_left
 
 func _server_process(_delta: float):
 	if $Player1.position.y < -5:
