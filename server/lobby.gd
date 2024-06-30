@@ -410,15 +410,15 @@ func goto_minigame() -> void:
 	broadcast(playerstate_updated.bind(encoded))
 	call_deferred("_goto_scene_minigame", minigame_state.minigame_config.scene_path)
 
-func duplicate_items(items: Array) -> Array:
-	var list := []
+func duplicate_items(items: Array[Item]) -> Array[Dictionary]:
+	var list: Array[Dictionary] = []
 	for item in items:
 		list.append(item.serialize())
 
 	return list
 
-func deduplicate_items(items: Array) -> Array:
-	var list := []
+func deduplicate_items(items: Array) -> Array[Item]:
+	var list: Array[Item] = []
 	for item in items:
 		var deserialized := Item.deserialize(item)
 		assert(deserialized, "Failed to load item")
