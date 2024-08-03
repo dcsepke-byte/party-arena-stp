@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://cokfcoiev4upj"]
 
 [ext_resource type="Script" path="res://plugins/minigames/hurdle/hurdle/hurdle.gd" id="1"]
-[ext_resource type="PackedScene" uid="uid://ct5hyvce1gnia" path="res://plugins/minigames/hurdle/hurdle/hurdle.glb" id="2"]
+[ext_resource type="PackedScene" uid="uid://tkfd08o4mw1t" path="res://assets/models/hurdle.glb" id="2_jjd6g"]
 
 [sub_resource type="PhysicsMaterial" id="1"]
 friction = 0.0
@@ -29,4 +29,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, -1.5)
 visible = false
 mesh = SubResource("3")
 
-[node name="hurdle" parent="." instance=ExtResource("2")]
+[node name="hurdle" parent="." instance=ExtResource("2_jjd6g")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)

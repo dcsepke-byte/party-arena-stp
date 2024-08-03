@@ -11,9 +11,9 @@ func _ready():
 	if info.is_ai() and multiplayer.is_server():
 		paddle_cooldown = randf()
 	if flip_paddle:
-		$"Scene Root".rotation.y *= -1
-		$"Scene Root".scale.x *= -1
-		$"Scene Root".position.x *= -1
+		$paddle.rotation.z *= -1
+		$paddle.scale.x *= -1
+		$paddle.position.x *= -1
 
 @rpc func fired():
 	$Model.play_animation("punch")

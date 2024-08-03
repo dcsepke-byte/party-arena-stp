@@ -524,6 +524,7 @@ func _load_player(player: Node, info: PlayerInfo):
 			shape.get_parent().remove_child(shape)
 			shape.transform = transform
 			shape.name = "Shape3D"
+			shape.owner = null
 		else:
 			push_warning("Character `{0}` has no shape".format([character]))
 

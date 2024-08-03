@@ -31,9 +31,9 @@ animation/remove_immutable_tracks=true
 import_script/path=""
 _subresources={
 "materials": {
-"tux": {
+"Atlas": {
 "use_external/enabled": true,
-"use_external/path": "res://plugins/characters/Tux/tux.material"
+"use_external/path": "res://plugins/characters/Tux/Atlas.tres"
 }
 }
 }

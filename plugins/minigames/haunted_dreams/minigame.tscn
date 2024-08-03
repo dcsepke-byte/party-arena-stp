@@ -1,15 +1,32 @@
-[gd_scene load_steps=16 format=3 uid="uid://c4b40c3h5thjk"]
+[gd_scene load_steps=27 format=3 uid="uid://c4b40c3h5thjk"]
 
 [ext_resource type="Script" path="res://plugins/minigames/haunted_dreams/minigame.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://bbbtum845mfgv" path="res://plugins/minigames/haunted_dreams/room.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://vtg2qi2vfajc" path="res://assets/models/furniture/desk.glb" id="2_lfy80"]
 [ext_resource type="PackedScene" uid="uid://bbwi5248ob4tm" path="res://assets/models/bed/bed.glb" id="3"]
+[ext_resource type="PackedScene" uid="uid://dilpml4gawh50" path="res://assets/models/furniture/chair.glb" id="3_2ke6i"]
+[ext_resource type="PackedScene" uid="uid://c1c1ara2osguw" path="res://plugins/minigames/haunted_dreams/penholder.glb" id="3_7sasi"]
 [ext_resource type="PackedScene" uid="uid://c66hdqgqcbqwm" path="res://plugins/minigames/haunted_dreams/player.tscn" id="4"]
+[ext_resource type="PackedScene" uid="uid://joebl0x5ny0b" path="res://assets/models/furniture/lamp.glb" id="4_i0wre"]
 [ext_resource type="FontVariation" uid="uid://v64kv8lvr38u" path="res://assets/fonts/default_font.tres" id="5"]
 [ext_resource type="PackedScene" uid="uid://bmdaus4pimoxb" path="res://common/scenes/countdown/countdown.tscn" id="6"]
 [ext_resource type="AudioStream" uid="uid://c7ef0adit7duj" path="res://assets/music/minigames/haunted dreams.ogg" id="7"]
+[ext_resource type="AudioStream" uid="uid://babeqaodknwle" path="res://assets/sounds/creepy_laughter.wav" id="8_3lpvr"]
+[ext_resource type="PackedScene" uid="uid://djfh86uxb6ejq" path="res://plugins/minigames/haunted_dreams/floor.glb" id="9_udokv"]
+[ext_resource type="PackedScene" uid="uid://q5cqofety2mm" path="res://assets/models/furniture/rug.glb" id="14_6l50o"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fxg5l"]
+size = Vector3(3.5, 3, 5)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kc1bo"]
+radius = 1.0
+height = 3.0
 
 [sub_resource type="PlaneMesh" id="1"]
 size = Vector2(2, 9)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qxujq"]
+albedo_color = Color(0, 0.212844, 0.408726, 1)
 
 [sub_resource type="Animation" id="3"]
 length = 10.0
@@ -33,7 +50,7 @@ _data = {
 }
 
 [sub_resource type="BoxShape3D" id="4"]
-size = Vector3(5, 2.5, 0.1)
+size = Vector3(10, 5, 0.1)
 
 [sub_resource type="NavigationMesh" id="5"]
 vertices = PackedVector3Array(-5, -1, 5, -1.5, -1, 1, -1.5, -1, -1, 5, -1, 5, 5, -1, -5, 1.5, -1, -1, 1.5, -1, 5, -1.5, -1, 5, -1.5, -1, -5, -5, -1, -5, 1.5, -1, -5, 1.5, -1, 1)
@@ -52,24 +69,54 @@ ambient_light_color = Color(0.745098, 0.745098, 0.745098, 1)
 ambient_light_sky_contribution = 0.0
 ambient_light_energy = 0.5
 
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_acdx0"]
+
 [node name="Node3D" type="Node3D"]
 script = ExtResource("1")
 
+[node name="desk" parent="." instance=ExtResource("2_lfy80")]
+transform = Transform3D(-0.5, 0, -4.37114e-08, 0, 0.5, 0, 4.37114e-08, 0, -0.5, -4, 0, -2)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="desk"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="desk/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 1, 0.9)
+shape = SubResource("BoxShape3D_fxg5l")
+
+[node name="penholder" parent="desk" instance=ExtResource("3_7sasi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.427784, 1.91185, -0.746596)
+
+[node name="lamp" parent="desk" instance=ExtResource("4_i0wre")]
+transform = Transform3D(-0.0243623, 0, -0.999703, 0, 1, 0, 0.999703, 0, -0.0243623, 0.803569, 1.88416, 2.33809)
+
+[node name="chair" parent="." instance=ExtResource("3_2ke6i")]
+transform = Transform3D(-0.237442, 0.357792, -0.256137, 0.401034, 0.0561823, -0.293283, -0.181088, -0.344715, -0.313654, -3, 0.25, -2.56131)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="chair"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="chair/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_kc1bo")
+
 [node name="Ground" parent="." instance=ExtResource("2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0631192, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(-1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0, 1, 5.1, 2, 0)
 cast_shadow = 0
 mesh = SubResource("1")
+surface_material_override/0 = SubResource("StandardMaterial3D_qxujq")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.40472, 2.07085, 0.78375)
-light_color = Color(0.113725, 0.32549, 0.545098, 1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.7201, 2.25094, 0.809841)
+light_color = Color(0.0952943, 0.288908, 0.498208, 1)
 light_energy = 2.0
 light_bake_mode = 0
 shadow_enabled = true
+shadow_bias = 0.01
 shadow_reverse_cull_face = true
 omni_range = 50.0
+omni_attenuation = 0.0426887
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="OmniLight3D"]
 libraries = {
@@ -96,6 +143,7 @@ shape = SubResource("6")
 [node name="Bed" type="StaticBody3D" parent="."]
 
 [node name="Scene Root" parent="Bed" instance=ExtResource("3")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Bed"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
@@ -171,5 +219,65 @@ process_mode = 3
 stream = ExtResource("7")
 autoplay = true
 bus = &"Music"
+
+[node name="LoseSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_3lpvr")
+volume_db = 20.0
+
+[node name="floor" type="StaticBody3D" parent="."]
+
+[node name="floor" parent="floor" instance=ExtResource("9_udokv")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -4, -0.41908, -4)
+
+[node name="floor2" parent="floor" instance=ExtResource("9_udokv")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -0.6, -0.41908, -4)
+
+[node name="floor5" parent="floor" instance=ExtResource("9_udokv")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 2.8, -0.41908, -4)
+
+[node name="floor6" parent="floor" instance=ExtResource("9_udokv")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 6.1, -0.41908, -4)
+
+[node name="floor3" parent="floor" instance=ExtResource("9_udokv")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -4, -0.41908, -0.618872)
+
+[node name="floor4" parent="floor" instance=ExtResource("9_udokv")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -0.6, -0.41908, -0.618872)
+
+[node name="floor7" parent="floor" instance=ExtResource("9_udokv")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 2.8, -0.41908, -0.618872)
+
+[node name="floor8" parent="floor" instance=ExtResource("9_udokv")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 6.1, -0.41908, -0.618872)
+
+[node name="floor9" parent="floor" instance=ExtResource("9_udokv")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -4, -0.41908, 2.75852)
+
+[node name="floor10" parent="floor" instance=ExtResource("9_udokv")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -0.6, -0.41908, 2.75852)
+
+[node name="floor11" parent="floor" instance=ExtResource("9_udokv")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 2.8, -0.41908, 2.75852)
+
+[node name="floor12" parent="floor" instance=ExtResource("9_udokv")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 6.1, -0.41908, 2.75852)
+
+[node name="floor13" parent="floor" instance=ExtResource("9_udokv")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -4, -0.41908, 6.13857)
+
+[node name="floor14" parent="floor" instance=ExtResource("9_udokv")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -0.6, -0.41908, 6.13857)
+
+[node name="floor15" parent="floor" instance=ExtResource("9_udokv")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 2.8, -0.41908, 6.13857)
+
+[node name="floor16" parent="floor" instance=ExtResource("9_udokv")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 6.1, -0.41908, 6.13857)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="floor"]
+shape = SubResource("WorldBoundaryShape3D_acdx0")
+
+[node name="rug" parent="." instance=ExtResource("14_6l50o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3)
 
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_Timer_timeout"]

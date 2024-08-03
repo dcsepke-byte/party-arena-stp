@@ -4,10 +4,10 @@
 [ext_resource type="PackedScene" uid="uid://cy4kcp2m25mc3" path="res://plugins/minigames/kernel_compiling/player_kernel_compiling.tscn" id="2"]
 [ext_resource type="AudioStream" uid="uid://2cifdv5xa3b8" path="res://assets/music/minigames/Iamcompiling_master.ogg" id="3"]
 [ext_resource type="PackedScene" uid="uid://jt7us5fj5t1k" path="res://plugins/minigames/kernel_compiling/room/room.glb" id="4"]
+[ext_resource type="PackedScene" uid="uid://cqa4a7u15t2ra" path="res://assets/models/computer/computer.glb" id="5_clukw"]
 [ext_resource type="ArrayMesh" uid="uid://dngsl57llrrfp" path="res://assets/models/tree/tree.obj" id="7"]
 [ext_resource type="PackedScene" uid="uid://bmdaus4pimoxb" path="res://common/scenes/countdown/countdown.tscn" id="8"]
 [ext_resource type="Texture2D" uid="uid://oigcbugm06is" path="res://assets/textures/grass/grass_01.png" id="8_vt052"]
-[ext_resource type="PackedScene" uid="uid://vkituo8tc8rf" path="res://plugins/minigames/kernel_compiling/screen/progress.glb" id="9"]
 [ext_resource type="Texture2D" uid="uid://c0aubkywn5qqe" path="res://plugins/minigames/kernel_compiling/screen/fill.png" id="10"]
 [ext_resource type="Shader" path="res://plugins/minigames/kernel_compiling/screen/progress.gdshader" id="11"]
 
@@ -17,7 +17,7 @@ shader = ExtResource("11")
 shader_parameter/percentage = 0.0
 shader_parameter/full_tex = ExtResource("10")
 
-[sub_resource type="ShaderMaterial" id="2"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_imd63"]
 render_priority = 0
 shader = ExtResource("11")
 shader_parameter/percentage = 0.0
@@ -52,7 +52,7 @@ script = ExtResource("1")
 [node name="Timer" type="Timer" parent="."]
 
 [node name="Player1" parent="." instance=ExtResource("2")]
-transform = Transform3D(0.173648, 0, -0.984808, 0, 1, 0, 0.984808, 0, 0.173648, 0, 0.05, -3)
+transform = Transform3D(0.34202, 0, -0.939693, 0, 1, 0, 0.939693, 0, 0.34202, 0, 0.05, -3)
 
 [node name="Player2" parent="." instance=ExtResource("2")]
 transform = Transform3D(0.0871556, 0, -0.996195, 0, 1, 0, 0.996195, 0, 0.0871556, 0.3, 0.05, -1)
@@ -61,7 +61,7 @@ transform = Transform3D(0.0871556, 0, -0.996195, 0, 1, 0, 0.996195, 0, 0.0871556
 transform = Transform3D(-0.0871559, 0, -0.996195, 0, 1, 0, 0.996195, 0, -0.0871559, 0.3, 0.05, 1)
 
 [node name="Player4" parent="." instance=ExtResource("2")]
-transform = Transform3D(-0.173648, 0, -0.984808, 0, 1, 0, 0.984808, 0, -0.173648, 0, 0.05, 3)
+transform = Transform3D(-0.34202, 0, -0.939693, 0, 1, 0, 0.939693, 0, -0.34202, 0, 0.05, 3)
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(-0.00174551, 0.173648, -0.984806, 0, 0.984808, 0.173648, 0.999998, 0.000303104, -0.00171899, -4.5, 2, 0)
@@ -79,24 +79,24 @@ omni_shadow_mode = 0
 
 [node name="room" parent="." instance=ExtResource("4")]
 
-[node name="Team1Progress" parent="." instance=ExtResource("9")]
-transform = Transform3D(0.043412, 0, -0.246202, 0, 0.25, 0, 0.246202, 0, 0.043412, -1.32076, 0.25, -1.78752)
+[node name="Team1Progress" parent="." instance=ExtResource("5_clukw")]
+transform = Transform3D(0.0868241, 0, -0.492404, 0, 0.5, 0, 0.492404, 0, 0.0868241, -1.5, -0.275, -1.6)
 visible = false
 
 [node name="Sprite3D" type="Sprite3D" parent="Team1Progress"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.90735e-06, -0.711507, 0.966021)
+transform = Transform3D(0.5, 0, -1.3411e-07, 0, 0.5, 0, 1.3411e-07, 0, 0.5, 0, 1.3, 0.65)
 material_override = SubResource("1")
-pixel_size = 0.0035
+pixel_size = 0.003
 texture = ExtResource("10")
 
-[node name="Team2Progress" parent="." instance=ExtResource("9")]
-transform = Transform3D(-0.0434121, 0, -0.246202, 0, 0.25, 0, 0.246202, 0, -0.0434121, -1.321, 0.25, 1.788)
+[node name="Team2Progress" parent="." instance=ExtResource("5_clukw")]
+transform = Transform3D(-0.0868241, 0, -0.492404, 0, 0.5, 0, 0.492404, 0, -0.0868241, -1.5, -0.275, 1.6)
 visible = false
 
 [node name="Sprite3D" type="Sprite3D" parent="Team2Progress"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.90735e-06, -0.711507, 0.966021)
-material_override = SubResource("2")
-pixel_size = 0.0035
+transform = Transform3D(0.5, 0, -1.3411e-07, 0, 0.5, 0, 1.3411e-07, 0, 0.5, 0, 1.3, 0.65)
+material_override = SubResource("ShaderMaterial_imd63")
+pixel_size = 0.003
 texture = ExtResource("10")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]

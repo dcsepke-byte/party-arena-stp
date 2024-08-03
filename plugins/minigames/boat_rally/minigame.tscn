@@ -1,10 +1,11 @@
-[gd_scene load_steps=16 format=3 uid="uid://bh7arcocvfcrr"]
+[gd_scene load_steps=15 format=3 uid="uid://bh7arcocvfcrr"]
 
 [ext_resource type="Script" path="res://plugins/minigames/boat_rally/minigame.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://c5t00fo6qulet" path="res://plugins/minigames/boat_rally/player.tscn" id="2"]
-[ext_resource type="PackedScene" uid="uid://byw1xf6guwomf" path="res://plugins/minigames/boat_rally/pirate_kit/boat_large.gltf" id="3"]
+[ext_resource type="PackedScene" uid="uid://cw7o81uaef7n3" path="res://assets/models/boat/boat.glb" id="3_hfmh6"]
 [ext_resource type="PackedScene" uid="uid://b0cdd0hbmabu0" path="res://plugins/minigames/boat_rally/formationLarge_rock.tscn" id="4"]
 [ext_resource type="Material" uid="uid://byv360y45sm7g" path="res://assets/materials/water_still.tres" id="5"]
+[ext_resource type="PackedScene" uid="uid://ddq6bbnjlnoni" path="res://assets/models/finishline/finishline.glb" id="6_5khee"]
 [ext_resource type="PackedScene" uid="uid://cr761cgcpp4n7" path="res://plugins/minigames/boat_rally/pirate_kit/ship_light.gltf" id="7"]
 [ext_resource type="PackedScene" uid="uid://bmdaus4pimoxb" path="res://common/scenes/countdown/countdown.tscn" id="8"]
 [ext_resource type="AudioStream" uid="uid://bdexpp7pfpreb" path="res://plugins/minigames/boat_rally/cannon-shot.wav" id="9"]
@@ -22,15 +23,7 @@ subdivide_width = 100
 subdivide_depth = 200
 
 [sub_resource type="BoxShape3D" id="4"]
-size = Vector3(10, 1, 5)
-
-[sub_resource type="PlaneMesh" id="5"]
-size = Vector2(19.5, 2)
-
-[sub_resource type="CylinderMesh" id="7"]
-top_radius = 0.25
-bottom_radius = 0.25
-height = 7.0
+size = Vector3(20, 2, 10)
 
 [node name="RigidBody3D" type="RigidBody3D" groups=["player"]]
 axis_lock_linear_y = true
@@ -51,30 +44,28 @@ current = true
 
 [node name="Player1" parent="." instance=ExtResource("2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7, 0, 0.5)
-force_dir = Vector3(-1, 0, 1)
+force_dir = Vector3(-1, 0.5, 1)
 
 [node name="Player2" parent="." instance=ExtResource("2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7, 0, 0.5)
-force_dir = Vector3(1, 0, 1)
+force_dir = Vector3(1, 0.5, 1)
 flip_paddle = true
 
 [node name="Player3" parent="." instance=ExtResource("2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.75, 0, -1)
-force_dir = Vector3(-1, 0, 1)
+force_dir = Vector3(-1, 0.5, 1)
 
 [node name="Player4" parent="." instance=ExtResource("2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.75, 0, -1)
-force_dir = Vector3(1, 0, 1)
+force_dir = Vector3(1, 0.5, 1)
 flip_paddle = true
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 9, 17)
 light_energy = 0.7
 
-[node name="Scene Root" parent="." instance=ExtResource("3")]
-
-[node name="boat_large_8angles" parent="Scene Root" index="0"]
-transform = Transform3D(-3, 0, -2.62268e-07, 0, 3, 0, 2.62268e-07, 0, -3, 0, -0.5, 1.25)
+[node name="boat" parent="." instance=ExtResource("3_hfmh6")]
+transform = Transform3D(-0.9, 0, -1.35896e-07, 0, 0.9, 0, 1.35896e-07, 0, -0.9, 0, -0.75, 0)
 
 [node name="Ground" type="Node3D" parent="."]
 
@@ -529,7 +520,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, -1, 78)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, -1, 87)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Ground"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 50)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 50)
 mesh = SubResource("3")
 surface_material_override/0 = ExtResource("5")
 
@@ -539,17 +530,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 110)
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Area3D"]
 shape = SubResource("4")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground/Area3D"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 4.5, -8)
-mesh = SubResource("5")
-
-[node name="MeshInstance2" type="MeshInstance3D" parent="Ground/Area3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 2.5, -8)
-mesh = SubResource("7")
-
-[node name="MeshInstance3" type="MeshInstance3D" parent="Ground/Area3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 2.5, -8)
-mesh = SubResource("7")
+[node name="finishline" parent="Ground/Area3D" instance=ExtResource("6_5khee")]
+transform = Transform3D(3, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, -1, -8)
 
 [node name="Scene Root2" parent="Ground" instance=ExtResource("7")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -20, 0, 20)
@@ -570,5 +552,3 @@ autoplay = true
 bus = &"Music"
 
 [connection signal="body_entered" from="Ground/Area3D" to="." method="_on_Area_body_entered"]
-
-[editable path="Scene Root"]

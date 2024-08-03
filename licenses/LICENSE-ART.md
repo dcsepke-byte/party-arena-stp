@@ -37,6 +37,19 @@ Retrieved from [Open Game Art](https://opengameart.org/content/free-controller-p
 
 License: [CC0 1.0 Universal](http://creativecommons.org/publicdomain/zero/1.0/legalcode)
 
+## assets/models/
+### block.glb
+
+Public Domain by Quaternius
+
+License: [CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/legalcode)
+
+### goal.glb | goal_small.glb | hammer.glb | hurdle.glb | *_Atlas_Party.png
+
+Public Domain by Quaternius
+
+License: [CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/legalcode)
+
 ## assets/models/Bomb
 ### Bomb.obj
 Copyright © Blender3D
@@ -44,6 +57,13 @@ Copyright © Blender3D
 Retrieved from: [Sketchfab](https://sketchfab.com/3d-models/simple-bomb-49ab3dbdfa6347dfb6e2b633c9c7f1c2)
 
 License: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/legalcode)
+
+## assets/models/boat/
+### boat.glb | boat_Atlas_Party.png | paddle.glb | paddle_Atlas_Party.png
+
+Public Domain by Quaternius
+
+License: [CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/legalcode)
 
 ## assets/models/Bomb/materials
 ### \*.png
@@ -55,11 +75,9 @@ Retrieved from: [Sketchfab](https://sketchfab.com/3d-models/simple-bomb-49ab3dbd
 License: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/legalcode)
 
 ## assets/models/bed
-### bed.glb | bed.blend
+### bed.glb | bed.blend | bed_Atlas_Party.png
 
-Public Domain by Clint Bellanger
-
-Retrieved from [Open Game Art](https://opengameart.org/content/bed-low-poly)
+Public Domain by Quaternius
 
 License: [CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/legalcode)
 
@@ -79,20 +97,18 @@ Copyright © 2019 Florian Kothmeier
 License: [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/legalcode)
 
 ## assets/models/cannon
-### scene.glb
-Copyright © furkan
+### scene.glb | scene_Atlas_Party.png
 
-Retrieved from [Sketchfab](https://sketchfab.com/3d-models/stylized-cannon-033aedfdfd5d4060bdbc9c77e859edbd)
+Public Domain by Quaternius
 
-License: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/legalcode)
+License: [CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/legalcode)
 
-## assets/models/cannon/textures
-### blinn1\*
-Copyright © furkan
+## assets/models/computer
+### computer.glb | computer_Atlas_Party.png | laptop.glb | laptop_Atlas_Party.png
 
-Retrieved from [Sketchfab](https://sketchfab.com/3d-models/stylized-cannon-033aedfdfd5d4060bdbc9c77e859edbd)
+Public Domain by Quaternius
 
-License: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/legalcode)
+License: [CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/legalcode)
 
 ## assets/models/door/
 ### WoodenDoor.blend | WoodenDoor.glb
@@ -111,24 +127,57 @@ Retrieved from [Open Game Art](https://opengameart.org/content/wooden-door)
 
 License: [CC-BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/legalcode)
 
+## assets/models/finishline
+### finishline.glb | finishline_Atlas_Party.png
+
+Public Domain by Quaternius
+
+License: [CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/legalcode)
+
+## assets/models/furniture/books
+### book*.glb | book*_Atlas_Party.png
+
+Public Domain by Quaternius
+
+License: [CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/legalcode)
+
+## assets/models/furniture/
+### chair.glb | chair_Atlas_Party.png
+
+Public Domain by Quaternius
+
+License: [CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/legalcode)
+
+### desk.glb | desk_Atlas_Party.png
+
+Public Domain by Quaternius
+
+License: [CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/legalcode)
+
+### lamp.glb | lamp_Atlas_Party.png
+
+Public Domain by Quaternius
+
+License: [CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/legalcode)
+
+### organizer.glb | organizer_Atlas_Party.png
+
+Public Domain by Quaternius
+
+License: [CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/legalcode)
+
+### rug.glb | rug_Atlas_Party.png
+
+Public Domain by Quaternius
+
+License: [CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/legalcode)
+
 ## assets/models/ghost
-### ghost.glb | ghost.blend
+### ghost.glb | ghost.blend | ghost_Atlas_Party.png
 
-Copyright © 2019 Florian Kothmeier
-Based upon the "Jack-o-Lantern" model by ulf
+Public Domain by Quaternius
 
-Retrieved from [Open Game Art](https://opengameart.org/content/jack-o-lantern)
-
-License: [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/legalcode)
-
-## assets/models/ghost/textures
-### jack-o-lantern_\*.png
-
-Copyright ulf
-
-Retrieved from [Open Game Art](https://opengameart.org/content/jack-o-lantern)
-
-License: [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/legalcode)
+License: [CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/legalcode)
 
 ## assets/models/food/OBJ
 ### Pumpkin.obj
@@ -156,6 +205,13 @@ License: [CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/l
 Public Domain by Quaternius
 
 Retrieved from [Quaternius.com](https://quaternius.com/packs/ultimatestylizednature.html)
+
+License: [CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/legalcode)
+
+## assets/models/rails
+### straight.glb | curve.glb | curve2.glb | *_Atlas_Party.png
+
+Public Domain by Quaternius
 
 License: [CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/legalcode)
 
@@ -335,15 +391,11 @@ Retrieved from [OpenGameArt](https://opengameart.org/content/sand-texture-pack)
 License: [CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/legalcode)
 
 ## plugins/characters/Tux
-### tux_texture.png | tux.blend | tux.glb
+### Atlas_Party.png | tux.blend | tux.glb
 
-Copyright © 2010 durmieu
+Public Domain by Quaternius
 
-Modified by Florian Kothmeier 2018
-
-Retrived from [Open Game Art](https://opengameart.org/content/tux)
-
-License: [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/legalcode)
+License: [CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/legalcode)
 
 ### splash.png
 
@@ -360,15 +412,12 @@ Retrieved from [Open Game Art](https://opengameart.org/content/mascots-and-frien
 License: [CC BY SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/legalcode)
 
 ## plugins/characters/Green Tux
-### tux_texture.png
+### Atlas_Party.png
 
-Copyright © 2010 durmieu
+Public Domain by Quaternius
+Modified by Yvonne Kothmeier
 
-Modified by Florian Kothmeier 2018
-
-Retrived from [Open Game Art](https://opengameart.org/content/tux)
-
-License: [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/legalcode)
+License: [CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/legalcode)
 
 ### splash.png
 
@@ -543,14 +592,11 @@ Retrieved from [Open Game Art](https://opengameart.org/content/playing-card-asse
 License: [CC0](http://creativecommons.org/publicdomain/zero/1.0/legalcode)
 
 ## plugins/minigames/bowling
-### ball.glb
-Copyright © kaito
+### ball.glb | ball_Atlas_Party.png
 
-Simplified model by Florian Kothmeier
+Public Domain by Quaternius
 
-Retrieved from [Sketchfab](https://sketchfab.com/3d-models/bowling-cc9ef646d4bc4896aef52bae07e8b544)
-
-License: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/legalcode)
+License: [CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/legalcode)
 
 ### screenshot.png
 
@@ -613,6 +659,18 @@ License: [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/legalcode)
 Copyright © Vytautas Butėnas, Florian Kothmeier
 
 License: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/legalcode)
+
+### floor.glb | floor_bed_Atlas_Party.png
+
+Public Domain by Quaternius
+
+License: [CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/legalcode)
+
+### penholder.glb | penholder_Atlas_Party.png
+
+Public Domain by Quaternius
+
+License: [CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/legalcode)
 
 ### screenshot.png
 
@@ -800,6 +858,12 @@ Copyright © Florian Kothmeier
 License: [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/legalcode)
 
 ## plugins/minigames/knock_off
+### ice.glb | ice_Atlas_Party.png
+
+Public Domain by Quaternius
+
+License: [CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/legalcode)
+
 ### screenshot.png
 
 Coyright © Florian Kothmeier
@@ -838,28 +902,20 @@ Retrieved form [OpenGameArt](https://opengameart.org/content/large-nature-backgr
 License: [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/legalcode)
 
 ## plugins/minigames/kernel_compiling/screen
-### screen.blend | screen.glb | progress.blend | progress.glb | fill.png
+### fill.png
 
 Copyright © Florian Kothmeier
 
 License: [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/legalcode)
 
-### laptop.blend | laptop.glb
-
-Copyright © Clint Bellanger
-
-Retrieved from [OpenGameArt](https://opengameart.org/content/laptop)
-
-License: [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/legalcode)
-
 ## plugins/minigames/kernel_compiling/room
-### room.blend | room.glb
+### room.blend | room.glb | room_Atlas_Party.png
 
-Copyright © Florian Kothmeier with shelves, lamp and desk models by Vytautas Butėnas
+Copyright © Florian Kothmeier with shelves models by Vytautas Butėnas
 
-Book model by Clint Bellanger
-Retrieved from [OpenGameArt](https://opengameart.org/content/old-fashioned-book)
-Book model License: [CC0](https://creativecommons.org/licenses/zero/1.0/legalcode)
+Book model by Quaternius
+
+Book model license: [CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/legalcode)
 
 License: [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/legalcode)
 

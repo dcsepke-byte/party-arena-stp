@@ -29,6 +29,7 @@ specular_mode = 1
 albedo_texture = ExtResource("7")
 metallic_specular = 0.0
 uv1_scale = Vector3(2, 6.66, 1)
+disable_receive_shadows = true
 
 [sub_resource type="PlaneMesh" id="6"]
 size = Vector2(20, 20)
@@ -112,7 +113,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0, 0)
 
 [node name="Sun" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.01756, 0.80884, -0.587767, 0.0375027, 0.586911, 0.808783, 0.999142, -0.0362451, -0.0200275, -6, 4, 3)
+transform = Transform3D(-0.867762, 0.420494, -0.264903, 0.0375027, 0.586911, 0.808783, 0.495563, 0.691896, -0.525069, -6, 4, 3)
 light_energy = 0.8
 shadow_enabled = true
 

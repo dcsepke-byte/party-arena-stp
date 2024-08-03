@@ -51,7 +51,7 @@ func update_progress():
 	# If each player has their own progress bar (every mode exect 2v2), then do it locally
 	# Otherwise, let the minigame root node handle the combined progress bars for each team
 	if info.lobby.minigame_state.minigame_type != Lobby.MINIGAME_TYPES.TWO_VS_TWO:
-		$Progress/Sprite3D.material_override.set_shader_parameter("percentage", get_percentage())
+		$Progress.material_override.set_shader_parameter("percentage", get_percentage())
 	else:
 		get_parent().update_progress()
 
@@ -59,7 +59,6 @@ func _ready():
 	$Model.jump_to_animation("sit")
 	
 	if info.lobby.minigame_state.minigame_type == Lobby.MINIGAME_TYPES.TWO_VS_TWO:
-		$Screen.position.y -= 0.15
 		$Progress.hide()
 	
 	if info.is_ai():
