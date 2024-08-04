@@ -30,7 +30,7 @@ var controller: Node
 
 var is_walking := false
 
-var items := []
+var items: Array[Item] = []
 var roll_modifiers := []
 
 @rpc func set_cookies(c: int):
@@ -54,7 +54,7 @@ func serialize_items() -> Array:
 	return serialized
 
 func deserialize_items(data: Array):
-	var deserialized := []
+	var deserialized: Array[Item] = []
 	for item in data:
 		var res := Item.deserialize(item)
 		if not res:

@@ -14,15 +14,14 @@ signal players_acknowledged()
 signal _event_completed()
 signal _camera_focus_aquired()
 
+const PlayerInfo := preload("res://common/scenes/board_logic/controller/player_info.gd")
+
 # If multiple players get on one space, this array decides the translation of
 # each.
 const PLAYER_TRANSLATION = [Vector3(0, 0, -0.75), Vector3(0.75, 0, 0),
 		Vector3(0, 0, 0.75), Vector3(-0.75, 0, 0)]
 const EMPTY_SPACE_PLAYER_TRANSLATION = Vector3(0, 0.05, 0)
 const CAMERA_SPEED = 6
-
-const PLAYER = preload("res://common/scenes/board_logic/player_board/player_board.gd")
-const PLACEMENT_COLORS := [Color("#FFD700"), Color("#C9C0BB"), Color("#CD7F32"), Color(0.3, 0.3, 0.3)]
 
 # Game options that can be customized in the Godot editor
 # Useful for board creation
@@ -67,6 +66,8 @@ enum EDITOR_NODE_LINKING_DISPLAY {
 var step_count := 0
 
 func _ready() -> void:
+	# Force the display to stay empty until the server set up everything
+	$Screen/BeforeSetupCurtain.show()
 	lobby = Lobby.get_lobby(self)
 
 	server = multiplayer.is_server()
@@ -79,6 +80,15 @@ func _ready() -> void:
 	players.append_array(Utility.get_nodes_in_group(lobby, "players"))
 	for p in players:
 		p.controller = self
+
+	# set up player info box
+	var spacer := Control.new()
+	spacer.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	for p in players:
+		const PlayerInfoContainer := preload("res://common/scenes/board_logic/controller/player_info.tscn")
+		%PlayerInfo.add_child(spacer.duplicate())
+		%PlayerInfo.add_child(PlayerInfoContainer.instantiate())
+	%PlayerInfo.add_child(spacer)
 
 	if server:
 		next_player.connect(_on_next_player)
@@ -306,7 +316,7 @@ func get_player_by_player_id(id: int) -> PlayerBoard:
 	$Screen/BeforeSetupCurtain.free()
 
 @rpc func set_turn(turn: int, max_turn: int):
-	$Screen/Turn.text = tr("CONTEXT_LABEL_TURN_NUM").format({"turn": turn, "total": max_turn})
+	%Turn.text = tr("CONTEXT_LABEL_TURN_NUM").format({"turn": turn, "total": max_turn})
 
 @rpc func cake_collected():
 	var old_node = get_cake_space()
@@ -403,13 +413,7 @@ func show_splash():
 	$Screen/Splash/Background/Player.texture =\
 			PluginSystem.character_loader.load_character_splash(character)
 	$Screen/Splash.play("show")
-	if info.is_local():
-		$Screen/Roll.show()
-	else:
-		$Screen/Roll.hide()
-
 	camera_focus = players[player_turn - 1]
-	$Screen/Dice.hide()
 
 func _on_Roll_pressed() -> void:
 	roll.rpc_id(1)
@@ -923,7 +927,7 @@ func get_players_on_space(space) -> int:
 
 	return num
 
-func _get_player_placement(p: Node3D) -> int:
+func _get_player_placement(p: PlayerBoard) -> int:
 	var placement := 1
 	for p2 in players:
 		if p2.cakes > p.cakes or p2.cakes == p.cakes and p2.cookies > p.cookies:
@@ -1005,35 +1009,8 @@ func update_player_info() -> void:
 	for p in players:
 		var placement = _get_player_placement(p)
 
-		var pos: Label = get_node("Screen/PlayerInfo%d" % i).get_node("Name/Position")
-		pos.text = str(placement)
-		pos.set("theme_override_colors/font_color", PLACEMENT_COLORS[placement - 1])
-		var info = get_node("Screen/PlayerInfo" + str(i))
-		info.get_node("Name/Player").text = p.info.name
-
-		if p.cookies_gui == p.cookies:
-			info.get_node("Cookies/Amount").text = str(p.cookies)
-		elif p.destination.size() > 0:
-			info.get_node("Cookies/Amount").text = str(p.cookies_gui)
-		elif p.cookies_gui > p.cookies:
-			info.get_node("Cookies/Amount").text = "-" + str(
-					p.cookies_gui - p.cookies) + "  " + str(p.cookies_gui)
-		else:
-			info.get_node("Cookies/Amount").text = "+" + str(
-					p.cookies - p.cookies_gui) + "  " + str(p.cookies_gui)
-
-		info.get_node("Cakes/Amount").text = str(p.cakes)
-		for j in PLAYER.MAX_ITEMS:
-			var item
-			if j < p.items.size():
-				item = p.items[j]
-			var texture_rect = info.get_node("Items/" + str(j))
-			if item != null:
-				texture_rect.texture = item.icon
-			else:
-				texture_rect.texture = null
-
-			j += 1
+		var entry: PlayerInfo = %PlayerInfo.get_child(2 * i - 1)
+		entry.update(p, placement, player_turn == i)
 
 		i += 1
 
@@ -1059,8 +1036,6 @@ func show_minigame_animation(state: Lobby.MinigameState) -> void:
 		Lobby.MINIGAME_TYPES.DUEL:
 			$Screen/MinigameTypeAnimation.play("Duel")
 
-	$Screen/Dice.hide()
-
 	if $Screen/MinigameTypeAnimation.is_playing():
 		await $Screen/MinigameTypeAnimation.animation_finished
 
@@ -1078,8 +1053,6 @@ func show_minigame_animation(state: Lobby.MinigameState) -> void:
 		$Screen/DuelReward/Value.text = "CONTEXT_LABEL_STEAL_ONE_CAKE"
 	else:
 		$Screen/DuelReward/Value.text = reward_name
-
-	$Screen/Dice.hide()
 
 	$Screen/DuelReward.show()
 	await get_tree().create_timer(2).timeout
