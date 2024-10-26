@@ -6,6 +6,7 @@ import glob
 import shlex
 import shutil
 import subprocess
+import pathlib
 from tqdm import tqdm
 
 DIR_MARKDOWN = "## "
@@ -32,43 +33,19 @@ FILE_EXTENSIONS = [
     "*.wav",
     "*.mp3",
     "*.ogg",
-    "*.shader",
+    "*.gdshader",
     "*.otf",
     "*.glb",
+    "*.gltf",
     "*.svg",
+    "*.xcf"
 ]
 
 
-def make_expand_shell_filter(shellpath):
-    def expand_shell_filter(x):
-        i_shellpath = 0
-        for i_x in range(len(x)):
-            if i_shellpath == len(shellpath):
-                return False
-
-            if (
-                shellpath[i_shellpath] == "\\"
-                and i_shellpath + 1 < len(shellpath)
-                and shellpath[i_shellpath + 1] == "*"
-            ):
-                i_shellpath += 1
-
-            if shellpath[i_shellpath] == "*":
-                if (
-                    i_shellpath + 1 < len(shellpath)
-                    and shellpath[i_shellpath + 1] == x[i_x]
-                ):
-                    i_shellpath += 2
-            else:
-                if shellpath[i_shellpath] != x[i_x]:
-                    return False
-                i_shellpath += 1
-
-        if i_shellpath < len(shellpath) and shellpath[i_shellpath] == "*":
-            i_shellpath += 1
-        return i_shellpath == len(shellpath)
-
-    return expand_shell_filter
+def file_matches(shellpath, x):
+    shellpath = shellpath.replace("\\_", "_").replace("\\*", "*").replace("\\\\", "\\")
+    # force absolute path match, otherwise it's just a suffix match
+    return pathlib.PurePosixPath("/" + x).match("/" + shellpath)
 
 
 files = set()
@@ -79,6 +56,9 @@ num_files = len(files)
 print("Checking %d files" % num_files)
 LICENSE_FILESIZE = sum([os.stat(x).st_size for x in LICENSE_FILE])
 
+unmatched_dirs = []
+unmatched_files = []
+
 with tqdm(total=LICENSE_FILESIZE, unit="B") as pbar:
     for x in LICENSE_FILE:
         with open(x, "r") as f:
@@ -86,22 +66,28 @@ with tqdm(total=LICENSE_FILESIZE, unit="B") as pbar:
             for line in f:
                 if line.startswith(DIR_MARKDOWN):
                     current_dir = line[len(DIR_MARKDOWN) :].strip()
-                    expand_shell_filter = make_expand_shell_filter(current_dir)
-                    files = [s for s in files if not expand_shell_filter(s)]
+                    files = [s for s in files if not file_matches(current_dir, s)]
                 elif line.startswith(FILE_MARKDOWN):
                     current_files = map(
                         str.strip, line[len(FILE_MARKDOWN) :].split("|")
                     )
 
                     for name in current_files:
-                        expand_shell_filter = make_expand_shell_filter(
-                            os.path.normpath(("%s/%s" % (current_dir, name)))
-                        )
-                        files = [s for s in files if not expand_shell_filter(s)]
+                        path = os.path.normpath(("%s/%s" % (current_dir, name)))
+                        matched = [s for s in files if file_matches(path, s)]
+                        files = [s for s in files if not file_matches(path, s)]
+                        if not matched:
+                            unmatched_files.append(path)
                 pbar.update(len(line))
 
 blacklist_regex = re.compile("|".join(BLACKLIST))
 print("\x1B[32mLicense found for %d files\x1B[0m" % (num_files - len(files)))
+
+for dirname in unmatched_dirs:
+    print("\x1B[33mWarning: Rule matches no directory: %s\x1B[0m" % dirname)
+for filename in unmatched_files:
+    print("\x1B[33mWarning: Rule matches no files: %s\x1B[0m" % filename)
+
 for f in files:
     if not (BLACKLIST and p.match(f)):
         print("\x1B[31mNo license found for: %s\x1B[0m" % f)

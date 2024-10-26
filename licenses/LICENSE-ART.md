@@ -90,12 +90,6 @@ Retrieved from [OpenGameArt](https://opengameart.org/content/wooden-bridge-0)
 
 License: [CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/legalcode)
 
-## assets/models/cake
-### cake.png
-Copyright © 2019 Florian Kothmeier
-
-License: [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/legalcode)
-
 ## assets/models/cannon
 ### scene.glb | scene_Atlas_Party.png
 
@@ -128,7 +122,7 @@ Retrieved from [Open Game Art](https://opengameart.org/content/wooden-door)
 License: [CC-BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/legalcode)
 
 ## assets/models/finishline
-### finishline.glb | finishline_Atlas_Party.png
+### finishline.glb | finishline\_Atlas\_Party.png
 
 Public Domain by Quaternius
 
@@ -191,7 +185,7 @@ Retrieved from [Quaternius.com](https://quaternius.com/packs/ultimatefood.html)
 License: [CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/legalcode)
 
 ## assets/models/nature/glTF
-### *.gltf
+### \*.gltf
 
 Public Domain by Quaternius
 
@@ -270,13 +264,6 @@ License: [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/legalcode)
 ### node.blend | node.glb
 
 Copyright © 2020 Florian Kothmeier
-
-License: [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/legalcode)
-
-## client/rewardscreens
-### background.png | background.blend | seats.png
-
-Copyright © 2019 Florian Kothmeier
 
 License: [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/legalcode)
 
@@ -625,34 +612,6 @@ Copyright © Florian Kothmeier
 
 License: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/legalcode)
 
-## plugins/minigames/harvest_food/background
-### farm2_textured.escn | FarmDiffuseMap.png
-
-Copyright © DeadKir
-
-Retrieved from [Open Game Art](https://opengameart.org/content/farm-0)
-
-License: [GPLv3](https://www.gnu.org/licenses/gpl-3.0.txt)
-
-### background.glb | background.blend
-
-Copyright © 2020 Florian Kothmeier
-
-Uses cornStalk1.fbx and plantLot1.fbx by DeadKir
-
-Retrieved from [Open Game Art](https://opengameart.org/content/simple-farm-assets)
-
-License: [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/legalcode)
-
-## plugins/minigames/harvest_food/background/farmAssets
-### *.escn | pallette.png
-
-Copyright © DeadKir
-
-Retrieved from [Open Game Art](https://opengameart.org/content/simple-farm-assets)
-
-License: [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/legalcode)
-
 ## plugins/minigames/haunted_dreams
 ### room.glb | room.blend
 
@@ -760,43 +719,6 @@ Retrieved from [Open Game Art](https://opengameart.org/content/farm-0)
 
 License: [GPLv3](https://www.gnu.org/licenses/gpl-3.0.txt)
 
-## plugins/minigames/harvest_food/plants
-### potato.blend | potato.escn
-
-Copyright © Florian Kothmeier
-
-License: [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/legalcode)
-
-### potato_rotten.blend | potato_rotten.escn
-
-Copyright © Florian Kothmeier
-
-License: [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/legalcode)
-
-### radish.blend | radish.escn
-
-Copyright © Florian Kothmeier
-
-License: [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/legalcode)
-
-### radish_rotten.blend | radish_rotten.escn
-
-Copyright © Florian Kothmeier
-
-License: [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/legalcode)
-
-### carrot.blend
-
-Copyright © Florian Kothmeier
-
-License: [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/legalcode)
-
-### carrot_rotten.blend
-
-Copyright © Florian Kothmeier
-
-License: [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/legalcode)
-
 ## plugins/minigames/hurdle
 ### screenshot.png
 
@@ -812,13 +734,13 @@ Copyright © Florian Kothmeier
 License: [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/legalcode)
 
 ## plugins/minigames/hurdle/hurdle
-### hurdle.glb | hurdle.blend
+### hurdle.glb
 
 Copyright © Jakob Sinclair
 
 License: [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/legalcode)
 
-### plastic_\* | metal_\*
+### plastic_\*
 
 Public Domain by StruffelProductions
 
@@ -826,39 +748,8 @@ Retrived from [CC0 Textures](https://cc0textures.com/home)
 
 License: [CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/legalcode)
 
-## plugins/minigames/hurdle/hurdles/trashcan
-### trashcan.escn | trashcan.blend
-
-Copyright © yethiel
-
-Retrieved from [Open Game Art](https://opengameart.org/content/trashcan)
-
-License: [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/legalcode)
-
-### trashcan_diffuse.png | trashcan_spec.png | trashcan_normal.png
-
-Public domain textures for the trashcan model by yethiel
-
-Retrieved from [Open Game Art](https://opengameart.org/content/trashcan)
-
-License: [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/legalcode)
-
-## plugins/minigames/hurdle/powerups/landmine
-### landmine.escn | landmine.blend
-
-Copyright © Florian Kothmeier
-
-License: [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/legalcode)
-
-## plugins/minigames/hurdle/powerups/star
-### star.escn | star.blend
-
-Copyright © Florian Kothmeier
-
-License: [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/legalcode)
-
 ## plugins/minigames/knock_off
-### ice.glb | ice_Atlas_Party.png
+### ice.glb
 
 Public Domain by Quaternius
 
@@ -871,12 +762,6 @@ Coyright © Florian Kothmeier
 License: [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/legalcode)
 
 ## assets/models/ice
-### ice.obj | iceberg.blend
-
-Copyright © Florian Kothmeier
-
-License: [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/legalcode)
-
 ### IceC_S.jpg | IceC_N.jpg
 
 Public Domain by Keith333
@@ -891,13 +776,6 @@ License: [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/legalcode)
 ### screenshot.png
 
 Copyright © Florian Kothmeier
-
-License: [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/legalcode)
-
-### tilesetOpenGameBackground.png
-Copyright © PauR
-
-Retrieved form [OpenGameArt](https://opengameart.org/content/large-nature-background)
 
 License: [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/legalcode)
 
@@ -926,13 +804,6 @@ Copyright © RayB2
 Retrieved from [OpenGameArt](https://opengameart.org/content/old-fashioned-book)
 
 License: [CC0](https://creativecommons.org/licenses/zero/1.0/legalcode)
-
-## plugins/minigames/kernel_compiling/background
-### background.blend | background.jpg
-
-Copyright © Florian Kothmeier
-
-License: [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/legalcode)
 
 ## assets/models/screen
 ### screen.blend | screen.escn
@@ -1001,7 +872,7 @@ Copyright © Florian Kothmeier
 
 License: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/legalcode)
 
-### ground.blend | ground.dae
+### ground.blend
 
 Copyright Florian Kothmeier
 
@@ -1175,7 +1046,7 @@ Retrieved from [Material Design](https://material.io/resources/icons/?search=pow
 Licensed: [Apache License 2.0](http://www.apache.org/licenses/LICENSE-2.0.txt)
 
 ## assets/defaults/theme_icons
-### Disabled.svg | GraberPress.svg | Graper.svg | NotSelected.svg | Off.svg | On.svg | Scroll.svg | Selected.svg
+### GraberPress.svg | Graper.svg | NotSelected.svg | Off.svg | On.svg | Scroll.svg | Selected.svg
 
 Copyright © 2020 Independent-Eye
 
