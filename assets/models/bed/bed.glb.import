@@ -31,17 +31,9 @@ animation/remove_immutable_tracks=true
 import_script/path=""
 _subresources={
 "materials": {
-"Blanket": {
+"Atlas": {
 "use_external/enabled": true,
-"use_external/path": "res://assets/models/bed/Blanket.tres"
-},
-"WhiteCloth": {
-"use_external/enabled": true,
-"use_external/path": "res://assets/models/bed/WhiteCloth.tres"
-},
-"Wood": {
-"use_external/enabled": true,
-"use_external/path": "res://assets/models/bed/Wood.tres"
+"use_external/path": "res://assets/models/bed/Atlas.tres"
 }
 }
 }

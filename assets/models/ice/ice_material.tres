@@ -20,3 +20,5 @@ roughness = 0.25
 normal_enabled = true
 normal_texture = ExtResource("2")
 refraction_enabled = true
+uv1_scale = Vector3(0.25, 0.25, 0.25)
+uv1_triplanar = true

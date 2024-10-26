@@ -38,7 +38,7 @@ func _ready():
 	precompute_ground_edges()
 
 func precompute_ground_edges():
-	var collision_shape = $Ground/StaticBody3D/CollisionShape3D
+	var collision_shape = $ice/IcePlatform/StaticBody3D/CollisionShape3D
 	var faces = collision_shape.shape.get_faces()
 	var newtransform = collision_shape.global_transform
 	var inward_edges = {}
@@ -47,7 +47,7 @@ func precompute_ground_edges():
 	while i < faces.size():
 		# Skip triangles that are on the bottom or on the side
 		# We only want to look at the top shape
-		if faces[i].y < 0 or faces[i + 1].y < 0 or faces[i + 2].y < 0:
+		if faces[i].y < 2 or faces[i + 1].y < 2 or faces[i + 2].y < 2:
 			i += 3
 			continue
 		var p1 = faces[i]

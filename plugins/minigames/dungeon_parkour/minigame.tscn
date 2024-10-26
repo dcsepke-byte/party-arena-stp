@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://df2q0uah6uvk"]
+[gd_scene load_steps=15 format=3 uid="uid://df2q0uah6uvk"]
 
 [ext_resource type="Script" path="res://plugins/minigames/dungeon_parkour/minigame.gd" id="1"]
 [ext_resource type="Script" path="res://plugins/minigames/dungeon_parkour/player.gd" id="2"]
@@ -8,9 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://glndjuhrxqhv" path="res://plugins/minigames/dungeon_parkour/Dungeon Arena/Skull01.tscn" id="6"]
 [ext_resource type="PackedScene" uid="uid://rprhyk2hitel" path="res://common/scenes/waypoint/waypoint.tscn" id="7"]
 [ext_resource type="PackedScene" uid="uid://c568spcblqxwt" path="res://plugins/minigames/dungeon_parkour/Dungeon Arena/platform.tscn" id="8"]
-[ext_resource type="Texture2D" uid="uid://bwpdq3vft45jd" path="res://assets/textures/finish.png" id="9"]
-[ext_resource type="PackedScene" uid="uid://dbljrsnws3tjk" path="res://plugins/minigames/dungeon_parkour/Dungeon Arena/Pole02.tscn" id="10"]
 [ext_resource type="AudioStream" uid="uid://ch7l8mi25vcrm" path="res://plugins/minigames/dungeon_parkour/Wind Run.ogg" id="11"]
+[ext_resource type="PackedScene" uid="uid://ddq6bbnjlnoni" path="res://assets/models/finishline/finishline.glb" id="11_3ca5i"]
 [ext_resource type="PackedScene" uid="uid://hrxeui4j2iea" path="res://plugins/minigames/dungeon_parkour/Dungeon Arena/Floor02Triangle.tscn" id="12"]
 [ext_resource type="PackedScene" uid="uid://b4vw6b04182os" path="res://plugins/minigames/dungeon_parkour/Dungeon Arena/Floor01Triangle.tscn" id="13"]
 
@@ -20,13 +19,6 @@ background_color = Color(0.0392157, 0.0470588, 0.0588235, 1)
 
 [sub_resource type="BoxShape3D" id="2"]
 size = Vector3(2, 4, 6)
-
-[sub_resource type="PlaneMesh" id="3"]
-size = Vector2(4.75, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ymt4w"]
-albedo_texture = ExtResource("9")
-uv1_scale = Vector3(4, 1, 1)
 
 [node name="Node3D" type="Node3D"]
 script = ExtResource("1")
@@ -577,20 +569,12 @@ autostart = true
 [node name="Finish" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 56, 0, -20)
 
+[node name="finishline" parent="Finish" instance=ExtResource("11_3ca5i")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -3, 0, 0)
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Finish"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 2.1, 0)
 shape = SubResource("2")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Finish"]
-transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 0, -4.37114e-08, 1, -1, 4.37114e-08, 1.91069e-15, -3, 3.5, 0)
-mesh = SubResource("3")
-surface_material_override/0 = SubResource("StandardMaterial3D_ymt4w")
-
-[node name="Pole02" parent="Finish" instance=ExtResource("10")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -3, 0, -2.75)
-
-[node name="Pole03" parent="Finish" instance=ExtResource("10")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -3, 0, 2.75)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("11")

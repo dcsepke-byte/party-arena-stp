@@ -2,12 +2,16 @@ extends Node3D
 
 const SPEED = 2
 
-func _ready():
-	$AnimationPlayer.play(&"fly-start")
-	$AnimationPlayer.queue(&"fly")
+var finished := false
 
-func _server_process(delta):
-	var dir = Vector3(-self.position.x, 0, -self.position.z).normalized()
+func _ready():
+	$AnimationPlayer.play(&"Idle")
+
+func _server_process(delta: float):
+	if finished:
+		return
+	
+	var dir := Vector3(-self.position.x, 0, -self.position.z).normalized()
 	self.rotation.y = atan2(dir.x, dir.z)
 	self.position += dir * delta * SPEED
 	get_parent().lobby.broadcast(position_updated.bind(position, rotation))
@@ -17,7 +21,14 @@ func _server_process(delta):
 	self.rotation = rot
 
 @rpc func delete():
-	queue_free()
+	$AudioStreamPlayer.play()
+	$AnimationPlayer.play(&"Sad")
+	var tween := get_tree().create_tween()
+	tween.tween_property($CharacterArmature/Skeleton3D/Ghost, ^"transparency", 1.0, 0.5)
+	tween.finished.connect(queue_free)
+
+func win():
+	$AnimationPlayer.play("Happy")
 
 func _on_area_3d_area_entered(area: Area3D):
 	if not multiplayer.is_server():

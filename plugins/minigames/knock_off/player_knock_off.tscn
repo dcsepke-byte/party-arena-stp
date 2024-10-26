@@ -4,7 +4,6 @@
 [ext_resource type="Material" uid="uid://dijcr62n1dnhu" path="res://plugins/minigames/knock_off/player_ball_material/player_knock_off_ball_material.tres" id="2"]
 
 [sub_resource type="PhysicsMaterial" id="1"]
-friction = 0.0
 bounce = 0.8
 
 [sub_resource type="SphereMesh" id="2"]

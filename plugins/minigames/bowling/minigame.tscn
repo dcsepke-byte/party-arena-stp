@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://plugins/minigames/bowling/minigame.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://ccsnrylg5i348" path="res://plugins/minigames/bowling/player.tscn" id="2"]
 [ext_resource type="PackedScene" uid="uid://bmdaus4pimoxb" path="res://common/scenes/countdown/countdown.tscn" id="4"]
-[ext_resource type="PackedScene" uid="uid://d2heolsyxjji1" path="res://assets/models/cannon/scene.glb" id="5"]
+[ext_resource type="PackedScene" uid="uid://bffaqtbhi0hjk" path="res://assets/models/cannon/scene.glb" id="5"]
 [ext_resource type="PackedScene" uid="uid://bkq4wwfoscjgj" path="res://plugins/minigames/bowling/room/room.glb" id="6"]
 [ext_resource type="PackedScene" uid="uid://gp3s5csbijue" path="res://plugins/minigames/bowling/box.tscn" id="8"]
 
@@ -36,7 +36,7 @@ transform = Transform3D(-1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, 0, 0.3
 is_solo_player = true
 
 [node name="scene" parent="Player4" instance=ExtResource("5")]
-transform = Transform3D(-0.05, 0, 1.62921e-08, 0, 0.05, 0, -1.62921e-08, 0, -0.05, 0, 0, 0.75)
+transform = Transform3D(0.35, 0, 0, 0, 0.35, 0, 0, 0, 0.35, 0, 0, 0.75)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Player4"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0.25)

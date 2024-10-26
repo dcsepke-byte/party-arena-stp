@@ -112,6 +112,22 @@ Copyright © franzopow
 
 License [CC-BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/legalcode)
 
+### creepy_laughter.wav
+
+Public Domain by BrainClaim
+
+Retrieved from [Freesound](https://freesound.org/people/BrainClaim/sounds/267638/)
+
+License [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/)
+
+### ghostly_sigh.wav
+
+Public Domain by HorrorAudio
+
+Retrieved from [Freesound](https://freesound.org/people/HorrorAudio/sounds/359153/)
+
+License [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/)
+
 ## assets/sounds/ui
 ### click1.wav | click2.wav | rollover2.wav
 
