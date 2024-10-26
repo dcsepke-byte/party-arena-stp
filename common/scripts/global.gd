@@ -1,12 +1,49 @@
 ## Manages global state with the possiblity to create/destroy clients/servers
 extends Node
 
-## Version of the protocol to check for compability with the remote party. [br]
-## Note that this only works for releases with the same godot version, as
-## different versions may have an incompatible network layer to begin with
-const PROTOCOL_VERSION := 2
-## A human readable name of the release (reported on version mismatch)
-const VERSION_STRING := "v1.0-rc1"
+## A version specification according to https://semver.org/
+class SemVer:
+	var major: int
+	var minor: int
+	var patch: int
+	
+	var beta: int
+	
+	func _init(major: int, minor: int, patch: int, beta := -1):
+		self.major = major
+		self.minor = minor
+		self.patch = patch
+		self.beta = beta
+	
+	func serialize() -> Dictionary:
+		return {
+			"major": major,
+			"minor": minor,
+			"patch": patch,
+			"beta": beta
+		}
+	
+	static func deserialize(data: Dictionary) -> SemVer:
+		return SemVer.new(data.major, data.minor, data.patch, data.beta)
+	
+	## Formats the SemVer as a readable string
+	func format() -> String:
+		if beta != -1:
+			return "{0}.{1}.{2}-beta{3}".format([major, minor, patch, beta])
+		return "{0}.{1}.{2}".format([major, minor, patch])
+	
+	## Check if this SemVer can work with the given version [br]
+	## In other words, checks whether the major version matches and the minor
+	## version is at least as high
+	## Furthermore, beta versions need not be compatible with other betas of the
+	## same major.minor version so we have to check that as well
+	func is_compatible(other: SemVer):
+		return other.major == major and \
+			(other.minor < minor or (other.minor == minor and other.beta == beta))
+	
+
+## Version of the game to check for compability with the remote party
+var VERSION := SemVer.new(1, 0, 0, 2)
 
 ## Create a server running on this machine. [br]
 ## If [param public] is false, the local server will listen only on localhost,

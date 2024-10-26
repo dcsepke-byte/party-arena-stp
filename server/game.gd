@@ -23,8 +23,6 @@ func _on_node_added(node: Node):
 # This is necessary, because since Godot4 these methods must be declared
 # on the sending side as well
 @rpc("authority")
-func version_callback(_proto: int, _version_string: String): pass
-@rpc("authority")
 func lobby_creation_failed(): pass
 @rpc("authority")
 func lobby_created(_lobby_name: String): pass
@@ -34,9 +32,6 @@ func lobby_join_failed(): pass
 func lobby_joined(): pass
 @rpc("authority")
 func public_lobbies_callback(_lobbies: Array): pass
-
-@rpc("any_peer") func get_version():
-	version_callback.rpc_id(multiplayer.get_remote_sender_id(), Global.PROTOCOL_VERSION, Global.VERSION_STRING)
 
 @rpc("any_peer") func get_public_lobbies():
 	var lobbies := []

@@ -440,7 +440,7 @@ anchor_bottom = 1.0
 offset_left = -464.0
 offset_top = 412.0
 offset_right = 41.0
-offset_bottom = -136.0
+offset_bottom = 584.0
 columns = 2
 
 [node name="Play" parent="MainMenu/Buttons" instance=ExtResource("4")]
@@ -476,7 +476,7 @@ anchor_bottom = 1.0
 offset_left = 128.0
 offset_top = -248.0
 offset_right = 1152.0
-offset_bottom = -328.0
+offset_bottom = 392.0
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("14")
 
@@ -580,8 +580,8 @@ visible_ratio = 0.0
 layout_mode = 1
 offset_left = 265.0
 offset_top = 188.0
-offset_right = 265.0
-offset_bottom = 188.0
+offset_right = 1545.0
+offset_bottom = 908.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -617,8 +617,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -913.0
 offset_top = 183.0
-offset_right = -898.0
-offset_bottom = -49.0
+offset_right = -386.0
+offset_bottom = 383.0
 
 [node name="Saves" type="VBoxContainer" parent="LoadGameMenu/ScrollContainer"]
 custom_minimum_size = Vector2(512, 0)
@@ -630,9 +630,9 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -901.0
-offset_top = -35.0
-offset_right = -901.0
-offset_bottom = 9.15527e-05
+offset_top = 397.0
+offset_right = -389.0
+offset_bottom = 436.0
 shortcut = SubResource("11")
 shortcut_in_tooltip = false
 text = "MENU_LABEL_BACK"
