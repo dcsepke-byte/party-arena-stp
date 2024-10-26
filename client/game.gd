@@ -58,17 +58,6 @@ func join_lobby(lobby_name: String) -> Node:
 func update_lobbies():
 	get_public_lobbies.rpc_id(1)
 
-@rpc func get_version():
-	get_version.rpc_id(1)
-	var timer := get_tree().create_timer(3)
-	timer.timeout.connect(_on_version_timeout, CONNECT_DEFERRED)
-	var res = await version
-	timer.timeout.disconnect(_on_version_timeout)
-	return res
-
-func _on_version_timeout():
-	version.emit(null)
-
 @rpc func public_lobbies_callback(list: Array):
 	public_lobbies.emit(list)
 
@@ -83,6 +72,3 @@ func _on_version_timeout():
 
 @rpc func lobby_joined():
 	join_lobby_callback.emit(true)
-
-@rpc func version_callback(id: int, version_string: String):
-	version.emit(id, version_string)

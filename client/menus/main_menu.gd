@@ -1,5 +1,8 @@
 extends Control
 
+const WebSocketClient := preload("res://client/websocket/WebSocketClient.gd")
+const WebSocketApi := preload("res://client/websocket/websocket_api.gd")
+
 @onready var server_list := $ServerList/VBoxContainer/ScrollContainer/List
 var add_server_button := Button.new()
 
@@ -237,7 +240,60 @@ func create_server_entry(data) -> Container:
 	server_list.add_child(container)
 	return container
 
+func format_url(host: String, port: int):
+	if ":" in host:
+		# Assume it's ipv6 (otherwise it's invalid anyway)
+		return "[{0}]:{1}".format([host, port])
+	return "{0}:{1}".format([host, port])
+
+func check_version(host: String, port: int) -> bool:
+	# Version precheck
+	var websocket := WebSocketClient.new()
+	var err := websocket.connect_to_url("ws://" + format_url(host, port))
+	if err != Error.OK:
+		push_error("Failed to connect to websocket: " + error_string(err))
+		$AcceptDialog.title = "MENU_LABEL_CONNECTION_ERROR"
+		$AcceptDialog.dialog_text = "MENU_LABEL_CONNECTION_TIMEOUT"
+		$AcceptDialog.popup_centered()
+		return false
+	add_child(websocket)
+	websocket.connection_closed.connect(func():
+		$LoadAnimation.hide()
+		websocket.queue_free()
+		websocket = null)
+	
+	var api := WebSocketApi.new(websocket)
+	var response := await api.get_version()
+	websocket.close()
+	
+	if response == null:
+		$AcceptDialog.title = "MENU_LABEL_CONNECTION_ERROR"
+		$AcceptDialog.dialog_text = "MENU_LABEL_CONNECTION_TIMEOUT"
+		$AcceptDialog.popup_centered()
+		return false
+	elif response.error != null:
+		$AcceptDialog.title = "MENU_LABEL_CONNECTION_ERROR_TITLE"
+		$AcceptDialog.dialog_text = response.error.message
+		$AcceptDialog.popup_centered()
+		return false
+	elif not Global.VERSION.is_compatible(response.content):
+		$AcceptDialog.title = "MENU_LABEL_VERSION_MISMATCH_TITLE"
+		$AcceptDialog.dialog_text = tr("MENU_LABEL_VERSION_MISMATCH").format(
+			{
+				'local': Global.VERSION.format(),
+				'remote': response.content.format()
+			})
+		$AcceptDialog.popup_centered()
+		return false
+	return true
+
 func remote_server(host: String, port: int) -> void:
+	$LoadAnimation.show()
+	
+	if not await check_version(host, port):
+		return
+	
+	# Now connect to the game server
 	var server := Global.connect_remote_server(host, port)
 	if server == null:
 		$AcceptDialog.title = "MENU_LABEL_CONNECTION_ERROR"
@@ -247,7 +303,6 @@ func remote_server(host: String, port: int) -> void:
 	var conn := server.multiplayer
 	conn.connection_failed.connect(_on_connection_failed, CONNECT_DEFERRED)
 	conn.connected_to_server.connect(_on_connection_succeeded.bind(server), CONNECT_DEFERRED)
-	$LoadAnimation.show()
 	$LoadAnimation/Cancel.grab_focus()
 
 func _on_connection_failed():
@@ -261,26 +316,7 @@ func _on_connection_failed():
 	Global.shutdown_connection()
 
 func _on_connection_succeeded(server):
-	var version = await server.get_version()
 	$LoadAnimation.hide()
-	if version == null:
-		$AcceptDialog.title = "MENU_LABEL_CONNECTION_ERROR_TITLE"
-		$AcceptDialog.dialog_text = "MENU_LABEL_NO_SERVER_VERSION"
-		$AcceptDialog.popup_centered()
-		get_tree().set_multiplayer(null)
-		Global.shutdown_connection()
-		return
-	elif version[0] != Global.PROTOCOL_VERSION:
-		$AcceptDialog.title = "MENU_LABEL_VERSION_MISMATCH_TITLE"
-		$AcceptDialog.dialog_text = tr("MENU_LABEL_VERSION_MISMATCH").format(
-			{
-				'local': Global.VERSION_STRING,
-				'remote': version[1]
-			})
-		$AcceptDialog.popup_centered()
-		get_tree().set_multiplayer(null)
-		Global.shutdown_connection()
-		return
 	var servermenu = preload("res://client/menus/lobby/servermenu.tscn").instantiate()
 	servermenu.server = server
 	servermenu.mainmenu = self

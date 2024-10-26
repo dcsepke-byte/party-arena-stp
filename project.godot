@@ -304,3 +304,4 @@ environment/defaults/default_environment="res://assets/defaults/default_env.tres
 
 port=7634
 max_players=512
+bind_ip="*"
