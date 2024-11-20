@@ -36,18 +36,16 @@ repository.
 ## Tools
 
 Super Tux Party is built in Godot 4.2 with GDscript.
-3D models are exported from [Blender](https://www.blender.org/) with the
-[godot-blender-exporter](https://github.com/godotengine/godot-blender-exporter)
-add-on installed.
+3D models are exported from [Blender](https://www.blender.org/) with the default gltf exporter.
 
 ### File structure
 
 - Assets should be placed in the same folder as the scene using them.
-- Exception to that should be assets that are used a lot across multiple scenes,
-  they should have their own folder
-- Minigames should be placed in the corresponding folder under the `minigames`
+- Exception to that should be assets that are used across multiple scenes or are
+  inteded to be reused, they should have their own folder under `assets/`
+- Minigames should be placed in the corresponding folder under the `plugins/minigames`
   folder
-- Boards should be placed under the `boards` folder in their own folder: the
+- Boards should be placed under the `plugins/boards` folder in their own folder: the
   name must match the name of the board
 
 ## Coding style
