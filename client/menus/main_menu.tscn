@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://c6aw5cs71kqpf"]
+[gd_scene load_steps=42 format=3 uid="uid://c6aw5cs71kqpf"]
 
 [ext_resource type="Theme" uid="uid://d3w3vt3s6ujoh" path="res://assets/defaults/default_theme.tres" id="1"]
 [ext_resource type="Script" path="res://client/menus/main_menu.gd" id="2"]
@@ -203,6 +203,10 @@ _data = {
 "OptionsMenu": SubResource("4"),
 "RESET": SubResource("Animation_ycp77")
 }
+
+[sub_resource type="Environment" id="Environment_lw4hj"]
+background_mode = 1
+background_color = Color(0, 0, 0, 0)
 
 [sub_resource type="Animation" id="Animation_6xc25"]
 resource_name = "ArmatureAction"
@@ -498,6 +502,7 @@ render_target_update_mode = 4
 [node name="Camera3D" type="Camera3D" parent="MainMenu/SubViewportContainer/SubViewport"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.892)
 keep_aspect = 0
+environment = SubResource("Environment_lw4hj")
 fov = 23.4
 
 [node name="tux" parent="MainMenu/SubViewportContainer/SubViewport" instance=ExtResource("11")]
