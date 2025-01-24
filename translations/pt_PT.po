@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 0.7\n"
-"PO-Revision-Date: 2021-01-20 01:32+0000\n"
-"Last-Translator: Márcia Costa <marciacostta.00@gmail.com>\n"
+"PO-Revision-Date: 2024-07-14 21:09+0000\n"
+"Last-Translator: ssantos <ssantos@web.de>\n"
 "Language-Team: Portuguese (Portugal) <https://hosted.weblate.org/projects/"
 "super-tux-party/super-tux-party/pt_PT/>\n"
 "Language: pt_PT\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.5-dev\n"
+"X-Generator: Weblate 5.7-dev\n"
 
 msgid "CONTEXT_LABEL_BUY_CAKE"
 msgstr "Compre um bolo por {amount} biscoitos"
@@ -62,7 +62,7 @@ msgid "CONTEXT_NOTIFICATION_NOT_ENOUGH_COOKIES"
 msgstr "Não tem biscoitos o suficiente para comprar isto"
 
 msgid "CONTEXT_NOTIFICATION_NOT_ENOUGH_SPACE"
-msgstr "Não tem espaço o suficiente em seu inventário"
+msgstr "Não tem espaço o suficiente no seu inventário"
 
 msgid "MENU_CONTROLS_ACTION_1"
 msgstr "Ação 1"
@@ -170,13 +170,13 @@ msgid "MENU_LABEL_DESKTOP"
 msgstr "Sair para o ambiente de trabalho"
 
 msgid "MENU_SETTINGS_AWARD_LINEAR"
-msgstr ""
+msgstr "Linear"
 
 msgid "MENU_LABEL_NEW_GAME"
 msgstr "Novo Jogo"
 
 msgid "MENU_LABEL_START"
-msgstr ""
+msgstr "Início"
 
 msgid "MENU_LABEL_PAUSE"
 msgstr "Pausa"
@@ -191,7 +191,7 @@ msgid "MENU_LABEL_PLAY"
 msgstr "Jogar"
 
 msgid "MENU_LABEL_ONLINE"
-msgstr ""
+msgstr "Jogue na rede"
 
 msgid "MENU_LABEL_PLAYER1"
 msgstr "Jogador1"
@@ -224,22 +224,22 @@ msgid "MENU_LABEL_SELECT_BOARD"
 msgstr "Selecione o tabuleiro:"
 
 msgid "MENU_LABEL_SELECT_CHARACTER"
-msgstr ""
+msgstr "Selecione a sua personagem"
 
 msgid "MENU_LABEL_TRY"
 msgstr "Tentar"
 
 msgid "MENU_SETTINGS_AWARD_WINNER_TAKES_ALL"
-msgstr ""
+msgstr "O ganhador leva tudo"
 
 msgid "MENU_SETTINGS_AWARD_TYPE"
-msgstr ""
+msgstr "Tipo de Prêmio"
 
 msgid "MENU_LABEL_CREDITS"
 msgstr "Créditos"
 
 msgid "MENU_LABEL_SCREENSHOTS"
-msgstr "captura de ecrã"
+msgstr "Captura de ecrã"
 
 msgid "MENU_OPTIONS"
 msgstr "Opções"
@@ -260,7 +260,7 @@ msgid "MENU_OPTIONS_FULLSCREEN"
 msgstr "Ecrã inteiro"
 
 msgid "MENU_OPTIONS_MSAA"
-msgstr ""
+msgstr "Anti-Serrilhado Multiamostra (Multisample anti-aliasing - MSAA)"
 
 msgid "MENU_OPTIONS_LANGUAGE"
 msgstr "Idoima"
@@ -293,49 +293,61 @@ msgid "DIALOG_NO"
 msgstr "Não"
 
 msgid "MENU_LABEL_CONNECTION_ERROR_TITLE"
-msgstr ""
+msgstr "Erro de Conexão"
 
 msgid "MENU_LABEL_CONNECTION_TIMEOUT"
 msgstr ""
+"Não foi possível atingir servidor.\n"
+"\n"
+"Por favor, contacte o seu administrador do servidor."
 
 msgid "MENU_LABEL_NO_SERVER_VERSION"
 msgstr ""
+"Não foi possível determinar a versão do servidor.\n"
+"\n"
+"Por favor contacte o seu administrador do servidor."
 
 msgid "MENU_LABEL_VERSION_MISMATCH_TITLE"
-msgstr ""
+msgstr "Versões não combinam"
 
 msgid "MENU_LABEL_VERSION_MISMATCH"
 msgstr ""
+"Está a executar uma versão incompatível do SuperTuxParty para este servidor."
+"\n"
+"A sua versão: {local}\n"
+"Versão do Servidor: {remote}\n"
+"\n"
+"Por favor descarregue uma versão compatível para jogar neste servidor."
 
 msgid "MENU_LABEL_CHOOSE_SERVER"
-msgstr ""
+msgstr "Escolher servidor:"
 
 msgid "MENU_LABEL_COPY"
-msgstr ""
+msgstr "Copiar para a área de transferência"
 
 msgid "MENU_LABEL_LOBBY_CREATE"
-msgstr ""
+msgstr "Criar sala de espera"
 
 msgid "MENU_LABEL_LOBBY_JOIN"
-msgstr ""
+msgstr "Entrar na sala de espera"
 
 msgid "MENU_LOBBY_SETTINGS"
-msgstr ""
+msgstr "Opções do Jogo"
 
 msgid "MENU_SETTINGS_PUBLIC"
-msgstr ""
+msgstr "Sala de espera pública"
 
 msgid "MENU_SETTINGS_CAKE_COST"
-msgstr ""
+msgstr "Custo do bolo"
 
 msgid "MENU_SETTINGS_TURNS"
-msgstr ""
+msgstr "giros"
 
 msgid "MENU_SETTINGS_ENABLE_TIMEOUT"
-msgstr ""
+msgstr "expulsar jogadores por inatividade"
 
 msgid "MENU_SETTINGS_TIMEOUT"
-msgstr ""
+msgstr "Limite de tempo"
 
 msgid "AI_DIFFICULTY"
 msgstr "Dificuldade das IA:"
@@ -350,7 +362,7 @@ msgid "DIFFICULTY_HARD"
 msgstr "Difícil"
 
 msgid "CONTEXT_GNU_ACTION_TYPE"
-msgstr "GNU ação"
+msgstr "Ação GNU"
 
 msgid "MENU_OPTIONS_GRAPHIC_QUALITY"
 msgstr "qualidade gráfica"
@@ -371,18 +383,18 @@ msgid "MENU_GRAPHIC_QUALITY_REBOOT_NOTICE"
 msgstr "A alteração da qualidade gráfica só tem efeito após reiniciar"
 
 msgid "MENU_LOBBY_ADD_PLAYER"
-msgstr ""
+msgstr "Aperte para fazer parte"
 
 msgid "CONTEXT_SPEAKER_SARA"
 msgstr "Sara"
 
 msgid "CONTEXT_WINNER_ANNOUNCEMENT"
 msgstr ""
-"Sei que todos vocês lutaram muito para ganhar, mas agora o jogo acabou e "
+"Sei que todos lutaram muito para ganhar, mas agora o jogo acabou e "
 "precisamos de um vencedor. E o vencedor é…"
 
 msgid "CONTEXT_WINNER_REVEAL_ONE_PLAYER"
-msgstr ""
+msgstr "[color=#ff3300]{0}[/color]!"
 
 msgid "CONTEXT_WINNER_REVEAL_TWO_PLAYER"
 msgstr ""
@@ -407,8 +419,8 @@ msgstr "Olá, precisa de ajuda? Deixe-me ver o que posso fazer por si hoje …"
 
 msgid "CONTEXT_GNU_MINIGAME_SOLO_MODERATION"
 msgstr ""
-"É um minijogo a solo! Mostre-me suas habilidades e eu te darei uma [color = "
-"# dd44ff] {recompensa} [/ color]"
+"É um minijogo a solo! Mostre-me as suas habilidades e darei-te uma [color = #"
+" dd44ff] {recompensa} [/ color]"
 
 msgid "CONTEXT_GNU_MINIGAME_SOLO"
 msgstr "minijogo a solo"
@@ -426,12 +438,12 @@ msgid "CONTEXT_GNU_SOLO_LOSS"
 msgstr "Isso não funcionou. Talvez na próxima vez."
 
 msgid "CONTEXT_GNU_COOP_VICTORY"
-msgstr "Você fez isso. Eu vou esperar pela próxima vez."
+msgstr "Conseguiste. Vou esperar pela próxima vez."
 
 msgid "CONTEXT_GNU_COOP_LOSS"
 msgstr ""
-"Embora não tenha conseguido, praticaste o teu trabalho em equipa. Tenho "
-"certeza que da próxima vez vai correr bem!"
+"Embora não tenha conseguido, praticaste o teu trabalho de equipa. Tenho "
+"certeza que à próxima vez vai correr bem!"
 
 msgid "CONTEXT_NOLOK_NAME"
 msgstr "nolok"
@@ -440,27 +452,27 @@ msgid "CONTEXT_NOLOK_ACTION_TYPE"
 msgstr "Nolok ação"
 
 msgid "CONTEXT_NOLOK_EVENT_START"
-msgstr "É a minha vez! Eu sei exatamento o que fazer…"
+msgstr "É a minha vez! Sei exatamente o que fazer…"
 
 msgid "CONTEXT_NOLOK_MINIGAME_SOLO_MODERATION"
 msgstr ""
-"Eu te desafio para um minijogo! Se poderes derrotar me, podes ficar com tuas "
+"Desafio-te para um minijogo! Se me poderes derrotar, podes ficar com as tuas "
 "coisas. Senão vou levar um dos teus bolos …"
 
 msgid "CONTEXT_NOLOK_MINIGAME_SOLO"
 msgstr "minijogo a solo"
 
 msgid "CONTEXT_NOLOK_MINIGAME_COOP_MODERATION"
-msgstr "Eu contra todos vocês? Ainda achas que tens uma chance contra mim?"
+msgstr "Contra todos? Ainda achas que tens uma chance contra mim?"
 
 msgid "CONTEXT_NOLOK_MINIGAME_COOP"
 msgstr "minijogo coop"
 
 msgid "CONTEXT_NOLOK_SOLO_VICTORY"
-msgstr "Fique grato por ter te poupado!"
+msgstr "Fica grato por te ter poupado!"
 
 msgid "CONTEXT_NOLOK_SOLO_LOSS"
-msgstr "Ansioso para vencer te novamente!"
+msgstr "Ansioso para vencer-te novamente!"
 
 msgid "CONTEXT_NOLOK_COOP_VICTORY"
 msgstr "Da próxima vez não vais ganhar."
@@ -470,7 +482,7 @@ msgstr "Haha, que vitória fácil."
 
 msgid "CONTEXT_NOLOK_LOSE_COOKIES_MODERATION"
 msgstr ""
-"Haha, lá vai [color = # 00aaff] {montante} [/ cor] de seus cookies. Tenho "
+"Haha, lá vai [color = # 00aaff] {montante} [/ cor] dos teus cookies. Tenho "
 "certeza de que [cor = # dd44ff] {jogador} [/ cor] tem uma utilidade para eles"
 
 msgid "CONTEXT_NOLOK_LOSE_COOKIES"
@@ -478,16 +490,15 @@ msgstr "Perdeste as tuas bolachas"
 
 msgid "CONTEXT_NOLOK_ROLL_MODIFIER_MODERATION"
 msgstr ""
-"Talvez você deva abrandar um pouco. Vamos ver como você se sai com [cor = # "
-"00aaff] {montante} [/ cor] menos movimento para os próximos [cor = # dd44ff] "
+"Talvez devias abrandar um pouco. Vamos ver como sai com [cor = # 00aaff] "
+"{montante} [/ cor] menos movimento para as próximas [cor = # dd44ff] "
 "{duração} [/ cor] jogadas"
 
 msgid "CONTEXT_NOLOK_ROLL_MODIFIER"
-msgstr "morrer amaldiçoado"
+msgstr "Morrer amaldiçoado"
 
 msgid "CONTEXT_SHOW_TUTORIAL"
-msgstr ""
-"Parece que é a primeira vez que jogas. Queres que eu explique as regras?"
+msgstr "Parece que é a primeira vez que jogas. Queres que explique as regras?"
 
 msgid "CONTEXT_TUTORIAL_DICE"
 msgstr ""
@@ -496,14 +507,14 @@ msgstr ""
 
 msgid "CONTEXT_TUTORIAL_COOKIES"
 msgstr ""
-"A moeda são as bolachas. Você ganha bolachas ao vencer minijogos. Com as "
-"bolachas podes comprar itens ao passar pelas lojas."
+"A moeda são as bolachas. Ganha bolachas ao vencer minijogos. Com as bolachas "
+"podes comprar itens ao passar pelas lojas."
 
 msgid "CONTEXT_TUTORIAL_CAKES"
 msgstr ""
 "Para ganhar, precisas coletar o máximo de bolos. As bolachas serão usadas "
-"como um desempate. Você pode comprar bolos em locais especiais do tabuleiro. "
-"Se comprares um, o bolo irá para outro local."
+"como um desempate. Pode comprar bolos em locais especiais do tabuleiro. Se "
+"comprares um, o bolo irá para outro local."
 
 msgid "CONTEXT_TUTORIAL_SPACES_NORMAL"
 msgstr ""
@@ -533,12 +544,12 @@ msgstr ""
 
 msgid "CONTEXT_TUTORIAL_MINIGAMES_SPECIAL"
 msgstr ""
-"Minijogos especiais serão jogados quando um jogador pousar em um espaço GNU "
-"ou NOLOK. Minijogos GNU são bons, enquanto minijogos NOLOK são ruins para "
-"ti. Portanto, é melhor ficar longe do último!"
+"Minijogos especiais serão jogados quando um jogador pousar num espaço GNU ou "
+"NOLOK. Minijogos GNU são bons, enquanto minijogos NOLOK são ruins para ti. "
+"Portanto, é melhor ficar longe do último!"
 
 msgid "CONTEXT_TUTORIAL_END"
-msgstr "É isso, agora tu estás pronto para começar! Diverte-te!"
+msgstr "É tudo, agora estás pronto para começar! Diverte-te!"
 
 msgid "CONTEXT_CAKE_PLACED"
 msgstr "Aqui está o bolo, vem buscar!"
@@ -551,17 +562,17 @@ msgstr "Quantos bolos queres comprar?"
 
 msgid "CONTEXT_CAKE_COLLECTED"
 msgstr ""
-"Muito bem, [cor = # 00aaff] {jogador} [/ cor]. Isso é [cor = # dd44ff] "
-"{montante} [/ cor] bolo (s) para ti."
+"Muito bem, [cor = # 00aaff] {jogador} [/ cor]. Faz [cor = # dd44ff] "
+"{montante} [/ cor] bolo(s) para ti."
 
 msgid "CONTEXT_CAKE_CANT_AFFORD"
 msgstr "Sinto muito, mas não tens bolachas suficientes para comprar um bolo."
 
 msgid "SHOP_LABEL_TITLE"
-msgstr "Loja de itens"
+msgstr "Loja de elemetos"
 
 msgid "SHOP_LABEL_DESCRIPTION"
-msgstr "Descrição do item"
+msgstr "Descrição do elemento"
 
 msgid "SHOP_ITEM_NO_DESCRIPTION"
 msgstr "Sem descrição"

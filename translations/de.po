@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 0.7\n"
-"PO-Revision-Date: 2022-05-12 08:20+0000\n"
-"Last-Translator: SZanko <szanko@protonmail.com>\n"
+"PO-Revision-Date: 2025-01-17 03:00+0000\n"
+"Last-Translator: Bob Idle <102661087+bobidle@users.noreply.github.com>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/super-tux-party/"
 "super-tux-party/de/>\n"
 "Language: de\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.13-dev\n"
+"X-Generator: Weblate 5.10-dev\n"
 
 msgid "CONTEXT_LABEL_BUY_CAKE"
 msgstr "Kaufe einen Kuchen für {amount} Kekse"
@@ -224,7 +224,7 @@ msgid "MENU_LABEL_SELECT_BOARD"
 msgstr "Spielbrett auswählen:"
 
 msgid "MENU_LABEL_SELECT_CHARACTER"
-msgstr "Wähle deinen Character"
+msgstr "Wähle deinen Charakter"
 
 msgid "MENU_LABEL_TRY"
 msgstr "Versuchen"
@@ -293,19 +293,32 @@ msgid "DIALOG_NO"
 msgstr "Nein"
 
 msgid "MENU_LABEL_CONNECTION_ERROR_TITLE"
-msgstr ""
+msgstr "Verbindungsfehler"
 
 msgid "MENU_LABEL_CONNECTION_TIMEOUT"
 msgstr ""
+"Kann Server nicht erreichen.\n"
+"\n"
+"Bitte kontaktieren Sie Ihren Server-Administrator."
 
 msgid "MENU_LABEL_NO_SERVER_VERSION"
 msgstr ""
+"Konnte Serverversion nicht ermitteln.\n"
+"\n"
+"Bitte kontaktieren Sie Ihren Server-Administrator."
 
 msgid "MENU_LABEL_VERSION_MISMATCH_TITLE"
-msgstr ""
+msgstr "Version stimmt nicht überein"
 
 msgid "MENU_LABEL_VERSION_MISMATCH"
 msgstr ""
+"Sie verwenden eine inkompatible Version von SuperTuxParty für diesen Server."
+"\n"
+"Ihre Version: {local}\n"
+"Server-Version: {remote}\n"
+"\n"
+"Bitte laden Sie eine kompatible Version herunter, um auf diesem Server zu "
+"spielen."
 
 msgid "MENU_LABEL_CHOOSE_SERVER"
 msgstr "Wähle einen Server:"
@@ -527,11 +540,11 @@ msgstr ""
 
 msgid "CONTEXT_TUTORIAL_MINIGAMES"
 msgstr ""
-"Nachdem jeder Spieler am Zug war, wird ein Minigspiel gespielt. Es "
-"existieren drei verschieden Arten von Minispielen:"
+"Nachdem jeder Spieler am Zug war, wird ein Minispiel gespielt. Es existieren "
+"drei verschieden Arten von Minispielen:"
 
 msgid "CONTEXT_TUTORIAL_MINIGAMES_FFA"
-msgstr "Jeder gegen Jeden, dort treten alle Spieler gegeinander an."
+msgstr "Jeder gegen Jeden, dort treten alle Spieler gegeneinander an."
 
 msgid "CONTEXT_TUTORIAL_MINIGAMES_2V2"
 msgstr "Zwei gegen Zwei, in welchem Zweierteams gegeneinander antreten."
@@ -543,7 +556,7 @@ msgstr ""
 
 msgid "CONTEXT_TUTORIAL_MINIGAMES_SPECIAL"
 msgstr ""
-"Besondere Minispiele werdn gespielt, wenn ein Spieler auf einem GNU- oder "
+"Besondere Minispiele werden gespielt, wenn ein Spieler auf einem GNU- oder "
 "einem NOLOK-Feld landet. GNU Minispiele sind gut für dich, während NOLOK "
 "Minispiele schlechte Folgen haben. Halte dich also von letzterem fern!"
 
@@ -568,9 +581,11 @@ msgid "CONTEXT_CAKE_CANT_AFFORD"
 msgstr ""
 "Es tut mir Leid, aber du hast nicht genug Kekse um einen Kuchen zu kaufen."
 
+#, fuzzy
 msgid "SHOP_LABEL_TITLE"
 msgstr "ItemShop"
 
+#, fuzzy
 msgid "SHOP_LABEL_DESCRIPTION"
 msgstr "Item Beschreibung"
 
@@ -599,31 +614,31 @@ msgid "MINIGAME_TYPE_2v2"
 msgstr "Zwei gegen Zwei Minispiel"
 
 msgid "MINIGAME_TYPE_1v3"
-msgstr "Eins gegen Drei Minigame"
+msgstr "Eins gegen Drei Minispiel"
 
 msgid "MINIGAME_TYPE_DUEL"
 msgstr "Duell Minispiel"
 
 msgid "MINIGAME_TYPE_GNU_COOP"
-msgstr "GNU Coop Minispiel"
+msgstr "GNU Koop-Minispiel"
 
 msgid "MINIGAME_TYPE_GNU_SOLO"
 msgstr "GNU Solo Minispiel"
 
 msgid "MINIGAME_TYPE_NOLOK_COOP"
-msgstr "Nolok Coop Minispiel"
+msgstr "Nolok Koop-Minispiel"
 
 msgid "MINIGAME_TYPE_NOLOK_SOLO"
 msgstr "Nolok Solo Minispiel"
 
 msgid "ERROR"
-msgstr ""
+msgstr "Fehler"
 
 msgid "SAVE_GAME_CANNOT_SAVE"
-msgstr ""
+msgstr "Das Spiel kann zurzeit nicht gespeichert werden"
 
 msgid "SAVE_GAME_DISABLED"
-msgstr ""
+msgstr "Das Speichern von Spielen ist auf diesem Server deaktiviert"
 
 #~ msgid "MENU_LABEL_OK"
 #~ msgstr "OK"

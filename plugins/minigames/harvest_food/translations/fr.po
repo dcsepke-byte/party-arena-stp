@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 0.7\n"
-"PO-Revision-Date: 2021-04-21 16:29+0000\n"
-"Last-Translator: Baptiste H <baptiste.huchon@bechamail.fr>\n"
+"PO-Revision-Date: 2024-08-07 17:36+0000\n"
+"Last-Translator: Cash Ozawa <louissaitomaloberti@gmail.com>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/super-tux-party/"
 "minigamesharvest_food/fr/>\n"
 "Language: fr\n"
@@ -14,11 +14,12 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n!=1);\n"
-"X-Generator: Weblate 4.7-dev\n"
+"X-Generator: Weblate 5.7-dev\n"
 
 msgid "HARVEST_FOOD_SELECT_ROTTEN_PLANT_MSG"
 msgstr "{player} a choisi la plante pourrie !"
 
+#, fuzzy
 msgid "MINIGAME_DESCRIPTION"
 msgstr ""
 "Les joueurs choisissent une plante jusqu'à ce que le temps soit écoulé. "
@@ -32,3 +33,6 @@ msgstr "Sauter"
 
 msgid "MINIGAME_NAME"
 msgstr "Récolter de la nourriture"
+
+msgid "MINIGAME_ACTION_PICKUP"
+msgstr "Ramasser ou jeter la citrouille"

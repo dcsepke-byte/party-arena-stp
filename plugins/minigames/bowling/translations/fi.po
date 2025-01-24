@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 0.7\n"
-"PO-Revision-Date: 2020-04-02 01:55+0000\n"
-"Last-Translator: Tuomas Lähteenmäki <lahtis@gmail.com>\n"
+"PO-Revision-Date: 2025-01-24 10:01+0000\n"
+"Last-Translator: Ricky Tigg <ricky.tigg@gmail.com>\n"
 "Language-Team: Finnish <https://hosted.weblate.org/projects/super-tux-party/"
 "minigamesbowling/fi/>\n"
 "Language: fi\n"
@@ -14,7 +14,38 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.0-dev\n"
+"X-Generator: Weblate 5.10-dev\n"
 
 msgid "BOWLING_FINISH_MSG"
 msgstr "Maali!"
+
+msgid "MINIGAME_NAME"
+msgstr "Keilailu"
+
+msgid "MINIGAME_DESCRIPTION"
+msgstr ""
+"Yksinpelaajan täytyy ampua kaikki muut pelaajat pois lavalta voittaakseen.\n"
+"Jos aika loppuu, ryhmä voittaa.\n"
+"Pidä silmällä putoavia laatikoita. Ne tainnuttavat, jos osut, mutta myös "
+"estävät luoteja."
+
+msgid "MINIGAME_ACTION_UP"
+msgstr "Liiku ylös"
+
+msgid "MINIGAME_ACTION_JUMP"
+msgstr "Hyppää"
+
+msgid "MINIGAME_ACTION_MOVE"
+msgstr "Liiku"
+
+msgid "MINIGAME_ACTION_DOWN"
+msgstr "Liiku alas"
+
+msgid "MINIGAME_ACTION_LEFT"
+msgstr "Liiku vasemmalle"
+
+msgid "MINIGAME_ACTION_THROW"
+msgstr "Heitä palloa"
+
+msgid "MINIGAME_ACTION_RIGHT"
+msgstr "Liiku oikealle"

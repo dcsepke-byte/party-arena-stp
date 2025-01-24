@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 0.7\n"
-"PO-Revision-Date: 2021-09-21 16:37+0000\n"
-"Last-Translator: Sergio Varela <sergitroll9@gmail.com>\n"
+"PO-Revision-Date: 2024-02-25 12:02+0000\n"
+"Last-Translator: gallegonovato <fran-carro@hotmail.es>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/super-tux-party/"
 "super-tux-party/es/>\n"
 "Language: es\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.9-dev\n"
+"X-Generator: Weblate 5.5-dev\n"
 
 msgid "CONTEXT_LABEL_BUY_CAKE"
 msgstr "Compra un pastel por {amount} galletas"
@@ -170,13 +170,13 @@ msgid "MENU_LABEL_DESKTOP"
 msgstr "Salir al escritorio"
 
 msgid "MENU_SETTINGS_AWARD_LINEAR"
-msgstr ""
+msgstr "Lineal"
 
 msgid "MENU_LABEL_NEW_GAME"
 msgstr "Juego nuevo"
 
 msgid "MENU_LABEL_START"
-msgstr ""
+msgstr "Iniciar"
 
 msgid "MENU_LABEL_PAUSE"
 msgstr "Pausa"
@@ -191,7 +191,7 @@ msgid "MENU_LABEL_PLAY"
 msgstr "Jugar"
 
 msgid "MENU_LABEL_ONLINE"
-msgstr ""
+msgstr "Jugar en línea"
 
 msgid "MENU_LABEL_PLAYER1"
 msgstr "Jugador1"
@@ -224,16 +224,16 @@ msgid "MENU_LABEL_SELECT_BOARD"
 msgstr "Selecciona el tablero:"
 
 msgid "MENU_LABEL_SELECT_CHARACTER"
-msgstr ""
+msgstr "Seleccione su personaje"
 
 msgid "MENU_LABEL_TRY"
 msgstr "Tratar"
 
 msgid "MENU_SETTINGS_AWARD_WINNER_TAKES_ALL"
-msgstr ""
+msgstr "El ganador se lo lleva todo"
 
 msgid "MENU_SETTINGS_AWARD_TYPE"
-msgstr ""
+msgstr "Tipo de premio"
 
 msgid "MENU_LABEL_CREDITS"
 msgstr "Créditos"
@@ -293,49 +293,61 @@ msgid "DIALOG_NO"
 msgstr "No"
 
 msgid "MENU_LABEL_CONNECTION_ERROR_TITLE"
-msgstr ""
+msgstr "Error en la conexión"
 
 msgid "MENU_LABEL_CONNECTION_TIMEOUT"
 msgstr ""
+"No se puede acceder al servidor.\n"
+"\n"
+"Póngase en contacto con el administrador del servidor."
 
 msgid "MENU_LABEL_NO_SERVER_VERSION"
 msgstr ""
+"No se ha podido determinar la versión del servidor.\n"
+"\n"
+"Póngase en contacto con el administrador del servidor."
 
 msgid "MENU_LABEL_VERSION_MISMATCH_TITLE"
-msgstr ""
+msgstr "Versión incorrecta"
 
 msgid "MENU_LABEL_VERSION_MISMATCH"
 msgstr ""
+"Está ejecutando una versión incompatible de SuperTuxParty para este servidor."
+"\n"
+"Su versión: {local}\n"
+"Versión del servidor: {remote}\n"
+"\n"
+"Por favor, descarga una versión compatible para jugar en este servidor."
 
 msgid "MENU_LABEL_CHOOSE_SERVER"
-msgstr ""
+msgstr "Seleccione el servidor:"
 
 msgid "MENU_LABEL_COPY"
-msgstr ""
+msgstr "Copiar al portapapeles"
 
 msgid "MENU_LABEL_LOBBY_CREATE"
-msgstr ""
+msgstr "Crear sala de espera"
 
 msgid "MENU_LABEL_LOBBY_JOIN"
-msgstr ""
+msgstr "Entrar en la sala de espera"
 
 msgid "MENU_LOBBY_SETTINGS"
-msgstr ""
+msgstr "Opciones del juego"
 
 msgid "MENU_SETTINGS_PUBLIC"
-msgstr ""
+msgstr "Sala de espera pública"
 
 msgid "MENU_SETTINGS_CAKE_COST"
-msgstr ""
+msgstr "Precio de la tarta"
 
 msgid "MENU_SETTINGS_TURNS"
-msgstr ""
+msgstr "Gira"
 
 msgid "MENU_SETTINGS_ENABLE_TIMEOUT"
-msgstr ""
+msgstr "Jugadores expulsados por inactividad"
 
 msgid "MENU_SETTINGS_TIMEOUT"
-msgstr ""
+msgstr "Límite de tiempo"
 
 msgid "AI_DIFFICULTY"
 msgstr "Dificultad de la IA:"
@@ -372,7 +384,7 @@ msgstr ""
 "El cambio de la calidad gráfica sólo tendrá efecto después de reiniciar"
 
 msgid "MENU_LOBBY_ADD_PLAYER"
-msgstr ""
+msgstr "Pulsar para unirse"
 
 msgid "CONTEXT_SPEAKER_SARA"
 msgstr "Sara"
@@ -612,13 +624,13 @@ msgid "MINIGAME_TYPE_NOLOK_SOLO"
 msgstr "Minijuego en solitario de Nolok"
 
 msgid "ERROR"
-msgstr ""
+msgstr "Error"
 
 msgid "SAVE_GAME_CANNOT_SAVE"
-msgstr ""
+msgstr "No se puede guardar el juego en este momento"
 
 msgid "SAVE_GAME_DISABLED"
-msgstr ""
+msgstr "Guardar las partidas está desactivado en este servidor"
 
 #~ msgid "MENU_LABEL_NOT_READY_ELLIPSIS"
 #~ msgstr "No está listo…"

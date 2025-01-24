@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 0.7\n"
-"PO-Revision-Date: 2021-04-21 16:29+0000\n"
-"Last-Translator: Baptiste H <baptiste.huchon@bechamail.fr>\n"
+"PO-Revision-Date: 2025-01-13 00:00+0000\n"
+"Last-Translator: Cash Ozawa <louissaitomaloberti@gmail.com>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/super-tux-party/"
 "super-tux-party/fr/>\n"
 "Language: fr\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n!=1);\n"
-"X-Generator: Weblate 4.7-dev\n"
+"X-Generator: Weblate 5.10-dev\n"
 
 msgid "CONTEXT_LABEL_BUY_CAKE"
 msgstr "Acheter un gâteau pour {amount} biscuits"
@@ -170,13 +170,13 @@ msgid "MENU_LABEL_DESKTOP"
 msgstr "Retourner sur le bureau"
 
 msgid "MENU_SETTINGS_AWARD_LINEAR"
-msgstr ""
+msgstr "Linéaire"
 
 msgid "MENU_LABEL_NEW_GAME"
 msgstr "Nouvelle partie"
 
 msgid "MENU_LABEL_START"
-msgstr ""
+msgstr "Commencer"
 
 msgid "MENU_LABEL_PAUSE"
 msgstr "Pause"
@@ -191,7 +191,7 @@ msgid "MENU_LABEL_PLAY"
 msgstr "Jouer"
 
 msgid "MENU_LABEL_ONLINE"
-msgstr ""
+msgstr "Jouer en ligne"
 
 msgid "MENU_LABEL_PLAYER1"
 msgstr "Joueur1"
@@ -224,16 +224,16 @@ msgid "MENU_LABEL_SELECT_BOARD"
 msgstr "Choisi un damier :"
 
 msgid "MENU_LABEL_SELECT_CHARACTER"
-msgstr ""
+msgstr "Choisir votre personnage"
 
 msgid "MENU_LABEL_TRY"
 msgstr "Essayer"
 
 msgid "MENU_SETTINGS_AWARD_WINNER_TAKES_ALL"
-msgstr ""
+msgstr "Le vainquer prend tout"
 
 msgid "MENU_SETTINGS_AWARD_TYPE"
-msgstr ""
+msgstr "Type de trophée"
 
 msgid "MENU_LABEL_CREDITS"
 msgstr "Remerciements"
@@ -293,13 +293,19 @@ msgid "DIALOG_NO"
 msgstr "Non"
 
 msgid "MENU_LABEL_CONNECTION_ERROR_TITLE"
-msgstr ""
+msgstr "Erreur de connexion"
 
 msgid "MENU_LABEL_CONNECTION_TIMEOUT"
 msgstr ""
+"Nous ne pouvons pas nous connecter au serveur.\n"
+"\n"
+"S'il vous plaît contactez votre administrateur de serveur."
 
 msgid "MENU_LABEL_NO_SERVER_VERSION"
 msgstr ""
+"Nous ne pouvions pas déterminer la version du serveur.\n"
+"\n"
+"S'il vous plaît contactez votre administrateur de serveur."
 
 msgid "MENU_LABEL_VERSION_MISMATCH_TITLE"
 msgstr ""
@@ -335,10 +341,10 @@ msgid "MENU_SETTINGS_ENABLE_TIMEOUT"
 msgstr ""
 
 msgid "MENU_SETTINGS_TIMEOUT"
-msgstr ""
+msgstr "Limite de temps"
 
 msgid "AI_DIFFICULTY"
-msgstr "Difficulté de l'IA :"
+msgstr "Difficulté de l'IA :"
 
 msgid "DIFFICULTY_EASY"
 msgstr "Facile"

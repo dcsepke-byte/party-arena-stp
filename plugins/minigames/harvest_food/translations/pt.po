@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2022-01-03 19:54+0000\n"
-"Last-Translator: ssantos <ssantos@web.de>\n"
+"PO-Revision-Date: 2024-04-02 16:17+0000\n"
+"Last-Translator: Anonymous <noreply@weblate.org>\n"
 "Language-Team: Portuguese <https://hosted.weblate.org/projects/"
 "super-tux-party/minigamesharvest_food/pt/>\n"
 "Language: pt\n"
@@ -9,11 +9,12 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 4.10.1\n"
+"X-Generator: Weblate 5.5-dev\n"
 
 msgid "MINIGAME_NAME"
 msgstr "Harvest Food"
 
+#, fuzzy
 msgid "MINIGAME_DESCRIPTION"
 msgstr ""
 "Os jogadores selecionam uma planta até que o tempo acabe. Cada jogador que "

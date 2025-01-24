@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2021-10-01 00:40+0000\n"
-"Last-Translator: phlostically <phlostically@mailinator.com>\n"
+"PO-Revision-Date: 2024-08-07 17:36+0000\n"
+"Last-Translator: Cash Ozawa <louissaitomaloberti@gmail.com>\n"
 "Language-Team: Esperanto <https://hosted.weblate.org/projects/"
 "super-tux-party/minigamesharvest_food/eo/>\n"
 "Language: eo\n"
@@ -9,11 +9,12 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.9-dev\n"
+"X-Generator: Weblate 5.7-dev\n"
 
 msgid "HARVEST_FOOD_SELECT_ROTTEN_PLANT_MSG"
 msgstr "{player} elektis la putran vegetaĵon!"
 
+#, fuzzy
 msgid "MINIGAME_DESCRIPTION"
 msgstr ""
 "La ludantoj elektas planton ĝis la tempo finiĝas. Ĉiu ludanto, kiu elektis "
@@ -27,3 +28,6 @@ msgstr "Rikolti Manĝaĵon"
 
 msgid "MINIGAME_ACTION_JUMP"
 msgstr "Salti"
+
+msgid "MINIGAME_ACTION_PICKUP"
+msgstr "Prenu aŭ ĵetu kukurbon"
