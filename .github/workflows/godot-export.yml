@@ -12,13 +12,17 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Install dependencies
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq unzip wget xvfb
+
       - name: Install Godot 4.7.1
         run: |
           wget -q https://github.com/godotengine/godot/releases/download/4.7.1-stable/Godot_v4.7.1-stable_linux.x86_64.zip
           unzip -q Godot_v4.7.1-stable_linux.x86_64.zip
           chmod +x Godot_v4.7.1-stable_linux.x86_64
           sudo mv Godot_v4.7.1-stable_linux.x86_64 /usr/local/bin/godot
-          # Export Templates
           mkdir -p ~/.local/share/godot/export_templates
           cd ~/.local/share/godot/export_templates
           wget -q https://github.com/godotengine/godot/releases/download/4.7.1-stable/Godot_v4.7.1-stable_export_templates.tpz
@@ -26,12 +30,13 @@ jobs:
           mv templates/* .
           rm -rf templates Godot_v4.7.1-stable_export_templates.tpz
 
-      - name: Import + Build Web
+      - name: Import + Build Web (mit Xvfb)
         run: |
           cp export_presets_ci.cfg export_presets.cfg
           mkdir -p build/web
-          godot --headless --import 2>&1 | tail -5
-          godot --headless --export-release "Web" build/web/index.html 2>&1 | tail -5
+          xvfb-run -a godot --headless --import 2>&1 | tail -5
+          xvfb-run -a godot --headless --export-release "Web" build/web/index.html 2>&1 | tail -10
+          echo "=== Build Output ==="
           ls -la build/web/
 
       - name: Deploy to GitHub Pages
