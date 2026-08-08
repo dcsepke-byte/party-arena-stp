@@ -9,13 +9,16 @@ jobs:
   export-web:
     name: Web Export
     runs-on: ubuntu-latest
-    container:
-      image: barichello/godot-ci:4.3
     steps:
       - uses: actions/checkout@v4
 
-      - name: Setup Templates
+      - name: Install Godot 4.7.1
         run: |
+          wget -q https://github.com/godotengine/godot/releases/download/4.7.1-stable/Godot_v4.7.1-stable_linux.x86_64.zip
+          unzip -q Godot_v4.7.1-stable_linux.x86_64.zip
+          chmod +x Godot_v4.7.1-stable_linux.x86_64
+          sudo mv Godot_v4.7.1-stable_linux.x86_64 /usr/local/bin/godot
+          # Export Templates
           mkdir -p ~/.local/share/godot/export_templates
           cd ~/.local/share/godot/export_templates
           wget -q https://github.com/godotengine/godot/releases/download/4.7.1-stable/Godot_v4.7.1-stable_export_templates.tpz
