@@ -80,7 +80,7 @@ func _handle(peer: int, message: String) -> ApiResponse:
 	# remove outdated logged requests
 	# Unfortunately this is O(n^2), we should keep the maximum number
 	# of api calls low for performance reasons
-	var first_timestamp := Time.get_ticks_msec() - TIMESTAMP_DURATION_SECONDS * 1000
+	var first_timestamp: int = Time.get_ticks_msec() - TIMESTAMP_DURATION_SECONDS * 1000
 	while not timestamps.is_empty() and timestamps[0].timestamp < first_timestamp:
 		timestamps.pop_front()
 	if timestamps.size() > MAX_REQUESTS_PER_TIMESTAMP:

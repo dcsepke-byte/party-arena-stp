@@ -26,7 +26,7 @@ const MAX_JUMP_TIME := 1.5
 
 var ai_running_dir := Vector3()
 var ai_time_dir_change := 0.0
-var ai_jump_timer := randf_range(MIN_JUMP_TIME, MAX_JUMP_TIME)
+var ai_jump_timer: float = randf_range(MIN_JUMP_TIME, MAX_JUMP_TIME)
 
 var stun_duration := 0.0
 
