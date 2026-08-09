@@ -5,6 +5,10 @@ on:
     branches: [main]
   workflow_dispatch:
 
+permissions:
+  contents: write
+  pages: write
+
 jobs:
   export-web:
     name: Web Export
@@ -42,3 +46,4 @@ jobs:
           publish_dir: build/web
           publish_branch: gh-pages
           force_orphan: true
+          enable_jekyll: false
