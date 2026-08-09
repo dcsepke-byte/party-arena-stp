@@ -12,13 +12,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install dependencies
+      - name: Install deps + Godot
         run: |
           sudo apt-get update -qq
-          sudo apt-get install -y -qq unzip wget xvfb
-
-      - name: Install Godot 4.7.1
-        run: |
+          sudo apt-get install -y -qq unzip wget libegl1 libgl1 libopengl0
           wget -q https://github.com/godotengine/godot/releases/download/4.7.1-stable/Godot_v4.7.1-stable_linux.x86_64.zip
           unzip -q Godot_v4.7.1-stable_linux.x86_64.zip
           chmod +x Godot_v4.7.1-stable_linux.x86_64
@@ -30,14 +27,13 @@ jobs:
           mv templates/* .
           rm -rf templates Godot_v4.7.1-stable_export_templates.tpz
 
-      - name: Import + Build Web (mit Xvfb)
+      - name: Import + Build Web
         run: |
           cp export_presets_ci.cfg export_presets.cfg
           mkdir -p build/web
-          xvfb-run -a godot --headless --import 2>&1 | tail -5
-          xvfb-run -a godot --headless --export-release "Web" build/web/index.html 2>&1 | tail -10
-          echo "=== Build Output ==="
-          ls -la build/web/
+          godot --headless --import 2>&1 | tail -3
+          godot --headless --export-release "Web" build/web/index.html 2>&1 | tail -10
+          ls -la build/web/ | head -10
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
