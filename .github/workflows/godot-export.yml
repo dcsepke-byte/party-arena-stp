@@ -41,12 +41,15 @@ jobs:
           ls -la build/web/ | head -10
 
       - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v4
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: build/web
-          publish_branch: gh-pages
-          force_orphan: true
-          enable_jekyll: false
-          # Repo explizit setzen (verhindert "No such remote: origin")
-          external_repository: dcsepke-byte/party-arena-stp
+        run: |
+          # Manueller Deploy auf gh-pages (robuster als peaceiris bei Remote-Problemen)
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git checkout --orphan gh-pages
+          git rm -rf . 2>/dev/null || true
+          cp -r build/web/* .
+          touch .nojekyll
+          git add -A
+          git commit -m "deploy: ${{ github.sha }}" --allow-empty
+          git push origin gh-pages --force
+          echo "✅ Deployed auf gh-pages"
