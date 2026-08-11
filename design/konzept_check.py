@@ -6,7 +6,7 @@ import json
 import os
 import re
 
-ROOT = "/opt/data/SuperTuxParty"
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 GDD = os.path.join(ROOT, "design/gdd")
 BOARDS = os.path.join(ROOT, "plugins/boards")
 CHARS = os.path.join(ROOT, "plugins/characters")
