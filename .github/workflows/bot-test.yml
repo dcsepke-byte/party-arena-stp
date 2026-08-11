@@ -46,24 +46,26 @@ jobs:
           python3 test_boards.py 2>&1 | tail -3
           python3 tests/verify_milestone_6c.py 2>&1 | tail -3
 
-      - name: Bot-Test (Server-Szene headless — lädt Autoloads + Boards)
+      - name: Bot-Test (Server-Smoke — startet ohne GDScript-Fehler)
         run: |
           set -o pipefail
-          # Server-Szene starten (lädt Autoloads + Boards korrekt), 20s laufen lassen
+          # Server-Szene starten (lädt Autoloads + Boards), 20s laufen lassen.
+          # Hinweis: Godot Headless importiert KEINE Assets (Fonts/Texturen/.ctex),
+          # daher sind Asset-Warnungen erwartet. Wir prüfen NUR auf GDScript-Fehler.
           timeout 20 xvfb-run -a godot --headless --path . res://server/server.tscn 2>&1 | tee /tmp/bot.log
-          # Prüfe: Boards geladen
+          # Prüfe: Boards geladen (Logik, nicht Assets)
           if grep -q "Loading boards finished" /tmp/bot.log; then
-            echo "✅ Boards geladen"
+            echo "✅ Boards geladen (Logik)"
           else
             echo "❌ Boards NICHT geladen"
             exit 1
           fi
-          # Prüfe auf fatale Fehler (nicht Asset-Warnungen)
-          if grep -qE "SCRIPT ERROR|Parse Error|Compilation failed|Identifier not found" /tmp/bot.log; then
+          # Prüfe auf GDScript-Fehler (nicht Asset-Warnungen)
+          if grep -qE "SCRIPT ERROR|Compilation failed|Identifier not found|Parse Error:.*\.gd" /tmp/bot.log; then
             echo "❌ Bot-Test: GDScript-Fehler gefunden"
             exit 1
           fi
-          echo "✅ Bot-Test bestanden (Server startet, Boards laden, keine GDScript-Fehler)"
+          echo "✅ Bot-Test bestanden (Server startet, Boards-Logik lädt, keine GDScript-Fehler)"
 
       - name: Konzept-Gegencheck
         run: |
