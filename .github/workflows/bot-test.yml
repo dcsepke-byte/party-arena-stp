@@ -28,8 +28,12 @@ jobs:
 
       - name: Import (baut Assets korrekt mit Software-Rendering)
         run: |
-          godot --headless --import 2>&1 | tail -5
+          godot --headless --import 2>&1 | tail -20
           echo "IMPORT_EXIT=$?"
+          # Prüfe ob .ctex-Dateien erzeugt wurden
+          echo "=== .ctex-Dateien ==="
+          ls .godot/imported/*.ctex 2>/dev/null | wc -l
+          ls .godot/imported/cookie* .godot/imported/star* .godot/imported/arrow* 2>/dev/null | head
 
       - name: Python-Unit-Tests (Logik)
         run: |
