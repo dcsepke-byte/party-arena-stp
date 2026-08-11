@@ -1,0 +1,62 @@
+{
+  "name_de": "Sonnenstrand",
+  "theme": "Urlaub & Wasser",
+  "difficulty": 1,
+  "colors": [
+    "#00f0ff",
+    "#f4d58d",
+    "#ff6b6b"
+  ],
+  "music": {
+    "style": "Steel Drums, Ukulele",
+    "bpm": 110,
+    "scale": "Dur"
+  },
+  "field_distribution": {
+    "START": 1,
+    "STERN_SHOP": 3,
+    "ITEM_SHOP": 2,
+    "EREIGNIS": 6,
+    "GLUECK_PECH": 3,
+    "MUENZ_BONUS": 4,
+    "MINISPIEL": 21
+  },
+  "item_price_tier": 0,
+  "intro_duration": 5,
+  "branches": [
+    {
+      "name": "Korallenriff",
+      "entry": 16,
+      "exit": 20,
+      "delta": 1,
+      "fields": [
+        33,
+        34,
+        35,
+        36
+      ]
+    },
+    {
+      "name": "Klippen",
+      "entry": 26,
+      "exit": 32,
+      "delta": -1,
+      "fields": [
+        37,
+        38,
+        39,
+        40
+      ]
+    }
+  ],
+  "event_pool": [
+    "springflut",
+    "muschel_suche",
+    "quallen_schwarm"
+  ],
+  "milestones": [
+    20,
+    30
+  ],
+  "special_rules": []
+}

@@ -1,0 +1,17 @@
+{
+  "name": "balance_akt",
+  "display_name": "Balance-Akt",
+  "category": "geschicklichkeit",
+  "players": {"min": 2, "max": 8},
+  "duration": 30,
+  "scene_path": "res://plugins/minigames/balance_akt/minigame.tscn",
+  "type": ["FFA"],
+  "description": "Balanciere auf der Kugel — wer als Letzter oben bleibt, gewinnt!",
+  "instructions": "Verlagere dein Gewicht mit den Richtungstasten. Wer vom Ball fällt, scheidet aus.",
+  "tags": ["balance", "elimination", "geschick"],
+  "results_mode": "by_position",
+  "team_mode": "ffa",
+  "controls": [
+    {"actions": ["up", "down", "left", "right"], "text": "Gewichtsverlagerung"}
+  ]
+}

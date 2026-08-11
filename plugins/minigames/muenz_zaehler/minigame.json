@@ -1,0 +1,18 @@
+{
+  "name": "muenz_zaehler",
+  "display_name": "Münz-Zähler",
+  "category": "rechnen",
+  "players": {"min": 2, "max": 8},
+  "duration": 30,
+  "scene_path": "res://plugins/minigames/muenz_zaehler/minigame.tscn",
+  "type": ["FFA"],
+  "description": "Schätze die Anzahl der gezeigten Münzen — je genauer, desto mehr Punkte!",
+  "instructions": "Münzhaufen wird 2 Sekunden gezeigt. Wähle deine Schätzung mit up/down und bestätige mit action1.",
+  "tags": ["zählen", "schätzen", "rechnen"],
+  "results_mode": "by_points",
+  "team_mode": "ffa",
+  "controls": [
+    {"actions": ["up", "down"], "text": "Zahl erhöhen/verringern"},
+    {"actions": ["action1"], "text": "Schätzung bestätigen"}
+  ]
+}

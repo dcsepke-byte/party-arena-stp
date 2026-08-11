@@ -1,0 +1,17 @@
+{
+  "name": "blitz_fangen",
+  "display_name": "Blitz-Fangen",
+  "category": "reaktion",
+  "players": {"min": 2, "max": 8},
+  "duration": 30,
+  "scene_path": "res://plugins/minigames/blitz_fangen/minigame.tscn",
+  "type": ["FFA"],
+  "description": "Weiche den Blitzen von ArenaStar aus! Wer am längsten überlebt, gewinnt.",
+  "instructions": "Bewege dich mit den Richtungstasten. Leuchtende Kreise zeigen Blitz-Einschläge an — lauf weg!",
+  "tags": ["ausweichen", "survival", "reaktion"],
+  "results_mode": "by_points",
+  "team_mode": "ffa",
+  "controls": [
+    {"actions": ["up", "down", "left", "right"], "text": "Bewegung"}
+  ]
+}

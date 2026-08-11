@@ -1,0 +1,65 @@
+{
+  "name_de": "Zuckerwald",
+  "theme": "Süßigkeiten",
+  "difficulty": 2,
+  "colors": [
+    "#ff4d6d",
+    "#8b4513",
+    "#98ff98"
+  ],
+  "music": {
+    "style": "Glockenspiel, Fagott",
+    "bpm": 120,
+    "scale": "Dur"
+  },
+  "field_distribution": {
+    "START": 1,
+    "STERN_SHOP": 3,
+    "ITEM_SHOP": 2,
+    "EREIGNIS": 5,
+    "GLUECK_PECH": 3,
+    "MUENZ_BONUS": 4,
+    "MINISPIEL": 22
+  },
+  "item_price_tier": 0,
+  "intro_duration": 5,
+  "branches": [
+    {
+      "name": "Schokoladen-Fluss",
+      "entry": 16,
+      "exit": 20,
+      "delta": 1,
+      "fields": [
+        33,
+        34,
+        35,
+        36
+      ]
+    },
+    {
+      "name": "Zuckerwatte-Wolken",
+      "entry": 25,
+      "exit": 32,
+      "delta": -2,
+      "fields": [
+        37,
+        38,
+        39,
+        40
+      ]
+    }
+  ],
+  "event_pool": [
+    "klebriger_boden",
+    "zucker_rausch",
+    "keks_regen"
+  ],
+  "milestones": [
+    15,
+    25
+  ],
+  "special_rules": [
+    "floss_fahrt",
+    "zuckerwatte_bonus_minigame"
+  ]
+}

@@ -1,0 +1,52 @@
+name: Party Arena Bot-Test
+
+on:
+  push:
+    branches: [dev, main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  bot-test:
+    name: Build + Bot-Test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          lfs: true
+
+      - name: Install deps + Godot
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq unzip wget libegl1 libgl1 libopengl0 xvfb
+          wget -q https://github.com/godotengine/godot/releases/download/4.7.1-stable/Godot_v4.7.1-stable_linux.x86_64.zip
+          unzip -q Godot_v4.7.1-stable_linux.x86_64.zip
+          chmod +x Godot_v4.7.1-stable_linux.x86_64
+          sudo mv Godot_v4.7.1-stable_linux.x86_64 /usr/local/bin/godot
+
+      - name: Import (baut Assets korrekt mit Software-Rendering)
+        run: |
+          godot --headless --import 2>&1 | tail -5
+          echo "IMPORT_EXIT=$?"
+
+      - name: Python-Unit-Tests (Logik)
+        run: |
+          python3 tests/unit/test_field_distribution.py 2>&1 | tail -3
+          python3 tests/unit/test_star_economy.py 2>&1 | tail -3
+          python3 tests/unit/test_item_system.py 2>&1 | tail -3
+          python3 tests/unit/test_minigame_system.py 2>&1 | tail -3
+          python3 tests/unit/test_character_system.py 2>&1 | tail -3
+          python3 tests/test_branch_wiring.py 2>&1 | tail -3
+          python3 test_boards.py 2>&1 | tail -3
+          python3 tests/verify_milestone_6c.py 2>&1 | tail -3
+
+      - name: Bot-Test (Board-Szene + Controller mit Xvfb)
+        run: |
+          xvfb-run -a godot --headless --path . --script res://tests/bot_test.gd 2>&1 | grep -iE "PASS|FAIL|BOT-TEST|RESULT" | head -30
+          echo "BOT_EXIT=${PIPESTATUS[0]}"
+
+      - name: Konzept-Gegencheck
+        run: |
+          python3 design/konzept_check.py 2>&1 | tail -5

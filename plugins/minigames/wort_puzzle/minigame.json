@@ -1,0 +1,19 @@
+{
+  "name": "wort_puzzle",
+  "display_name": "Wort-Puzzle",
+  "category": "rechnen",
+  "players": {"min": 2, "max": 8},
+  "duration": 20,
+  "scene_path": "res://plugins/minigames/wort_puzzle/minigame.tscn",
+  "type": ["FFA"],
+  "description": "Bilde aus den gezeigten Buchstaben das längste Wort!",
+  "instructions": "Wähle Buchstaben mit Cursor + action1 und reiche dein Wort mit action2 ein. Jeder Buchstabe nur einmal nutzbar.",
+  "tags": ["wort", "sprache", "rechnen"],
+  "results_mode": "by_points",
+  "team_mode": "ffa",
+  "controls": [
+    {"actions": ["up", "down", "left", "right"], "text": "Cursor / Buchstabe wählen"},
+    {"actions": ["action1"], "text": "Buchstabe auswählen"},
+    {"actions": ["action2"], "text": "Wort einreichen"}
+  ]
+}

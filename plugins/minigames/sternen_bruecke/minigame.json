@@ -1,0 +1,18 @@
+{
+  "name": "sternen_bruecke",
+  "display_name": "Sternen-Brücke",
+  "category": "kooperation",
+  "players": {"min": 2, "max": 8},
+  "duration": 30,
+  "scene_path": "res://plugins/minigames/sternen_bruecke/minigame.tscn",
+  "type": ["GnuCoop"],
+  "description": "Baut gemeinsam eine Brücke über die Schlucht! Je mehr Segmente, desto besser.",
+  "instructions": "Hebe ein Segment mit action1 auf, trage es zur Lücke und setze es mit action1 ein. Alle arbeiten zusammen!",
+  "tags": ["koop", "bauen", "team"],
+  "results_mode": "by_points",
+  "team_mode": "coop_all",
+  "controls": [
+    {"actions": ["up", "down", "left", "right"], "text": "Bewegung"},
+    {"actions": ["action1"], "text": "Segment aufheben / einsetzen"}
+  ]
+}

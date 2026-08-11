@@ -1,0 +1,21 @@
+*.zip filter=lfs diff=lfs merge=lfs -text
+*.pck filter=lfs diff=lfs merge=lfs -text
+
+
+
+plugins/test_minigame.zip filter=lfs diff=lfs merge=lfs -text
+plugins/test_board.zip filter=lfs diff=lfs merge=lfs -text
+*.escn filter=lfs diff=lfs merge=lfs -text
+
+
+
+*.bin filter=lfs diff=lfs merge=lfs -text
+
+
+# Ausnahme: Diese Icons als normale Git-Dateien (nicht LFS)
+common/scenes/board_logic/controller/icons/star.png !filter !diff !merge
+plugins/items/coinmagnet/icon.png !filter !diff !merge
+plugins/items/luckydice/icon.png !filter !diff !merge
+plugins/items/shield/icon.png !filter !diff !merge
+plugins/items/teleporter/icon.png !filter !diff !merge
+plugins/items/thiefglove/icon.png !filter !diff !merge

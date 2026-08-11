@@ -1,0 +1,65 @@
+{
+  "name_de": "Mechanik-Stadt",
+  "theme": "Spielzeug-Technik",
+  "difficulty": 4,
+  "colors": [
+    "#c0c0c0",
+    "#ff6a00",
+    "#ffd34e"
+  ],
+  "music": {
+    "style": "Marimba/Xylophon, Tuba",
+    "bpm": 140,
+    "scale": "Mixolydisch"
+  },
+  "field_distribution": {
+    "START": 1,
+    "STERN_SHOP": 3,
+    "ITEM_SHOP": 2,
+    "EREIGNIS": 6,
+    "GLUECK_PECH": 3,
+    "MUENZ_BONUS": 4,
+    "MINISPIEL": 21
+  },
+  "item_price_tier": 2,
+  "intro_duration": 5,
+  "branches": [
+    {
+      "name": "Rohrpost-Teleport",
+      "entry": 13,
+      "exit": 17,
+      "delta": 1,
+      "fields": [
+        33,
+        34,
+        35,
+        36
+      ]
+    },
+    {
+      "name": "Förderband-Fabrik",
+      "entry": 24,
+      "exit": 30,
+      "delta": -1,
+      "fields": [
+        37,
+        38,
+        39,
+        40
+      ]
+    }
+  ],
+  "event_pool": [
+    "zahnrad_stau",
+    "erfindermesse",
+    "dampf_explosion"
+  ],
+  "milestones": [
+    19,
+    31
+  ],
+  "special_rules": [
+    "rohrpost_teleport",
+    "foerderband_fabrik"
+  ]
+}

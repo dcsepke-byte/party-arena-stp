@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://common/scripts/character.gd" id="1"]
+
+[sub_resource type="StandardMaterial3D" id="2"]
+albedo_color = Color(0.227451, 0.525490, 1.000000, 1)
+
+[sub_resource type="BoxMesh" id="3"]
+size = Vector3(0.6, 1.2, 0.6)
+material = SubResource("2")
+
+[sub_resource type="CapsuleShape3D" id="4"]
+radius = 0.6
+height = 1.2
+
+[node name="bolt" type="Node3D"]
+script = ExtResource("1")
+animations = NodePath("AnimationTree")
+collision_shape = NodePath("Shape3D")
+
+[node name="PlaceholderMesh" type="MeshInstance3D" parent="."]
+mesh = SubResource("3")
+
+[node name="Shape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+shape = SubResource("4")
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]

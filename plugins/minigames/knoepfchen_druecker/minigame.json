@@ -1,0 +1,20 @@
+{
+  "name": "knoepfchen_druecker",
+  "display_name": "Knöpfchen-Drücker",
+  "category": "reaktion",
+  "players": {"min": 2, "max": 8},
+  "duration": 30,
+  "scene_path": "res://plugins/minigames/knoepfchen_druecker/minigame.tscn",
+  "type": ["FFA"],
+  "description": "Drücke die aufleuchtenden Knöpfe so schnell wie möglich!",
+  "instructions": "Action1–4 drücken den entsprechenden Knopf. Nur den leuchtenden Knopf drücken!",
+  "tags": ["knöpfe", "speed", "reaktion"],
+  "results_mode": "by_points",
+  "team_mode": "ffa",
+  "controls": [
+    {"actions": ["action1"], "text": "Knopf 1 (Rot)"},
+    {"actions": ["action2"], "text": "Knopf 2 (Blau)"},
+    {"actions": ["action3"], "text": "Knopf 3 (Gelb)"},
+    {"actions": ["action4"], "text": "Knopf 4 (Grün)"}
+  ]
+}

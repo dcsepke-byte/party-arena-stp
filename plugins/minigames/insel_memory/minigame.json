@@ -1,0 +1,18 @@
+{
+  "name": "insel_memory",
+  "display_name": "Insel-Memory",
+  "category": "puzzle",
+  "players": {"min": 2, "max": 8},
+  "duration": 30,
+  "scene_path": "res://plugins/minigames/insel_memory/minigame.tscn",
+  "type": ["FFA"],
+  "description": "Finde die meisten Kartenpaare auf deinem Insel-Memory-Feld!",
+  "instructions": "Bewege den Cursor mit den Richtungstasten und decke Karten mit action1 auf. Finde gleiche Paare!",
+  "tags": ["memory", "gedächtnis", "denken"],
+  "results_mode": "by_points",
+  "team_mode": "ffa",
+  "controls": [
+    {"actions": ["up", "down", "left", "right"], "text": "Cursor bewegen"},
+    {"actions": ["action1"], "text": "Karte aufdecken"}
+  ]
+}

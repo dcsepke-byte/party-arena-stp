@@ -1,0 +1,18 @@
+{
+  "name": "zielwurf",
+  "display_name": "Zielwurf",
+  "category": "geschicklichkeit",
+  "players": {"min": 2, "max": 8},
+  "duration": 30,
+  "scene_path": "res://plugins/minigames/zielwurf/minigame.tscn",
+  "type": ["FFA"],
+  "description": "Wirf Bälle auf andere Spieler — die meisten Treffer gewinnen!",
+  "instructions": "Bewege dich mit den Richtungstasten und wirf mit action1 in Blickrichtung.",
+  "tags": ["werfen", "action", "wettkampf"],
+  "results_mode": "by_points",
+  "team_mode": "ffa",
+  "controls": [
+    {"actions": ["up", "down", "left", "right"], "text": "Bewegung"},
+    {"actions": ["action1"], "text": "Ball werfen"}
+  ]
+}

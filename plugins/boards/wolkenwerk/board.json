@@ -1,0 +1,66 @@
+{
+  "name_de": "Wolkenwerk",
+  "theme": "Schwebende Himmel",
+  "difficulty": 3,
+  "colors": [
+    "#87ceeb",
+    "#ffffff",
+    "regenbogen"
+  ],
+  "music": {
+    "style": "Harfe, Flöte",
+    "bpm": 100,
+    "scale": "Lydisch"
+  },
+  "field_distribution": {
+    "START": 1,
+    "STERN_SHOP": 3,
+    "ITEM_SHOP": 2,
+    "EREIGNIS": 6,
+    "GLUECK_PECH": 3,
+    "MUENZ_BONUS": 4,
+    "MINISPIEL": 21
+  },
+  "item_price_tier": 1,
+  "intro_duration": 5,
+  "branches": [
+    {
+      "name": "Windkanal",
+      "entry": 9,
+      "exit": 13,
+      "delta": -3,
+      "fields": [
+        10,
+        11,
+        12,
+        13
+      ]
+    },
+    {
+      "name": "Regenbogen-Rutsche",
+      "entry": 21,
+      "exit": 25,
+      "delta": 2,
+      "fields": [
+        22,
+        23,
+        24
+      ]
+    }
+  ],
+  "event_pool": [
+    "turbulenz",
+    "aufwind",
+    "regenbogen_schatz",
+    "nebelbank",
+    "windstoss"
+  ],
+  "milestones": [
+    15,
+    27
+  ],
+  "special_rules": [
+    "windkanal_express",
+    "regenbogen_gleitfahrt"
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "name": "schatz_trage",
+  "display_name": "Schatz-Trage",
+  "category": "kooperation",
+  "players": {"min": 4, "max": 8},
+  "duration": 30,
+  "scene_path": "res://plugins/minigames/schatz_trage/minigame.tscn",
+  "type": ["2v2"],
+  "description": "Tragt als Team die Schatztruhe schneller als das andere Team ins Ziel!",
+  "instructions": "Bleibt als Team zusammen und bewegt euch in dieselbe Richtung. Nur gemeinsam bewegt sich die Truhe!",
+  "tags": ["koop", "team", "tragen"],
+  "results_mode": "by_points",
+  "team_mode": "coop_teams",
+  "controls": [
+    {"actions": ["up", "down", "left", "right"], "text": "Bewegung (alle im Team synchron)"}
+  ]
+}

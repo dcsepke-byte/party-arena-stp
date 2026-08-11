@@ -1,0 +1,66 @@
+{
+  "name_de": "Frostgipfel",
+  "theme": "Eis & Schnee",
+  "difficulty": 3,
+  "colors": [
+    "#a8d8ea",
+    "#f0f0f0",
+    "#9b59b6"
+  ],
+  "music": {
+    "style": "Celesta, Tremolo-Strings",
+    "bpm": 90,
+    "scale": "Moll"
+  },
+  "field_distribution": {
+    "START": 1,
+    "STERN_SHOP": 3,
+    "ITEM_SHOP": 2,
+    "EREIGNIS": 5,
+    "GLUECK_PECH": 3,
+    "MUENZ_BONUS": 4,
+    "MINISPIEL": 22
+  },
+  "item_price_tier": 1,
+  "intro_duration": 5,
+  "branches": [
+    {
+      "name": "Eishöhle",
+      "entry": 11,
+      "exit": 17,
+      "delta": -1,
+      "fields": [
+        33,
+        34,
+        35,
+        36
+      ]
+    },
+    {
+      "name": "Vereister See",
+      "entry": 25,
+      "exit": 30,
+      "delta": 0,
+      "fields": [
+        37,
+        38,
+        39,
+        40
+      ]
+    }
+  ],
+  "event_pool": [
+    "schneesturm",
+    "eisglaette",
+    "nordlicht",
+    "eiskristall_regen"
+  ],
+  "milestones": [
+    11,
+    30
+  ],
+  "special_rules": [
+    "eishoehlen_dunkelheit",
+    "eisglaette_rutsch"
+  ]
+}

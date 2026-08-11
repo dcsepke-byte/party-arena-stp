@@ -1,0 +1,66 @@
+{
+  "name_de": "Sternenzitadelle",
+  "theme": "Kosmisch & Finale",
+  "difficulty": 5,
+  "colors": [
+    "#ffd700",
+    "#1a1a4e",
+    "#ff00ff"
+  ],
+  "music": {
+    "style": "Volle Orchester, Chor",
+    "bpm": "80-160",
+    "scale": "heroisch"
+  },
+  "field_distribution": {
+    "START": 1,
+    "STERN_SHOP": 4,
+    "ITEM_SHOP": 2,
+    "EREIGNIS": 6,
+    "GLUECK_PECH": 3,
+    "MUENZ_BONUS": 4,
+    "MINISPIEL": 20
+  },
+  "item_price_tier": 3,
+  "intro_duration": 7,
+  "branches": [
+    {
+      "name": "Kosmische Drift",
+      "entry": 12,
+      "exit": 17,
+      "delta": -1,
+      "fields": [
+        33,
+        34,
+        35,
+        36
+      ]
+    },
+    {
+      "name": "Geister-Felder",
+      "entry": 22,
+      "exit": 27,
+      "delta": -1,
+      "fields": [
+        37,
+        38,
+        39,
+        40
+      ]
+    }
+  ],
+  "event_pool": [
+    "sternen_regen",
+    "zeit_verzerrung",
+    "arenastars_segen",
+    "schwarzes_loch"
+  ],
+  "milestones": [
+    15,
+    26
+  ],
+  "special_rules": [
+    "kosmische_drift",
+    "geister_felder"
+  ]
+}

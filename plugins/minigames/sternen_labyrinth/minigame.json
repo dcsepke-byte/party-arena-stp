@@ -1,0 +1,17 @@
+{
+  "name": "sternen_labyrinth",
+  "display_name": "Sternen-Labyrinth",
+  "category": "puzzle",
+  "players": {"min": 2, "max": 8},
+  "duration": 30,
+  "scene_path": "res://plugins/minigames/sternen_labyrinth/minigame.tscn",
+  "type": ["FFA"],
+  "description": "Finde als Erster den Weg durch das Labyrinth zum Zielstern!",
+  "instructions": "Bewege dich mit den Richtungstasten durch das Labyrinth. Erreiche den Stern als Erster!",
+  "tags": ["labyrinth", "navigation", "denken"],
+  "results_mode": "by_position",
+  "team_mode": "ffa",
+  "controls": [
+    {"actions": ["up", "down", "left", "right"], "text": "Bewegung"}
+  ]
+}

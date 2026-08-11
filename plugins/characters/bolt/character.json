@@ -1,0 +1,7 @@
+{
+  "name": "Bolt",
+  "type": "Roboter",
+  "home": "Mechanik-Stadt",
+  "personality": "logisch, präzise, liebenswert",
+  "color_hex": "#3a86ff"
+}

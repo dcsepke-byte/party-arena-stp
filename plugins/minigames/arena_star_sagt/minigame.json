@@ -1,0 +1,20 @@
+{
+  "name": "arena_star_sagt",
+  "display_name": "ArenaStar sagt",
+  "category": "reaktion",
+  "players": {"min": 2, "max": 8},
+  "duration": 30,
+  "scene_path": "res://plugins/minigames/arena_star_sagt/minigame.tscn",
+  "type": ["FFA"],
+  "description": "Simon Says mit ArenaStar! Befolge nur Kommandos mit \"ArenaStar sagt\".",
+  "instructions": "Action1=Springen, Action2=Drehen, Action3=Winken, Action4=Hinhocken. Nur ausführen wenn ArenaStar es sagt!",
+  "tags": ["simon-says", "elimination", "reaktion"],
+  "results_mode": "by_position",
+  "team_mode": "ffa",
+  "controls": [
+    {"actions": ["action1"], "text": "Springen"},
+    {"actions": ["action2"], "text": "Drehen"},
+    {"actions": ["action3"], "text": "Winken"},
+    {"actions": ["action4"], "text": "Hinhocken"}
+  ]
+}
