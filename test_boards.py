@@ -13,7 +13,7 @@ import os
 import re
 import sys
 
-BOARDS_DIR = "/opt/data/SuperTuxParty/plugins/boards"
+BOARDS_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "plugins", "boards")
 
 EXPECTED_ISLANDS = {
     "sonnenstrand": {

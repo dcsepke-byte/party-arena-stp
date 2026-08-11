@@ -22,7 +22,7 @@ BOARD_DIRS = [
     "mechanik-stadt",
     "sternenzitadelle",
 ]
-BASE_DIR = "/opt/data/SuperTuxParty/plugins/boards"
+BASE_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "plugins", "boards")
 
 errors = []
 warnings = []

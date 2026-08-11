@@ -37,6 +37,7 @@ jobs:
 
       - name: Python-Unit-Tests (Logik)
         run: |
+          set -e
           python3 tests/unit/test_field_distribution.py 2>&1 | tail -3
           python3 tests/unit/test_star_economy.py 2>&1 | tail -3
           python3 tests/unit/test_item_system.py 2>&1 | tail -3
@@ -45,6 +46,7 @@ jobs:
           python3 tests/test_branch_wiring.py 2>&1 | tail -3
           python3 test_boards.py 2>&1 | tail -3
           python3 tests/verify_milestone_6c.py 2>&1 | tail -3
+          echo "✅ ALLE Logik-Tests grün"
 
       - name: Bot-Test (Spiellogik — Python-Unit-Tests)
         run: |
