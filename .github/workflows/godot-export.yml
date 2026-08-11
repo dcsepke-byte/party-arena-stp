@@ -51,5 +51,7 @@ jobs:
           touch .nojekyll
           git add -A
           git commit -m "deploy: ${{ github.sha }}" --allow-empty
+          # Erhöhe Timeout für große Web-Dateien
+          git config http.postBuffer 524288000
           git push origin gh-pages --force
           echo "✅ Deployed auf gh-pages"
