@@ -48,3 +48,5 @@ jobs:
           publish_branch: gh-pages
           force_orphan: true
           enable_jekyll: false
+          # Repo explizit setzen (verhindert "No such remote: origin")
+          external_repository: dcsepke-byte/party-arena-stp
