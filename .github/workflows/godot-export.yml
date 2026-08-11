@@ -24,12 +24,13 @@ jobs:
           unzip -q Godot_v4.7.1-stable_linux.x86_64.zip
           chmod +x Godot_v4.7.1-stable_linux.x86_64
           sudo mv Godot_v4.7.1-stable_linux.x86_64 /usr/local/bin/godot
-          mkdir -p ~/.local/share/godot/export_templates
-          cd ~/.local/share/godot/export_templates
+          mkdir -p ~/.local/share/godot/export_templates/4.7.1.stable
+          cd ~/.local/share/godot/export_templates/4.7.1.stable
           wget -q https://github.com/godotengine/godot/releases/download/4.7.1-stable/Godot_v4.7.1-stable_export_templates.tpz
           unzip -q Godot_v4.7.1-stable_export_templates.tpz
           mv templates/* .
           rm -rf templates Godot_v4.7.1-stable_export_templates.tpz
+          ls -la | head -5
 
       - name: Import + Build Web
         run: |
