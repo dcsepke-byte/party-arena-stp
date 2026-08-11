@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://dayv8irsd54tq"]
 
-[ext_resource type="Texture2D" uid="uid://cfujd5y86ott5" path="res://common/scenes/board_logic/controller/icons/cookie.png" id="1_b3ktk"]
+[ext_resource type="Texture2D" path="res://common/scenes/board_logic/controller/icons/cookie.png" id="1_b3ktk"]
 [ext_resource type="Script" path="res://common/scenes/board_logic/controller/player_info.gd" id="1_u8p8a"]
-[ext_resource type="Texture2D" uid="uid://xsusqt03md8o" path="res://common/scenes/board_logic/controller/icons/star.png" id="2_fpqex"]
+[ext_resource type="Texture2D" path="res://common/scenes/board_logic/controller/icons/star.png" id="2_fpqex"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6r4rk"]
 resource_local_to_scene = true

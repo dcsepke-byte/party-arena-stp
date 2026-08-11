@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://cpv20xkqx2dpy"]
 
 [ext_resource type="Script" path="res://common/scenes/board_logic/node/arrow/arrow.gd" id="1"]
-[ext_resource type="Texture2D" uid="uid://dog8be8sj1ye1" path="res://common/scenes/board_logic/node/arrow/arrow.png" id="2"]
+[ext_resource type="Texture2D" path="res://common/scenes/board_logic/node/arrow/arrow.png" id="2"]
 
 [sub_resource type="BoxShape3D" id="1"]
 size = Vector3(0.724517, 0.1, 1.03621)
