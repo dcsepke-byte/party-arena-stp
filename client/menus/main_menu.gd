@@ -221,9 +221,9 @@ func _on_ServerList_server_delete(entry: Node):
 func create_server_entry(data) -> Container:
 	var container := HBoxContainer.new()
 	var edit := Button.new()
-	edit.icon = preload("res://assets/icons/edit.png")
+	edit.icon = _load_icon("res://assets/icons/edit.png")
 	var delete := Button.new()
-	delete.icon = preload("res://assets/icons/delete.png")
+	delete.icon = _load_icon("res://assets/icons/delete.png")
 	var button := Button.new()
 	button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	if data is Dictionary:
@@ -322,3 +322,7 @@ func _on_connection_succeeded(server):
 	servermenu.mainmenu = self
 	add_child(servermenu)
 	$ServerList.hide()
+
+func _load_icon(path: String) -> Texture2D:
+	var tex: Texture2D = load(path)
+	return tex
