@@ -4,7 +4,3 @@
 .import/
 .directory
 .godot/
-
-# Godot Import-Cache (wird beim Import neu erzeugt)
-*.import
-.godot/
